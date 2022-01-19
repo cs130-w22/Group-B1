@@ -1,4 +1,4 @@
-export enum Personalities {
+export enum PersonalityTraits {
   "introvert",
   "extrovert",
   "sensor",
@@ -9,4 +9,4 @@ export enum Personalities {
   "perceiver",
 }
 
-export type Personality = keyof typeof Personalities;
+export type PersonalityTrait = keyof typeof PersonalityTraits;
