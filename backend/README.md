@@ -2,13 +2,27 @@ If you haven't installed node, download and install it from this link:
 https://nodejs.org/en/download/
 
 After installing node, go to the backend folder and run:
+
 ```
 npm install
 ```
 
-After all dependencies are successfully installed, run the following command to start the backend app:
+Run program
+
 ```
-node app.js
+npm run start
+```
+
+Lint
+
+```
+npm run lint
+```
+
+Format
+
+```
+npm run format
 ```
 
 Go to http://localhost:3000/
