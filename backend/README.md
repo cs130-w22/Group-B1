@@ -12,7 +12,7 @@ npm install
 
 ## Running backend
 
-To start the server, run:
+To start the server, run
 
 ```
 npm run start
