@@ -1,11 +1,13 @@
+# Shared
+
 Lint:
 
 ```
-npm run lint
+npm run lint ./src/*
 ```
 
 Style:
 
 ```
-npx prettier --write .
+npx prettier --write ./src/*
 ```
