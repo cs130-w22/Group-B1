@@ -1,17 +1,35 @@
-If you haven't installed node, download and install it from this link:
-https://nodejs.org/en/download/
+# Backend
 
-After installing node, go to the backend folder and run:
+
+## Setup
+
+If you haven't installed Node, download and install it from this link:
+https://nodejs.org/en/download/. After installing Node, run
+
 ```
 npm install
 ```
 
-After all dependencies are successfully installed, run the following command to start the backend app:
+## Running backend
+
+To start the server, run
+
 ```
-node app.js
+npm run start
 ```
 
-Go to http://localhost:3000/
-You should see a "Hello World!" message popping up.
+Go to http://localhost:3000/. You should see a "Hello World!" message popping up. To stop the app, type Ctrl+C in the terminal.
 
-To stop the app, type Ctrl+C in the terminal.
+## Linting and Formatting
+
+Lint
+
+```
+npm run lint
+```
+
+Format
+
+```
+npm run format
+```
