@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend for zoomieRoomies",
-  "main": "dist/app.js",
+  "main": "dist/backend/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "start": "tsc && node dist/backend/app.js",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
