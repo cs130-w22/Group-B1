@@ -1,8 +1,6 @@
 import { RoommateRepository } from "../../src/repository/RoommateRepository";
 import { Area } from "../../../shared/src/area";
 
-jest.mock("../../src/repository/RoommateRepository");
-
 const testRoommate = {
   username: "Bob",
   password: "BobPassword",
