@@ -1,9 +1,12 @@
 import express from "express";
+import { json } from "body-parser";
 import TYPES from "./types";
 import container from "./inversify.config";
 import { RegistrableController } from "./src/controllers/RegistrableController";
 
 const app = express();
+app.use(json());
+
 const port = 3000;
 
 const controllers: RegistrableController[] =

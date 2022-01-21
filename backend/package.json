@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^17.0.10",
+    "body-parser": "^1.19.1",
     "express": "^4.17.2",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13"

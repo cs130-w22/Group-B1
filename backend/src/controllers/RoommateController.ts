@@ -14,7 +14,6 @@ export class RoommateController implements RegistrableController {
   }
 
   public register(app: Application): void {
-    console.log("register");
     app
       .route("/roommate/")
       .get(async (req: Request, res: Response) => {
@@ -24,7 +23,7 @@ export class RoommateController implements RegistrableController {
         } catch (err) {
           return res.status(500).json({
             message: "Failed to get all roommates.",
-            err,
+            err: err.message,
           });
         }
       })
@@ -40,8 +39,8 @@ export class RoommateController implements RegistrableController {
           });
         } catch (err) {
           return res.status(400).json({
-            message: "Invalid roommate in request body.",
-            err,
+            message: "Failed to create roommate.",
+            err: err.message,
           });
         }
       })
@@ -58,8 +57,8 @@ export class RoommateController implements RegistrableController {
           });
         } catch (err) {
           return res.status(400).json({
-            message: "Invalid roommate in request body.",
-            err,
+            message: "Failed to update roommate.",
+            err: err.message,
           });
         }
       });
