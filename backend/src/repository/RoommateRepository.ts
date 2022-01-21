@@ -1,5 +1,6 @@
 import { Roommate } from "../../../shared/src/roommate";
 import { injectable } from "inversify";
+import "reflect-metadata";
 
 @injectable()
 export class RoommateRepository {
