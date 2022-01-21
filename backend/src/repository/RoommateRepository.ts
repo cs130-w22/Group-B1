@@ -1,5 +1,7 @@
-import { Roommate } from "../../shared/src/roommate";
+import { Roommate } from "../../../shared/src/roommate";
+import { injectable } from "inversify";
 
+@injectable()
 export class RoommateRepository {
   create(roommate: Roommate): Promise<boolean> {
     throw new Error("Method not implemented.");
