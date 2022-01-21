@@ -3,10 +3,12 @@ import { json } from "body-parser";
 import TYPES from "./types";
 import container from "./inversify.config";
 import { RegistrableController } from "./src/controllers/RegistrableController";
+import * as dotenv from "dotenv";
 
 const app = express();
 app.use(json());
 
+dotenv.config();
 const port = 3000;
 
 const controllers: RegistrableController[] =

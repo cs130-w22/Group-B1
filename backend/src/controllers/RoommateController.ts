@@ -7,11 +7,8 @@ import { RegistrableController } from "./RegistrableController";
 
 @injectable()
 export class RoommateController implements RegistrableController {
+  @inject(TYPES.RoommateService)
   private roommateService: RoommateService;
-
-  constructor(@inject(TYPES.RoommateService) roommateService: RoommateService) {
-    this.roommateService = roommateService;
-  }
 
   public register(app: Application): void {
     app

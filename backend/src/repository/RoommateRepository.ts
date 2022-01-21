@@ -7,7 +7,7 @@ export class RoommateRepository {
     throw new Error("Method not implemented.");
   }
 
-  findOne(id: string): Promise<Roommate> {
+  findOne(id: string): Promise<Roommate | null> {
     throw new Error("Method not implemented.");
   }
 

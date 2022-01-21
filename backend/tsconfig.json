@@ -13,5 +13,5 @@
     "outDir": "dist"
   },
   "lib": ["es2015"],
-  "include": ["src/*", "app.ts"]
+  "include": ["./src", "app.ts"]
 }
