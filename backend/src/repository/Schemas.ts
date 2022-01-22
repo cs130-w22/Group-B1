@@ -1,6 +1,6 @@
 import { Schema, model, Document } from "mongoose";
-import { Roommate } from "../../shared/src/roommate";
-import { RoommateProfile } from "../../shared/src/roommateProfile";
+import { Roommate } from "../../../shared/src/roommate";
+import { RoommateProfile } from "../../../shared/src/roommateProfile";
 
 //Make Schemas, the outlines for our documents
 //---------------------------------------------
