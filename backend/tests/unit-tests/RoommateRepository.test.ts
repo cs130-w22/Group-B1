@@ -21,6 +21,6 @@ const testRoommate = {
 describe("Roommate Repository", () => {
   it("Creates roommate", async () => {
     const roommateRepository = new RoommateRepository();
-    await expect(roommateRepository.create(testRoommate)).toEqual(true);
+    expect(await roommateRepository.create(testRoommate)).toEqual(true);
   });
 });
