@@ -1,5 +1,6 @@
 import { RoommateRepository } from "../../src/repository/RoommateRepository";
 import { Area } from "../../../shared/src/area";
+import { describe, expect, it } from "@jest/globals";
 
 const testRoommate = {
   username: "Bob",
@@ -21,6 +22,6 @@ describe("Roommate Repository", () => {
   it("Creates roommate", async () => {
     jest.setTimeout(30000)
     const roommateRepository = new RoommateRepository();
-    await expect(roommateRepository.create(testRoommate)).toEqual(true);
+    expect(await roommateRepository.create(testRoommate)).toEqual(true);
   });
 });
