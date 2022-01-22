@@ -1,5 +1,6 @@
 import { RoommateRepository } from "../../src/repository/RoommateRepository";
 import { Area } from "../../../shared/src/area";
+import { describe, expect, it } from "@jest/globals";
 
 const testRoommate = {
   username: "Bob",
