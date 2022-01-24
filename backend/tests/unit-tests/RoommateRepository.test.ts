@@ -80,39 +80,6 @@ const roommateProfileDoc2: RoommateProfileDoc = {
   additionalInfo: "Looking for 2 roommates"
 };
 
-// beforeAll(() => {
-//   //Connect to DB
-//   dotenv.config();
-//   const MONGODB_URL = process.env.DB_URL_DEV;
-//   connect(MONGODB_URL).then(() => {
-//   console.log("Connected to database");
-
-//   //Clear all documents
-//   RoommateModel.deleteMany({})
-//   .then(()=>{})
-//   .catch((err) => {
-//     console.log(err.message);
-//   })
-//   RoommateProfileModel.deleteMany({})
-//   .then(()=>{})
-//   .catch((err) => {
-//     console.log(err.message);
-//   });
-
-// })
-//   .catch(err => {
-//     console.error("Failed to connect to database: ", err.message);
-//     process.exit(1);
-//   });
-
-// });
-
-afterAll(done => {
-  // Disconnect DB, allows Jest to end successfully
-  connection.close()
-  done()
-})
-
 describe("Roommate Repository", () => {
   it("Creates roommate", async () => {
     const roommateRepository = new RoommateRepository();
