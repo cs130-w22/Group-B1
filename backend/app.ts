@@ -14,10 +14,11 @@ const port = 3000;
 
 //DB connection
 const MONGODB_URL = process.env.DB_URL_DEV;
-connect(MONGODB_URL).then(() => {
-  console.log("Connected to database");
-})
-  .catch(err => {
+connect(MONGODB_URL)
+  .then(() => {
+    console.log("Connected to database");
+  })
+  .catch((err) => {
     console.error("Failed to connect to database: ", err.message);
     process.exit(1);
   });

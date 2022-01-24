@@ -1,14 +1,14 @@
 import { RoommateRepository } from "../../src/repository/RoommateRepository";
 import { Area } from "../../../shared/src/area";
-import { describe, expect, it, beforeAll, afterAll } from "@jest/globals";
-import jestConfig from "../../jest.config";
-import { connect, connection } from "mongoose";
-import * as dotenv from "dotenv";
-import { RoommateDoc, RoommateModel, RoommateProfileDoc, RoommateProfileModel } from "../../src/repository/Schemas";
+import { describe, expect, it } from "@jest/globals";
+import {
+  RoommateDoc,
+  RoommateModel,
+  RoommateProfileDoc,
+  RoommateProfileModel,
+} from "../../src/repository/Schemas";
 import * as mockingoose from "mockingoose";
 import { Roommate } from "../../../shared/src/roommate";
-import { RoommateProfile } from "../../../shared/src/roommateProfile";
-
 
 const roommate1: Roommate = {
   username: "Bob",
@@ -23,7 +23,6 @@ const roommate1: Roommate = {
     personality: [],
     additionalInfo: "Looking for 2 roommates",
   },
-  roommateList: [],
 };
 
 const roommate2: Roommate = {
@@ -39,17 +38,9 @@ const roommate2: Roommate = {
     personality: [],
     additionalInfo: "Looking for 1 roommate",
   },
-  roommateList: [],
 };
 
-const roommates = [roommate1, roommate2]
-
-const roommateDoc1: RoommateDoc = {
-  username: "Tom",
-  password: "TomPassword",
-  profile: "tom@gmail.com",
-  roommateList: [],
-};
+const roommates = [roommate1, roommate2];
 
 const roommateProfileDoc1: RoommateProfileDoc = {
   firstName: "Tom",
@@ -59,14 +50,13 @@ const roommateProfileDoc1: RoommateProfileDoc = {
   bio: "NYU grad",
   hobbies: [],
   personality: [],
-  additionalInfo: "Looking for 1 roommate"
+  additionalInfo: "Looking for 1 roommate",
 };
 
-const roommateDoc2: RoommateDoc = {
-  username: "Bob",
-  password: "BobPassword",
-  profile: "bob@gmail.com",
-  roommateList: [],
+const roommateDoc1: RoommateDoc = {
+  username: "Tom",
+  password: "TomPassword",
+  profile: roommateProfileDoc1,
 };
 
 const roommateProfileDoc2: RoommateProfileDoc = {
@@ -77,26 +67,31 @@ const roommateProfileDoc2: RoommateProfileDoc = {
   bio: "UCLA grad",
   hobbies: [],
   personality: [],
-  additionalInfo: "Looking for 2 roommates"
+  additionalInfo: "Looking for 2 roommates",
+};
+
+const roommateDoc2: RoommateDoc = {
+  username: "Bob",
+  password: "BobPassword",
+  profile: roommateProfileDoc2,
 };
 
 describe("Roommate Repository", () => {
   it("Creates roommate", async () => {
     const roommateRepository = new RoommateRepository();
 
-    mockingoose(RoommateModel).toReturn([], 'find'); //No existing roommate is found
-    mockingoose(RoommateModel).toReturn(null, 'save'); //Successfully save
-    mockingoose(RoommateProfileModel).toReturn(null, 'save'); //Successfully save
+    mockingoose(RoommateModel).toReturn([], "find"); //No existing roommate is found
+    mockingoose(RoommateModel).toReturn(null, "save"); //Successfully save
+    mockingoose(RoommateProfileModel).toReturn(null, "save"); //Successfully save
 
-    
     expect(await roommateRepository.create(roommate1)).toEqual(true);
   });
 
   it("Create roommate 2", async () => {
     const roommateRepository = new RoommateRepository();
-    mockingoose(RoommateModel).toReturn([], 'find'); //No existing roommate is found
-    mockingoose(RoommateModel).toReturn(null, 'save'); //Successfully save
-    mockingoose(RoommateProfileModel).toReturn(null, 'save'); //Successfully save
+    mockingoose(RoommateModel).toReturn([], "find"); //No existing roommate is found
+    mockingoose(RoommateModel).toReturn(null, "save"); //Successfully save
+    mockingoose(RoommateProfileModel).toReturn(null, "save"); //Successfully save
 
     expect(await roommateRepository.create(roommate2)).toEqual(true);
   });
@@ -104,23 +99,21 @@ describe("Roommate Repository", () => {
   it("Finds roommate ", async () => {
     const roommateRepository = new RoommateRepository();
 
-    mockingoose(RoommateModel).toReturn([roommateDoc1], 'find');
-    mockingoose(RoommateProfileModel).toReturn([roommateProfileDoc1], 'find');
+    mockingoose(RoommateModel).toReturn([roommateDoc1], "find");
+    mockingoose(RoommateProfileModel).toReturn([roommateProfileDoc1], "find");
 
-    expect(await roommateRepository.findOne(roommate2.username)).toEqual(roommate2);
+    expect(await roommateRepository.findOne(roommate2.username)).toEqual(
+      roommate2
+    );
   });
 
   it("Find all roommates ", async () => {
     const roommateRepository = new RoommateRepository();
-    const allRoommates = await roommateRepository.getAll();
-    mockingoose(RoommateModel).toReturn([roommateDoc1, roommateDoc2], 'find');
-    mockingoose(RoommateProfileModel).toReturn(roommateProfileDoc1, 'find');
-    mockingoose(RoommateProfileModel).toReturn(roommateProfileDoc2, 'find');
 
-    expect(allRoommates).toContain(roommates);
+    mockingoose(RoommateModel).toReturn([roommateDoc1, roommateDoc2], "find");
+
+    const allRoommates = await roommateRepository.getAll();
+    expect(allRoommates).toEqual(expect.arrayContaining(roommates));
     expect(allRoommates.length).toEqual(roommates.length);
   });
-
-
-
 });
