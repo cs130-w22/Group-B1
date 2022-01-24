@@ -94,12 +94,6 @@ export const documentToRoommateProfile = (
 export const documentsToRoommate = (
   roommateDoc: HydratedDocument<RoommateDoc>
 ): Roommate => {
-  console.log({
-    fn: "documentsToRoommate",
-    roommateDoc,
-    profile: roommateDoc.profile,
-    id: roommateDoc.profile["_id"],
-  });
   const roommateProfileDoc = roommateDoc.profile;
   const profile = {
     firstName: roommateProfileDoc.firstName,
