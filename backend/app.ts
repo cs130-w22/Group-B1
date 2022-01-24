@@ -13,7 +13,7 @@ dotenv.config();
 const port = 3000;
 
 //DB connection
-const MONGODB_URL = "mongodb://localhost:27017/ZoomieRoomies";
+const MONGODB_URL = process.env.DB_URL_DEV;
 connect(MONGODB_URL).then(() => {
   console.log("Connected to database");
 })
