@@ -2,6 +2,7 @@ import { injectable, inject } from "inversify";
 import TYPES from "../../types";
 import { RoommateRepository } from "../repository/RoommateRepository";
 import { Roommate } from "../../../shared/src/roommate";
+import "reflect-metadata";
 
 @injectable()
 export class RoommateService {

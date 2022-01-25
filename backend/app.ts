@@ -1,4 +1,5 @@
 import express from "express";
+import { connect } from "mongoose";
 import { json } from "body-parser";
 import TYPES from "./types";
 import container from "./inversify.config";
@@ -10,6 +11,17 @@ app.use(json());
 
 dotenv.config();
 const port = 3000;
+
+//DB connection
+const MONGODB_URL = process.env.DB_URL_DEV;
+connect(MONGODB_URL)
+  .then(() => {
+    console.log("Connected to database");
+  })
+  .catch((err) => {
+    console.error("Failed to connect to database: ", err.message);
+    process.exit(1);
+  });
 
 const controllers: RegistrableController[] =
   container.getAll<RegistrableController>(TYPES.Controller);
