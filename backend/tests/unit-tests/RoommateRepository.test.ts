@@ -1,4 +1,7 @@
-import { RoommateRepository } from "../../src/repository/RoommateRepository";
+import {
+  RoommateRepository,
+  RoommateRepositoryImplMongo,
+} from "../../src/repository/RoommateRepository";
 import { Area } from "../../../shared/src/area";
 import { describe, expect, it, beforeAll, afterAll } from "@jest/globals";
 import { RoommateModel } from "../../src/repository/Schemas";
@@ -57,7 +60,7 @@ describe("Roommate Repository", () => {
   let roommateRepository: RoommateRepository;
 
   beforeAll(async () => {
-    roommateRepository = new RoommateRepository();
+    roommateRepository = new RoommateRepositoryImplMongo();
     dotenv.config();
 
     const MONGODB_URL = process.env.DB_URL_TEST;

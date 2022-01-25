@@ -3,8 +3,16 @@ import { RoommateModel } from "./Schemas";
 import { injectable } from "inversify";
 import "reflect-metadata";
 
+export interface RoommateRepository {
+  create(roommate: Roommate): Promise<boolean>;
+  findOne(username: string): Promise<Roommate | null>;
+  getAll(): Promise<Roommate[]>;
+  update(username: string, roommate: Roommate): Promise<boolean>;
+  delete(username: string): Promise<boolean>;
+}
+
 @injectable()
-export class RoommateRepository {
+export class RoommateRepositoryImplMongo implements RoommateRepository {
   /**
    * Create a Roommate
    * @param roommate Roommate as represented in Shared folder
