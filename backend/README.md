@@ -32,3 +32,9 @@ Format
 ```
 npm run format
 ```
+
+## Testing
+
+```
+npm run test
+```
