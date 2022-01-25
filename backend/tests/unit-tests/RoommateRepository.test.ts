@@ -72,6 +72,8 @@ describe("Roommate Repository", () => {
 
   it("Creates, updates, finds, and deletes roommate", async () => {
     expect(await roommateRepository.create(roommate1)).toEqual(true);
+    expect(await roommateRepository.create(roommate1)).toEqual(false);
+
     expect(await roommateRepository.create(roommate2)).toEqual(true);
 
     expect(await roommateRepository.findOne(roommate1.username)).toEqual(
