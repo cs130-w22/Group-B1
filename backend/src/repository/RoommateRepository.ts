@@ -8,7 +8,7 @@ export class RoommateRepository {
   /**
    * Create a Roommate
    * @param roommate Roommate as represented in Shared folder
-   * @returns false if already exists, true if entered successfully
+   * @returns False if already exists, true if entered successfully
    */
   async create(roommate: Roommate): Promise<boolean> {
     const existingRoommate = await RoommateModel.findOne({
@@ -25,7 +25,7 @@ export class RoommateRepository {
   /**
    * Finds a roommate given a username
    * @param username
-   * @returns null if does not exist, otherwise Roommate as defined in shared
+   * @returns Null if does not exist, otherwise Roommate
    */
   async findOne(username: string): Promise<Roommate | null> {
     const roommate = await RoommateModel.findOne({ username: username });
@@ -34,13 +34,19 @@ export class RoommateRepository {
 
   /**
    * Get all of the roommates
-   * @returns Promise<Roommate[]> List of Roommates
+   * @returns List of all roommates
    */
   async getAll(): Promise<Roommate[]> {
     const roommateDocs = await RoommateModel.find();
     return roommateDocs.map((roommateDoc) => roommateDoc.toObject());
   }
 
+  /**
+   * Updates a roommate with a given username
+   * @param username
+   * @param roommate
+   * @returns False if the roommate did not exist, true if update succeedd
+   */
   async update(username: string, roommate: Roommate): Promise<boolean> {
     const roommateDoc = await RoommateModel.findOne({ username: username });
     if (!roommateDoc) {
@@ -52,6 +58,11 @@ export class RoommateRepository {
     return true;
   }
 
+  /**
+   * Deletes a roommate given a username
+   * @param username
+   * @returns True if the roommate was deleted, false otherwise
+   */
   async delete(username: string): Promise<boolean> {
     return (await RoommateModel.deleteOne({ username })).deletedCount == 1;
   }
