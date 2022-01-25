@@ -1,12 +1,6 @@
 import { Roommate } from "../../../shared/src/roommate";
-import {
-  roommateToDocument,
-  documentsToRoommate,
-  RoommateModel,
-  RoommateDoc,
-} from "./Schemas";
+import { roommateToDocument, RoommateModel } from "./Schemas";
 import { injectable } from "inversify";
-import { HydratedDocument } from "mongoose";
 import "reflect-metadata";
 
 @injectable()
@@ -17,7 +11,9 @@ export class RoommateRepository {
    * @returns false if already exists, true if entered successfully
    */
   async create(roommate: Roommate): Promise<boolean> {
-    const existingRoommate = await this.findOne(roommate.username);
+    const existingRoommate = await RoommateModel.findOne({
+      username: roommate.username,
+    });
     if (existingRoommate) {
       return false;
     }
@@ -32,11 +28,11 @@ export class RoommateRepository {
    * @returns null if does not exist, otherwise Roommate as defined in shared
    */
   async findOne(username: string): Promise<Roommate | null> {
-    const roommateDoc = await this.findRoommateDoc(username);
+    const roommateDoc = await RoommateModel.findOne({ username: username });
     if (!roommateDoc) {
       return null;
     }
-    return documentsToRoommate(roommateDoc);
+    return roommateDoc.toObject();
   }
 
   /**
@@ -45,11 +41,11 @@ export class RoommateRepository {
    */
   async getAll(): Promise<Roommate[]> {
     const roommateDocs = await RoommateModel.find();
-    return roommateDocs.map((roommateDoc) => documentsToRoommate(roommateDoc));
+    return roommateDocs.map((roommateDoc) => roommateDoc.toObject());
   }
 
   async update(username: string, roommate: Roommate): Promise<boolean> {
-    const roommateDoc = await this.findRoommateDoc(username);
+    const roommateDoc = await RoommateModel.findOne({ username: username });
     if (!roommateDoc) {
       return false;
     }
@@ -59,28 +55,7 @@ export class RoommateRepository {
     return true;
   }
 
-  delete(id: string): Promise<Roommate> {
-    throw new Error("Method not implemented.");
-  }
-
-  /**
-   * Given a username returns a RoommateDoc object
-   * @param username
-   * @returns HydratedDocument<Roommate> or null if does not exist
-   */
-  private async findRoommateDoc(
-    username: string
-  ): Promise<HydratedDocument<RoommateDoc> | null> {
-    const roommateDocs = await RoommateModel.find({ username: username });
-    console.log({ fn: "findRoommateDoc", roommateDocs });
-    if (roommateDocs.length == 0) {
-      return null;
-    } else if (roommateDocs.length > 1) {
-      const error_str = `Error there are multiple Roommates with the username: ${username}`;
-      console.log(error_str);
-      return null;
-    } else {
-      return roommateDocs[0];
-    }
+  async delete(username: string): Promise<boolean> {
+    return (await RoommateModel.deleteOne({ username })).acknowledged;
   }
 }
