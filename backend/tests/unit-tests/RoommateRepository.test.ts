@@ -1,13 +1,10 @@
 import { RoommateRepository } from "../../src/repository/RoommateRepository";
 import { Area } from "../../../shared/src/area";
-import { describe, expect, it, beforeEach } from "@jest/globals";
-import {
-  RoommateModel,
-  roommateToDocument,
-} from "../../src/repository/Schemas";
-import * as mockingoose from "mockingoose";
+import { describe, expect, it, beforeAll, afterAll } from "@jest/globals";
+import { RoommateModel } from "../../src/repository/Schemas";
 import { Roommate } from "../../../shared/src/roommate";
-import { cloneDeep } from "lodash";
+import { connect, disconnect } from "mongoose";
+import * as dotenv from "dotenv";
 
 const roommate1: Roommate = {
   username: "Bob",
@@ -18,6 +15,21 @@ const roommate1: Roommate = {
     email: "bob@gmail.com",
     area: "Austin" as Area,
     bio: "UCLA grad",
+    hobbies: [],
+    personality: [],
+    additionalInfo: "Looking for 2 roommates",
+  },
+};
+
+const roommate1Updated: Roommate = {
+  username: "Bob",
+  password: "BobNewPassword",
+  profile: {
+    firstName: "Bob",
+    lastName: "Smith",
+    email: "bob@gmail.com",
+    area: "Austin" as Area,
+    bio: "USC grad",
     hobbies: [],
     personality: [],
     additionalInfo: "Looking for 2 roommates",
@@ -42,66 +54,43 @@ const roommate2: Roommate = {
 const roommates = [roommate1, roommate2];
 
 describe("Roommate Repository", () => {
-  beforeEach(() => {
-    mockingoose.resetAll();
+  let roommateRepository: RoommateRepository;
+
+  beforeAll(async () => {
+    roommateRepository = new RoommateRepository();
+    dotenv.config();
+
+    const MONGODB_URL = process.env.DB_URL_TEST;
+    await connect(MONGODB_URL);
+    await RoommateModel.deleteMany({});
   });
 
-  it("Creates roommate", async () => {
-    const roommateRepository = new RoommateRepository();
+  afterAll(async () => {
+    await RoommateModel.deleteMany({});
+    disconnect();
+  });
 
-    mockingoose(RoommateModel).toReturn([], "find"); //No existing roommate is found
-    mockingoose(RoommateModel).toReturn(null, "save"); //Successfully save
-
+  it("Creates, updates, finds, and deletes roommate", async () => {
     expect(await roommateRepository.create(roommate1)).toEqual(true);
-  });
-
-  it("Finds roommate ", async () => {
-    const roommateRepository = new RoommateRepository();
-
-    mockingoose(RoommateModel).toReturn([roommate2], "find");
-
-    expect(await roommateRepository.findOne(roommate2.username)).toEqual(
-      roommate2
-    );
-  });
-
-  it("Find all roommates ", async () => {
-    const roommateRepository = new RoommateRepository();
-
-    mockingoose(RoommateModel).toReturn([roommate1, roommate2], "find");
-
-    const allRoommates = await roommateRepository.getAll();
-    expect(allRoommates).toEqual(expect.arrayContaining(roommates));
-    expect(allRoommates.length).toEqual(roommates.length);
-  });
-
-  it("Updates roommate", async () => {
-    const roommateRepository = new RoommateRepository();
-    mockingoose(RoommateModel).toReturn([], "find"); //No existing roommate is found
-    mockingoose(RoommateModel).toReturn(null, "save"); //Successfully save
-
     expect(await roommateRepository.create(roommate2)).toEqual(true);
-    const roommate2Updated = cloneDeep(roommate2);
-    roommate2Updated.profile.bio = "Recent NYU grad";
 
-    const finderMock = (query) => {
-      if (query.getQuery().username === roommate2.username) {
-        return [roommateToDocument(roommate2)];
-      }
-    };
-    mockingoose(RoommateModel).toReturn(finderMock, "find");
-
-    const saveMock = (query) => {
-      expect(query.profile.bio === roommate2Updated.profile.bio).toEqual(true);
-    };
-
-    mockingoose(RoommateModel).toReturn(saveMock, "save"); //Successfully save
+    expect(await roommateRepository.findOne(roommate1.username)).toEqual(
+      roommate1
+    );
+    expect(await roommateRepository.getAll()).toEqual(
+      expect.arrayContaining(roommates)
+    );
 
     expect(
-      await roommateRepository.update(
-        roommate2Updated.username,
-        roommate2Updated
-      )
+      await roommateRepository.update(roommate1.username, roommate1Updated)
     ).toEqual(true);
+    expect(await roommateRepository.findOne(roommate1.username)).toEqual(
+      roommate1Updated
+    );
+
+    expect(await roommateRepository.delete(roommate2.username)).toEqual(true);
+    expect(await roommateRepository.findOne(roommate2.username)).toEqual(null);
+
+    expect((await roommateRepository.getAll()).length).toEqual(1);
   });
 });

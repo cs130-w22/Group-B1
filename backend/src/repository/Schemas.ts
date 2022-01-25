@@ -1,8 +1,6 @@
-import { Schema, model, HydratedDocument } from "mongoose";
+import { Schema, model } from "mongoose";
 import { Roommate } from "../../../shared/src/roommate";
 
-//Make Schemas, the outlines for our documents
-//---------------------------------------------
 const roommateSchema = new Schema<Roommate>(
   {
     username: { type: String, required: true, unique: true },
@@ -28,19 +26,4 @@ const roommateSchema = new Schema<Roommate>(
   }
 );
 
-//Make Models, the constructors that make documents
-//-------------------------------------------------
 export const RoommateModel = model<Roommate>("Roommate", roommateSchema);
-
-//Functions to Convert Shared Classes to DB Models
-//------------------------------------------------
-export const roommateToDocument = (
-  roommate: Roommate
-): HydratedDocument<Roommate> => {
-  const roommateDoc = new RoommateModel({
-    username: roommate.username,
-    password: roommate.password,
-    profile: roommate.profile,
-  });
-  return roommateDoc;
-};

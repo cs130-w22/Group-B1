@@ -1,5 +1,5 @@
 import { Roommate } from "../../../shared/src/roommate";
-import { roommateToDocument, RoommateModel } from "./Schemas";
+import { RoommateModel } from "./Schemas";
 import { injectable } from "inversify";
 import "reflect-metadata";
 
@@ -17,7 +17,7 @@ export class RoommateRepository {
     if (existingRoommate) {
       return false;
     }
-    const roommateDoc = roommateToDocument(roommate);
+    const roommateDoc = new RoommateModel(roommate);
     await roommateDoc.save();
     return true;
   }
@@ -28,11 +28,8 @@ export class RoommateRepository {
    * @returns null if does not exist, otherwise Roommate as defined in shared
    */
   async findOne(username: string): Promise<Roommate | null> {
-    const roommateDoc = await RoommateModel.findOne({ username: username });
-    if (!roommateDoc) {
-      return null;
-    }
-    return roommateDoc.toObject();
+    const roommate = await RoommateModel.findOne({ username: username });
+    return roommate ? roommate.toObject() : null;
   }
 
   /**
@@ -56,6 +53,6 @@ export class RoommateRepository {
   }
 
   async delete(username: string): Promise<boolean> {
-    return (await RoommateModel.deleteOne({ username })).acknowledged;
+    return (await RoommateModel.deleteOne({ username })).deletedCount == 1;
   }
 }
