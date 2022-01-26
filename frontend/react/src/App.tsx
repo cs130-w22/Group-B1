@@ -4,7 +4,7 @@ import './App.css';
 
 import Main from './Main';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Main />

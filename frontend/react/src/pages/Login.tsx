@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Login.css';
 
-const Login = () => {
+const Login: React.FC = () => {
   return (
     <p className='login-text'>Login Page</p>
   )

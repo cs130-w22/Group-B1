@@ -6,13 +6,13 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Search from './pages/Search';
 
-const NoMatch = () => {
+const NoMatch: React.FC = () => {
   return (
     <p>Error 404: Path not recognized.</p>
   )
 }
 
-const Main = () => {
+const Main: React.FC = () => {
   return (
     <BrowserRouter> {/* Router swaps topmost page component based on url */}
       <Routes>
