@@ -35,12 +35,11 @@ export class RoommateController implements RegistrableController {
             return res.status(200).json(roommate);
           } else {
             return res.status(400).json({
-              message:
-                "Failed to create roommate. Username likely already taken.",
+              message: "Username already taken.",
             });
           }
         } catch (err) {
-          return res.status(400).json({
+          return res.status(500).json({
             message: "Failed to create roommate.",
           });
         }
@@ -56,13 +55,12 @@ export class RoommateController implements RegistrableController {
             return res.status(200).json(roommate);
           } else {
             return res.status(400).json({
-              message: "Failed to update roommate. Roommate username invalid.",
+              message: "Roommate username invalid.",
             });
           }
         } catch (err) {
-          return res.status(400).json({
+          return res.status(500).json({
             message: "Failed to update roommate.",
-            err: err.message,
           });
         }
       });
