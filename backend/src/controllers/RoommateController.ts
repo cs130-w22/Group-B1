@@ -15,10 +15,20 @@ export class RoommateController implements RegistrableController {
       .route("/roommate/")
       .get(async (req: Request, res: Response) => {
         try {
-          const roommateProfiles = (
-            await this.roommateService.getAllRoommates()
-          ).map((roommate) => roommate.profile);
-          res.status(200).json({ data: roommateProfiles });
+          const username = req.query.username;
+          if (username) {
+            const roommate = await this.roommateService.findRoommate(username);
+            if (!roommate) {
+              res.status(404).json({ message: "Roommate not found." });
+            } else {
+              res.status(200).json(roommate.profile);
+            }
+          } else {
+            const roommateProfiles = (
+              await this.roommateService.getAllRoommates()
+            ).map((roommate) => roommate.profile);
+            res.status(200).json({ data: roommateProfiles });
+          }
         } catch (err) {
           return res.status(500).json({
             message: "Failed to get all roommates.",

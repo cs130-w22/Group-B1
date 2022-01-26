@@ -17,6 +17,10 @@ export class RoommateService {
     return await this.roommateRepository.create(roommate);
   }
 
+  public async findRoommate(username: string): Promise<Roommate | null> {
+    return await this.roommateRepository.findOne(username);
+  }
+
   public async updateRoommate(
     username: string,
     roommate: Roommate
