@@ -3,9 +3,10 @@ import TYPES from "../../types";
 import { RoommateRepository } from "../repository/RoommateRepository";
 import { Roommate } from "../../../shared/src/roommate";
 import { createHmac, randomBytes } from "crypto";
-import { jwt } from "jsonwebtoken";
 
-interface AuthTokens {
+const jwt = require("jsonwebtoken");
+
+export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
 }
@@ -50,8 +51,24 @@ export class AuthorizationService {
       return false;
     }
 
-    const [roommatePassword, salt] = roommate.password.split("$");
+    const [salt, hashedPassword] = roommate.password.split("$");
     const hash = createHmac("sha512", salt).update(password).digest("base64");
-    return hash == roommatePassword;
+
+    return hash == hashedPassword;
+  }
+
+  public async validToken(authorization: string): Promise<boolean> {
+    try {
+      let authorizations = authorization.split(" ");
+      if (authorizations[0] !== "Bearer") {
+        return false;
+      } else {
+        const jwtSecret = process.env.JWT_SECRET;
+        jwt.verify(authorizations[1], jwtSecret);
+        return true;
+      }
+    } catch (err) {
+      return false;
+    }
   }
 }
