@@ -97,6 +97,7 @@ const useProfile = (newId) => {
   return [id, setId];
 }
 const UserProfilePanel: React.FC = () => {
+  // TODO: derekh implement this
   return (
     <div className="user-profile-panel">
       <div className='profilePicture'></div>
