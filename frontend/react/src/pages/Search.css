@@ -1,5 +1,5 @@
 .user-profile-panel {
-  background-color: #a81c0a;
+  background-color: #C952D0;
 
   position: absolute;
   top: 0px;
@@ -9,7 +9,7 @@
 }
 
 .roommate-selection-panel {
-  background-color: #888888;
+  background-color: #F2CFF5;
 
   position: absolute;
   top: 80px;
@@ -20,7 +20,7 @@
   overflow: hidden;
 }
 .roommate-list-panel {
-  background-color: #dddddd;
+  background-color: #F2CFF5;
 
   box-sizing: border-box;
   position: absolute;
@@ -34,58 +34,76 @@
   -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
   scrollbar-width: none;  /* Hide scrollbar for Firefox */
 }
-	.miniProfile {
-      background-color: #ffffff;
+.recommendation-text {
+  /*display: inline-block;*/
+  /*position: absolute;*/
+  font-size: 30px;
+  transform:  translateY(-25%);
+  font-weight: bold;
+  text-decoration: underline;
+}
+.miniViewFade {
+  /*background: linear-gradient(180deg, rgba(64,49,45,1) 0%, rgba(64,49,45,0) 100%);*/
+  background: linear-gradient(180deg, #F2CFF5ff 0%, #F2CFF500 100%);
 
-      display: block;
-      position: relative;
-      height: 60px;
-      margin-bottom: 10px;
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  height: 15px;
+  z-index: 2;
+}
+.miniProfile {
+  background-color: #ffffff;
 
-      border: 2px solid #000000;
-      border-radius: 12px;
-    }
-      .miniProfilePicture {
-        background-color: #dddddd;
+  display: block;
+  position: relative;
+  height: 60px;
+  margin-bottom: 10px;
 
-        display: inline-block;
-        position: absolute;
-        top: 50%;
-        left: 30px;
-        width: 50px;
-        height: 50px;
-        transform: translate(-50%, -50%);
+  border: 2px solid #000000;
+  border-radius: 12px;
+}
+.miniProfilePicture {
+  background-color: #dddddd;
 
-        border-radius: 50%;
-      }
-      .miniProfilePreference {
-        background-color: #bbbbbb;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
 
-        display: inline-block;
-        position: absolute;
-        top: 75%;
-        left: 45px;
-        width: 20px;
-        height: 20px;
-        transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+.miniProfilePreference {
+  background-color: #bbbbbb;
 
-        border-radius: 50%;
-      }
-      .miniProfileName {
-        display: inline-block;
-        position: absolute;
-        top: -15px;
-        left: 65px;
+  display: inline-block;
+  position: absolute;
+  top: 75%;
+  left: 45px;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
 
-        font-weight: bold;
-        font-size: 20px;
-      }
-      .miniProfileText {
-        display: inline-block;
-        position: absolute;
-        top: 15px;
-        left: 65px;
-      }
+  border-radius: 50%;
+}
+.miniProfileName {
+  display: inline-block;
+  position: absolute;
+  top: -15px;
+  left: 65px;
+
+  font-weight: bold;
+  font-size: 20px;
+}
+.miniProfileText {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  left: 65px;
+}
 
 .viewed-profile-panel {
   background-color: #eeeeee;
@@ -98,4 +116,60 @@
 
   overflow: scroll;
   overflow-x: hidden;
+}
+.fullProfilePicture {
+  background-color: #dddddd;
+
+  display: inline-block;
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%,0%);
+
+  border-radius: 50%;
+}
+.fullProfilePreference {
+  background-color: #bbbbbb;
+
+  display: inline-block;
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  width: 45px;
+  height: 45px;
+  transform: translate(calc(-50% + 50px), 0%);
+
+  border-radius: 50%;
+}
+.fullProfileName {
+  display: inline-block;
+  position: absolute;
+  top: 210px;
+  left: 50%;
+  transform: translate(-50%,0%);
+
+  font-weight: bold;
+  font-size: 20px;
+}
+.fullProfileText {
+  display: inline-block;
+  position: absolute;
+  top: 240px;
+  left: 50%;
+  transform: translate(-50%,0%);
+}
+.fullProfileBio {
+  background-color: #F2CFF5;
+
+  display: inline-block;
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  width: 70%;
+  height: 700px;
+  transform: translate(-50%,0%);
+
+  border-radius: 24px;
 }
