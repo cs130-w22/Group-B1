@@ -30,7 +30,7 @@ export class AuthorizationMiddleware {
     }
   };
 
-  public verifyPassword = async (
+  public verifyPasswordExists = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -44,7 +44,7 @@ export class AuthorizationMiddleware {
       );
       next();
     } catch (err) {
-      res.status(500).json({ message: "Failed to verify password." });
+      res.status(500).json({ message: "Failed to encrypt password." });
     }
   };
 }

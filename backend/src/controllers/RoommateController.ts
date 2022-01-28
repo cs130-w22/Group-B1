@@ -18,10 +18,13 @@ export class RoommateController implements RegistrableController {
     app
       .route("/roommate/")
       .get(this.authorizationMiddleware.verifyToken, this.getRoommates)
-      .post(this.authorizationMiddleware.verifyPassword, this.createRoomate)
+      .post(
+        this.authorizationMiddleware.verifyPasswordExists,
+        this.createRoomate
+      )
       .put(
         this.authorizationMiddleware.verifyToken,
-        this.authorizationMiddleware.verifyPassword,
+        this.authorizationMiddleware.verifyPasswordExists,
         this.updateRoommate
       );
   }
