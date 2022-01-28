@@ -53,45 +53,7 @@
 
 /********************************************/
 
-.profilePicture {
-        background-color: #ffffff;
 
-        display:  inline-block;
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        width: 40px;
-        height: 40px;
-
-        border-radius: 50%;
-      }
-      .profileName {
-        display:  inline-block;
-        position:  absolute;
-        /*top: 50%;*/
-        left: 80px;
-        width: calc(100% - 160px);
-        /*transform:  translate(0%, -50%);*/
-
-        font: 24px Calibri;
-      }
-      .settingsButton {
-        background: url('resources/edit.png');
-        background-color: #ff000022;
-        background-position: center;
-        background-size: 60%;
-        background-repeat: no-repeat;
-
-        display:  inline-block;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-
-        border: 2px solid #000000;
-        border-radius: 50%;
-      }
 
 .test-class {
   background-color: #dddddd;

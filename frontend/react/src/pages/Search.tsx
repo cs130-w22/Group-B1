@@ -76,6 +76,7 @@ for (let i = 0; i < 30; i++) {
     personality: [],
     additionalInfo: '[additional info]'
   };
+  profile.email = profile.firstName + ' ' + profile.lastName + '@' + (Math.random()<0.5?'gmail':'yahoo') + '.com';
   for (let i = 0, n = randInt(2,5); i < n; i++) {
     profile.personality.push(personalities[randInt(0,personalities.length-1)])
   }
@@ -97,7 +98,11 @@ const useProfile = (newId) => {
 }
 const UserProfilePanel: React.FC = () => {
   return (
-    <div className='user-profile-panel'/>
+    <div className="user-profile-panel">
+      <div className='profilePicture'></div>
+      <p className='profileName'>Hodor Hodurson</p>
+      <div className='settingsButton'></div>
+    </div>
   )
 }
 const RoommateSelectionPanel: React.FC = () => {
