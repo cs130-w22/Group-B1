@@ -5,7 +5,6 @@ import TYPES from "../../types";
 import { RoommateService } from "../services/RoommateService";
 import { AuthorizationService } from "../services/AuthorizationService";
 import { RegistrableController } from "./RegistrableController";
-import crypto from "crypto";
 
 @injectable()
 export class RoommateController implements RegistrableController {
@@ -27,7 +26,7 @@ export class RoommateController implements RegistrableController {
           if (!validToken) {
             return res.status(400).json({ message: "Invalid token." });
           }
-          
+
           const username = req.query.username;
           if (username) {
             const roommate = await this.roommateService.findRoommate(username);

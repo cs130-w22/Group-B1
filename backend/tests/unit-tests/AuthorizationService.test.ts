@@ -5,9 +5,7 @@ import { RoommateRepository } from "../../src/repository/RoommateRepository";
 
 import { Area } from "../../../shared/src/area";
 import { describe, expect, it, beforeAll, afterAll } from "@jest/globals";
-import { RoommateModel } from "../../src/repository/Schemas";
 import { Roommate } from "../../../shared/src/roommate";
-import { connect, disconnect } from "mongoose";
 import * as dotenv from "dotenv";
 import TYPES from "../../types";
 
@@ -61,10 +59,6 @@ describe("Authorization Service", () => {
 
     dotenv.config();
 
-    const MONGODB_URL = process.env.DB_URL_TEST;
-    await connect(MONGODB_URL);
-    await RoommateModel.deleteMany({});
-
     container.unbind(TYPES.RoommateRepository);
     container
       .bind<RoommateRepository>(TYPES.RoommateRepository)
@@ -77,11 +71,9 @@ describe("Authorization Service", () => {
 
   afterAll(async () => {
     container.restore();
-    await RoommateModel.deleteMany({});
-    disconnect();
   });
 
-  it("Test", async () => {
+  it("Checks for valid username, password, and access token", async () => {
     const plainTextPassword = testRoommate.password;
     testRoommate.password = await authorizationService.encryptPassword(
       testRoommate.password
