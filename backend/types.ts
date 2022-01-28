@@ -1,9 +1,9 @@
 const TYPES = {
   RoommateRepository: Symbol("RoommateRepository"),
   RoommateService: Symbol("RoommateService"),
-  Controller: Symbol("Controller"),
-
   AuthorizationService: Symbol("AuthorizationService"),
+  Controller: Symbol("Controller"),
+  AuthorizationMiddleware: Symbol("AuthorizationMiddleware"),
 };
 
 export default TYPES;
