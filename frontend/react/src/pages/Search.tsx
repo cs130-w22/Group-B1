@@ -1,5 +1,6 @@
 import React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import Modal from 'react-modal';
 
 import './Search.css';
 import '../shared/roommateProfile.ts';
@@ -85,6 +86,17 @@ for (let i = 0; i < 30; i++) {
 var viewedProfile:RoommateProfile = profiles[0];
 var viewedId:number = 0;
 
+var mockUserProfile:RoommateProfile = {
+  firstName: "Peter",
+  lastName: "Parker",
+  email: "notspiderman@marvel.com",
+  area: 'New York',
+  bio: "Hi I'm Peter Parkter, your friendly neighborhood Spiderman",
+  hobbies: ["reading", "running"],
+  personality: ["introvert"],
+  additionalInfo: "I'm looking for a roommate to help me fight crime!"
+}
+
 // fetch data
 function getProfiles() {
   return profiles;
@@ -96,14 +108,34 @@ const useProfile = (newId) => {
   setId(newId);
   return [id, setId];
 }
-const UserProfilePanel: React.FC = () => {
+
+const UserProfilePanel: React.FC = (props) => {
   // TODO: derekh implement this
+  var userProfile:RoommateProfile = props.profile;
+  var openUserPreferencesPanel = props.onSettingsClick;
+
   return (
     <div className="user-profile-panel">
       <div className='profilePicture'></div>
-      <p className='profileName'>Hodor Hodurson</p>
-      <div className='settingsButton'></div>
+      <p className='profileName'>{userProfile.firstName} {userProfile.lastName}</p>
+
+      <div className='settingsButton' onClick={openUserPreferencesPanel}></div>
     </div>
+  )
+}
+
+const ProfilePreferencesPanel: React.FC = (props) => {
+  // var userProfile:RoommateProfile = props.profile;
+  
+  var isPreferencePopUpOpen = props.isPreferencePopUpOpen;
+  var closeModal = props.onCloseClick;
+  return (
+    <Modal 
+      isOpen={isPreferencePopUpOpen}
+      onRequestClose={closeModal}
+    >
+      <div>This is the UserPreferencesPanel</div>
+    </Modal>
   )
 }
 const RoommateSelectionPanel: React.FC = () => {
@@ -171,11 +203,18 @@ const ViewedProfilePanel: React.FC = () => {
 
 // page
 const Search: React.FC = () => {
+  const [isPreferencePopUpOpen, setIsPreferencePopUpOpen] = useState(false);
+  const togglePreferencePopUp = () => {
+    console.log("clicking button; isPreferencePopUpOpen:", isPreferencePopUpOpen);
+    setIsPreferencePopUpOpen(!isPreferencePopUpOpen);
+  }
+
   return (
     <div>
-      <UserProfilePanel/>
+      <UserProfilePanel profile={mockUserProfile} onSettingsClick={togglePreferencePopUp}/>
       <RoommateSelectionPanel/>
       <ViewedProfilePanel/>
+      <ProfilePreferencesPanel isPreferencePopUpOpen={isPreferencePopUpOpen} onCloseClick={togglePreferencePopUp}/>
     </div>
   )
 }
