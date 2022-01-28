@@ -19,12 +19,10 @@ export class AuthorizationController implements RegistrableController {
           password
         );
         if (tokens) {
-          return res
-            .status(200)
-            .json({
-              accessToken: tokens.accessToken,
-              refreshToken: tokens.refreshToken,
-            });
+          return res.status(200).json({
+            accessToken: tokens.accessToken,
+            refreshToken: tokens.refreshToken,
+          });
         } else {
           return res.status(400).json({
             message: "Invalid username or password",

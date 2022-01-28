@@ -5,8 +5,7 @@ import TYPES from "../../types";
 import { RoommateService } from "../services/RoommateService";
 import { AuthorizationService } from "../services/AuthorizationService";
 import { RegistrableController } from "./RegistrableController";
-
-var crypto = require("crypto");
+import crypto from "crypto";
 
 @injectable()
 export class RoommateController implements RegistrableController {
@@ -26,7 +25,7 @@ export class RoommateController implements RegistrableController {
             authorization
           );
           if (!validToken) {
-            return res.status(400).json({ message: "Session expired." });
+            return res.status(400).json({ message: "Invalid token." });
           }
           const roommateProfiles = (
             await this.roommateService.getAllRoommates()
@@ -40,12 +39,9 @@ export class RoommateController implements RegistrableController {
       })
       .post(async (req: Request, res: Response) => {
         try {
-          let salt = crypto.randomBytes(16).toString("base64");
-          let hash = crypto
-            .createHmac("sha512", salt)
-            .update(req.body.password)
-            .digest("base64");
-          req.body.password = salt + "$" + hash;
+          req.body.password = await this.authorizationService.encryptPassword(
+            req.body.password
+          );
 
           const roommate: Roommate = req.body as Roommate;
           const roommateCreated = await this.roommateService.createRoommate(
@@ -69,19 +65,17 @@ export class RoommateController implements RegistrableController {
         try {
           const authorization: string = req.headers.authorization;
           const validToken = await this.authorizationService.validToken(
-            authorization
+            authorization,
+            req.body.username
           );
           if (!validToken) {
-            return res.status(400).json({ message: "Session expired." });
+            return res.status(400).json({ message: "Invalid token." });
           }
 
           if (req.body.password) {
-            let salt = crypto.randomBytes(16).toString("base64");
-            let hash = crypto
-              .createHmac("sha512", salt)
-              .update(req.body.password)
-              .digest("base64");
-            req.body.password = salt + "$" + hash;
+            req.body.password = await this.authorizationService.encryptPassword(
+              req.body.password
+            );
           }
 
           const roommate: Roommate = req.body as Roommate;
