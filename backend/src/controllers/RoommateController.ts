@@ -3,6 +3,7 @@ import { Roommate } from "../../../shared/src/roommate";
 import { injectable, inject } from "inversify";
 import TYPES from "../../types";
 import { RoommateService } from "../services/RoommateService";
+import { AuthorizationService } from "../services/AuthorizationService";
 import { RegistrableController } from "./RegistrableController";
 
 @injectable()
@@ -10,11 +11,22 @@ export class RoommateController implements RegistrableController {
   @inject(TYPES.RoommateService)
   private roommateService: RoommateService;
 
+  @inject(TYPES.AuthorizationService)
+  private authorizationService: AuthorizationService;
+
   public register(app: Application): void {
     app
       .route("/roommate/")
       .get(async (req: Request, res: Response) => {
         try {
+          const authorization: string = req.headers.authorization;
+          const validToken = await this.authorizationService.validToken(
+            authorization
+          );
+          if (!validToken) {
+            return res.status(400).json({ message: "Invalid token." });
+          }
+
           const username = req.query.username;
           if (username) {
             const roommate = await this.roommateService.findRoommate(username);
@@ -37,6 +49,10 @@ export class RoommateController implements RegistrableController {
       })
       .post(async (req: Request, res: Response) => {
         try {
+          req.body.password = await this.authorizationService.encryptPassword(
+            req.body.password
+          );
+
           const roommate: Roommate = req.body as Roommate;
           const roommateCreated = await this.roommateService.createRoommate(
             roommate
@@ -56,6 +72,21 @@ export class RoommateController implements RegistrableController {
       })
       .put(async (req: Request, res: Response) => {
         try {
+          const authorization: string = req.headers.authorization;
+          const validToken = await this.authorizationService.validToken(
+            authorization,
+            req.body.username
+          );
+          if (!validToken) {
+            return res.status(400).json({ message: "Invalid token." });
+          }
+
+          if (req.body.password) {
+            req.body.password = await this.authorizationService.encryptPassword(
+              req.body.password
+            );
+          }
+
           const roommate: Roommate = req.body as Roommate;
           const roommateUpdated = await this.roommateService.updateRoommate(
             roommate.username,
