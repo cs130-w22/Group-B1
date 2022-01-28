@@ -1,3 +1,101 @@
-.search-text {
-	color: #000000;
+.user-profile-panel {
+  background-color: #a81c0a;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 30%;
+  height: 80px;
+}
+
+.roommate-selection-panel {
+  background-color: #888888;
+
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  width: 30%;
+  height: calc(100% - 80px);
+
+  overflow: hidden;
+}
+.roommate-list-panel {
+  background-color: #dddddd;
+
+  box-sizing: border-box;
+  position: absolute;
+  padding: 15px;
+  top: 60px;
+  width: 100%;
+  height: calc(100% - 60px);
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+	.miniProfile {
+      background-color: #ffffff;
+
+      display: block;
+      position: relative;
+      height: 60px;
+      margin-bottom: 10px;
+
+      border: 2px solid #000000;
+      border-radius: 12px;
+    }
+      .miniProfilePicture {
+        background-color: #dddddd;
+
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 30px;
+        width: 50px;
+        height: 50px;
+        transform: translate(-50%, -50%);
+
+        border-radius: 50%;
+      }
+      .miniProfilePreference {
+        background-color: #bbbbbb;
+
+        display: inline-block;
+        position: absolute;
+        top: 75%;
+        left: 45px;
+        width: 20px;
+        height: 20px;
+        transform: translate(-50%, -50%);
+
+        border-radius: 50%;
+      }
+      .miniProfileName {
+        display: inline-block;
+        position: absolute;
+        top: -15px;
+        left: 65px;
+
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .miniProfileText {
+        display: inline-block;
+        position: absolute;
+        top: 15px;
+        left: 65px;
+      }
+
+.viewed-profile-panel {
+  background-color: #eeeeee;
+
+  position: absolute;
+  top: 0px;
+  left:  30%;
+  width: 70%;
+  height: 100%;
+
+  overflow: scroll;
+  overflow-x: hidden;
 }

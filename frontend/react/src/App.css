@@ -109,7 +109,7 @@
   scrollbar-width: none;  /* Hide scrollbar for Firefox */
 }
 
-.miniProfile {
+/*.miniProfile {
       background-color: #ffffff;
 
       display: block;
@@ -160,4 +160,4 @@
         position: absolute;
         top: 15px;
         left: 65px;
-      }
+      }*/
