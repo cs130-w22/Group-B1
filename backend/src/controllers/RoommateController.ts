@@ -27,10 +27,21 @@ export class RoommateController implements RegistrableController {
           if (!validToken) {
             return res.status(400).json({ message: "Invalid token." });
           }
-          const roommateProfiles = (
-            await this.roommateService.getAllRoommates()
-          ).map((roommate) => roommate.profile);
-          res.status(200).json({ data: roommateProfiles });
+          
+          const username = req.query.username;
+          if (username) {
+            const roommate = await this.roommateService.findRoommate(username);
+            if (!roommate) {
+              res.status(404).json({ message: "Roommate not found." });
+            } else {
+              res.status(200).json(roommate.profile);
+            }
+          } else {
+            const roommateProfiles = (
+              await this.roommateService.getAllRoommates()
+            ).map((roommate) => roommate.profile);
+            res.status(200).json({ data: roommateProfiles });
+          }
         } catch (err) {
           return res.status(500).json({
             message: "Failed to get all roommates.",
@@ -51,12 +62,11 @@ export class RoommateController implements RegistrableController {
             return res.status(200).json(roommate);
           } else {
             return res.status(400).json({
-              message:
-                "Failed to create roommate. Username likely already taken.",
+              message: "Username already taken.",
             });
           }
         } catch (err) {
-          return res.status(400).json({
+          return res.status(500).json({
             message: "Failed to create roommate.",
           });
         }
@@ -87,13 +97,12 @@ export class RoommateController implements RegistrableController {
             return res.status(200).json(roommate);
           } else {
             return res.status(400).json({
-              message: "Failed to update roommate. Roommate username invalid.",
+              message: "Roommate username invalid.",
             });
           }
         } catch (err) {
-          return res.status(400).json({
+          return res.status(500).json({
             message: "Failed to update roommate.",
-            err: err.message,
           });
         }
       });
