@@ -10,6 +10,7 @@ import {
 } from "./src/repository/RoommateRepository";
 import { AuthorizationService } from "./src/services/AuthorizationService";
 import { AuthorizationController } from "./src/controllers/AuthorizationController";
+import { AuthorizationMiddleware } from "./src/middleware/AuthorizationMiddleware";
 
 const container = new Container();
 container.bind<RegistrableController>(TYPES.Controller).to(RoommateController);
@@ -25,5 +26,9 @@ container
 container
   .bind<RoommateRepository>(TYPES.RoommateRepository)
   .to(RoommateRepositoryImplMongo);
+
+container
+  .bind<AuthorizationMiddleware>(TYPES.AuthorizationMiddleware)
+  .to(AuthorizationMiddleware);
 
 export default container;

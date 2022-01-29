@@ -3,7 +3,7 @@ import { Roommate } from "../../../shared/src/roommate";
 import { injectable, inject } from "inversify";
 import TYPES from "../../types";
 import { RoommateService } from "../services/RoommateService";
-import { AuthorizationService } from "../services/AuthorizationService";
+import { AuthorizationMiddleware } from "../middleware/AuthorizationMiddleware";
 import { RegistrableController } from "./RegistrableController";
 
 @injectable()
@@ -11,99 +11,85 @@ export class RoommateController implements RegistrableController {
   @inject(TYPES.RoommateService)
   private roommateService: RoommateService;
 
-  @inject(TYPES.AuthorizationService)
-  private authorizationService: AuthorizationService;
+  @inject(TYPES.AuthorizationMiddleware)
+  private authorizationMiddleware: AuthorizationMiddleware;
 
   public register(app: Application): void {
     app
       .route("/roommate/")
-      .get(async (req: Request, res: Response) => {
-        try {
-          const authorization: string = req.headers.authorization;
-          const validToken = await this.authorizationService.validToken(
-            authorization
-          );
-          if (!validToken) {
-            return res.status(400).json({ message: "Invalid token." });
-          }
-
-          const username = req.query.username;
-          if (username) {
-            const roommate = await this.roommateService.findRoommate(username);
-            if (!roommate) {
-              res.status(404).json({ message: "Roommate not found." });
-            } else {
-              res.status(200).json(roommate.profile);
-            }
-          } else {
-            const roommateProfiles = (
-              await this.roommateService.getAllRoommates()
-            ).map((roommate) => roommate.profile);
-            res.status(200).json({ data: roommateProfiles });
-          }
-        } catch (err) {
-          return res.status(500).json({
-            message: "Failed to get all roommates.",
-          });
-        }
-      })
-      .post(async (req: Request, res: Response) => {
-        try {
-          req.body.password = await this.authorizationService.encryptPassword(
-            req.body.password
-          );
-
-          const roommate: Roommate = req.body as Roommate;
-          const roommateCreated = await this.roommateService.createRoommate(
-            roommate
-          );
-          if (roommateCreated) {
-            return res.status(200).json(roommate);
-          } else {
-            return res.status(400).json({
-              message: "Username already taken.",
-            });
-          }
-        } catch (err) {
-          return res.status(500).json({
-            message: "Failed to create roommate.",
-          });
-        }
-      })
-      .put(async (req: Request, res: Response) => {
-        try {
-          const authorization: string = req.headers.authorization;
-          const validToken = await this.authorizationService.validToken(
-            authorization,
-            req.body.username
-          );
-          if (!validToken) {
-            return res.status(400).json({ message: "Invalid token." });
-          }
-
-          if (req.body.password) {
-            req.body.password = await this.authorizationService.encryptPassword(
-              req.body.password
-            );
-          }
-
-          const roommate: Roommate = req.body as Roommate;
-          const roommateUpdated = await this.roommateService.updateRoommate(
-            roommate.username,
-            roommate
-          );
-          if (roommateUpdated) {
-            return res.status(200).json(roommate);
-          } else {
-            return res.status(400).json({
-              message: "Roommate username invalid.",
-            });
-          }
-        } catch (err) {
-          return res.status(500).json({
-            message: "Failed to update roommate.",
-          });
-        }
-      });
+      .get(this.authorizationMiddleware.verifyToken, this.getRoommates)
+      .post(
+        this.authorizationMiddleware.verifyPasswordExists,
+        this.createRoomate
+      )
+      .put(
+        this.authorizationMiddleware.verifyToken,
+        this.authorizationMiddleware.verifyPasswordExists,
+        this.updateRoommate
+      );
   }
+
+  private getRoommates = async (req: Request, res: Response) => {
+    try {
+      const username = req.query.username;
+      if (username) {
+        const roommate = await this.roommateService.findRoommate(username);
+        if (!roommate) {
+          res.status(404).json({ message: "Roommate not found." });
+        } else {
+          res.status(200).json(roommate.profile);
+        }
+      } else {
+        const roommateProfiles = (
+          await this.roommateService.getAllRoommates()
+        ).map((roommate) => roommate.profile);
+        res.status(200).json({ data: roommateProfiles });
+      }
+    } catch (err) {
+      return res.status(500).json({
+        message: "Failed to get all roommates.",
+      });
+    }
+  };
+
+  private createRoomate = async (req: Request, res: Response) => {
+    try {
+      const roommate: Roommate = req.body as Roommate;
+      const roommateCreated = await this.roommateService.createRoommate(
+        roommate
+      );
+      if (roommateCreated) {
+        return res.status(200).json(roommate.profile);
+      } else {
+        return res.status(400).json({
+          message: "Username already taken.",
+        });
+      }
+    } catch (err) {
+      return res.status(500).json({
+        message: "Failed to create roommate.",
+      });
+    }
+  };
+
+  private updateRoommate = async (req: Request, res: Response) => {
+    try {
+      const roommate: Roommate = req.body as Roommate;
+      const roommateUpdated = await this.roommateService.updateRoommate(
+        roommate.username,
+        roommate
+      );
+      if (roommateUpdated) {
+        return res.status(200).json(roommate.profile);
+      } else {
+        return res.status(400).json({
+          message: "Roommate username invalid.",
+        });
+      }
+    } catch (err) {
+      return res.status(500).json({
+        message: "Failed to update roommate.",
+      });
+    }
+  };
 }
