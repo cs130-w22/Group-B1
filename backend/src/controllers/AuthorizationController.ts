@@ -14,14 +14,13 @@ export class AuthorizationController implements RegistrableController {
       try {
         const username: string = req.query.username;
         const password: string = req.query.password;
-        const tokens = await this.authorizationService.login(
+        const accessToken = await this.authorizationService.login(
           username,
           password
         );
-        if (tokens) {
+        if (accessToken) {
           return res.status(200).json({
-            accessToken: tokens.accessToken,
-            refreshToken: tokens.refreshToken,
+            accessToken: accessToken,
           });
         } else {
           return res.status(400).json({

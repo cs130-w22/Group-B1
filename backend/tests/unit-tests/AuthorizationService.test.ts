@@ -97,12 +97,11 @@ describe("Authorization Service", () => {
       )
     ).toEqual(false);
 
-    const tokens = await authorizationService.login(
+    const accessToken = await authorizationService.login(
       testRoommate.username,
       plainTextPassword
     );
-    expect(tokens).toHaveProperty("accessToken");
-    expect(tokens).toHaveProperty("refreshToken");
+    expect(typeof accessToken).toBe('string');
     expect(
       await authorizationService.login("wrongUsername", plainTextPassword)
     ).toEqual(null);
@@ -110,7 +109,7 @@ describe("Authorization Service", () => {
       await authorizationService.login(testRoommate.username, "wrongPassword")
     ).toEqual(null);
 
-    const validAuthorization = "Bearer " + tokens.accessToken;
+    const validAuthorization = "Bearer " + accessToken;
     expect(await authorizationService.validToken(validAuthorization)).toEqual(
       true
     );
