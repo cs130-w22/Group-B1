@@ -1,0 +1,19 @@
+@startuml
+
+
+app -> authorizationMiddleware : verifyToken(req, res, next)
+
+
+alt 401 error
+authorizationMiddleware --> app
+else 500 error
+authorizationMiddleware --> app
+else
+authorizationMiddleware -> roommateController : getRoommates(req, res, next)
+roommateController --> authorizationMiddleware
+authorizationMiddleware --> app
+end
+
+
+
+@enduml

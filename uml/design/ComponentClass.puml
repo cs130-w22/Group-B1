@@ -1,0 +1,24 @@
+@startuml
+
+interface RegistrableController {
++ register(in app: Application): void
+}
+
+class RoommateController {
++ register(in app: Application): void
+- getRoommates(in req: Request, in res: Response): void
+}
+
+RoommateController --|> RegistrableController
+RoommateController -> RoommateService
+RoommateController -> AuthorizationMiddleware
+
+class RoommateService {
++ getAllRoommates(): Promise<Roommate[]>
+}
+
+class AuthorizationMiddleware {
++ verifyToken (in req: Request, in res: Response, in next: NextFunction): void
+}
+
+@enduml
