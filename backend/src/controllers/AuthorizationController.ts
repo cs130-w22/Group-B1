@@ -10,10 +10,10 @@ export class AuthorizationController implements RegistrableController {
   private authorizationService: AuthorizationService;
 
   public register(app: Application): void {
-    app.route("/roommate/login").get(async (req: Request, res: Response) => {
+    app.route("/roommate/login").post(async (req: Request, res: Response) => {
       try {
-        const username: string = req.query.username;
-        const password: string = req.query.password;
+        const username: string = req.body.username;
+        const password: string = req.body.password;
         const accessToken = await this.authorizationService.login(
           username,
           password
