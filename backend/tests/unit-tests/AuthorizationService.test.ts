@@ -101,7 +101,7 @@ describe("Authorization Service", () => {
       testRoommate.username,
       plainTextPassword
     );
-    expect(typeof accessToken).toBe('string');
+    expect(typeof accessToken).toBe("string");
     expect(
       await authorizationService.login("wrongUsername", plainTextPassword)
     ).toEqual(null);

@@ -10,7 +10,6 @@ import { RegistrableController } from "../../src/controllers/RegistrableControll
 import express from "express";
 import { json } from "body-parser";
 
-
 const testRoommate: Roommate = {
   username: "username",
   password: "password",
@@ -31,15 +30,18 @@ class AuthorizationServiceMock extends AuthorizationService {
   public async login(
     username: string,
     password: string
-  ): Promise<String | null> {
-    if (username != testRoommate.username || password != testRoommate.password) {
+  ): Promise<string | null> {
+    if (
+      username != testRoommate.username ||
+      password != testRoommate.password
+    ) {
       return null;
     }
     return "accessToken";
   }
 }
 
-describe('POST /roommate/login', function () {
+describe("POST /roommate/login", function () {
   const app = express();
   app.use(json());
 
@@ -58,40 +60,39 @@ describe('POST /roommate/login', function () {
     container.restore();
   });
 
-
-
-  it('responds accessToken to correct password and username', async function () {
+  it("responds accessToken to correct password and username", async function () {
     const response = await request(app)
-      .post('/roommate/login')
-      .set('Accept', 'application/json')
-      .send({ username: testRoommate.username, password: testRoommate.password });
+      .post("/roommate/login")
+      .set("Accept", "application/json")
+      .send({
+        username: testRoommate.username,
+        password: testRoommate.password,
+      });
     expect(response.status).toEqual(200);
     expect(response.body.accessToken).toEqual("accessToken");
   });
 
-  it('responds error if the password does not match with the username', async function () {
+  it("responds error if the password does not match with the username", async function () {
     const response = await request(app)
-      .post('/roommate/login')
-      .set('Accept', 'application/json')
+      .post("/roommate/login")
+      .set("Accept", "application/json")
       .send({ username: testRoommate.username, password: "wrongPassword" });
     expect(response.status).toEqual(400);
   });
 
-  it('responds error if password is missing', async function () {
+  it("responds error if password is missing", async function () {
     const response = await request(app)
-      .post('/roommate/login')
-      .set('Accept', 'application/json')
+      .post("/roommate/login")
+      .set("Accept", "application/json")
       .send({ username: testRoommate.username });
     expect(response.status).toEqual(400);
   });
 
-  it('responds error if username is missing', async function () {
+  it("responds error if username is missing", async function () {
     const response = await request(app)
-      .post('/roommate/login')
-      .set('Accept', 'application/json')
+      .post("/roommate/login")
+      .set("Accept", "application/json")
       .send({ password: testRoommate.password });
     expect(response.status).toEqual(400);
   });
-
-
 });
