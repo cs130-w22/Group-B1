@@ -1,19 +1,25 @@
 @startuml
 
+[Presentation] as FE
 
-app -> authorizationMiddleware : verifyToken(req, res, next)
+[Business Logic] as BE
 
+[Data] as DB
 
-alt 401 error
-authorizationMiddleware --> app
-else 500 error
-authorizationMiddleware --> app
-else
-authorizationMiddleware -> roommateController : getRoommates(req, res, next)
-roommateController --> authorizationMiddleware
-authorizationMiddleware --> app
-end
+FE <-> BE
+BE <-> DB
 
+note bottom of FE
+React.js "frontend"
+end note
+
+note bottom of BE
+Node.js "backend"
+end note
+
+note bottom of DB
+MongoDB
+end note
 
 
 @enduml
