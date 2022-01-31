@@ -5,11 +5,6 @@ import { Roommate } from "../../../shared/src/roommate";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 
-export interface AuthTokens {
-  accessToken: string;
-  refreshToken: string;
-}
-
 @injectable()
 export class AuthorizationService {
   @inject(TYPES.RoommateRepository)
@@ -18,7 +13,7 @@ export class AuthorizationService {
   public async login(
     username: string,
     password: string
-  ): Promise<AuthTokens | null> {
+  ): Promise<string | null> {
     const validUsernamePassword = await this.validUsernamePassword(
       username,
       password
@@ -28,17 +23,13 @@ export class AuthorizationService {
     }
 
     const jwtSecret = process.env.JWT_SECRET;
-    const refreshId = username + jwtSecret;
     const salt = crypto.randomBytes(16).toString("base64");
-    const hash = crypto
-      .createHmac("sha512", salt)
-      .update(refreshId)
-      .digest("base64");
 
-    const accessToken = jwt.sign({ username, salt }, jwtSecret);
-    const refreshToken = Buffer.from(hash).toString("base64");
+    const accessToken = jwt.sign({ username, salt }, jwtSecret, {
+      expiresIn: Number(process.env.TOKEN_EXPIRESIN),
+    });
 
-    return { accessToken, refreshToken };
+    return accessToken;
   }
 
   public async validUsernamePassword(
