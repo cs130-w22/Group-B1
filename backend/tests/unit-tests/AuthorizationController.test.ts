@@ -77,7 +77,7 @@ describe("POST /roommate/login", function () {
       .post("/roommate/login")
       .set("Accept", "application/json")
       .send({ username: testRoommate.username, password: "wrongPassword" });
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(401);
   });
 
   it("responds error if password is missing", async function () {
@@ -85,7 +85,7 @@ describe("POST /roommate/login", function () {
       .post("/roommate/login")
       .set("Accept", "application/json")
       .send({ username: testRoommate.username });
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(401);
   });
 
   it("responds error if username is missing", async function () {
@@ -93,6 +93,6 @@ describe("POST /roommate/login", function () {
       .post("/roommate/login")
       .set("Accept", "application/json")
       .send({ password: testRoommate.password });
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(401);
   });
 });

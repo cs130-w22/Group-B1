@@ -21,7 +21,7 @@ export class AuthorizationMiddleware {
         req.body.username
       );
       if (!validToken) {
-        res.status(400).json({ message: "Invalid token." });
+        res.status(401).json({ message: "Invalid token." });
       } else {
         next();
       }
