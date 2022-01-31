@@ -25,12 +25,7 @@ export class AuthorizationService {
     }
 
     const jwtSecret = process.env.JWT_SECRET;
-    const refreshId = username + jwtSecret;
     const salt = crypto.randomBytes(16).toString("base64");
-    const hash = crypto
-      .createHmac("sha512", salt)
-      .update(refreshId)
-      .digest("base64");
 
     const accessToken = jwt.sign({ username, salt }, jwtSecret, {expiresIn: Number(process.env.TOKEN_EXPIRESIN)});
 
