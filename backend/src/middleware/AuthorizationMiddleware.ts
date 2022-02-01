@@ -9,11 +9,7 @@ export class AuthorizationMiddleware {
   @inject(TYPES.AuthorizationService)
   private authorizationService: AuthorizationService;
 
-  public verifyToken = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  public verifyToken = (req: Request, res: Response, next: NextFunction) => {
     try {
       const authorization: string = req.headers.authorization;
       const username = req.body.username || req.query.username;

@@ -108,6 +108,8 @@ Example Response:
 }
 ```
 
+Notice that this endpoint is returning roommate _profiles_. (Usernames and passwords are not included.)
+
 ### Create a roommate
 
 ```
