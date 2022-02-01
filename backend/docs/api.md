@@ -183,27 +183,23 @@ Example Response:
 PUT /roommate
 ```
 
-Include a `Roommate` object inside the request body, along with the authorization header.
+Include a `RoommateProfile` object inside the request body, along with the authorization header. Note that this means that we are not allowing the username or password to be updated using this endpoint.
 
 Example Request:
 
 ```
-curl --location --request PUT 'http://localhost:3000/roommate/' \
---header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldzEiLCJzYWx0IjoiaFRpajBPa3FENElXUDNPOU9ta2xTZz09IiwiaWF0IjoxNjQzNjYxNjA0LCJleHAiOjE2NDM2NjM0MDR9.r4tNmIe4fo9C9YTucto3Mab3gcJ9MGu5AevKUoPCzyk' \
+curl --location --request PUT 'http://localhost:3000/roommate/?username=Andrew1' \
+--header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldzEiLCJzYWx0IjoiMFE0SU84cWtoa0wyQUluZWU1OFJyZz09IiwiaWF0IjoxNjQzNzQwNjg2LCJleHAiOjE2NDM3NDI0ODZ9.V0PXNjRxe2Su-g7mzoddyYy-icVIPI0MfmWDvwYmVfY' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "username": "Andrew1",
-    "password": "Andrew1Password2",
-    "profile": {
-        "firstName": "AndrewNewName",
-        "lastName": "Changy",
-        "email": "andrewwww@gmail.com",
-        "area": "Los Angeles",
-        "bio": "UCLA grad",
-        "hobbies": [],
-        "personality": [],
-        "additionalInfo": "Looking for 2 roommates"
-    }
+    "firstName": "AndrewName",
+    "lastName": "Changy",
+    "email": "andrewwww@gmail.com",
+    "area": "Los Angeles",
+    "bio": "UCLA graduate",
+    "hobbies": [],
+    "personality": [],
+    "additionalInfo": "Looking for 2 roommates"
 }'
 ```
 
@@ -211,11 +207,11 @@ Example Response:
 
 ```
 {
-    "firstName": "AndrewNewName",
+    "firstName": "AndrewName",
     "lastName": "Changy",
     "email": "andrewwww@gmail.com",
     "area": "Los Angeles",
-    "bio": "UCLA grad",
+    "bio": "UCLA graduate",
     "hobbies": [],
     "personality": [],
     "additionalInfo": "Looking for 2 roommates"

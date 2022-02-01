@@ -86,9 +86,10 @@ describe("Roommates API", function () {
 
     const updateRoommateResponse = await request(app)
       .put("/roommate/")
+      .query({ username: updatedTestRoommate.username })
       .set("Accept", "application/json")
       .set("Authorization", authorizationHeader)
-      .send(updatedTestRoommate);
+      .send(updatedTestRoommate.profile);
     expect(updateRoommateResponse.status).toEqual(200);
 
     const getRoommatesResponse = await request(app)

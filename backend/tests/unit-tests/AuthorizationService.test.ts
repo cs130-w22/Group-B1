@@ -6,6 +6,7 @@ import { RoommateRepository } from "../../src/repository/RoommateRepository";
 import { Area } from "../../../shared/src/area";
 import { describe, expect, it, beforeAll, afterAll } from "@jest/globals";
 import { Roommate } from "../../../shared/src/roommate";
+import { RoommateProfile } from "../../../shared/src/roommateProfile";
 import * as dotenv from "dotenv";
 import TYPES from "../../types";
 
@@ -43,7 +44,10 @@ class RoommateRepositoryMock implements RoommateRepository {
   async getAll(): Promise<Roommate[]> {
     return [testRoommate];
   }
-  async update(username: string, roommate: Roommate): Promise<boolean> {
+  async update(
+    username: string,
+    roommateProfile: RoommateProfile
+  ): Promise<boolean> {
     return username == testRoommate.username;
   }
   async delete(username: string): Promise<boolean> {
