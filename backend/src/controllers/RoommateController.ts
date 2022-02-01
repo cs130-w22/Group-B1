@@ -5,6 +5,7 @@ import TYPES from "../../types";
 import { RoommateService } from "../services/RoommateService";
 import { AuthorizationMiddleware } from "../middleware/AuthorizationMiddleware";
 import { RegistrableController } from "./RegistrableController";
+import { RoommateProfile } from "../../../shared/src/roommateProfile";
 
 @injectable()
 export class RoommateController implements RegistrableController {
@@ -22,11 +23,7 @@ export class RoommateController implements RegistrableController {
         this.authorizationMiddleware.verifyPasswordExists,
         this.createRoomate
       )
-      .put(
-        this.authorizationMiddleware.verifyToken,
-        this.authorizationMiddleware.verifyPasswordExists,
-        this.updateRoommate
-      );
+      .put(this.authorizationMiddleware.verifyToken, this.updateRoommate);
   }
 
   private getRoommates = async (req: Request, res: Response) => {
@@ -74,13 +71,19 @@ export class RoommateController implements RegistrableController {
 
   private updateRoommate = async (req: Request, res: Response) => {
     try {
-      const roommate: Roommate = req.body as Roommate;
+      const username = req.query.username;
+      if (!username) {
+        return res.status(400).json({
+          message: "Roommate username missing.",
+        });
+      }
+      const roommateProfile: RoommateProfile = req.body as RoommateProfile;
       const roommateUpdated = await this.roommateService.updateRoommate(
-        roommate.username,
-        roommate
+        username,
+        roommateProfile
       );
       if (roommateUpdated) {
-        return res.status(200).json(roommate.profile);
+        return res.status(200).json(roommateProfile);
       } else {
         return res.status(400).json({
           message: "Roommate username invalid.",

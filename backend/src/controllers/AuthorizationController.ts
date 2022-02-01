@@ -23,7 +23,7 @@ export class AuthorizationController implements RegistrableController {
             accessToken: accessToken,
           });
         } else {
-          return res.status(400).json({
+          return res.status(401).json({
             message: "Invalid username or password",
           });
         }

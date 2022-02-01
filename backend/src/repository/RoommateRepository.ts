@@ -1,4 +1,5 @@
 import { Roommate } from "../../../shared/src/roommate";
+import { RoommateProfile } from "../../../shared/src/roommateProfile";
 import { RoommateModel } from "./Schemas";
 import { injectable } from "inversify";
 import "reflect-metadata";
@@ -7,7 +8,7 @@ export interface RoommateRepository {
   create(roommate: Roommate): Promise<boolean>;
   findOne(username: string): Promise<Roommate | null>;
   getAll(): Promise<Roommate[]>;
-  update(username: string, roommate: Roommate): Promise<boolean>;
+  update(username: string, roommateProfile: RoommateProfile): Promise<boolean>;
   delete(username: string): Promise<boolean>;
 }
 
@@ -50,18 +51,20 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Updates a roommate with a given username
+   * Updates a roommate's profile with a given username
    * @param username
    * @param roommate
    * @returns False if the roommate did not exist, true if update succeedd
    */
-  async update(username: string, roommate: Roommate): Promise<boolean> {
+  async update(
+    username: string,
+    roommateProfile: RoommateProfile
+  ): Promise<boolean> {
     const roommateDoc = await RoommateModel.findOne({ username: username });
     if (!roommateDoc) {
       return false;
     }
-    roommateDoc.password = roommate.password;
-    Object.assign(roommateDoc.profile, roommate.profile);
+    roommateDoc.profile = roommateProfile;
     await roommateDoc.save();
     return true;
   }

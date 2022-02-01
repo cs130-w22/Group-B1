@@ -2,6 +2,7 @@ import { injectable, inject } from "inversify";
 import TYPES from "../../types";
 import { RoommateRepository } from "../repository/RoommateRepository";
 import { Roommate } from "../../../shared/src/roommate";
+import { RoommateProfile } from "../../../shared/src/roommateProfile";
 import "reflect-metadata";
 
 @injectable()
@@ -23,8 +24,8 @@ export class RoommateService {
 
   public async updateRoommate(
     username: string,
-    roommate: Roommate
+    roommateProfile: RoommateProfile
   ): Promise<boolean> {
-    return await this.roommateRepository.update(username, roommate);
+    return await this.roommateRepository.update(username, roommateProfile);
   }
 }
