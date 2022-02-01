@@ -16,9 +16,10 @@ export class AuthorizationMiddleware {
   ) => {
     try {
       const authorization: string = req.headers.authorization;
+      const username = req.body.username || req.query.username;
       const validToken = await this.authorizationService.validToken(
         authorization,
-        req.body.username
+        username
       );
       if (!validToken) {
         res.status(401).json({ message: "Invalid token." });
