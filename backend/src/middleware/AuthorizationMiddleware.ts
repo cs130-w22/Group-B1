@@ -9,7 +9,7 @@ export class AuthorizationMiddleware {
   @inject(TYPES.AuthorizationService)
   private authorizationService: AuthorizationService;
 
-  public verifyToken = async (
+  public verifyToken = (
     req: Request,
     res: Response,
     next: NextFunction
@@ -31,7 +31,7 @@ export class AuthorizationMiddleware {
     }
   };
 
-  public verifyPasswordExists = async (
+  public verifyPasswordExists = (
     req: Request,
     res: Response,
     next: NextFunction
@@ -40,7 +40,7 @@ export class AuthorizationMiddleware {
       if (!req.body.password) {
         return res.status(400).json({ message: "Missing password." });
       }
-      req.body.password = await this.authorizationService.encryptPassword(
+      req.body.password = this.authorizationService.encryptPassword(
         req.body.password
       );
       next();
