@@ -72,6 +72,11 @@ export class RoommateController implements RegistrableController {
   private updateRoommate = async (req: Request, res: Response) => {
     try {
       const username = req.query.username;
+      if (!username) {
+        return res.status(400).json({
+          message: "Roommate username missing.",
+        });
+      }
       const roommateProfile: RoommateProfile = req.body as RoommateProfile;
       const roommateUpdated = await this.roommateService.updateRoommate(
         username,

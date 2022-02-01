@@ -183,7 +183,7 @@ Example Response:
 PUT /roommate
 ```
 
-Include a `RoommateProfile` object inside the request body, along with the authorization header. Note that this means that we are not allowing the username or password to be updated using this endpoint.
+Include the username as a query parameter. Include a `RoommateProfile` object inside the request body, along with the authorization header. Note that this means that we are not allowing the username or password to be updated using this endpoint.
 
 Example Request:
 
