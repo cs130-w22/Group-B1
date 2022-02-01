@@ -54,7 +54,7 @@ PUT  /roommate
 GET /roommate
 ```
 
-Include the authorization header. Optionally include an `username` query parameter to retrieve a single roommate.
+Include the authorization header. Optionally include a `username` query parameter to retrieve a single roommate.
 
 Example Request:
 

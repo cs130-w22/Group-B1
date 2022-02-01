@@ -33,6 +33,21 @@ const testRoommate1: Roommate = {
   },
 };
 
+const testRoommate2: Roommate = {
+  username: "username2",
+  password: "password2",
+  profile: {
+    firstName: "Bob",
+    lastName: "Smith",
+    email: "bob@gmail.com",
+    area: "Los Angeles" as Area,
+    bio: "NYU grad",
+    hobbies: [],
+    personality: [],
+    additionalInfo: "Looking for 1 roommate",
+  },
+};
+
 describe("Roommates API", function () {
   const app = express();
   app.use(json());
@@ -92,13 +107,22 @@ describe("Roommates API", function () {
       .send(updatedTestRoommate.profile);
     expect(updateRoommateResponse.status).toEqual(200);
 
+    const createSecondRoommateResponse = await request(app)
+      .post("/roommate/")
+      .set("Accept", "application/json")
+      .send(testRoommate2);
+    expect(createSecondRoommateResponse.status).toEqual(200);
+
     const getRoommatesResponse = await request(app)
       .get("/roommate/")
       .set("Accept", "application/json")
       .set("Authorization", authorizationHeader);
     expect(getRoommatesResponse.status).toEqual(200);
     expect(getRoommatesResponse.body.data).toEqual(
-      expect.arrayContaining([updatedTestRoommate.profile])
+      expect.arrayContaining([
+        updatedTestRoommate.profile,
+        testRoommate2.profile,
+      ])
     );
   });
 
