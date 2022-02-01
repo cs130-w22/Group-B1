@@ -51,10 +51,7 @@ export class AuthorizationService {
     return hash == hashedPassword;
   }
 
-  public async validToken(
-    authorization: string,
-    username?: string
-  ): Promise<boolean> {
+  public validToken(authorization: string, username?: string): boolean {
     try {
       const authorizations = authorization.split(" ");
       if (authorizations[0] !== "Bearer") {
@@ -76,7 +73,7 @@ export class AuthorizationService {
     }
   }
 
-  public async encryptPassword(password: string) {
+  public encryptPassword(password: string) {
     const salt = crypto.randomBytes(16).toString("base64");
     const hash = crypto
       .createHmac("sha512", salt)

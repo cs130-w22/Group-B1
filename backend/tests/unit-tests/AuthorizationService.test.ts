@@ -79,7 +79,7 @@ describe("Authorization Service", () => {
 
   it("Checks for valid username, password, and access token", async () => {
     const plainTextPassword = testRoommate.password;
-    testRoommate.password = await authorizationService.encryptPassword(
+    testRoommate.password = authorizationService.encryptPassword(
       testRoommate.password
     );
     expect(
@@ -114,10 +114,8 @@ describe("Authorization Service", () => {
     ).toEqual(null);
 
     const validAuthorization = "Bearer " + accessToken;
-    expect(await authorizationService.validToken(validAuthorization)).toEqual(
-      true
-    );
-    expect(await authorizationService.validToken("wrongAuthorization")).toEqual(
+    expect(authorizationService.validToken(validAuthorization)).toEqual(true);
+    expect(authorizationService.validToken("wrongAuthorization")).toEqual(
       false
     );
   });

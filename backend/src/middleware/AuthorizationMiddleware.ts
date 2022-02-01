@@ -17,7 +17,7 @@ export class AuthorizationMiddleware {
     try {
       const authorization: string = req.headers.authorization;
       const username = req.body.username || req.query.username;
-      const validToken = await this.authorizationService.validToken(
+      const validToken = this.authorizationService.validToken(
         authorization,
         username
       );
