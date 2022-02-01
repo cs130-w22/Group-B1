@@ -18,6 +18,8 @@ Some routes require an authorization header. The request header should be of the
 { authorization: "Bearer {accessToken}" }
 ```
 
+These access tokens do expire. Their expiration times are determined by the value of `TOKEN_EXPIRESIN` set inside the `.env` file.
+
 ## Roommate
 
 A roommate is of the form
@@ -38,6 +40,8 @@ A roommate is of the form
   };
 }
 ```
+
+Please refer to the `shared` folder for more details on the `Roommate` interface.
 
 ### Endpoints
 
@@ -154,7 +158,7 @@ Example Response
 POST /roommate/login
 ```
 
-This is used to retrieve the access token, which is needed for protected routes.
+This is used to retrieve the access token, which is needed for protected routes. This access token expires, so the user will need to be prompted to login again.
 
 Include the `username` and `password` in the request body.
 
@@ -183,7 +187,7 @@ Example Response:
 PUT /roommate
 ```
 
-Include the username as a query parameter. Include a `RoommateProfile` object inside the request body, along with the authorization header. Note that this means that we are not allowing the username or password to be updated using this endpoint.
+Include the `username` as a query parameter. Include a `RoommateProfile` object inside the request body, along with the authorization header. Note that that we are not allowing the username or password to be updated using this endpoint.
 
 Example Request:
 
@@ -217,3 +221,7 @@ Example Response:
     "additionalInfo": "Looking for 2 roommates"
 }
 ```
+
+## Example workflow
+
+Please refer to `src/tests/e2e-tests/RoommatesApi.test.ts` to see a full workflow in which a roommate is created, logged in, and updated.
