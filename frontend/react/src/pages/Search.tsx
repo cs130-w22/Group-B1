@@ -1,6 +1,7 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
 import Modal from 'react-modal';
+import { WithContext as ReactTags } from 'react-tag-input';
 
 import './Search.css';
 import '../shared/roommateProfile.ts';
@@ -91,7 +92,7 @@ var mockUserProfile:RoommateProfile = {
   lastName: "Parker",
   email: "notspiderman@marvel.com",
   area: 'New York',
-  bio: "Hi I'm Peter Parkter, your friendly neighborhood Spiderman",
+  bio: "Hi I'm Peter Parker, your friendly neighborhood Spiderman",
   hobbies: ["reading", "running"],
   personality: ["introvert"],
   additionalInfo: "I'm looking for a roommate to help me fight crime!"
@@ -110,7 +111,6 @@ const useProfile = (newId) => {
 }
 
 const UserProfilePanel: React.FC = (props) => {
-  // TODO: derekh implement this
   var userProfile:RoommateProfile = props.profile;
   var openUserPreferencesPanel = props.onSettingsClick;
 
@@ -125,16 +125,43 @@ const UserProfilePanel: React.FC = (props) => {
 }
 
 const ProfilePreferencesPanel: React.FC = (props) => {
-  // var userProfile:RoommateProfile = props.profile;
+  var userProfile:RoommateProfile = props.profile;
   
   var isPreferencePopUpOpen = props.isPreferencePopUpOpen;
   var closeModal = props.onCloseClick;
+  var personalityTags = userProfile.personality.map(trait => { return {id: trait, text: trait}});
+  var hobbyTags = userProfile.hobbies.map(hobby => { return {id: hobby, text: hobby}});
+  // place holder function for submitting a profile edit request 
+  var submitProfileChanges = () => {};
   return (
     <Modal 
       isOpen={isPreferencePopUpOpen}
       onRequestClose={closeModal}
+      contentLabel="User Preferences"
     >
-      <div>This is the UserPreferencesPanel</div>
+      <h1>User Preferences</h1>
+      <h2>User Info</h2>
+      <form onSubmit={submitProfileChanges}>
+        <div><label>First name: <input type="text" value={userProfile.firstName}/></label></div>
+        <div><label>Last name: <input type="text" value={userProfile.lastName}/></label></div>
+        <div><label>Bio: <textarea type="text" value={userProfile.bio}/></label></div>
+        <h2>User Tags</h2>
+        <div>
+          Personality Tags:
+          <ReactTags 
+            tags={personalityTags}
+          />
+        </div>
+        <div>
+          Hobby Tags:
+          <ReactTags 
+            tags={hobbyTags}
+          />
+        </div>
+        <input type="submit" value="Save" />
+      </form>
+      <h2>Mini Profile</h2>
+      <h2>Full Profile</h2>
     </Modal>
   )
 }
@@ -204,6 +231,7 @@ const ViewedProfilePanel: React.FC = () => {
 // page
 const Search: React.FC = () => {
   const [isPreferencePopUpOpen, setIsPreferencePopUpOpen] = useState(false);
+  /* React.useEffect load the user and list here */
   const togglePreferencePopUp = () => {
     console.log("clicking button; isPreferencePopUpOpen:", isPreferencePopUpOpen);
     setIsPreferencePopUpOpen(!isPreferencePopUpOpen);
@@ -214,7 +242,7 @@ const Search: React.FC = () => {
       <UserProfilePanel profile={mockUserProfile} onSettingsClick={togglePreferencePopUp}/>
       <RoommateSelectionPanel/>
       <ViewedProfilePanel/>
-      <ProfilePreferencesPanel isPreferencePopUpOpen={isPreferencePopUpOpen} onCloseClick={togglePreferencePopUp}/>
+      <ProfilePreferencesPanel profile={mockUserProfile} isPreferencePopUpOpen={isPreferencePopUpOpen} onCloseClick={togglePreferencePopUp}/>
     </div>
   )
 }
