@@ -50,6 +50,10 @@ GET  /roommate
 POST /roommate
 POST /roommate/login
 PUT  /roommate
+
+GET /roommate/areas
+GET /roommate/hobbies
+GET /roommate/personalities
 ```
 
 ### Retrieve roommate(s)
@@ -222,6 +226,98 @@ Example Response:
     "personality": [],
     "additionalInfo": "Looking for 2 roommates"
 }
+```
+
+### Get areas list
+
+```
+GET /roommate/areas
+```
+
+Example Request:
+
+```
+curl --location --request GET 'http://localhost:3000/roommate/areas'
+```
+
+Example Response:
+
+```
+[
+    "Austin",
+    "Los Angeles",
+    "Miami",
+    "New York",
+    "San Francisco",
+    "Seattle"
+]
+```
+
+### Get hobbies list
+
+```
+GET /roommate/hobbies
+```
+
+Example Request:
+
+```
+curl --location --request GET 'http://localhost:3000/roommate/hobbies'
+```
+
+Example Response:
+
+```
+[
+    "baseball",
+    "basketball",
+    "cooking",
+    "gaming",
+    "hiking",
+    "knitting",
+    "reading",
+    "running",
+    "soccer",
+    "tennis"
+]
+```
+
+### Get personalities list
+
+```
+GET /roommate/personalities
+```
+
+```
+[
+    "Austin",
+    "Los Angeles",
+    "Miami",
+    "New York",
+    "San Francisco",
+    "Seattle"
+]
+```
+
+Example Request:
+
+```
+curl --location --request GET 'http://localhost:3000/roommate/personalities'
+```
+
+Example Response:
+
+```
+[
+    "introvert",
+    "extrovert",
+    "sensor",
+    "intuitive",
+    "thinker",
+    "feeler",
+    "judger",
+    "perceiver"
+]
 ```
 
 ## Example workflow

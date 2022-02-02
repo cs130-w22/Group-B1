@@ -95,5 +95,4 @@ export class RoommateController implements RegistrableController {
       });
     }
   };
-
 }

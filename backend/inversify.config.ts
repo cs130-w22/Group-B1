@@ -15,7 +15,9 @@ import { AuthorizationMiddleware } from "./src/middleware/AuthorizationMiddlewar
 
 const container = new Container();
 container.bind<RegistrableController>(TYPES.Controller).to(RoommateController);
-container.bind<RegistrableController>(TYPES.Controller).to(RoommateInterfaceController);
+container
+  .bind<RegistrableController>(TYPES.Controller)
+  .to(RoommateInterfaceController);
 container
   .bind<RegistrableController>(TYPES.Controller)
   .to(AuthorizationController);
