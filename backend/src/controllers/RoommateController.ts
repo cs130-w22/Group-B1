@@ -1,11 +1,11 @@
 import { Application, Request, Response } from "express";
-import { Roommate } from "../../../shared/src/roommate";
+import { Roommate } from "../roommate/roommate";
 import { injectable, inject } from "inversify";
 import TYPES from "../../types";
 import { RoommateService } from "../services/RoommateService";
 import { AuthorizationMiddleware } from "../middleware/AuthorizationMiddleware";
 import { RegistrableController } from "./RegistrableController";
-import { RoommateProfile } from "../../../shared/src/roommateProfile";
+import { RoommateProfile } from "../roommate/roommateProfile";
 
 @injectable()
 export class RoommateController implements RegistrableController {
@@ -17,7 +17,7 @@ export class RoommateController implements RegistrableController {
 
   public register(app: Application): void {
     app
-      .route("/roommate/")
+      .route("/roommate")
       .get(this.authorizationMiddleware.verifyToken, this.getRoommates)
       .post(
         this.authorizationMiddleware.verifyPasswordExists,
@@ -95,4 +95,5 @@ export class RoommateController implements RegistrableController {
       });
     }
   };
+
 }

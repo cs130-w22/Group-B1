@@ -1,8 +1,8 @@
 import TYPES from "../../types";
 import container from "../../inversify.config";
 import { describe, expect, it, beforeAll, afterAll } from "@jest/globals";
-import { Roommate } from "../../../shared/src/roommate";
-import { Area } from "../../../shared/src/area";
+import { Roommate } from "../../src/roommate/roommate";
+import { Area } from "../../src/roommate/area";
 import { AuthorizationService } from "../../src/services/AuthorizationService";
 import { injectable } from "inversify";
 import request from "supertest";

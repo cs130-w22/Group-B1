@@ -41,7 +41,7 @@ A roommate is of the form
 }
 ```
 
-Please refer to the `shared` folder for more details on the `Roommate` interface.
+Please refer to the `roommate` folder for more details on the `Roommate` interface.
 
 ### Endpoints
 

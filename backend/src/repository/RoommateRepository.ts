@@ -1,5 +1,5 @@
-import { Roommate } from "../../../shared/src/roommate";
-import { RoommateProfile } from "../../../shared/src/roommateProfile";
+import { Roommate } from "../roommate/roommate";
+import { RoommateProfile } from "../roommate/roommateProfile";
 import { RoommateModel } from "./Schemas";
 import { injectable } from "inversify";
 import "reflect-metadata";
@@ -16,7 +16,7 @@ export interface RoommateRepository {
 export class RoommateRepositoryImplMongo implements RoommateRepository {
   /**
    * Create a Roommate
-   * @param roommate Roommate as represented in Shared folder
+   * @param roommate Roommate as represented in roommate folder
    * @returns False if already exists, true if entered successfully
    */
   async create(roommate: Roommate): Promise<boolean> {
