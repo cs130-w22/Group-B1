@@ -30,7 +30,7 @@ export class RecommendationController implements RegistrableController {
                         }
 
                         const roommateProfiles = (
-                            await this.recommendationService.getRecommendations(username)
+                            await this.recommendationService.getRecommendations(roommate)
                         ).map((roommate) => roommate.profile);
                         res.status(200).json({ data: roommateProfiles });
 
