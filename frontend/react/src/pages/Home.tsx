@@ -1,6 +1,9 @@
 
 import React from 'react';
+import { Link } from "react-router-dom";
 import './Home.css';
+import Login from "./Login" 
+import Signup from "./Signup" 
 import * as Unicons from '@iconscout/react-unicons';
 
 // images
@@ -12,10 +15,6 @@ var woman2 = require('../resources/woman2.png')
 // unicon logo sizes
 var col_icon_size = 47.5
 var login_icon_size = 60
-
-// Matthew  
-// 
-// 
 
 const Home: React.FC = () => {
   return (
@@ -34,12 +33,13 @@ const Home: React.FC = () => {
           <div className="buttons_wrapper">
             <div className="login">
               <Unicons.UilHome size={login_icon_size} className="home"/>
-              <p>Login</p>
+              <Link to="/login"> Login </Link>
             </div>
 
             <div className="signup">
               <Unicons.UilSignin size={login_icon_size} className="signin" />
-              <p>Sign Up</p>
+              {/*<p>Sign Up</p>*/}
+              <Link to="/signup"> Sign Up </Link>
             </div>
           </div>
 
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
 
         <footer>
           <p>Find your roommate today!</p>
-          <div className="signup_footer">
+          <div className="signup_footer"> 
             <p>Sign Up</p>
           </div>
         </footer>

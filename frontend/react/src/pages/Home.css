@@ -183,7 +183,10 @@ body {
   transform: scaleX(1);
 }
 
-.login p, .signup p {
+.login a, .signup a {
+  color: white;
+  text-decoration: none;
+
   padding: 0;
   padding-right: 20px;
   margin: 0;
