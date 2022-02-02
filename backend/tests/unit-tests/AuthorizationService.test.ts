@@ -3,10 +3,10 @@ import "reflect-metadata";
 import { AuthorizationService } from "../../src/services/AuthorizationService";
 import { RoommateRepository } from "../../src/repository/RoommateRepository";
 
-import { Area } from "../../../shared/src/area";
+import { Area } from "../../src/roommate/area";
 import { describe, expect, it, beforeAll, afterAll } from "@jest/globals";
-import { Roommate } from "../../../shared/src/roommate";
-import { RoommateProfile } from "../../../shared/src/roommateProfile";
+import { Roommate } from "../../src/roommate/roommate";
+import { RoommateProfile } from "../../src/roommate/roommateProfile";
 import * as dotenv from "dotenv";
 import TYPES from "../../types";
 

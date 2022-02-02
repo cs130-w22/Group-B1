@@ -8,8 +8,8 @@ import {
   afterAll,
   beforeEach,
 } from "@jest/globals";
-import { Roommate } from "../../../shared/src/roommate";
-import { Area } from "../../../shared/src/area";
+import { Roommate } from "../../src/roommate/roommate";
+import { Area } from "../../src/roommate/area";
 import request from "supertest";
 import { RegistrableController } from "../../src/controllers/RegistrableController";
 import express from "express";

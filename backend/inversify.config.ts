@@ -4,6 +4,7 @@ import TYPES from "./types";
 import { RoommateService } from "./src/services/RoommateService";
 import { RegistrableController } from "./src/controllers/RegistrableController";
 import { RoommateController } from "./src/controllers/RoommateController";
+import { RoommateInterfaceController } from "./src/controllers/RoommateInterfaceController";
 import {
   RoommateRepository,
   RoommateRepositoryImplMongo,
@@ -14,6 +15,9 @@ import { AuthorizationMiddleware } from "./src/middleware/AuthorizationMiddlewar
 
 const container = new Container();
 container.bind<RegistrableController>(TYPES.Controller).to(RoommateController);
+container
+  .bind<RegistrableController>(TYPES.Controller)
+  .to(RoommateInterfaceController);
 container
   .bind<RegistrableController>(TYPES.Controller)
   .to(AuthorizationController);
