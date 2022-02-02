@@ -288,17 +288,6 @@ Example Response:
 GET /roommate/personalities
 ```
 
-```
-[
-    "Austin",
-    "Los Angeles",
-    "Miami",
-    "New York",
-    "San Francisco",
-    "Seattle"
-]
-```
-
 Example Request:
 
 ```
