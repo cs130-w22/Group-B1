@@ -1,0 +1,12 @@
+@startuml
+[API's] as A
+[Controllers] as C
+[Services] as S
+[Repositories] as R
+[Database] as DB
+
+A <-> C
+C <-> S
+S <-> R
+R <-> DB
+@enduml
