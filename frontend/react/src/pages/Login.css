@@ -1,3 +1,69 @@
-.login-text {
-	color: #000000;
+
+:root {
+  --gray-white: rgb(226, 227, 227);
+  --white: rgb(247, 247, 247);
+  --pink: rgb(242, 194, 246, 0.5);
+  --purple: rgb(191, 26, 197);
+  --light-black: rgb(24, 24, 24);
+}
+
+body {
+  /*font-family: Calibri, sans-serif;*/
+  background-color: var(--white);
+}
+
+.outer {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 85%;
+  width: 100%;
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+
+  position: relative;
+  height: 8vh;
+  max-width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+
+  background-color: var(--pink);
+}
+
+.login_wrapper {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 75%;
+	transform: translate(-50%, -50%);
+}
+
+.login_banner {
+	padding: 1px;
+	background-color: green;
+	display: flex;
+	text-align: center;
+	z-index: 1;
+}
+
+.pencil {
+	color: white;
+}
+
+.login_banner p {
+	font-size: calc(10px + 1vmin);
+	color: white;
 }
