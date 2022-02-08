@@ -6,19 +6,14 @@ var pencil_icon_size = 47.5
 
 const Login: React.FC = () => {
   return (
-    <div className="outer">
-      <div className="middle">
-        <div className="inner">
-          <div className="login_wrapper">
-            <div className="login_banner">
-              <Unicons.UilPen size={pencil_icon_size} className="home pencil"/>
-              <p>Login</p>
-            </div>
-          </div>
+    <div className="center">
+      <div className="login_banner">
+        <div className="login_logo">
+          <Unicons.UilPen size={pencil_icon_size} className="home"/>
         </div>
+        <p>Login</p>
       </div>
     </div>
-
   )
 }
 
