@@ -13,8 +13,8 @@ export class RecommendationService {
     private static readonly scores = {
         "area": 3,
         "bio": 4,
-        "hobbies": 2, //each
-        "personality": 2
+        "hobbies": 2, //points per hobby match
+        "personality": 2 //points per personality match
     };
 
     private static readonly fieldsNotToCompare = [
@@ -36,7 +36,7 @@ export class RecommendationService {
         //Remove the given roommate from the list
         recommendedRoommates = recommendedRoommates.filter((recommendedRoommate: Roommate) => recommendedRoommate.username !== roommate.username);
 
-        //Run all users through the score function
+        //Get all other Roommate's score with our roommate
         const roommatesAndScores = recommendedRoommates.map(
             recommendedRoommate => {
                 return {
@@ -68,8 +68,8 @@ export class RecommendationService {
                 const sharedAttributes = profile1[property].filter(value => profile2[property].includes(value));
                 score += sharedAttributes.length * RecommendationService.scores[property]
             }
-            else { //Handle normal matches
-                if (profile1[property] === profile2[property]) {
+            else { //Handle normal matches, but ignore blank fields
+                if (! profile1[property].isBlank() && profile1[property] === profile2[property]) {
                     score += RecommendationService.scores[property]
                 }
             }

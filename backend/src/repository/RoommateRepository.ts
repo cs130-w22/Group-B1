@@ -46,7 +46,7 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
    * Get roommates that match any of the similar attributes
    * @param profileFields to match
    * @param keysToIgnore a list of keys that will not be used to match
-   * @returns List of matching roommates
+   * @returns Array of matching roommates
    */
   async findOverlap(profileFields: Partial<RoommateProfile>, keysToIgnore: string[] = []): Promise<Roommate[]> {
 
