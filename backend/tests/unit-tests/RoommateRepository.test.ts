@@ -26,9 +26,9 @@ const roommate1: Roommate = {
 
 const roommate1Updated: Roommate = {
   username: "Bob",
-  password: "BobNewPassword",
+  password: "BobPassword",
   profile: {
-    firstName: "Bob",
+    firstName: "Bobby",
     lastName: "Smith",
     email: "bob@gmail.com",
     area: "Austin" as Area,
@@ -114,7 +114,10 @@ describe("Roommate Repository", () => {
     );
 
     expect(
-      await roommateRepository.update(roommate1.username, roommate1Updated)
+      await roommateRepository.update(
+        roommate1.username,
+        roommate1Updated.profile
+      )
     ).toEqual(true);
     expect(await roommateRepository.findOne(roommate1.username)).toEqual(
       roommate1Updated

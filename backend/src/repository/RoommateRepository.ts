@@ -9,7 +9,7 @@ export interface RoommateRepository {
   findOne(username: string): Promise<Roommate | null>;
   findOverlap(profileFields: Partial<RoommateProfile>, keysToIgnore?: string[]): Promise<Roommate[]>
   getAll(): Promise<Roommate[]>;
-  update(username: string, roommate: Roommate): Promise<boolean>;
+  update(username: string, roommateProfile: RoommateProfile): Promise<boolean>;
   delete(username: string): Promise<boolean>;
 }
 
@@ -85,18 +85,20 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Updates a roommate with a given username
+   * Updates a roommate's profile with a given username
    * @param username
    * @param roommate
    * @returns False if the roommate did not exist, true if update succeedd
    */
-  async update(username: string, roommate: Roommate): Promise<boolean> {
+  async update(
+    username: string,
+    roommateProfile: RoommateProfile
+  ): Promise<boolean> {
     const roommateDoc = await RoommateModel.findOne({ username: username });
     if (!roommateDoc) {
       return false;
     }
-    roommateDoc.password = roommate.password;
-    Object.assign(roommateDoc.profile, roommate.profile);
+    roommateDoc.profile = roommateProfile;
     await roommateDoc.save();
     return true;
   }
