@@ -10,6 +10,22 @@ import container from "../../inversify.config";
 import { injectable } from "inversify";
 import { describe, expect, it, beforeAll, afterAll } from "@jest/globals";
 
+//This user will not be matched with anyone
+const blankRoommate: Roommate = {
+  username: "RyanIsCool",
+  password: "SuperHashedPassword",
+  profile: {
+    firstName: "Ryan",
+    lastName: "Richard",
+    email: "",
+    area: "Seattle" as Area,
+    bio: "",
+    hobbies: [],
+    personality: [],
+    additionalInfo: "",
+  },
+};
+
 //Create a user roommate, and then 5 increasingly related users
 const user: Roommate = {
   username: "Bob",
@@ -150,6 +166,9 @@ class RoommateRepositoryMock implements RoommateRepository {
       return [match1, match2, match3, match4, match5].sort(
         (_a, _b) => 0.5 - Math.random()
       );
+    }
+    if (profileFields === blankRoommate.profile) {
+      return [];
     } else {
       throw new Error(
         "Can only give overlapping profiles for 'user' test roommate"
@@ -195,8 +214,9 @@ describe("Recommendation Service", () => {
       err.message = `${err.message}\n\n: ${moreInfo}`;
       throw err;
     }
+
+    expect(
+      await recommendationService.getRecommendations(blankRoommate)
+    ).toEqual([]);
   });
 });
-
-//Mock the RommateRepository to return these 12
-//Ensure that the RecommendationService returns the top 10 in the correct order

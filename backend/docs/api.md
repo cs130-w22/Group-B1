@@ -54,6 +54,8 @@ PUT  /roommate
 GET /roommate/areas
 GET /roommate/hobbies
 GET /roommate/personalities
+
+GET  /recommendations
 ```
 
 ### Retrieve roommate(s)
@@ -136,8 +138,8 @@ curl --location --request POST 'http://localhost:3000/roommate/' \
         "email": "andrewwww@gmail.com",
         "area": "Los Angeles",
         "bio": "UCLA grad",
-        "hobbies": [],
-        "personality": [],
+        "hobbies": ["hiking"],
+        "personality": ["intuitive"],
         "additionalInfo": "Looking for 2 roommates"
     }
 }'
@@ -306,6 +308,50 @@ Example Response:
     "feeler",
     "judger",
     "perceiver"
+]
+```
+
+### Get recommendations list
+
+```
+GET /recommendations
+```
+
+Include the `username` as a query parameter. Returned will be a list of roommate profiles of up to the 10 most similar users, sorted by the most similar first and the least similar list. The profile that belongs to the queried username will not be returned in the list.
+
+Example Request:
+
+```
+curl --location --request GET 'http://localhost:3000/recommendations/?username=Andrew1'
+```
+
+Example Response:
+
+```
+[
+    {
+        firstName: "Isabela",
+        lastName: "Smith",
+        email: "Isabela@gmail.com",
+        area: "Los Angeles" as Area,
+        bio: "",
+        hobbies: ["reading", "hiking","soccer"],
+        personality: ["introvert","intuitive","thinker"],
+        additionalInfo: "Looking for someone to mountain bike with on weekends!",
+    },
+
+    ...
+
+    {
+        firstName: "Carly",
+        lastName: "Williams",
+        email: "Carly@gmail.com",
+        area: "Austin" as Area,
+        bio: "",
+        hobbies: ["reading", "basketball", "soccer"],
+        personality: ["judger"],
+        additionalInfo: "",
+  }
 ]
 ```
 
