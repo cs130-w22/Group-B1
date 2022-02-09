@@ -1,5 +1,4 @@
 import { Application, Request, Response } from "express";
-import { Roommate } from "../../../shared/src/roommate";
 import { injectable, inject } from "inversify";
 import TYPES from "../../types";
 import { RecommendationService } from "../services/RecommendationService";

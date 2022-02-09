@@ -1,8 +1,8 @@
 import { RoommateRepository } from "../../src/repository/RoommateRepository";
 import { RecommendationService } from "../../src/services/RecommendationService";
-import { Roommate } from "../../../shared/src/roommate";
-import { RoommateProfile } from "../../../shared/src/roommateProfile";
-import { Area } from "../../../shared/src/area";
+import { Roommate } from "../../src/roommate/roommate";
+import { RoommateProfile } from "../../src/roommate/roommateProfile";
+import { Area } from "../../src/roommate/area";
 import * as dotenv from "dotenv";
 import TYPES from "../../types";
 

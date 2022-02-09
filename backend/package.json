@@ -13,22 +13,17 @@
   "license": "ISC",
   "dependencies": {
     "@jest/globals": "^27.5.1",
-    "@nestjs/testing": "^8.2.6",
     "babel-jest": "^27.4.6",
     "body-parser": "^1.19.1",
-    "crypto": "^1.0.1",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
     "inversify": "^6.0.1",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.21",
     "mongoose": "^6.1.7",
     "reflect-metadata": "^0.1.13",
     "voca": "^1.4.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.16.11",
-    "@types/lodash": "^4.14.178",
     "@types/node": "^16.11.7",
     "@types/voca": "^1.4.2",
     "@typescript-eslint/eslint-plugin": "^5.10.0",

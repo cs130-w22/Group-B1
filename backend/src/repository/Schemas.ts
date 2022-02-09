@@ -1,9 +1,5 @@
 import { Schema, model } from "mongoose";
-<<<<<<< HEAD
-import { Roommate } from "../../../shared/src/roommate";
-=======
 import { Roommate } from "../roommate/roommate";
->>>>>>> origin/main
 
 const roommateSchema = new Schema<Roommate>(
   {
