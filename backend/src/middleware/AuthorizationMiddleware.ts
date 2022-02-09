@@ -9,15 +9,11 @@ export class AuthorizationMiddleware {
   @inject(TYPES.AuthorizationService)
   private authorizationService: AuthorizationService;
 
-  public verifyToken = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  public verifyToken = (req: Request, res: Response, next: NextFunction) => {
     try {
       const authorization: string = req.headers.authorization;
       const username = req.body.username || req.query.username;
-      const validToken = await this.authorizationService.validToken(
+      const validToken = this.authorizationService.validToken(
         authorization,
         username
       );
@@ -31,7 +27,7 @@ export class AuthorizationMiddleware {
     }
   };
 
-  public verifyPasswordExists = async (
+  public verifyPasswordExists = (
     req: Request,
     res: Response,
     next: NextFunction
@@ -40,7 +36,7 @@ export class AuthorizationMiddleware {
       if (!req.body.password) {
         return res.status(400).json({ message: "Missing password." });
       }
-      req.body.password = await this.authorizationService.encryptPassword(
+      req.body.password = this.authorizationService.encryptPassword(
         req.body.password
       );
       next();

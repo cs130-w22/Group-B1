@@ -18,6 +18,8 @@ Some routes require an authorization header. The request header should be of the
 { authorization: "Bearer {accessToken}" }
 ```
 
+These access tokens do expire. Their expiration times are determined by the value of `TOKEN_EXPIRESIN` set inside the `.env` file.
+
 ## Roommate
 
 A roommate is of the form
@@ -39,6 +41,8 @@ A roommate is of the form
 }
 ```
 
+Please refer to the `roommate` folder for more details on the `Roommate` interface.
+
 ### Endpoints
 
 ```
@@ -46,6 +50,10 @@ GET  /roommate
 POST /roommate
 POST /roommate/login
 PUT  /roommate
+
+GET /roommate/areas
+GET /roommate/hobbies
+GET /roommate/personalities
 ```
 
 ### Retrieve roommate(s)
@@ -104,6 +112,8 @@ Example Response:
 }
 ```
 
+Notice that this endpoint is returning roommate _profiles_. (Usernames and passwords are not included.)
+
 ### Create a roommate
 
 ```
@@ -154,7 +164,7 @@ Example Response
 POST /roommate/login
 ```
 
-This is used to retrieve the access token, which is needed for protected routes.
+This is used to retrieve the access token, which is needed for protected routes. This access token expires, so the user will need to be prompted to login again.
 
 Include the `username` and `password` in the request body.
 
@@ -183,7 +193,7 @@ Example Response:
 PUT /roommate
 ```
 
-Include the username as a query parameter. Include a `RoommateProfile` object inside the request body, along with the authorization header. Note that this means that we are not allowing the username or password to be updated using this endpoint.
+Include the `username` as a query parameter. Include a `RoommateProfile` object inside the request body, along with the authorization header. Note that that we are not allowing the username or password to be updated using this endpoint.
 
 Example Request:
 
@@ -217,3 +227,88 @@ Example Response:
     "additionalInfo": "Looking for 2 roommates"
 }
 ```
+
+### Get areas list
+
+```
+GET /roommate/areas
+```
+
+Example Request:
+
+```
+curl --location --request GET 'http://localhost:3000/roommate/areas'
+```
+
+Example Response:
+
+```
+[
+    "Austin",
+    "Los Angeles",
+    "Miami",
+    "New York",
+    "San Francisco",
+    "Seattle"
+]
+```
+
+### Get hobbies list
+
+```
+GET /roommate/hobbies
+```
+
+Example Request:
+
+```
+curl --location --request GET 'http://localhost:3000/roommate/hobbies'
+```
+
+Example Response:
+
+```
+[
+    "baseball",
+    "basketball",
+    "cooking",
+    "gaming",
+    "hiking",
+    "knitting",
+    "reading",
+    "running",
+    "soccer",
+    "tennis"
+]
+```
+
+### Get personalities list
+
+```
+GET /roommate/personalities
+```
+
+Example Request:
+
+```
+curl --location --request GET 'http://localhost:3000/roommate/personalities'
+```
+
+Example Response:
+
+```
+[
+    "introvert",
+    "extrovert",
+    "sensor",
+    "intuitive",
+    "thinker",
+    "feeler",
+    "judger",
+    "perceiver"
+]
+```
+
+## Example workflow
+
+Please refer to `src/tests/e2e-tests/RoommatesApi.test.ts` to see a full workflow in which a roommate is created, logged in, and updated.

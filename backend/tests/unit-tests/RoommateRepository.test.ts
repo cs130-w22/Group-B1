@@ -2,10 +2,10 @@ import {
   RoommateRepository,
   RoommateRepositoryImplMongo,
 } from "../../src/repository/RoommateRepository";
-import { Area } from "../../../shared/src/area";
+import { Area } from "../../src/roommate/area";
 import { describe, expect, it, beforeAll, afterAll } from "@jest/globals";
 import { RoommateModel } from "../../src/repository/Schemas";
-import { Roommate } from "../../../shared/src/roommate";
+import { Roommate } from "../../src/roommate/roommate";
 import { connect, disconnect } from "mongoose";
 import * as dotenv from "dotenv";
 

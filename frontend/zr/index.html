@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset = 'utf-8'>
+	<title>Zoomie Roomies - Design Board</title>
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+			box-sizing: border-box;
+			font-family: 'Times New Roman';
+		}	
+		body {
+			background-color: #dddddd;
+			overflow: hidden;
+		}
+		
+		/* left panel */
+		#profileBar {
+			background-color: #a81c0a;
+
+			position: absolute;
+			width: 30%;
+			height: 80px;
+		}
+			#profilePicture {
+				background-color: #ffffff;
+
+				display:  inline-block;
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				width: 40px;
+				height: 40px;
+
+				border-radius: 50%;
+			}
+			#profileName {
+				display:  inline-block;
+				position:  absolute;
+				top: 50%;
+				left: 80px;
+				width: calc(100% - 160px);
+				transform:  translate(0%, -50%);
+
+				font: 24px Calibri;
+			}
+			#settingsButton {
+				background: url('source/edit.png');
+				background-color: #ff000022;
+				background-position: center;
+				background-size: 60%;
+				background-repeat: no-repeat;
+
+				display:  inline-block;
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				width: 40px;
+				height: 40px;
+
+				border: 2px solid #000000;
+				border-radius: 50%;
+			}
+		#selectionBar {
+			/*background-color: #ff0000;*/
+
+			position: absolute;
+			top: 95px;
+			left: 2%;
+			width: 26%;
+			height: 40px;
+		}
+			#selectionLeft {
+				background-color: #ffffff;
+
+				display:  inline-block;
+				position: absolute;
+				left: 0%;
+				width:  33.33%;
+				height: 40px;
+
+				border: 2px solid #888888;
+				border-right: none;
+				border-radius: 20px 0px 0px 20px;
+			}
+			#selectionMiddle {
+				background-color: #eeeeee;
+
+				display:  inline-block;
+				position: absolute;
+				left: 33.33%;
+				width:  33.34%;
+				height: 40px;
+
+				border: 2px solid #888888;
+			}
+			#selectionRight {
+				background-color: #eeeeee;
+
+				display:  inline-block;
+				position: absolute;
+				left: 66.67%;
+				width:  33.33%;
+				height: 40px;
+
+				border: 2px solid #888888;
+				border-left: none;
+				border-radius: 0px 20px 20px 0px;
+			}
+			.selectionLabel {
+				color: #888888;
+				display:  inline-block;
+				position: absolute;
+				padding: 2px;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		#miniView {
+			background-color: #dddddd;
+
+			position: absolute;
+			padding: 15px;
+			/*padding-top: 0px;*/
+			top: 140px;
+			width: 30%;
+			height: calc(100% - 140px);
+
+			overflow: scroll;
+			-ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+			scrollbar-width: none;  /* Hide scrollbar for Firefox */
+		}
+			#miniViewFade {
+				/*background: linear-gradient(180deg, rgba(64,49,45,1) 0%, rgba(64,49,45,0) 100%);*/
+				background: linear-gradient(180deg, #ddddddff 0%, #dddddd00 100%);
+
+				position: absolute;
+				top: 140px;
+				width: 30%;
+				height: 15px;
+				z-index: 2;
+			}
+		.miniProfile {
+			background-color: #ffffff;
+
+			display: block;
+			position: relative;
+			height: 60px;
+			margin-bottom: 10px;
+
+			border: 2px solid #000000;
+			border-radius: 12px;
+		}
+			.miniProfilePicture {
+				background-color: #dddddd;
+
+				display: inline-block;
+				position: absolute;
+				top: 3px;
+				left: 3px;
+				width: 50px;
+				height: 50px;
+
+				border-radius: 50%;
+			}
+			.miniProfilePreference {
+				background-color: #bbbbbb;
+
+				display: inline-block;
+				position: absolute;
+				top: 35px;
+				left: 35px;
+				width: 20px;
+				height: 20px;
+
+				border-radius: 50%;
+			}
+			.miniProfileName {
+				display: inline-block;
+				position: absolute;
+				top: 8px;
+				left: 60px;
+
+				font-weight: bold;
+				font-size: 20px;
+			}
+			.miniProfileText {
+				display: inline-block;
+				position: absolute;
+				top: 30px;
+				left: 60px;
+			}
+
+		/* right panel */
+		#fullView {
+			background-color: #eeeeee;
+
+			position: absolute;
+			padding: 10px;
+			top: 0px;
+			left:  30%;
+			width: 70%;
+			height: 100%;
+
+			overflow: scroll;
+			overflow-x: hidden;
+		}
+			#banner {
+				position: absolute;
+				padding: 10px;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+			}
+			#bannerText {
+				color: #bbbbbb;
+
+				display: inline-block;
+				position: absolute;
+				top: calc(50% + 160px);
+				left: 50%;
+				transform: translate(-50%, 0%);
+
+				font-size: 24px;
+			}
+			#fullProfilePicture {
+				background-color: #dddddd;
+
+				display: inline-block;
+				position: absolute;
+				top: 80px;
+				left: 50%;
+				width: 120px;
+				height: 120px;
+				transform: translate(-50%,0%);
+
+				border-radius: 50%;
+			}
+			#fullProfilePreference {
+				background-color: #bbbbbb;
+
+				display: inline-block;
+				position: absolute;
+				top: 150px;
+				left: 50%;
+				width: 45px;
+				height: 45px;
+				transform: translate(calc(-50% + 50px), 0%);
+
+				border-radius: 50%;
+			}
+			#fullProfileName {
+				display: inline-block;
+				position: absolute;
+				top: 210px;
+				left: 50%;
+				transform: translate(-50%,0%);
+
+				font-weight: bold;
+				font-size: 20px;
+			}
+			#fullProfileText {
+				display: inline-block;
+				position: absolute;
+				top: 240px;
+				left: 50%;
+				transform: translate(-50%,0%);
+			}
+			#personalityPreferences {
+				background-color: #dddddd;
+
+				display: inline-block;
+				position: absolute;
+				top: 300px;
+				right: calc(50% + 60px);
+				width: 40%;
+				height: 700px;
+
+				border-radius: 12px;
+			}
+			#housingPreferences {
+				background-color: #dddddd;
+
+				display: inline-block;
+				position: absolute;
+				top: 300px;
+				left: calc(50% + 60px);
+				width: 40%;
+				height: 700px;
+
+				border-radius: 12px;
+			}
+			#email {
+				display: inline-block;
+				position: absolute;
+				top: 160px;
+				left: calc(50% - 250px);
+				transform: translate(-50%,0%);
+			}
+			#phone {
+				display: inline-block;
+				position: absolute;
+				top: 180px;
+				left: calc(50% - 250px);
+				transform: translate(-50%,0%);
+			}
+			.picture {
+				background-color: #dddddd;
+
+				display: inline-block;
+				position: absolute;
+				top: 150px;
+				left: calc(50% + 250px);
+				width: 50px;
+				height: 50px;
+
+				border: 2px solid #888888;
+				border-radius: 12px;
+			}
+
+		/* settings */
+		#dimmer {
+			background-color: #00000088;
+
+			display: inline-block;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+
+			visibility: hidden;
+
+			overflow: scroll;
+			-ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+			scrollbar-width: none;  /* Hide scrollbar for Firefox */
+		}
+			#settings {
+				background-color: #ffffff;
+
+				display: inline-block;
+				position: absolute;
+				margin: 60px;
+				left: 50%;
+				width: 70%;
+				height: 700px;
+				transform: translate(-50%,0%);
+
+				border: 2px solid #000000;
+				border-radius: 12px;
+			}
+			#settingsStubText {
+				display: inline-block;
+				position: absolute;
+				top: 240px;
+				left: 50%;
+				transform: translate(-50%,0%);
+			}
+			#closeSettings {
+				background: url('source/close.png');
+				background-color: #00000022;
+				background-position: center;
+				background-size: 60%;
+				background-repeat: no-repeat;
+
+				display: inline-block;
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				width: 30px;
+				height: 30px;
+
+				border: 2px solid #000000;
+				border-radius: 50%;
+			}
+	</style>
+</head>
+
+<body>
+
+	<div id='profileBar'>
+		<div id='profilePicture'></div>
+		<p id='profileName'>Firstname Lastname</p>
+		<div id='settingsButton' onclick='toggleSettings(true)'></div>
+	</div>
+	<div id='selectionBar'>
+		<div id='selectionLeft' onclick='setSelection(0)'><p id='selectionLabelLeft' class='selectionLabel' style='font-weight: bold; font-size: 16px; border-bottom: 3px solid #ff0000; color: #000000;'>My List</p></div>
+		<div id='selectionMiddle' onclick='setSelection(1)'><p id='selectionLabelMiddle' class='selectionLabel'>Search</p></div>
+		<div id='selectionRight' onclick='setSelection(2)'><p id='selectionLabelRight' class='selectionLabel'>Recommend</p></div>
+	</div>
+	<div id='miniViewFade'></div>
+	<div id='miniView'></div>
+	<div id='fullView'></div>
+	<div id='dimmer' onclick='toggleSettings(false)'>
+		<div id='settings'>
+			<p id='settingsStubText'>[show signout button, settings/preferences, preview of profile as others would see it, etc]</p>
+			<div id='closeSettings' onclick='toggleSettings(false)'></div>
+		</div>
+	</div>
+
+	<script>
+		function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+		let miniView = document.getElementById('miniView');
+		let fullView = document.getElementById('fullView');
+		let settings = document.getElementById('dimmer');
+
+		let selections = [
+			{
+				container: document.getElementById('selectionLeft'),
+				label: document.getElementById('selectionLabelLeft')
+			},
+			{
+				container: document.getElementById('selectionMiddle'),
+				label: document.getElementById('selectionLabelMiddle')
+			},
+			{
+				container: document.getElementById('selectionRight'),
+				label: document.getElementById('selectionLabelRight')
+			}
+		];
+
+		let firstnames = ['John', 'Joe', 'Katie', 'Lauren', 'Mariana', 'Katniss', 'Peter', 'Tyler', 'Tara', 'Ezekiel'];
+		let lastnames = ['Smith', 'Cooper', 'Westfield', 'Everdeen', 'Rennel', 'Miller', 'Steinbech', 'Reinhardt'];
+		let personalities = ['extrovert, party-lover | 2-bedroom, urban', 'introvert, gamer | 2-bedroom, suburban', 'introvert, bookworm | 2-bedroom, urban', 'extrovert, foodie | bunk beds, urban'];
+		let profiles = [];
+		for (let i = 0; i < 30; i++) {
+			profiles.push({
+				firstname: firstnames[randInt(0,firstnames.length-1)],
+				lastname: lastnames[randInt(0,lastnames.length-1)],
+				personality: personalities[randInt(0,personalities.length-1)]
+			});
+		}
+
+		let contents = [];
+		for (let i = 0; i < 3; i++) {
+			let contentStr = '';
+			for (let j = 0; j < 10; j++) {
+				let profileIndex = randInt(0, profiles.length-1);
+				contentStr += '<div id="elem' + j + '" class="miniProfile" onclick="loadProfile(' + j + ',' + profileIndex + ')">'
+					contentStr += '<div class="miniProfilePicture"></div>';
+					contentStr += '<div class="miniProfilePreference"></div>';
+					contentStr += '<p class="miniProfileName">' + profiles[profileIndex].firstname + ' '  + profiles[profileIndex].lastname + '</p>';
+					contentStr += '<p class="miniProfileText">' + profiles[profileIndex].personality + '</p>';
+				contentStr += '</div>';
+			}
+			contents.push(contentStr);
+		}
+
+		function setSelection(n) {
+			for (let i = 0; i < 3; i++) {
+				if (i == n) {
+					selections[i].container.style.backgroundColor = '#ffffff';
+					selections[i].label.style.color = '#000000';
+					selections[i].label.style.borderBottom = '3px solid #ff0000';
+					selections[i].label.style.fontWeight = 'bold';
+				} else {
+					selections[i].container.style.backgroundColor = '#eeeeee';
+					selections[i].label.style.color = '#888888';
+					selections[i].label.style.borderBottom = 'none';
+					selections[i].label.style.fontWeight = 'normal';
+				}
+			}
+			miniView.innerHTML = contents[n];
+		}
+		setSelection(0);
+
+		function loadProfile(elemNum, profileIndex) {
+			for (let i = 0; i < 10; i++) {
+				let elem = document.getElementById('elem'+i);
+				elem.style.transform = (i==elemNum) ? 'translateX(13px)' : '';
+				elem.style.borderWidth = (i==elemNum) ? '3px' : '2px';
+			}
+
+			contentStr = '';
+			contentStr += '<div id="fullProfilePicture"></div>';
+			contentStr += '<div id="fullProfilePreference"></div>';
+			contentStr += '<p id="fullProfileName">' + profiles[profileIndex].firstname + ' '  + profiles[profileIndex].lastname + '</p>';
+			contentStr += '<p id="fullProfileText">' + profiles[profileIndex].personality + '</p>';
+			contentStr += '<div id="personalityPreferences">[personality: self-desc + roommate prefs]</div>';
+			contentStr += '<div id="housingPreferences">[housing: prefs + current residence if applicable]</div>';
+			contentStr += '<p id="email">example@email.com</p>';
+			contentStr += '<p id="phone">123-456-7890</p>';
+			for (let i = -1; i <= 1; i++) {
+				contentStr += '<div class="picture" style="transform: translate(' + (i*20) + 'px,' + (i*3) + 'px);"></div>';
+			}
+			fullView.innerHTML = contentStr;
+		}
+		function clearProfile() {
+			for (let i = 0; i < 10; i++) {
+				let elem = document.getElementById('elem'+i);
+				elem.style.transform = '';
+				elem.style.borderWidth = '2px';
+			}
+
+			contentStr = '';
+			contentStr += '<img id="banner" src="source/banner.png" width="300" height="300">';
+			contentStr += '<p id="bannerText">(click a profile to begin)</p>'
+			fullView.innerHTML = contentStr;
+		}
+		clearProfile();
+
+		function toggleSettings(showSettings) {
+			console.log((showSettings) ? 'visible' : 'hidden');
+			settings.style.visibility = (showSettings) ? 'visible' : 'hidden';
+		}
+
+		// let contentStr = '';
+		// for (let i = 0; i < 100; i++) {
+		// 	contentStr += '<div style="display:block;">' + (Math.random()>0.5?'hello':'world') + '</div>';
+		// }
+		// fullView.innerHTML = contentStr;
+	</script>
+
+</body>
+
+</html>

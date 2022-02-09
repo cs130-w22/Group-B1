@@ -1,0 +1,198 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*******************************************/
+
+.user-profile-panel {
+  background-color: #a81c0a;
+
+  position: absolute;
+  width: 30%;
+  height: 80px;
+}
+
+.roommate-selection-panel {
+  background-color: #888888;
+
+  position: absolute;
+  top: 80px;
+  width: 30%;
+  height: calc(100% - 80px);
+
+  overflow: hidden;
+}
+.roommate-list-panel {
+  background-color: #dddddd;
+
+  box-sizing: border-box;
+  position: absolute;
+  padding: 15px;
+  top: 60px;
+  width: 100%;
+  height: calc(100% - 60px);
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+
+.viewed-profile-panel {
+  background-color: #eeeeee;
+
+  position: absolute;
+  top: 0px;
+  left:  30%;
+  width: 70%;
+  height: 100%;
+
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+/********************************************/
+
+.profilePicture {
+        background-color: #ffffff;
+
+        display:  inline-block;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+
+        border-radius: 50%;
+      }
+      .profileName {
+        display:  inline-block;
+        position:  absolute;
+        /*top: 50%;*/
+        left: 80px;
+        width: calc(100% - 160px);
+        /*transform:  translate(0%, -50%);*/
+
+        font: 24px Calibri;
+      }
+      .settingsButton {
+        background: url('source/edit.png');
+        background-color: #ff000022;
+        background-position: center;
+        background-size: 60%;
+        background-repeat: no-repeat;
+
+        display:  inline-block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+
+        border: 2px solid #000000;
+        border-radius: 50%;
+      }
+
+.test-class {
+  background-color: #dddddd;
+
+  box-sizing: border-box;
+  position: absolute;
+  padding: 15px;
+  top: 140px;
+  width: 30%;
+  height: calc(100% - 140px);
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+
+.miniProfile {
+      background-color: #ffffff;
+
+      display: block;
+      position: relative;
+      height: 60px;
+      margin-bottom: 10px;
+
+      border: 2px solid #000000;
+      border-radius: 12px;
+    }
+      .miniProfilePicture {
+        background-color: #dddddd;
+
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 30px;
+        width: 50px;
+        height: 50px;
+        transform: translate(-50%, -50%);
+
+        border-radius: 50%;
+      }
+      .miniProfilePreference {
+        background-color: #bbbbbb;
+
+        display: inline-block;
+        position: absolute;
+        top: 75%;
+        left: 45px;
+        width: 20px;
+        height: 20px;
+        transform: translate(-50%, -50%);
+
+        border-radius: 50%;
+      }
+      .miniProfileName {
+        display: inline-block;
+        position: absolute;
+        top: -15px;
+        left: 65px;
+
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .miniProfileText {
+        display: inline-block;
+        position: absolute;
+        top: 15px;
+        left: 65px;
+      }

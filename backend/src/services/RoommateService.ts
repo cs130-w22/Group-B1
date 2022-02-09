@@ -1,8 +1,8 @@
 import { injectable, inject } from "inversify";
 import TYPES from "../../types";
 import { RoommateRepository } from "../repository/RoommateRepository";
-import { Roommate } from "../../../shared/src/roommate";
-import { RoommateProfile } from "../../../shared/src/roommateProfile";
+import { Roommate } from "../roommate/roommate";
+import { RoommateProfile } from "../roommate/roommateProfile";
 import "reflect-metadata";
 
 @injectable()
