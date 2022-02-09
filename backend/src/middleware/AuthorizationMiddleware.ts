@@ -23,7 +23,7 @@ export class AuthorizationMiddleware {
         next();
       }
     } catch (err) {
-      res.status(500).json({ message: "Faild to verify token." });
+      res.status(500).json({ message: "Failed to verify token." });
     }
   };
 
