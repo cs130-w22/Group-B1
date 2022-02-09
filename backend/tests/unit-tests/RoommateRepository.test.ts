@@ -18,7 +18,7 @@ const roommate1: Roommate = {
     email: "bob@gmail.com",
     area: "Austin" as Area,
     bio: "UCLA grad",
-    hobbies: ["hiking","running","cooking"],
+    hobbies: ["hiking", "running", "cooking"],
     personality: [],
     additionalInfo: "Looking for 2 roommates",
   },
@@ -48,7 +48,7 @@ const roommate2: Roommate = {
     email: "tom@gmail.com",
     area: "Los Angeles" as Area,
     bio: "NYU grad",
-    hobbies: ["reading","hiking"],
+    hobbies: ["reading", "hiking"],
     personality: [],
     additionalInfo: "Looking for 1 roommate",
   },
@@ -100,18 +100,18 @@ describe("Roommate Repository", () => {
     expect(await roommateRepository.getAll()).toEqual(
       expect.arrayContaining(roommates)
     );
-    
+
     expect(await roommateRepository.findOverlap(roommate1.profile)).toEqual(
-      expect.arrayContaining([roommate1,roommate2])
+      expect.arrayContaining([roommate1, roommate2])
     );
 
     expect(await roommateRepository.findOverlap(roommate1.profile)).toEqual(
-      expect.arrayContaining([roommate1,roommate2])
+      expect.arrayContaining([roommate1, roommate2])
     );
 
-    expect(await roommateRepository.findOverlap(roommate1.profile,["hobbies"])).toEqual(
-      expect.arrayContaining([roommate1])
-    );
+    expect(
+      await roommateRepository.findOverlap(roommate1.profile, ["hobbies"])
+    ).toEqual(expect.arrayContaining([roommate1]));
 
     expect(
       await roommateRepository.update(
