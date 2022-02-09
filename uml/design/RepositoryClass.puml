@@ -1,0 +1,16 @@
+@startuml
+
+interface RoommateRepository {
+  + create(in roommate: Roommate): Promise<boolean>
+  + findOne(in username: string): Promise<Roommate | null> {query}
+  + findOverlap(in profileFields: Partial<RoommateProfile>, in keysToIgnore: string[] = []): Promise<Roommate[]> {query}
+  + getAll(): Promise<Roommate[]> {query}
+  + update(in username: string, in roommateProfile: RoommateProfile): Promise<boolean>
+  + delete(in username: string): Promise<boolean>
+}
+
+class RoommateRepositoryImplMongo
+RoommateRepositoryImplMongo ...|> RoommateRepository
+RoommateRepositoryImplMongo -> RoommateModel
+
+@enduml
