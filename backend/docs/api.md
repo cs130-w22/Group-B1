@@ -317,12 +317,13 @@ Example Response:
 GET /roommate/recommendations
 ```
 
-Include the `username` as a query parameter. Returned will be a list of roommate profiles of up to the 10 most similar users. The list is sorte with the most similar profile first and the least similar profile last. The profile that belongs to the queried username will not be returned in the list.
+Include the `username` as a query parameter. Returned will be a list of roommate profiles of up to the 10 most similar users. The list is sorted with the most similar profile first and the least similar profile last. The profile that belongs to the queried username will not be returned in the list.
 
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/recommendations/?username=Andrew1'
+curl --location --request GET 'http://localhost:3000/roommate/recommendations?username=Andrew' \
+--header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldyIsInNhbHQiOiJIM3UwakRsdUY3RFZBRmZoS2UvU0xnPT0iLCJpYXQiOjE2NDQ0MzU3OTYsImV4cCI6MTY0NDQzNzU5Nn0.8J5JSbNh1iJykAHbIEjqWyBx2Im6i5jbA8vyXZ7I2pY'
 ```
 
 Example Response:

@@ -124,6 +124,15 @@ describe("Roommates API", function () {
         testRoommate2.profile,
       ])
     );
+
+    const getRecommendationsResponse = await request(app)
+      .get("/roommate/recommendations")
+      .query({ username: updatedTestRoommate.username })
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader);
+    expect(getRecommendationsResponse.body).toEqual(
+      expect.arrayContaining([testRoommate2.profile])
+    );
   });
 
   it("Checks for taken usernames", async () => {
