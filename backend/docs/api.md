@@ -51,6 +51,8 @@ POST /roommate
 POST /roommate/login
 PUT  /roommate
 
+GET /roommate/recommendations
+
 GET /roommate/areas
 GET /roommate/hobbies
 GET /roommate/personalities
@@ -136,8 +138,8 @@ curl --location --request POST 'http://localhost:3000/roommate/' \
         "email": "andrewwww@gmail.com",
         "area": "Los Angeles",
         "bio": "UCLA grad",
-        "hobbies": [],
-        "personality": [],
+        "hobbies": ["hiking"],
+        "personality": ["intuitive"],
         "additionalInfo": "Looking for 2 roommates"
     }
 }'
@@ -226,6 +228,51 @@ Example Response:
     "personality": [],
     "additionalInfo": "Looking for 2 roommates"
 }
+```
+
+### Get recommendations list
+
+```
+GET /roommate/recommendations
+```
+
+Include the `username` as a query parameter. Include the authorization header. Returned will be a list of roommate profiles of up to the 10 most similar users. The list is sorted with the most similar profile first and the least similar profile last. The profile that belongs to the queried username will not be returned in the list.
+
+Example Request:
+
+```
+curl --location --request GET 'http://localhost:3000/roommate/recommendations?username=Andrew' \
+--header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldyIsInNhbHQiOiJIM3UwakRsdUY3RFZBRmZoS2UvU0xnPT0iLCJpYXQiOjE2NDQ0MzU3OTYsImV4cCI6MTY0NDQzNzU5Nn0.8J5JSbNh1iJykAHbIEjqWyBx2Im6i5jbA8vyXZ7I2pY'
+```
+
+Example Response:
+
+```
+[
+    {
+        firstName: "Isabela",
+        lastName: "Smith",
+        email: "Isabela@gmail.com",
+        area: "Los Angeles" as Area,
+        bio: "",
+        hobbies: ["reading", "hiking","soccer"],
+        personality: ["introvert","intuitive","thinker"],
+        additionalInfo: "Looking for someone to mountain bike with on weekends!",
+    },
+
+    ...
+
+    {
+        firstName: "Carly",
+        lastName: "Williams",
+        email: "Carly@gmail.com",
+        area: "Austin" as Area,
+        bio: "",
+        hobbies: ["reading", "basketball", "soccer"],
+        personality: ["judger"],
+        additionalInfo: "",
+  }
+]
 ```
 
 ### Get areas list

@@ -53,6 +53,12 @@ class RoommateRepositoryMock implements RoommateRepository {
   async delete(username: string): Promise<boolean> {
     return username == testRoommate.username;
   }
+  async findOverlap(
+    profileFields: Partial<RoommateProfile>,
+    keysToIgnore: string[] = []
+  ): Promise<Roommate[]> {
+    throw new Error("Function should not be called for this unit test");
+  }
 }
 
 describe("Authorization Service", () => {

@@ -7,6 +7,10 @@ import "reflect-metadata";
 export interface RoommateRepository {
   create(roommate: Roommate): Promise<boolean>;
   findOne(username: string): Promise<Roommate | null>;
+  findOverlap(
+    profileFields: Partial<RoommateProfile>,
+    keysToIgnore?: string[]
+  ): Promise<Roommate[]>;
   getAll(): Promise<Roommate[]>;
   update(username: string, roommateProfile: RoommateProfile): Promise<boolean>;
   delete(username: string): Promise<boolean>;
@@ -39,6 +43,42 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   async findOne(username: string): Promise<Roommate | null> {
     const roommate = await RoommateModel.findOne({ username: username });
     return roommate ? roommate.toObject() : null;
+  }
+
+  /**
+   * Get roommates that match any of the similar attributes
+   * @param profileFields to match
+   * @param keysToIgnore a list of keys that will not be used to match
+   * @returns Array of matching roommates
+   */
+  async findOverlap(
+    profileFields: Partial<RoommateProfile>,
+    keysToIgnore: string[] = []
+  ): Promise<Roommate[]> {
+    //Convert object to list of {profile.key : value}, flattening the lists as well, to make the query arg
+    const fields = Object.entries(profileFields).flatMap(function ([
+      key,
+      value,
+    ]) {
+      if (keysToIgnore.includes(key)) {
+        return [];
+      }
+
+      const new_key = `profile.${key}`;
+      if (Array.isArray(value)) {
+        return value.map((x: string) => ({ [new_key]: x }));
+      } else {
+        return { [new_key]: value };
+      }
+    });
+
+    const to_match = {
+      $or: fields,
+    };
+
+    const roommateDocs = await RoommateModel.find(to_match);
+
+    return roommateDocs.map((roommateDoc) => roommateDoc.toObject());
   }
 
   /**

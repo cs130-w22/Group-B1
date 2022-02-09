@@ -18,7 +18,7 @@ const roommate1: Roommate = {
     email: "bob@gmail.com",
     area: "Austin" as Area,
     bio: "UCLA grad",
-    hobbies: [],
+    hobbies: ["hiking", "running", "cooking"],
     personality: [],
     additionalInfo: "Looking for 2 roommates",
   },
@@ -48,13 +48,29 @@ const roommate2: Roommate = {
     email: "tom@gmail.com",
     area: "Los Angeles" as Area,
     bio: "NYU grad",
+    hobbies: ["reading", "hiking"],
+    personality: [],
+    additionalInfo: "Looking for 1 roommate",
+  },
+};
+
+//roommate3 should have no overlapping properties with roommate1
+const roommate3: Roommate = {
+  username: "Jessica",
+  password: "JessicaPassword",
+  profile: {
+    firstName: "Tom",
+    lastName: "Richard",
+    email: "tom@gmail.com",
+    area: "Los Angeles" as Area,
+    bio: "NYU grad",
     hobbies: [],
     personality: [],
     additionalInfo: "Looking for 1 roommate",
   },
 };
 
-const roommates = [roommate1, roommate2];
+const roommates = [roommate1, roommate2, roommate3];
 
 describe("Roommate Repository", () => {
   let roommateRepository: RoommateRepository;
@@ -78,6 +94,7 @@ describe("Roommate Repository", () => {
     expect(await roommateRepository.create(roommate1)).toEqual(false);
 
     expect(await roommateRepository.create(roommate2)).toEqual(true);
+    expect(await roommateRepository.create(roommate3)).toEqual(true);
 
     expect(await roommateRepository.findOne(roommate1.username)).toEqual(
       roommate1
@@ -85,6 +102,18 @@ describe("Roommate Repository", () => {
     expect(await roommateRepository.getAll()).toEqual(
       expect.arrayContaining(roommates)
     );
+
+    expect(await roommateRepository.findOverlap(roommate1.profile)).toEqual(
+      expect.arrayContaining([roommate1, roommate2])
+    );
+
+    expect(await roommateRepository.findOverlap(roommate1.profile)).toEqual(
+      expect.arrayContaining([roommate1, roommate2])
+    );
+
+    expect(
+      await roommateRepository.findOverlap(roommate1.profile, ["hobbies"])
+    ).toEqual(expect.arrayContaining([roommate1]));
 
     expect(
       await roommateRepository.update(
@@ -99,6 +128,6 @@ describe("Roommate Repository", () => {
     expect(await roommateRepository.delete(roommate2.username)).toEqual(true);
     expect(await roommateRepository.findOne(roommate2.username)).toEqual(null);
 
-    expect((await roommateRepository.getAll()).length).toEqual(1);
+    expect((await roommateRepository.getAll()).length).toEqual(2);
   });
 });
