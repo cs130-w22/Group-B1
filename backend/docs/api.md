@@ -317,7 +317,7 @@ Example Response:
 GET /recommendations
 ```
 
-Include the `username` as a query parameter. Returned will be a list of roommate profiles of up to the 10 most similar users, sorted by the most similar first and the least similar list. The profile that belongs to the queried username will not be returned in the list.
+Include the `username` as a query parameter. Returned will be a list of roommate profiles of up to the 10 most similar users. The list is sorte with the most similar profile first and the least similar profile last. The profile that belongs to the queried username will not be returned in the list.
 
 Example Request:
 

@@ -37,7 +37,7 @@ export class RecommendationController implements RegistrableController {
         const roommateProfiles = (
           await this.recommendationService.getRecommendations(roommate)
         ).map((roommate) => roommate.profile);
-        res.status(200).json({ roommateProfiles });
+        res.status(200).json(roommateProfiles);
       } else {
         return res.status(400).json({
           message: "Username required.",

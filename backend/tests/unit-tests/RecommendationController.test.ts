@@ -172,6 +172,6 @@ describe("GET /recommendations", function () {
       .set("Accept", "application/json")
       .send();
     expect(response.status).toEqual(200);
-    expect(response.body.roommateProfiles).toEqual(matchesProfile);
+    expect(response.body).toEqual(matchesProfile);
   });
 });
