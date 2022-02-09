@@ -19,7 +19,7 @@ export class RecommendationController implements RegistrableController {
 
   public register(app: Application): void {
     app
-      .route("/recommendations")
+      .route("/roommate/recommendations")
       .get(this.authorizationMiddleware.verifyToken, this.getRecommendations);
   }
 

@@ -110,7 +110,7 @@ class AuthorizationMiddlewareMock extends AuthorizationMiddleware {
   };
 }
 
-describe("GET /recommendations", function () {
+describe("GET /roommate/recommendations", function () {
   const app = express();
   app.use(json());
 
@@ -143,7 +143,7 @@ describe("GET /recommendations", function () {
 
   it("No Username Given", async function () {
     const response = await request(app)
-      .get("/recommendations")
+      .get("/roommate/recommendations")
       .set("Accept", "application/json")
       .send();
     expect(response.status).toEqual(400);
@@ -151,7 +151,7 @@ describe("GET /recommendations", function () {
 
   it("Cannot Find Username", async function () {
     const response = await request(app)
-      .get(`/recommendations/?username=${match2.username}`)
+      .get(`/roommate/recommendations/?username=${match2.username}`)
       .set("Accept", "application/json")
       .send();
     expect(response.status).toEqual(404);
@@ -160,7 +160,7 @@ describe("GET /recommendations", function () {
   it("Trigger an Internal Error", async function () {
     //match1 will trigger internal error because of way RecommendationServiceMock.getRecommendations is mocked
     const response = await request(app)
-      .get(`/recommendations/?username=${match1.username}`)
+      .get(`/roommate/recommendations/?username=${match1.username}`)
       .set("Accept", "application/json")
       .send();
     expect(response.status).toEqual(500);
@@ -168,7 +168,7 @@ describe("GET /recommendations", function () {
 
   it("Successful Recommendation Get", async function () {
     const response = await request(app)
-      .get(`/recommendations/?username=${user.username}`)
+      .get(`/roommate/recommendations/?username=${user.username}`)
       .set("Accept", "application/json")
       .send();
     expect(response.status).toEqual(200);

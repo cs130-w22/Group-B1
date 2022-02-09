@@ -132,9 +132,6 @@ const match5: Roommate = {
 };
 
 const correctRecommnedations = [match5, match4, match3, match2, match1];
-const correctNames = correctRecommnedations.map((roommate: Roommate) => {
-  return roommate.profile.firstName;
-});
 
 @injectable()
 class RoommateRepositoryMock implements RoommateRepository {
@@ -200,21 +197,10 @@ describe("Recommendation Service", () => {
   });
 
   it("Checks ranking of recommended roommates", async () => {
-    const reccommendedUsers = await recommendationService.getRecommendations(
+    const recommendedUsers = await recommendationService.getRecommendations(
       user
     );
-    const foundNames = reccommendedUsers.map((roommate: Roommate) => {
-      return roommate.profile.firstName;
-    });
-    try {
-      expect(reccommendedUsers).toEqual(correctRecommnedations);
-    } catch (err) {
-      let moreInfo = `Matches are supposed to be:  ${correctNames} \n
-                instead they are ${foundNames}`;
-      err.message = `${err.message}\n\n: ${moreInfo}`;
-      throw err;
-    }
-
+    expect(recommendedUsers).toEqual(correctRecommnedations);
     expect(
       await recommendationService.getRecommendations(blankRoommate)
     ).toEqual([]);

@@ -4,6 +4,7 @@ import { RoommateRepository } from "../repository/RoommateRepository";
 import { Roommate } from "../roommate/roommate";
 import { RoommateProfile } from "../roommate/roommateProfile";
 import voca from "voca";
+import _ from "lodash";
 
 @injectable()
 export class RecommendationService {
@@ -30,40 +31,23 @@ export class RecommendationService {
    */
   public async getRecommendations(roommate: Roommate): Promise<Roommate[]> {
     //Get all users with any overlap of attributes at all
-    let recommendedRoommates = await this.roommateRepository.findOverlap(
+    const recommendedRoommates = await this.roommateRepository.findOverlap(
       roommate.profile,
       RecommendationService.fieldsNotToCompare
     );
 
-    //Remove the given roommate from the list
-    recommendedRoommates = recommendedRoommates.filter(
-      (recommendedRoommate: Roommate) =>
-        recommendedRoommate.username !== roommate.username
-    );
-
-    //Get all other Roommate's score with our roommate
-    let roommatesAndScores = recommendedRoommates.map((recommendedRoommate) => {
-      return {
-        roommate: recommendedRoommate,
-        score: this.getCompatibilityScore(
-          recommendedRoommate.profile,
-          roommate.profile
-        ),
-      };
-    });
-
-    //Sort by score
-    roommatesAndScores = roommatesAndScores.sort((a, b) => {
-      return b.score - a.score;
-    });
-
-    //Remove score
-    let finalRecommendations = roommatesAndScores.map((a) => {
-      return a.roommate;
-    });
-
-    //Return only top 10
-    return finalRecommendations.slice(0, 10);
+    return _.chain(recommendedRoommates)
+      .filter(
+        (recommendedRoommate: Roommate) =>
+          recommendedRoommate.username !== roommate.username
+      )
+      .sortBy(
+        (otherRoommate: Roommate) =>
+          -1 *
+          this.getCompatibilityScore(otherRoommate.profile, roommate.profile)
+      )
+      .slice(0, 10)
+      .value();
   }
 
   private getCompatibilityScore(
@@ -72,22 +56,22 @@ export class RecommendationService {
   ): number {
     let score = 0;
 
-    for (const property in RecommendationService.scores) {
+    for (const [property, weight] of Object.entries(
+      RecommendationService.scores
+    )) {
       //Handle array matches
       if (Array.isArray(profile1[property])) {
-        const sharedAttributes = profile1[property].filter((value) =>
-          profile2[property].includes(value)
+        const sharedAttributes = _.intersection(
+          profile1[property],
+          profile2[property]
         );
-        score +=
-          sharedAttributes.length * RecommendationService.scores[property];
-      } else {
+        score += sharedAttributes.length * weight;
+      } else if (
+        !voca.isBlank(profile1[property]) &&
+        profile1[property] === profile2[property]
+      ) {
         //Handle normal matches, but ignore blank fields
-        if (
-          !voca.isBlank(profile1[property]) &&
-          profile1[property] === profile2[property]
-        ) {
-          score += RecommendationService.scores[property];
-        }
+        score += weight;
       }
     }
 

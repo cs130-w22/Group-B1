@@ -54,21 +54,6 @@ const roommate2: Roommate = {
   },
 };
 
-const roommate3: Roommate = {
-  username: "Jessica",
-  password: "JessicaPassword",
-  profile: {
-    firstName: "Tom",
-    lastName: "Richard",
-    email: "tom@gmail.com",
-    area: "Los Angeles" as Area,
-    bio: "NYU grad",
-    hobbies: [],
-    personality: [],
-    additionalInfo: "Looking for 1 roommate",
-  },
-};
-
 const roommates = [roommate1, roommate2];
 
 describe("Roommate Repository", () => {

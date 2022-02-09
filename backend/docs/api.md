@@ -55,7 +55,7 @@ GET /roommate/areas
 GET /roommate/hobbies
 GET /roommate/personalities
 
-GET  /recommendations
+GET /roommate/recommendations
 ```
 
 ### Retrieve roommate(s)
@@ -314,7 +314,7 @@ Example Response:
 ### Get recommendations list
 
 ```
-GET /recommendations
+GET /roommate/recommendations
 ```
 
 Include the `username` as a query parameter. Returned will be a list of roommate profiles of up to the 10 most similar users. The list is sorte with the most similar profile first and the least similar profile last. The profile that belongs to the queried username will not be returned in the list.
@@ -322,7 +322,7 @@ Include the `username` as a query parameter. Returned will be a list of roommate
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/recommendations/?username=Andrew1'
+curl --location --request GET 'http://localhost:3000/roommate/recommendations/?username=Andrew1'
 ```
 
 Example Response:
