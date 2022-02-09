@@ -10,7 +10,12 @@
 body {
   /*font-family: Calibri, sans-serif;*/
   background-color: var(--white);
-  /*height: 1000px;*/
+}
+
+hr {
+	margin-top: 5px;
+	margin-bottom: 15px;
+	padding: 0;
 }
 
 .center {
@@ -25,30 +30,96 @@ body {
 }
 
 .login_banner {
-	height: 80vh;
-	width: 37.5%;
+	height: 65vh;
+	width: 75%;
 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	border-radius: 20px;
+	background-color: var(--white);
 	border-radius: 17.5px;
-	background-color: var(--pink);
+	border-width: 5px;
+	border-style: solid;
+	border-color: var(--purple);
+	opacity: 0.75;	/* make it more pastel-like */
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 
-.login_logo {
+.people {
 	position: relative;
-	top: 50px;
-	left: -50px;
+	top: 0;
+	right: 20px;
 
-	height: 100px;
-	width: 100px;
-	border-radius: 50px;
+	height: auto;
+	max-width: 50%;
+}
 
+.login_region {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
 
-	color: white;
-	filter: brightness(1.05);
-	background-color: var(--purple);
-	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+.instructions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+.instructions p {
+	padding: 7.5px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.sentence1 {
+	margin: 0;
+	padding: 0;
+	font-weight: 500;
+}
+
+.sentence2 {
+	margin: 0;
+	padding: 0 !important;
+	font-weight: 300;
+}
+
+.login_region input {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 0px;
+	margin-right: 0px;
+
+	font-size: calc(8px + 2vmin);
+	background-color: var(--gray-white);
+	border: 1x solid blue;
+}
+
+.login_button {
+  padding: 7.5px;
+
+  display: flex;
+  height: 30px;
+  width: 65%;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: calc(10px + 1vmin);
+  font-weight: 550;
+  letter-spacing: 1.5px;
+  color: white;
+  border-radius: 12.5px;
+  background-color: var(--purple);
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.login_button:hover {
+	opacity: 0.85;
 }
