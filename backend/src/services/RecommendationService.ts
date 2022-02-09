@@ -27,7 +27,7 @@ export class RecommendationService {
   /**
    * Returns the best matched roommates for a given roommate
    * @param roommate
-   * @returns top 10 scored simiar roommates if there are that many in the database
+   * @returns the top 10 most similar roommates if that many profiles exist with any shared attributes
    */
   public async getRecommendations(roommate: Roommate): Promise<Roommate[]> {
     //Get all users with any overlap of attributes at all
