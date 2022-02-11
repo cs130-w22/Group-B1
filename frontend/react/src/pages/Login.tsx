@@ -1,13 +1,15 @@
+
 import React from 'react';
 import './Login.css';
 import * as Unicons from '@iconscout/react-unicons';
 
 var people1 = require('../resources/people1.png')
-// var pencil_icon_size = 35
 
 const Login: React.FC = () => {
   return (
     <div className="center">
+      <div className="square top_left"></div>
+      <div className="square bottom_right"></div>
       <div className="login_banner">
         <img src={people1} className="people" alt="people" /> 
         <div className="login_region">

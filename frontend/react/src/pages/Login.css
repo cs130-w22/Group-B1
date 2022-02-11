@@ -19,6 +19,7 @@ hr {
 }
 
 .center {
+	position: relative;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -27,6 +28,33 @@ hr {
 
 	color: black;
 	font-size: calc(10px + 2vmin);
+}
+
+.square {
+	border-radius: 15px;
+	background-color: var(--purple);
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+	z-index: -1;
+}
+
+.top_left {
+	position: absolute;
+	top: 50px;
+	left: 50px;
+
+	height: 300px;
+	width: 300px;
+	opacity: 0.65;	
+}
+
+.bottom_right {
+	position: absolute;
+	bottom: 50px;
+	right: 100px;
+		
+	height: 250px;
+	width: 250px;
+	opacity: 0.45;
 }
 
 .login_banner {
@@ -43,7 +71,7 @@ hr {
 	border-width: 5px;
 	border-style: solid;
 	border-color: var(--purple);
-	opacity: 0.75;	/* make it more pastel-like */
+	opacity: 0.925;	/* make it more pastel-like */
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 
@@ -96,7 +124,6 @@ hr {
 
 	font-size: calc(8px + 2vmin);
 	background-color: var(--gray-white);
-	border: 1x solid blue;
 }
 
 .login_button {
