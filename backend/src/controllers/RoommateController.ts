@@ -48,7 +48,7 @@ export class RoommateController implements RegistrableController {
       }
     } catch (err) {
       return res.status(500).json({
-        message: "Failed to get all roommates.",
+        message: "Failed to get roommates.",
       });
     }
   };
