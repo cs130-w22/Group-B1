@@ -47,11 +47,12 @@ Please refer to the `roommate` folder for more details on the `Roommate` interfa
 
 ```
 GET  /roommate
+GET  /roommate/:username
 POST /roommate
 POST /roommate/login
-PUT  /roommate
+PUT  /roommate/:username
 
-GET /roommate/recommendations
+GET /roommate/recommendations/:username
 
 GET /roommate/areas
 GET /roommate/hobbies
@@ -64,17 +65,12 @@ GET /roommate/personalities
 GET /roommate
 ```
 
-Include the authorization header.
+Include the authorization header. Optionally include query parameters to filter the search:
 
-Options:
-
-- With no query parameters set, all roommate profiles will be retrieved.
-
-- When the optional `username` query parameter is included, a single roommate profile will be returned if the username exists.
-
-- When optional `firstName`, `lastName`, `email`, and/or `area` query parameters are included, an array of roommate profiles that match the search criteria will be returned.
-
-Note that the `username` query parameter takes precedence over these profile query parameters. In other words, if `username` is present in the query parameters, the other query parameters are ignored. When searching by roommate profile filters, you can include any number of the query parameters. You do not need to include all the profile query parameters.
+- `firstName`
+- `lastName`
+- `email`
+- `area`
 
 Example Request (find all roommates):
 
@@ -110,29 +106,7 @@ Example Response:
 ]
 ```
 
-Example Request (querying for 1 roommate by username):
-
-```
-curl --location --request GET 'http://localhost:3000/roommate/?username=Andrew1' \
---header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldzEiLCJzYWx0IjoiaFRpajBPa3FENElXUDNPOU9ta2xTZz09IiwiaWF0IjoxNjQzNjYxNjA0LCJleHAiOjE2NDM2NjM0MDR9.r4tNmIe4fo9C9YTucto3Mab3gcJ9MGu5AevKUoPCzyk'
-```
-
-Example Response:
-
-```
-{
-    "firstName": "AndrewNewName",
-    "lastName": "Changy",
-    "email": "andrewwww@gmail.com",
-    "area": "Los Angeles",
-    "bio": "UCLA grad",
-    "hobbies": [],
-    "personality": [],
-    "additionalInfo": "Looking for 2 roommates"
-}
-```
-
-Example Request (querying for roommate profiles using filters):
+Example Request (with query params):
 
 ```
 curl --location --request GET 'http://localhost:3000/roommate/?firstName=Andrew&lastName=Chang' \
@@ -166,7 +140,35 @@ Example Response:
 ]
 ```
 
-Notice that this endpoint is returning roommate _profiles_. (Usernames and passwords are not included.)
+```
+GET /roommate/:username
+```
+
+Include the authorization header. Include the username as a path parameter.
+
+Example Request (searching for 1 roommate by username):
+
+```
+curl --location --request GET 'http://localhost:3000/roommate/Andrew1' \
+--header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldzEiLCJzYWx0IjoiaFRpajBPa3FENElXUDNPOU9ta2xTZz09IiwiaWF0IjoxNjQzNjYxNjA0LCJleHAiOjE2NDM2NjM0MDR9.r4tNmIe4fo9C9YTucto3Mab3gcJ9MGu5AevKUoPCzyk'
+```
+
+Example Response:
+
+```
+{
+    "firstName": "AndrewNewName",
+    "lastName": "Changy",
+    "email": "andrewwww@gmail.com",
+    "area": "Los Angeles",
+    "bio": "UCLA grad",
+    "hobbies": [],
+    "personality": [],
+    "additionalInfo": "Looking for 2 roommates"
+}
+```
+
+Notice that all of these endpoints are returning roommate _profiles_. (Usernames and passwords are not included.)
 
 ### Create a roommate
 
@@ -244,15 +246,15 @@ Example Response:
 ### Update a roommate
 
 ```
-PUT /roommate
+PUT /roommate/:username
 ```
 
-Include the `username` as a query parameter. Include a `RoommateProfile` object inside the request body, along with the authorization header. Note that that we are not allowing the username or password to be updated using this endpoint.
+Include the `username` as a path parameter. Include a `RoommateProfile` object inside the request body, along with the authorization header. Note that that we are not allowing the username or password to be updated using this endpoint.
 
 Example Request:
 
 ```
-curl --location --request PUT 'http://localhost:3000/roommate/?username=Andrew1' \
+curl --location --request PUT 'http://localhost:3000/roommate/Andrew1' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldzEiLCJzYWx0IjoiMFE0SU84cWtoa0wyQUluZWU1OFJyZz09IiwiaWF0IjoxNjQzNzQwNjg2LCJleHAiOjE2NDM3NDI0ODZ9.V0PXNjRxe2Su-g7mzoddyYy-icVIPI0MfmWDvwYmVfY' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -285,15 +287,15 @@ Example Response:
 ### Get recommendations list
 
 ```
-GET /roommate/recommendations
+GET /roommate/recommendations/:username
 ```
 
-Include the `username` as a query parameter. Include the authorization header. Returned will be a list of roommate profiles of up to the 10 most similar users. The list is sorted with the most similar profile first and the least similar profile last. The profile that belongs to the queried username will not be returned in the list.
+Include the `username` as a path parameter. Include the authorization header. Returned will be a list of roommate profiles of up to the 10 most similar users. The list is sorted with the most similar profile first and the least similar profile last. The profile that belongs to the queried username will not be returned in the list.
 
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/recommendations?username=Andrew' \
+curl --location --request GET 'http://localhost:3000/roommate/recommendations/Andrew' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldyIsInNhbHQiOiJIM3UwakRsdUY3RFZBRmZoS2UvU0xnPT0iLCJpYXQiOjE2NDQ0MzU3OTYsImV4cCI6MTY0NDQzNzU5Nn0.8J5JSbNh1iJykAHbIEjqWyBx2Im6i5jbA8vyXZ7I2pY'
 ```
 

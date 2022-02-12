@@ -19,30 +19,24 @@ export class RecommendationController implements RegistrableController {
 
   public register(app: Application): void {
     app
-      .route("/roommate/recommendations")
+      .route("/roommate/recommendations/:username")
       .get(this.authorizationMiddleware.verifyToken, this.getRecommendations);
   }
 
   private getRecommendations = async (req: Request, res: Response) => {
     try {
-      const username = req.query.username;
-      if (username) {
-        const roommate = await this.roommmateService.findRoommate(username);
-        if (!roommate) {
-          return res.status(404).json({
-            message: "Roommate not found.",
-          });
-        }
-
-        const roommateProfiles = (
-          await this.recommendationService.getRecommendations(roommate)
-        ).map((roommate) => roommate.profile);
-        res.status(200).json(roommateProfiles);
-      } else {
-        return res.status(400).json({
-          message: "Username required.",
+      const username = req.params["username"];
+      const roommate = await this.roommmateService.findRoommate(username);
+      if (!roommate) {
+        return res.status(404).json({
+          message: "Roommate not found.",
         });
       }
+
+      const roommateProfiles = (
+        await this.recommendationService.getRecommendations(roommate)
+      ).map((roommate) => roommate.profile);
+      res.status(200).json(roommateProfiles);
     } catch (err) {
       console.log("Error is: ", err.message);
       return res.status(500).json({
