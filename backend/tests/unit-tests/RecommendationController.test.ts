@@ -141,17 +141,9 @@ describe("GET /roommate/recommendations", function () {
     container.restore();
   });
 
-  it("No Username Given", async function () {
-    const response = await request(app)
-      .get("/roommate/recommendations")
-      .set("Accept", "application/json")
-      .send();
-    expect(response.status).toEqual(400);
-  });
-
   it("Cannot Find Username", async function () {
     const response = await request(app)
-      .get(`/roommate/recommendations/?username=${match2.username}`)
+      .get(`/roommate/recommendations/${match2.username}`)
       .set("Accept", "application/json")
       .send();
     expect(response.status).toEqual(404);
@@ -160,7 +152,7 @@ describe("GET /roommate/recommendations", function () {
   it("Trigger an Internal Error", async function () {
     //match1 will trigger internal error because of way RecommendationServiceMock.getRecommendations is mocked
     const response = await request(app)
-      .get(`/roommate/recommendations/?username=${match1.username}`)
+      .get(`/roommate/recommendations/${match1.username}`)
       .set("Accept", "application/json")
       .send();
     expect(response.status).toEqual(500);
@@ -168,7 +160,7 @@ describe("GET /roommate/recommendations", function () {
 
   it("Successful Recommendation Get", async function () {
     const response = await request(app)
-      .get(`/roommate/recommendations/?username=${user.username}`)
+      .get(`/roommate/recommendations/${user.username}`)
       .set("Accept", "application/json")
       .send();
     expect(response.status).toEqual(200);

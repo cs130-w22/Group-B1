@@ -23,21 +23,17 @@ export class RoommateController implements RegistrableController {
       .post(
         this.authorizationMiddleware.verifyPasswordExists,
         this.createRoomate
-      )
+      );
+    app
+      .route("/roommate/:username")
+      .get(this.authorizationMiddleware.verifyToken, this.getRoommateByUsername)
       .put(this.authorizationMiddleware.verifyToken, this.updateRoommate);
   }
 
   private getRoommates = async (req: Request, res: Response) => {
     try {
-      const { username, firstName, lastName, email, area } = req.query;
-      if (username) {
-        const roommate = await this.roommateService.findRoommate(username);
-        if (!roommate) {
-          res.status(404).json({ message: "Roommate not found." });
-        } else {
-          res.status(200).json(roommate.profile);
-        }
-      } else if (firstName || lastName || email || area) {
+      const { firstName, lastName, email, area } = req.query;
+      if (firstName || lastName || email || area) {
         const partialProfile = { firstName, lastName, email, area };
         const filteredPartialProfile = _.omitBy(partialProfile, _.isUndefined);
         const roommateProfiles = (
@@ -53,6 +49,22 @@ export class RoommateController implements RegistrableController {
     } catch (err) {
       return res.status(500).json({
         message: "Failed to get all roommates.",
+      });
+    }
+  };
+
+  private getRoommateByUsername = async (req: Request, res: Response) => {
+    try {
+      const username = req.params["username"];
+      const roommate = await this.roommateService.findRoommate(username);
+      if (!roommate) {
+        res.status(404).json({ message: "Roommate not found." });
+      } else {
+        res.status(200).json(roommate.profile);
+      }
+    } catch (err) {
+      return res.status(500).json({
+        message: "Failed to get roommate with given username.",
       });
     }
   };
@@ -79,12 +91,7 @@ export class RoommateController implements RegistrableController {
 
   private updateRoommate = async (req: Request, res: Response) => {
     try {
-      const username = req.query.username;
-      if (!username) {
-        return res.status(400).json({
-          message: "Roommate username missing.",
-        });
-      }
+      const username = req.params["username"];
       const roommateProfile: RoommateProfile = req.body as RoommateProfile;
       const roommateUpdated = await this.roommateService.updateRoommate(
         username,

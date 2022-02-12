@@ -100,8 +100,7 @@ describe("Roommates API", function () {
     const authorizationHeader = "Bearer " + accessToken;
 
     const updateRoommateResponse = await request(app)
-      .put("/roommate/")
-      .query({ username: updatedTestRoommate.username })
+      .put("/roommate/username")
       .set("Accept", "application/json")
       .set("Authorization", authorizationHeader)
       .send(updatedTestRoommate.profile);
@@ -126,8 +125,7 @@ describe("Roommates API", function () {
     );
 
     const getRoommateByUsernameResponse = await request(app)
-      .get("/roommate/")
-      .query({ username: updatedTestRoommate.username })
+      .get("/roommate/username")
       .set("Accept", "application/json")
       .set("Authorization", authorizationHeader);
     expect(getRoommateByUsernameResponse.status).toEqual(200);
@@ -149,8 +147,7 @@ describe("Roommates API", function () {
     );
 
     const getRecommendationsResponse = await request(app)
-      .get("/roommate/recommendations")
-      .query({ username: updatedTestRoommate.username })
+      .get("/roommate/recommendations/username")
       .set("Accept", "application/json")
       .set("Authorization", authorizationHeader);
     expect(getRecommendationsResponse.body).toEqual(
