@@ -145,6 +145,11 @@ class RoommateRepositoryMock implements RoommateRepository {
   async findOne(username: string): Promise<Roommate | null> {
     throw new Error("Function should not be called for this unit test");
   }
+
+  async findWhere(profile: Partial<RoommateProfile>): Promise<Roommate[]> {
+    throw new Error("Function should not be called for this unit test");
+  }
+
   async getAll(): Promise<Roommate[]> {
     throw new Error("Function should not be called for this unit test");
   }

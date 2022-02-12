@@ -59,7 +59,7 @@ const roommate3: Roommate = {
   username: "Jessica",
   password: "JessicaPassword",
   profile: {
-    firstName: "Tom",
+    firstName: "Jessica",
     lastName: "Richard",
     email: "tom@gmail.com",
     area: "Los Angeles" as Area,
@@ -99,6 +99,16 @@ describe("Roommate Repository", () => {
     expect(await roommateRepository.findOne(roommate1.username)).toEqual(
       roommate1
     );
+
+    expect(
+      await roommateRepository.findWhere({ area: roommate2.profile.area })
+    ).toEqual(expect.arrayContaining([roommate2, roommate3]));
+    expect(
+      await roommateRepository.findWhere({
+        lastName: roommate1.profile.lastName,
+      })
+    ).toEqual(expect.arrayContaining([roommate1]));
+
     expect(await roommateRepository.getAll()).toEqual(
       expect.arrayContaining(roommates)
     );

@@ -14,6 +14,12 @@ export class RoommateService {
     return await this.roommateRepository.getAll();
   }
 
+  public async findRoommatesWhere(
+    profile: Partial<RoommateProfile>
+  ): Promise<Roommate[]> {
+    return await this.roommateRepository.findWhere(profile);
+  }
+
   public async createRoommate(roommate: Roommate): Promise<boolean> {
     return await this.roommateRepository.create(roommate);
   }

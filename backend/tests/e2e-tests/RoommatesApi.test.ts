@@ -118,11 +118,34 @@ describe("Roommates API", function () {
       .set("Accept", "application/json")
       .set("Authorization", authorizationHeader);
     expect(getRoommatesResponse.status).toEqual(200);
-    expect(getRoommatesResponse.body.data).toEqual(
+    expect(getRoommatesResponse.body).toEqual(
       expect.arrayContaining([
         updatedTestRoommate.profile,
         testRoommate2.profile,
       ])
+    );
+
+    const getRoommateByUsernameResponse = await request(app)
+      .get("/roommate/")
+      .query({ username: updatedTestRoommate.username })
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader);
+    expect(getRoommateByUsernameResponse.status).toEqual(200);
+    expect(getRoommateByUsernameResponse.body).toEqual(
+      updatedTestRoommate.profile
+    );
+
+    const getRoommatesByFilterResponse = await request(app)
+      .get("/roommate/")
+      .query({
+        firstName: testRoommate2.profile.firstName,
+        email: testRoommate2.profile.email,
+      })
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader);
+    expect(getRoommatesByFilterResponse.status).toEqual(200);
+    expect(getRoommatesByFilterResponse.body).toEqual(
+      expect.arrayContaining([testRoommate2.profile])
     );
 
     const getRecommendationsResponse = await request(app)

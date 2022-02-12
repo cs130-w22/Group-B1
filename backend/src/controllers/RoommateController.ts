@@ -6,6 +6,7 @@ import { RoommateService } from "../services/RoommateService";
 import { AuthorizationMiddleware } from "../middleware/AuthorizationMiddleware";
 import { RegistrableController } from "./RegistrableController";
 import { RoommateProfile } from "../roommate/roommateProfile";
+import _ from "lodash";
 
 @injectable()
 export class RoommateController implements RegistrableController {
@@ -28,7 +29,7 @@ export class RoommateController implements RegistrableController {
 
   private getRoommates = async (req: Request, res: Response) => {
     try {
-      const username = req.query.username;
+      const { username, firstName, lastName, email, area } = req.query;
       if (username) {
         const roommate = await this.roommateService.findRoommate(username);
         if (!roommate) {
@@ -36,11 +37,18 @@ export class RoommateController implements RegistrableController {
         } else {
           res.status(200).json(roommate.profile);
         }
+      } else if (firstName || lastName || email || area) {
+        const partialProfile = { firstName, lastName, email, area };
+        const filteredPartialProfile = _.omitBy(partialProfile, _.isUndefined);
+        const roommateProfiles = (
+          await this.roommateService.findRoommatesWhere(filteredPartialProfile)
+        ).map((roommate) => roommate.profile);
+        res.status(200).json(roommateProfiles);
       } else {
         const roommateProfiles = (
           await this.roommateService.getAllRoommates()
         ).map((roommate) => roommate.profile);
-        res.status(200).json({ data: roommateProfiles });
+        res.status(200).json(roommateProfiles);
       }
     } catch (err) {
       return res.status(500).json({
