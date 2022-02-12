@@ -64,9 +64,19 @@ GET /roommate/personalities
 GET /roommate
 ```
 
-Include the authorization header. Optionally include a `username` query parameter to retrieve a single roommate.
+Include the authorization header.
 
-Example Request:
+Options:
+
+- With no query parameters set, all roommate profiles will be retrieved.
+
+- When the optional `username` query parameter is included, a single roommate profile will be returned if the username exists.
+
+- When optional `firstName`, `lastName`, `email`, and/or `area` query parameters are included, an array of roommate profiles that match the search criteria will be returned.
+
+Note that the `username` query parameter takes precedence over these profile query parameters. In other words, if `username` is present in the query parameters, the other query parameters are ignored. When searching by roommate profile filters, you can include any number of the query parameters. You do not need to include all the profile query parameters.
+
+Example Request (find all roommates):
 
 ```
 curl --location --request GET 'http://localhost:3000/roommate/' \
@@ -76,23 +86,31 @@ curl --location --request GET 'http://localhost:3000/roommate/' \
 Example Response:
 
 ```
-{
-    "data": [
-        {
-            "firstName": "AndrewNewName",
-            "lastName": "Changy",
-            "email": "andrewwww@gmail.com",
-            "area": "Los Angeles",
-            "bio": "UCLA grad",
-            "hobbies": [],
-            "personality": [],
-            "additionalInfo": "Looking for 2 roommates"
-        }
-    ]
-}
+[
+    {
+        "firstName": "Andrew",
+        "lastName": "Chang",
+        "email": "andrewwww@gmail.com",
+        "area": "Los Angeles",
+        "bio": "UCLA graduate",
+        "hobbies": [],
+        "personality": [],
+        "additionalInfo": "Looking for 2 roommates"
+    },
+    {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john@gmail.com",
+        "area": "Los Angeles",
+        "bio": "UCLA grad",
+        "hobbies": [],
+        "personality": [],
+        "additionalInfo": "Looking for 3 roommates"
+    }
+]
 ```
 
-Example Request (querying for 1 roommate):
+Example Request (querying for 1 roommate by username):
 
 ```
 curl --location --request GET 'http://localhost:3000/roommate/?username=Andrew1' \
@@ -112,6 +130,40 @@ Example Response:
     "personality": [],
     "additionalInfo": "Looking for 2 roommates"
 }
+```
+
+Example Request (querying for roommate profiles using filters):
+
+```
+curl --location --request GET 'http://localhost:3000/roommate/?firstName=Andrew&lastName=Chang' \
+--header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldyIsInNhbHQiOiJiY1NoRFZqSXI2dHpsYVBGemdhRHlRPT0iLCJpYXQiOjE2NDQ2NzIxNTYsImV4cCI6MTY0NDY3Mzk1Nn0.0-CzWP1TEB5IsJQUgEKxJBHxv8E3W3OeTKVs5iR2wSU'
+```
+
+Example Response:
+
+```
+[
+    {
+        "firstName": "Andrew",
+        "lastName": "Chang",
+        "email": "andrewwww@gmail.com",
+        "area": "Los Angeles",
+        "bio": "UCLA graduate",
+        "hobbies": [],
+        "personality": [],
+        "additionalInfo": "Looking for 2 roommates"
+    },
+    {
+        "firstName": "Andrew",
+        "lastName": "Chang",
+        "email": "andrew@gmail.com",
+        "area": "Los Angeles",
+        "bio": "UCLA grad",
+        "hobbies": [],
+        "personality": [],
+        "additionalInfo": "Looking for 2 roommates"
+    }
+]
 ```
 
 Notice that this endpoint is returning roommate _profiles_. (Usernames and passwords are not included.)

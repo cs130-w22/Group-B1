@@ -2,11 +2,13 @@ import { Roommate } from "../roommate/roommate";
 import { RoommateProfile } from "../roommate/roommateProfile";
 import { RoommateModel } from "./Schemas";
 import { injectable } from "inversify";
+import _ from "lodash";
 import "reflect-metadata";
 
 export interface RoommateRepository {
   create(roommate: Roommate): Promise<boolean>;
   findOne(username: string): Promise<Roommate | null>;
+  findWhere(profile: Partial<RoommateProfile>): Promise<Roommate[]>;
   findOverlap(
     profileFields: Partial<RoommateProfile>,
     keysToIgnore?: string[]
@@ -43,6 +45,17 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   async findOne(username: string): Promise<Roommate | null> {
     const roommate = await RoommateModel.findOne({ username: username });
     return roommate ? roommate.toObject() : null;
+  }
+
+  /**
+   * Finds a roommate whose profile matches profile fields
+   * @param profile a partial RoommateProfile
+   * @returns an array of roommates who match search criteria
+   */
+  async findWhere(profile: Partial<RoommateProfile>): Promise<Roommate[]> {
+    const filter = _.mapKeys(profile, (value, key) => "profile." + key);
+    const roommateDocs = await RoommateModel.find(filter);
+    return roommateDocs.map((roommateDoc) => roommateDoc.toObject());
   }
 
   /**
