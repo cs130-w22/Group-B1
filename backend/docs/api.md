@@ -146,7 +146,7 @@ GET /roommate/:username
 
 Include the authorization header. Include the username as a path parameter.
 
-Example Request (querying for 1 roommate by username):
+Example Request (searching for 1 roommate by username):
 
 ```
 curl --location --request GET 'http://localhost:3000/roommate/Andrew1' \
