@@ -65,7 +65,7 @@ GET /roommate/personalities
 GET /roommate
 ```
 
-Include the authorization header. Optional include query parameters to filter the search:
+Include the authorization header. Optionally include query parameters to filter the search:
 
 - `firstName`
 - `lastName`
@@ -168,41 +168,7 @@ Example Response:
 }
 ```
 
-Example Request (querying for roommate profiles using filters):
-
-```
-curl --location --request GET 'http://localhost:3000/roommate/?firstName=Andrew&lastName=Chang' \
---header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldyIsInNhbHQiOiJiY1NoRFZqSXI2dHpsYVBGemdhRHlRPT0iLCJpYXQiOjE2NDQ2NzIxNTYsImV4cCI6MTY0NDY3Mzk1Nn0.0-CzWP1TEB5IsJQUgEKxJBHxv8E3W3OeTKVs5iR2wSU'
-```
-
-Example Response:
-
-```
-[
-    {
-        "firstName": "Andrew",
-        "lastName": "Chang",
-        "email": "andrewwww@gmail.com",
-        "area": "Los Angeles",
-        "bio": "UCLA graduate",
-        "hobbies": [],
-        "personality": [],
-        "additionalInfo": "Looking for 2 roommates"
-    },
-    {
-        "firstName": "Andrew",
-        "lastName": "Chang",
-        "email": "andrew@gmail.com",
-        "area": "Los Angeles",
-        "bio": "UCLA grad",
-        "hobbies": [],
-        "personality": [],
-        "additionalInfo": "Looking for 2 roommates"
-    }
-]
-```
-
-Notice that this endpoint is returning roommate _profiles_. (Usernames and passwords are not included.)
+Notice that all of these endpoints are returning roommate _profiles_. (Usernames and passwords are not included.)
 
 ### Create a roommate
 
