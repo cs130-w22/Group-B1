@@ -329,7 +329,7 @@ Include the `username` as a path parameter. Include the authorization header. Re
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/recommendations?username=Andrew' \
+curl --location --request GET 'http://localhost:3000/roommate/recommendations/Andrew' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldyIsInNhbHQiOiJIM3UwakRsdUY3RFZBRmZoS2UvU0xnPT0iLCJpYXQiOjE2NDQ0MzU3OTYsImV4cCI6MTY0NDQzNzU5Nn0.8J5JSbNh1iJykAHbIEjqWyBx2Im6i5jbA8vyXZ7I2pY'
 ```
 
