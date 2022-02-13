@@ -62,7 +62,7 @@ const match2: Roommate = {
 
 const matches = [match1, match2];
 const matchesProfile = matches.map((roommate: Roommate) => {
-  return roommate.profile;
+  return { username: roommate.username, profile: roommate.profile };
 });
 
 @injectable()
