@@ -83,26 +83,35 @@ Example Response:
 
 ```
 [
-    {
-        "firstName": "Andrew",
-        "lastName": "Chang",
-        "email": "andrewwww@gmail.com",
-        "area": "Los Angeles",
-        "bio": "UCLA graduate",
-        "hobbies": [],
-        "personality": [],
-        "additionalInfo": "Looking for 2 roommates"
+    { 
+        "username": "Andrew1",
+        "profile":
+        {
+            "firstName": "Andrew",
+            "lastName": "Chang",
+            "email": "andrewwww@gmail.com",
+            "area": "Los Angeles",
+            "bio": "UCLA graduate",
+            "hobbies": [],
+            "personality": [],
+            "additionalInfo": "Looking for 2 roommates"
+        }
     },
     {
-        "firstName": "John",
-        "lastName": "Doe",
-        "email": "john@gmail.com",
-        "area": "Los Angeles",
-        "bio": "UCLA grad",
-        "hobbies": [],
-        "personality": [],
-        "additionalInfo": "Looking for 3 roommates"
+        "username": "John1",
+        "profile":
+        {
+            "firstName": "John",
+            "lastName": "Doe",
+            "email": "john@gmail.com",
+            "area": "Los Angeles",
+            "bio": "UCLA grad",
+            "hobbies": [],
+            "personality": [],
+            "additionalInfo": "Looking for 3 roommates"
+        }
     }
+    
 ]
 ```
 
@@ -118,27 +127,37 @@ Example Response:
 ```
 [
     {
-        "firstName": "Andrew",
-        "lastName": "Chang",
-        "email": "andrewwww@gmail.com",
-        "area": "Los Angeles",
-        "bio": "UCLA graduate",
-        "hobbies": [],
-        "personality": [],
-        "additionalInfo": "Looking for 2 roommates"
+        "username": "Andrew1",
+        "profile": 
+        {
+            "firstName": "Andrew",
+            "lastName": "Chang",
+            "email": "andrewwww@gmail.com",
+            "area": "Los Angeles",
+            "bio": "UCLA graduate",
+            "hobbies": [],
+            "personality": [],
+            "additionalInfo": "Looking for 2 roommates"
+        }
     },
     {
-        "firstName": "Andrew",
-        "lastName": "Chang",
-        "email": "andrew@gmail.com",
-        "area": "Los Angeles",
-        "bio": "UCLA grad",
-        "hobbies": [],
-        "personality": [],
-        "additionalInfo": "Looking for 2 roommates"
+        "username": "Andrew2",
+        "profile":
+        {
+            "firstName": "Andrew",
+            "lastName": "Chang",
+            "email": "andrew@gmail.com",
+            "area": "Los Angeles",
+            "bio": "UCLA grad",
+            "hobbies": [],
+            "personality": [],
+            "additionalInfo": "Looking for 2 roommates"
+        }
     }
 ]
 ```
+
+Notice that this endpoint is returning roommate _usernames_ and _profiles_. (passwords are not included.)
 
 ```
 GET /roommate/:username
@@ -168,7 +187,7 @@ Example Response:
 }
 ```
 
-Notice that all of these endpoints are returning roommate _profiles_. (Usernames and passwords are not included.)
+Notice that this endpoint is returning roommate _profiles_. (Usernames and passwords are not included.)
 
 ### Create a roommate
 
@@ -303,29 +322,37 @@ Example Response:
 
 ```
 [
-    {
-        firstName: "Isabela",
-        lastName: "Smith",
-        email: "Isabela@gmail.com",
-        area: "Los Angeles" as Area,
-        bio: "",
-        hobbies: ["reading", "hiking","soccer"],
-        personality: ["introvert","intuitive","thinker"],
-        additionalInfo: "Looking for someone to mountain bike with on weekends!",
+    { 
+        "username": "Isabela1",
+        "profile":
+        {
+            firstName: "Isabela",
+            lastName: "Smith",
+            email: "Isabela@gmail.com",
+            area: "Los Angeles" as Area,
+            bio: "",
+            hobbies: ["reading", "hiking","soccer"],
+            personality: ["introvert","intuitive","thinker"],
+            additionalInfo: "Looking for someone to mountain bike with on weekends!",
+        }
     },
 
     ...
 
     {
-        firstName: "Carly",
-        lastName: "Williams",
-        email: "Carly@gmail.com",
-        area: "Austin" as Area,
-        bio: "",
-        hobbies: ["reading", "basketball", "soccer"],
-        personality: ["judger"],
-        additionalInfo: "",
-  }
+        "username": "Carly1",
+        "profile": 
+        {
+            firstName: "Carly",
+            lastName: "Williams",
+            email: "Carly@gmail.com",
+            area: "Austin" as Area,
+            bio: "",
+            hobbies: ["reading", "basketball", "soccer"],
+            personality: ["judger"],
+            additionalInfo: "",
+        }
+    }
 ]
 ```
 

@@ -43,7 +43,9 @@ export class RoommateController implements RegistrableController {
       } else {
         const roommateProfiles = (
           await this.roommateService.getAllRoommates()
-        ).map((roommate) => roommate.profile);
+        ).map((roommate) => {
+          return { username: roommate.username, profile: roommate.profile };
+        });
         res.status(200).json(roommateProfiles);
       }
     } catch (err) {
