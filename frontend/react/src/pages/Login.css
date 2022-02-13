@@ -95,28 +95,9 @@ input {
 }
 
 .instructions {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-
-.instructions p {
 	padding: 7.5px;
 	margin-top: 0;
 	margin-bottom: 0;
-}
-
-.sentence1 {
-	margin: 0;
-	padding: 0;
-	font-weight: 500;
-}
-
-.sentence2 {
-	margin: 0;
-	padding: 0 !important;
-	font-weight: 300;
 }
 
 .login_region input {

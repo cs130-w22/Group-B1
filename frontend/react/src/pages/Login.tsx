@@ -13,10 +13,7 @@ const Login: React.FC = () => {
       <div className="login_banner">
         <img src={people1} className="people" alt="people" /> 
         <div className="login_region">
-          <div className="instructions">
-            <p className="sentence1">Sign in</p>
-            <p className="sentence2">to find your new roommates</p>
-          </div>
+          <p className="instructions">Sign in to find your new roommates</p>
           <hr></hr>
 
           <input type="text" placeholder=" Username"/>
