@@ -119,8 +119,11 @@ describe("Roommates API", function () {
     expect(getRoommatesResponse.status).toEqual(200);
     expect(getRoommatesResponse.body).toEqual(
       expect.arrayContaining([
-        updatedTestRoommate.profile,
-        testRoommate2.profile,
+        {
+          username: updatedTestRoommate.username,
+          profile: updatedTestRoommate.profile,
+        },
+        { username: testRoommate2.username, profile: testRoommate2.profile },
       ])
     );
 
@@ -151,7 +154,9 @@ describe("Roommates API", function () {
       .set("Accept", "application/json")
       .set("Authorization", authorizationHeader);
     expect(getRecommendationsResponse.body).toEqual(
-      expect.arrayContaining([testRoommate2.profile])
+      expect.arrayContaining([
+        { username: testRoommate2.username, profile: testRoommate2.profile },
+      ])
     );
   });
 
