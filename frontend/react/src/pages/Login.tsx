@@ -18,11 +18,13 @@ const Login: React.FC = () => {
             <p className="sentence2">to find your new roommates</p>
           </div>
           <hr></hr>
+
           <input type="text" placeholder=" Username"/>
           <input type="password" placeholder=" Password" />
           <div className="login_button">
             <p>Login</p>
           </div>
+          
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@
 }
 
 body {
-  /*font-family: Calibri, sans-serif;*/
   background-color: var(--white);
 }
 
@@ -16,6 +15,10 @@ hr {
 	margin-top: 5px;
 	margin-bottom: 15px;
 	padding: 0;
+}
+
+input {
+	border-radius: 7.5px;
 }
 
 .center {
@@ -124,6 +127,10 @@ hr {
 
 	font-size: calc(8px + 2vmin);
 	background-color: var(--gray-white);
+}
+
+input::placeholder {
+	font-size: 18px;
 }
 
 .login_button {
