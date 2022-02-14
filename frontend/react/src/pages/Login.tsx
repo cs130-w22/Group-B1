@@ -5,7 +5,16 @@ import * as Unicons from '@iconscout/react-unicons';
 
 var people1 = require('../resources/people1.png')
 
-const Login: React.FC = () => {
+export class Login extends React.Component{
+
+  componentDidMount() {
+    console.log("componentDidMount");
+    fetch('http://localhost:5000/roommate/types/areas')
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }
+
+  render() {
   return (
     <div className="login-center">
       <div className="login-square top_left"></div>
@@ -25,7 +34,8 @@ const Login: React.FC = () => {
         </div>
       </div>
     </div>
-  )
+  );
+  }
 }
 
 export default Login;
