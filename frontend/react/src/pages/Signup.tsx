@@ -3,6 +3,7 @@ import React from 'react';
 import './Signup.css';
 import * as Unicons from '@iconscout/react-unicons';
 
+var homePageIcon = require('../resources/banner.png')
 var people2 = require('../resources/people2.png')
 
 const fillSelect = () => {
@@ -15,26 +16,26 @@ const fillSelect = () => {
 
 const Signup: React.FC = () => {
   return (
-    <div className="center">
-      <div className="square top_left"></div>
-        <div className="square bottom_right"></div>
-          <div className="signup_banner">
-            <div className="signup_region">
-              <p className="instructions">Sign up and let's find your new roommates</p>
+    <div className="signup-center">
+      <div className="signup-square top_left"></div>
+        <div className="signup-square bottom_right"></div>
+          <div className="signup-signup_banner">
+            <div className="signup-signup_region">
+              <p className="signup-instructions">Sign up and let's find your new roommates</p>
               <hr></hr>
 
-              <div className="info_container">
-                <p className="title">Login Info</p>
+              <div className="signup-info_container">
+                <p className="signup-title">Login Info</p>
                 <input type="text" placeholder=" Username"/>
                 <input type="text" placeholder=" Password"/>
               </div>
 
-              <div className="info_container">
-                <p className="title">Tell us about yourself</p>
+              <div className="signup-info_container">
+                <p className="signup-title">Tell us about yourself</p>
                 <input type="text" placeholder=" First Name"/>
                 <input type="text" placeholder=" Last Name"/>
                 <input type="text" placeholder=" Email"/>
-                <div className="age_container">
+                <div className="signup-age_container">
                   <p>Age</p>
                   <select>
                     {fillSelect()}
@@ -42,12 +43,12 @@ const Signup: React.FC = () => {
                 </div>
               </div>
 
-              <div className="sign_up_button">
+              <div className="signup-sign_up_button">
                 <p>Sign Up</p>
               </div>
 
             </div>
-            <img src={people2} className="people2" alt="people" /> 
+            <img src={people2} className="signup-people2" alt="people" /> 
           </div>
     </div>
   )

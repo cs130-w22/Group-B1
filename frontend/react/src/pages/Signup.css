@@ -21,7 +21,7 @@ input {
 	border-radius: 7.5px;
 }
 
-.center {
+.signup-center {
 	position: relative;
 	min-height: 100vh;
 	display: flex;
@@ -33,14 +33,14 @@ input {
 	font-size: calc(10px + 2vmin);
 }
 
-.square {
+.signup-square {
 	border-radius: 15px;
 	background-color: var(--purple);
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 	z-index: -1;
 }
 
-.top_left {
+.signup-signup-top_left {
 	position: absolute;
 	top: 50px;
 	left: 50px;
@@ -50,7 +50,7 @@ input {
 	opacity: 0.65;	
 }
 
-.bottom_right {
+.signup-bottom_right {
 	position: absolute;
 	bottom: 50px;
 	right: 100px;
@@ -60,7 +60,7 @@ input {
 	opacity: 0.45;
 }
 
-.signup_banner {
+.signup-signup_banner {
 	height: 80vh;
 	width: 75%;
 
@@ -78,14 +78,14 @@ input {
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 
-.signup_region {
+.signup-signup_region {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
-.people2 {
+.signup-people2 {
 	position: relative;
 	top: 0;
 	right: 0;
@@ -94,13 +94,13 @@ input {
 	max-width: 45%;
 }
 
-.instructions {
+.signup-instructions {
 	padding: 7.5px;
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
-.info_container {
+.signup-info_container {
 	margin-top: 40px;
 	margin-bottom: 0px;
 	margin-left: 0px;
@@ -113,11 +113,11 @@ input {
 	justify-content: center;
 }
 
-.title {
+.signup-title {
 	font-size: 20px;
 }
 
-.info_container p {
+.signup-info_container p {
 	position: relative;
 	top: 0;
 	left: 0px;
@@ -126,7 +126,7 @@ input {
 	padding: 0;
 }
 
-.info_container input {
+.signup-info_container input {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left: 0px;
@@ -136,26 +136,31 @@ input {
 	background-color: var(--gray-white);
 }
 
-.info_container input::placeholder {
+.signup-info_container input::placeholder {
 	font-size: 18px;
 }
 
-.age_container {
+.signup-age_container {
 	display: flex;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+
 }
 
-.age_container p {
+.signup-age_container p {
 	font-size: 20px;
 }
 
-.age_container p, .age_container select {
+.signup-age_container p, .signup-age_container select {
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: 10px;
 	margin-right: 10px;
 }
 
-.sign_up_button {
+.signup-sign_up_button {
 	margin-top: 40px;
 	margin-bottom: 40px;
 	margin-left: auto;
@@ -180,6 +185,6 @@ input {
   transition: 0.5s;
 }
 
-.sign_up_button:hover {
+.signup-sign_up_button:hover {
 	opacity: 0.85;
 }

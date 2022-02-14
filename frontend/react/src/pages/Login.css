@@ -21,7 +21,7 @@ input {
 	border-radius: 7.5px;
 }
 
-.center {
+.login-center {
 	position: relative;
 	min-height: 100vh;
 	display: flex;
@@ -33,14 +33,14 @@ input {
 	font-size: calc(10px + 2vmin);
 }
 
-.square {
+.login-square {
 	border-radius: 15px;
 	background-color: var(--purple);
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 	z-index: -1;
 }
 
-.top_left {
+.login-top_left {
 	position: absolute;
 	top: 50px;
 	left: 50px;
@@ -50,7 +50,7 @@ input {
 	opacity: 0.65;	
 }
 
-.bottom_right {
+.login-bottom_right {
 	position: absolute;
 	bottom: 50px;
 	right: 100px;
@@ -60,7 +60,7 @@ input {
 	opacity: 0.45;
 }
 
-.login_banner {
+.login-login_banner {
 	height: 65vh;
 	width: 75%;
 
@@ -78,7 +78,7 @@ input {
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 
-.people {
+.login-people {
 	position: relative;
 	top: 0;
 	right: 20px;
@@ -87,20 +87,20 @@ input {
 	max-width: 50%;
 }
 
-.login_region {
+.login-login_region {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
-.instructions {
+.login-instructions {
 	padding: 7.5px;
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
-.login_region input {
+.login-login_region input {
 	margin-top: 15px;
 	margin-bottom: 15px;
 	margin-left: 0px;
@@ -114,7 +114,7 @@ input::placeholder {
 	font-size: 18px;
 }
 
-.login_button {
+.login-login_button {
   padding: 7.5px;
 
   display: flex;
@@ -135,6 +135,6 @@ input::placeholder {
   transition: 0.5s;
 }
 
-.login_button:hover {
+.login-login_button:hover {
 	opacity: 0.85;
 }
