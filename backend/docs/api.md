@@ -54,9 +54,9 @@ PUT  /roommate/:username
 
 GET /roommate/recommendations/:username
 
-GET /roommate/areas
-GET /roommate/hobbies
-GET /roommate/personalities
+GET /roommate/types/areas
+GET /roommate/types/hobbies
+GET /roommate/types/personalities
 ```
 
 ### Retrieve roommate(s)
@@ -359,7 +359,7 @@ Example Response:
 ### Get areas list
 
 ```
-GET /roommate/areas
+GET /roommate/types/areas
 ```
 
 Example Request:
@@ -384,7 +384,7 @@ Example Response:
 ### Get hobbies list
 
 ```
-GET /roommate/hobbies
+GET /roommate/types/hobbies
 ```
 
 Example Request:
@@ -413,7 +413,7 @@ Example Response:
 ### Get personalities list
 
 ```
-GET /roommate/personalities
+GET /roommate/types/personalities
 ```
 
 Example Request:
