@@ -16,9 +16,9 @@ const fillSelect = () => {
 
 const Signup: React.FC = () => {
   return (
-    <div className="signup-center">
-      <div className="signup-square top_left"></div>
-        <div className="signup-square bottom_right"></div>
+    <div className="center">
+      <div className="square top_left"></div>
+        <div className="square bottom_right"></div>
           <div className="signup-signup_banner">
             <div className="signup-signup_region">
               <p className="signup-instructions">Sign up and let's find your new roommates</p>

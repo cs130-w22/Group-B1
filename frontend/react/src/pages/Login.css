@@ -135,6 +135,6 @@ input::placeholder {
   transition: 0.5s;
 }
 
-.login-login_button:hover {
+.signup-login_button:hover {
 	opacity: 0.85;
 }

@@ -21,7 +21,7 @@ input {
 	border-radius: 7.5px;
 }
 
-.signup-center {
+.center {
 	position: relative;
 	min-height: 100vh;
 	display: flex;
@@ -33,14 +33,14 @@ input {
 	font-size: calc(10px + 2vmin);
 }
 
-.signup-square {
+.square {
 	border-radius: 15px;
 	background-color: var(--purple);
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 	z-index: -1;
 }
 
-.signup-signup-top_left {
+.top_left {
 	position: absolute;
 	top: 50px;
 	left: 50px;
@@ -50,7 +50,7 @@ input {
 	opacity: 0.65;	
 }
 
-.signup-bottom_right {
+.bottom_right {
 	position: absolute;
 	bottom: 50px;
 	right: 100px;
