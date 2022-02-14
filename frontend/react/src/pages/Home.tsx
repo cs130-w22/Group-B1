@@ -97,7 +97,9 @@ const Home: React.FC = () => {
         <footer>
           <p>Find your roommate today!</p>
           <div className="home-signup_footer"> 
-            <p>Sign Up</p>
+            <Link to="/signup">
+              <p>Sign Up</p>
+            </Link>
           </div>
         </footer>
       </div>
