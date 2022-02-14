@@ -54,9 +54,9 @@ PUT  /roommate/:username
 
 GET /roommate/recommendations/:username
 
-GET /roommate/areas
-GET /roommate/hobbies
-GET /roommate/personalities
+GET /roommate/types/areas
+GET /roommate/types/hobbies
+GET /roommate/types/personalities
 ```
 
 ### Retrieve roommate(s)
@@ -83,7 +83,7 @@ Example Response:
 
 ```
 [
-    { 
+    {
         "username": "Andrew1",
         "profile":
         {
@@ -111,7 +111,7 @@ Example Response:
             "additionalInfo": "Looking for 3 roommates"
         }
     }
-    
+
 ]
 ```
 
@@ -128,7 +128,7 @@ Example Response:
 [
     {
         "username": "Andrew1",
-        "profile": 
+        "profile":
         {
             "firstName": "Andrew",
             "lastName": "Chang",
@@ -322,7 +322,7 @@ Example Response:
 
 ```
 [
-    { 
+    {
         "username": "Isabela1",
         "profile":
         {
@@ -341,7 +341,7 @@ Example Response:
 
     {
         "username": "Carly1",
-        "profile": 
+        "profile":
         {
             firstName: "Carly",
             lastName: "Williams",
@@ -359,13 +359,13 @@ Example Response:
 ### Get areas list
 
 ```
-GET /roommate/areas
+GET /roommate/types/areas
 ```
 
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/areas'
+curl --location --request GET 'http://localhost:3000/roommate/types/areas'
 ```
 
 Example Response:
@@ -384,13 +384,13 @@ Example Response:
 ### Get hobbies list
 
 ```
-GET /roommate/hobbies
+GET /roommate/types/hobbies
 ```
 
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/hobbies'
+curl --location --request GET 'http://localhost:3000/roommate/types/hobbies'
 ```
 
 Example Response:
@@ -413,13 +413,13 @@ Example Response:
 ### Get personalities list
 
 ```
-GET /roommate/personalities
+GET /roommate/types/personalities
 ```
 
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/personalities'
+curl --location --request GET 'http://localhost:3000/roommate/types/personalities'
 ```
 
 Example Response:
