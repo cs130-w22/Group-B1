@@ -83,7 +83,7 @@ Example Response:
 
 ```
 [
-    { 
+    {
         "username": "Andrew1",
         "profile":
         {
@@ -111,7 +111,7 @@ Example Response:
             "additionalInfo": "Looking for 3 roommates"
         }
     }
-    
+
 ]
 ```
 
@@ -128,7 +128,7 @@ Example Response:
 [
     {
         "username": "Andrew1",
-        "profile": 
+        "profile":
         {
             "firstName": "Andrew",
             "lastName": "Chang",
@@ -322,7 +322,7 @@ Example Response:
 
 ```
 [
-    { 
+    {
         "username": "Isabela1",
         "profile":
         {
@@ -341,7 +341,7 @@ Example Response:
 
     {
         "username": "Carly1",
-        "profile": 
+        "profile":
         {
             firstName: "Carly",
             lastName: "Williams",
