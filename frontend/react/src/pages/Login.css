@@ -111,7 +111,7 @@ input {
 }
 
 input::placeholder {
-	font-size: 18px;
+	font-size: calc(8px + 1vmin);
 }
 
 .login-login_button {
