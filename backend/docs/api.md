@@ -54,6 +54,7 @@ PUT  /roommate/:username
 
 GET /roommate/recommendations/:username
 
+
 GET /roommate/areas
 GET /roommate/hobbies
 GET /roommate/personalities
@@ -79,7 +80,7 @@ Include the authorization header. Optionally include query parameters to filter 
 Example Request (find all roommates):
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/' \
+curl --location --request GET 'http://localhost:5000/roommate/' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldzEiLCJzYWx0IjoiaFRpajBPa3FENElXUDNPOU9ta2xTZz09IiwiaWF0IjoxNjQzNjYxNjA0LCJleHAiOjE2NDM2NjM0MDR9.r4tNmIe4fo9C9YTucto3Mab3gcJ9MGu5AevKUoPCzyk'
 ```
 
@@ -122,7 +123,7 @@ Example Response:
 Example Request (with query params):
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/?firstName=Andrew&lastName=Chang' \
+curl --location --request GET 'http://localhost:5000/roommate/?firstName=Andrew&lastName=Chang' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldyIsInNhbHQiOiJiY1NoRFZqSXI2dHpsYVBGemdhRHlRPT0iLCJpYXQiOjE2NDQ2NzIxNTYsImV4cCI6MTY0NDY3Mzk1Nn0.0-CzWP1TEB5IsJQUgEKxJBHxv8E3W3OeTKVs5iR2wSU'
 ```
 
@@ -172,7 +173,7 @@ Include the authorization header. Include the username as a path parameter.
 Example Request (searching for 1 roommate by username):
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/Andrew1' \
+curl --location --request GET 'http://localhost:5000/roommate/Andrew1' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldzEiLCJzYWx0IjoiaFRpajBPa3FENElXUDNPOU9ta2xTZz09IiwiaWF0IjoxNjQzNjYxNjA0LCJleHAiOjE2NDM2NjM0MDR9.r4tNmIe4fo9C9YTucto3Mab3gcJ9MGu5AevKUoPCzyk'
 ```
 
@@ -204,7 +205,7 @@ Include a `Roommate` object inside the request body.
 Example Request
 
 ```
-curl --location --request POST 'http://localhost:3000/roommate/' \
+curl --location --request POST 'http://localhost:5000/roommate/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "username": "Andrew1",
@@ -250,7 +251,7 @@ Include the `username` and `password` in the request body.
 Example Request:
 
 ```
-curl --location --request POST 'http://localhost:3000/roommate/login' \
+curl --location --request POST 'http://localhost:5000/roommate/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "username": "Andrew1",
@@ -277,7 +278,7 @@ Include the `username` as a path parameter. Include a `RoommateProfile` object i
 Example Request:
 
 ```
-curl --location --request PUT 'http://localhost:3000/roommate/Andrew1' \
+curl --location --request PUT 'http://localhost:5000/roommate/Andrew1' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldzEiLCJzYWx0IjoiMFE0SU84cWtoa0wyQUluZWU1OFJyZz09IiwiaWF0IjoxNjQzNzQwNjg2LCJleHAiOjE2NDM3NDI0ODZ9.V0PXNjRxe2Su-g7mzoddyYy-icVIPI0MfmWDvwYmVfY' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -318,7 +319,7 @@ Include the `username` as a path parameter. Include the authorization header. Re
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/recommendations/Andrew' \
+curl --location --request GET 'http://localhost:5000/roommate/recommendations/Andrew' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJldyIsInNhbHQiOiJIM3UwakRsdUY3RFZBRmZoS2UvU0xnPT0iLCJpYXQiOjE2NDQ0MzU3OTYsImV4cCI6MTY0NDQzNzU5Nn0.8J5JSbNh1iJykAHbIEjqWyBx2Im6i5jbA8vyXZ7I2pY'
 ```
 
@@ -363,13 +364,13 @@ Example Response:
 ### Get areas list
 
 ```
-GET /roommate/areas
+GET /roommate/types/areas
 ```
 
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/areas'
+curl --location --request GET 'http://localhost:5000/roommate/areas'
 ```
 
 Example Response:
@@ -388,13 +389,13 @@ Example Response:
 ### Get hobbies list
 
 ```
-GET /roommate/hobbies
+GET /roommate/types/hobbies
 ```
 
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/hobbies'
+curl --location --request GET 'http://localhost:5000/roommate/hobbies'
 ```
 
 Example Response:
@@ -417,13 +418,13 @@ Example Response:
 ### Get personalities list
 
 ```
-GET /roommate/personalities
+GET /roommate/types/personalities
 ```
 
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:3000/roommate/personalities'
+curl --location --request GET 'http://localhost:5000/roommate/personalities'
 ```
 
 Example Response:

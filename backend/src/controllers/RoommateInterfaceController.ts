@@ -8,9 +8,9 @@ import { Hobbies } from "../roommate/hobby";
 @injectable()
 export class RoommateInterfaceController implements RegistrableController {
   public register(app: Application): void {
-    app.route("/roommate/areas").get(this.getAreas);
-    app.route("/roommate/hobbies").get(this.getHobbies);
-    app.route("/roommate/personalities").get(this.getPersonalityTraits);
+    app.route("/roommate/types/areas").get(this.getAreas);
+    app.route("/roommate/types/hobbies").get(this.getHobbies);
+    app.route("/roommate/types/personalities").get(this.getPersonalityTraits);
   }
 
   private getAreas = (req: Request, res: Response) => {

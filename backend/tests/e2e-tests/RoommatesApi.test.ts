@@ -15,6 +15,7 @@ import { RegistrableController } from "../../src/controllers/RegistrableControll
 import express from "express";
 import { json } from "body-parser";
 import { RoommateModel } from "../../src/repository/Schemas";
+import { Areas } from "../../src/roommate/area";
 import { connect, disconnect } from "mongoose";
 import * as dotenv from "dotenv";
 import exp from "constants";
@@ -214,6 +215,13 @@ describe("Roommates API", function () {
       .set("Authorization", authorizationHeader)
       .send({ usernameToAdd: "UserNotExist" });
     expect(failedDeleteFromRoommateList.status).toEqual(500);
+
+    const getAreasResponse = await request(app)
+      .get("/roommate/types/areas")
+      .set("Accept", "application/json");
+    const areas = Object.values(Areas).filter((x) => typeof x === "string");
+    expect(getAreasResponse.body).toEqual(expect.arrayContaining(areas));
+
   });
 
   it("Checks for taken usernames", async () => {
