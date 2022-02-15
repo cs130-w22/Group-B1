@@ -181,13 +181,16 @@ function getAllRoommates(callback:(string)=>void): void {
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = function() { 
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      console.log(xmlHttp.responseText);
       callback(xmlHttp.responseText);
+    }
   }
   xmlHttp.open("GET", rootUrl+'/roommate/', true); // true for async
-  xmlHttp.setRequestHeader('authorization', authToken);
+  xmlHttp.setRequestHeader('authorization', 'Bearer '+window['connectDev'].authToken);
   xmlHttp.send(null);
 }
+window['connectDev'].getAllRoommates = getAllRoommates;
 function getRoommate(username:string, callback:(string)=>void): void {
   console.log('looking up profile for '+username+'...');
 
@@ -205,7 +208,7 @@ function getRoommate(username:string, callback:(string)=>void): void {
       callback(xmlHttp.responseText);
   }
   xmlHttp.open("GET", rootUrl+'/roommate/'+username, true); // true for async
-  xmlHttp.setRequestHeader('authorization', authToken);
+  xmlHttp.setRequestHeader('authorization', 'Bearer '+window['connectDev'].authToken);
   xmlHttp.send(null);
 }
 function getFilteredRoommates(filter, callback:(string)=>void): void {
@@ -225,7 +228,7 @@ function getFilteredRoommates(filter, callback:(string)=>void): void {
       callback(xmlHttp.responseText);
   }
   xmlHttp.open("GET", rootUrl+'/roommate/'+filterStr, true); // true for async
-  xmlHttp.setRequestHeader('authorization', authToken);
+  xmlHttp.setRequestHeader('authorization', 'Bearer '+window['connectDev'].authToken);
   xmlHttp.send(null);
 }
 
