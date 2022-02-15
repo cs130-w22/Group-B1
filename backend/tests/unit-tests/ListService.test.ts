@@ -1,6 +1,5 @@
 import "reflect-metadata";
 
-import { AuthorizationService } from "../../src/services/AuthorizationService";
 import { RoommateRepository } from "../../src/repository/RoommateRepository";
 
 import { Area } from "../../src/roommate/area";

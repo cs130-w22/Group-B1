@@ -18,7 +18,6 @@ import { RoommateModel } from "../../src/repository/Schemas";
 import { Areas } from "../../src/roommate/area";
 import { connect, disconnect } from "mongoose";
 import * as dotenv from "dotenv";
-import exp from "constants";
 
 const testRoommate1: Roommate = {
   username: "username",

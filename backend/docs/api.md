@@ -481,7 +481,7 @@ Example Response:
 ["username1", "username2", "username3"]
 ```
 
-Notice that this request adds _username3_ to _username's_ roommate list. The endpoint returns updated roommate list.
+Notice that this request adds username3 to Tom's roommate list. The endpoint returns updated roommate list.
 
 ### Remove a user from the roommate list
 
@@ -504,7 +504,7 @@ Example Response:
 ["username1", "username2"]
 ```
 
-Notice that this request deletes _username3_ from _username's_ roommate list. The endpoint returns updated roommate list.
+Notice that this request deletes username3 from Tom's roommate list. The endpoint returns updated roommate list.
 
 ## Example workflow
 
