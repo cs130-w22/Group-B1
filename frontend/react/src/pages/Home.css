@@ -12,7 +12,13 @@ body {
   background-color: var(--white);
 }
 
-.outer {
+hr {
+  height: 0px;
+  width: 85%;
+  border-bottom: 2px;   /* for some reason, this removes the weird notch on the bottom left */
+}
+
+.home-outer {
   display: table;
   position: absolute;
   top: 0;
@@ -21,7 +27,7 @@ body {
   width: 100%;
 }
 
-.header {
+.home-header {
   position: relative;
   top: 0;
   left: 0;
@@ -32,12 +38,12 @@ body {
   background-color: var(--white);
 }
 
-.middle {
+.home-middle {
   display: table-cell;
   vertical-align: middle;
 }
 
-.inner {
+.home-inner {
   margin-left: auto;
   margin-right: auto;
 
@@ -54,22 +60,22 @@ body {
   background-color: var(--pink);
 }
 
-.people {
+.home-people {
   position: absolute;
-  bottom: 0%;
-  right: 7.5%;
+  bottom: 0;
+  right: 5vw;
 
   height: auto;
   max-width: 37.5%;
 }
 
-.text_wrapper {
+.home-text_wrapper {
   position: absolute;
   left: 0;
   margin-left: 9vw;  
 }
 
-.text_wrapper h3 {
+.home-text_wrapper h3 {
   margin-top: 0;
   margin-bottom: 0;
   margin-left: 0;
@@ -87,7 +93,7 @@ body {
   color: var(--light-black);
 }
 
-.text_wrapper h4 {
+.home-text_wrapper h4 {
   margin-top: 0;
   margin-bottom: 0;
   margin-left: 0;
@@ -103,7 +109,7 @@ body {
   letter-spacing: 1px;
 }
 
-.buttons_wrapper {
+.home-buttons_wrapper {
   position: absolute;
   left: 0;
   display: flex;
@@ -123,7 +129,7 @@ body {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 
-.home, .signin {
+.home-home, .home-signin {
   width: 45%;
   max-height: 45%;
 
@@ -131,7 +137,7 @@ body {
   padding: 0;
 }
 
-.login, .signup {
+.home-login, .home-signup {
   padding: 5px;
   margin-left: 20px;
   margin-right: 20px;
@@ -153,13 +159,13 @@ body {
   transition: 0.5s;
 }
 
-.login:hover, .signup:hover {
+.home-login:hover, .home-signup:hover {
   opacity: 0.75;
   filter: brightness(1.15);
 }
 
 /* Animate an underline when hovering over machine */
-.login::before, .signup::before {
+.home-login::before, .home-signup::before {
   content: "";
   position: absolute;
   width: 75%;
@@ -178,26 +184,31 @@ body {
   transition: all 0.3s ease-in-out 0s;
 }
 
-.login:hover::before, .signup:hover::before {
+.home-login:hover::before, .home-signup:hover::before {
   visibility: visible;
   transform: scaleX(1);
 }
 
-.login p, .signup p {
-  padding: 0;
-  padding-right: 20px;
-  margin: 0;
-  margin-left: -10px;
+.home-login a, .home-signup a {
+  color: white;
+  text-decoration: none;
 }
 
-.row {
+.home-login p, .home-signup p {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.home-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
 }
 
-.settings, .search, .contact {
+.home-settings, .home-search, .home-contact {
   color: var(--purple);
 
   padding-top: 25px;
@@ -206,7 +217,7 @@ body {
   padding-right: 0px;
 }
 
-.col {
+.home-col {
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
@@ -226,7 +237,7 @@ body {
   background-color: var(--white);
 }
 
-.col h3 {
+.home-col h3 {
   padding-bottom: 0;
   margin-bottom: 5px;
  
@@ -234,7 +245,7 @@ body {
   letter-spacing: 1px;
 }
 
-.col p {
+.home-col p {
   padding-top: 10px;
   padding-bottom: 10px;
 
@@ -244,14 +255,14 @@ body {
   font-size: calc(15px + 0.5vmin);
 }
 
-.quote_wrapper {
+.home-quote_wrapper {
 	display: flex;
 	align-items: center;
 	text-align: center;
 	justify-content: center;
 }
 
-.quote_wrapper img {
+.home-quote_wrapper img {
 	/* this may not be responsive */
 	height: 50%;
 	max-width: 50%;
@@ -260,7 +271,7 @@ body {
 	padding: 10px;
 }
 
-.quote {
+.home-quote {
 	margin: 0;
 	margin-left: -30px;
 
@@ -268,18 +279,12 @@ body {
 	text-align: left;
 }
 
-.quoter {
+.home-quoter {
 	margin: 0;
 	margin-top: -10px;
 
 	padding: 0;
 	text-align: left;
-}
-
-hr {
-  height: 0px;
-  width: 85%;
-  border-bottom: 2px;   /* for some reason, this removes the weird notch on the bottom left */
 }
 
 footer {
@@ -303,7 +308,12 @@ footer p {
 	font-size: calc(10px + 1vmin);
 }
 
-.signup_footer {
+.home-signup_footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.home-signup_footer {
   padding: 5px;
   margin-left: 20px;
   margin-right: 20px;
@@ -326,7 +336,7 @@ footer p {
   transition: 0.5s;
 }
 
-.signup_footer:hover {
+.home-signup_footer:hover {
   opacity: 0.75;
   filter: brightness(1.15);
 }
