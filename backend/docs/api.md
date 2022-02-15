@@ -57,6 +57,10 @@ GET /roommate/recommendations/:username
 GET /roommate/areas
 GET /roommate/hobbies
 GET /roommate/personalities
+
+GET /roommate/list/:username
+POST /roommate/list/:username
+DELETE /roommate/list/:username
 ```
 
 ### Retrieve roommate(s)
@@ -83,7 +87,7 @@ Example Response:
 
 ```
 [
-    { 
+    {
         "username": "Andrew1",
         "profile":
         {
@@ -111,7 +115,7 @@ Example Response:
             "additionalInfo": "Looking for 3 roommates"
         }
     }
-    
+
 ]
 ```
 
@@ -128,7 +132,7 @@ Example Response:
 [
     {
         "username": "Andrew1",
-        "profile": 
+        "profile":
         {
             "firstName": "Andrew",
             "lastName": "Chang",
@@ -322,7 +326,7 @@ Example Response:
 
 ```
 [
-    { 
+    {
         "username": "Isabela1",
         "profile":
         {
@@ -341,7 +345,7 @@ Example Response:
 
     {
         "username": "Carly1",
-        "profile": 
+        "profile":
         {
             firstName: "Carly",
             lastName: "Williams",
@@ -436,6 +440,70 @@ Example Response:
     "perceiver"
 ]
 ```
+
+### Get roommate list of a user
+
+```
+GET /roommate/list/:username
+```
+
+Example Request:
+
+```
+curl --location --request GET 'localhost:3000/roommate/list/Tom'
+```
+
+Example Response:
+
+```
+["username1", "username2"]
+```
+
+### Add a user to the roommate list
+
+```
+POST /roommate/list/:username
+```
+
+Example Request:
+
+```
+curl --location --request POST 'localhost:3000/roommate/list/Tom' \
+--header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRvbSIsInNhbHQiOiJud0xxYm93VktYcENKL0FhUkhwTUFBPT0iLCJpYXQiOjE2NDQ4Nzc0NDcsImV4cCI6MTY0NDg3OTI0N30.-lg6y9Q2t9Kivf73IShwILpJcU6YCkRi6IwuwSXO5Y0' \
+--header 'Content-Type: application/json' \
+--data-raw '{ "usernameToAdd": "username3" }'
+```
+
+Example Response:
+
+```
+["username1", "username2", "username3"]
+```
+
+Notice that this request adds _username3_ to _username's_ roommate list. The endpoint returns updated roommate list.
+
+### Remove a user from the roommate list
+
+```
+DELETE /roommate/list/:username
+```
+
+Example Request:
+
+```
+curl --location --request DELETE 'localhost:3000/roommate/list/Tom' \
+--header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRvbSIsInNhbHQiOiJud0xxYm93VktYcENKL0FhUkhwTUFBPT0iLCJpYXQiOjE2NDQ4Nzc0NDcsImV4cCI6MTY0NDg3OTI0N30.-lg6y9Q2t9Kivf73IShwILpJcU6YCkRi6IwuwSXO5Y0' \
+--header 'Content-Type: application/json' \
+--data-raw '{ "usernameToDelete": "username3" }'
+```
+
+Example Response:
+
+```
+["username1", "username2"]
+```
+
+Notice that this request deletes _username3_ from _username's_ roommate list. The endpoint returns updated roommate list.
 
 ## Example workflow
 
