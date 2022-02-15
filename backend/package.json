@@ -23,6 +23,7 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.1.7",
     "reflect-metadata": "^0.1.13",
+    "typedoc": "^0.22.11",
     "voca": "^1.4.0"
   },
   "devDependencies": {
