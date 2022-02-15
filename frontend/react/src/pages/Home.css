@@ -1,3 +1,342 @@
-.home-text {
-	color: #000000;
+
+:root {
+  --gray-white: rgb(226, 227, 227);
+  --white: rgb(247, 247, 247);
+  --pink: rgb(242, 194, 246, 0.5);
+  --purple: rgb(191, 26, 197);
+  --light-black: rgb(24, 24, 24);
+}
+
+body {
+  /*font-family: Calibri, sans-serif;*/
+  background-color: var(--white);
+}
+
+hr {
+  height: 0px;
+  width: 85%;
+  border-bottom: 2px;   /* for some reason, this removes the weird notch on the bottom left */
+}
+
+.home-outer {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.home-header {
+  position: relative;
+  top: 0;
+  left: 0;
+
+  height: 7vh;
+  max-width: 100%;
+
+  background-color: var(--white);
+}
+
+.home-middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.home-inner {
+  margin-left: auto;
+  margin-right: auto;
+
+  position: relative;
+  height: 80vh;
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+
+  background-color: var(--pink);
+}
+
+.home-people {
+  position: absolute;
+  bottom: 0;
+  right: 5vw;
+
+  height: auto;
+  max-width: 37.5%;
+}
+
+.home-text_wrapper {
+  position: absolute;
+  left: 0;
+  margin-left: 9vw;  
+}
+
+.home-text_wrapper h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 15px;
+  padding-bottom: 20px;
+
+  text-align: left;
+  font-size: calc(50px + 2vmin);
+  letter-spacing: 1px;
+  filter: brightness(2);
+  color: var(--light-black);
+}
+
+.home-text_wrapper h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 15px;
+  padding-bottom: 65px;
+
+  text-align: left;
+  font-size: calc(10px + 2vmin);
+  letter-spacing: 1px;
+}
+
+.home-buttons_wrapper {
+  position: absolute;
+  left: 0;
+  display: flex;
+
+  margin-top: 30vh;
+  margin-bottom: 0;
+  margin-right: 0;
+  margin-left: 9vw;
+
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  padding-left: 4vw;
+  padding-right: 4vw;
+
+  border-radius: 17.5px;
+  background-color: var(--gray-white);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+
+.home-home, .home-signin {
+  width: 45%;
+  max-height: 45%;
+
+  margin: 0;
+  padding: 0;
+}
+
+.home-login, .home-signup {
+  padding: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+  display: flex;
+  width: 170px;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: calc(10px + 1vmin);
+  font-weight: 550;
+  letter-spacing: 1.5px;
+  color: white;
+  border-radius: 17.5px;
+  background-color: var(--purple);
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.home-login:hover, .home-signup:hover {
+  opacity: 0.75;
+  filter: brightness(1.15);
+}
+
+/* Animate an underline when hovering over machine */
+.home-login::before, .home-signup::before {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 2px;
+  bottom: 13px;
+
+  display: block;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+  background-color: white;
+  opacity: 1;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.home-login:hover::before, .home-signup:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+.home-login a, .home-signup a {
+  color: white;
+  text-decoration: none;
+}
+
+.home-login p, .home-signup p {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.home-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.home-settings, .home-search, .home-contact {
+  color: var(--purple);
+
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.home-col {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+
+  margin-top: -4.5vh;
+  margin-bottom: 0px;
+  margin-left: 3vw;
+  margin-right: 3vw;
+
+  border-radius: 17.5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  background-color: var(--white);
+}
+
+.home-col h3 {
+  padding-bottom: 0;
+  margin-bottom: 5px;
+ 
+  font-size: calc(7.5px + 2vmin);
+  letter-spacing: 1px;
+}
+
+.home-col p {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  padding-left: 25px;
+  padding-right: 25px;
+
+  font-size: calc(15px + 0.5vmin);
+}
+
+.home-quote_wrapper {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+}
+
+.home-quote_wrapper img {
+	/* this may not be responsive */
+	height: 50%;
+	max-width: 50%;
+
+	margin: 0;
+	padding: 10px;
+}
+
+.home-quote {
+	margin: 0;
+	margin-left: -30px;
+
+	padding: 0;
+	text-align: left;
+}
+
+.home-quoter {
+	margin: 0;
+	margin-top: -10px;
+
+	padding: 0;
+	text-align: left;
+}
+
+footer {
+	position: absolute;
+	bottom: -500px;
+	left: 0;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+
+	height: 200px;
+	width: 100%;
+	background-color: var(--pink);
+}
+
+footer p {
+	text-align: center;
+	font-size: calc(10px + 1vmin);
+}
+
+.home-signup_footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.home-signup_footer {
+  padding: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+  display: flex;
+  height: 30px;
+  width: 150px;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: calc(10px + 1vmin);
+  font-weight: 550;
+  letter-spacing: 1.5px;
+  color: white;
+  border-radius: 20px;
+  background-color: var(--purple);
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.home-signup_footer:hover {
+  opacity: 0.75;
+  filter: brightness(1.15);
 }
