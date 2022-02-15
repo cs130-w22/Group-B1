@@ -126,13 +126,59 @@ const UserProfilePanel: React.FC = (props) => {
 
 const ProfilePreferencesPanel: React.FC = (props) => {
   var userProfile:RoommateProfile = props.profile;
-  
   var isPreferencePopUpOpen = props.isPreferencePopUpOpen;
   var closeModal = props.onCloseClick;
-  var personalityTags = userProfile.personality.map(trait => { return {id: trait, text: trait}});
-  var hobbyTags = userProfile.hobbies.map(hobby => { return {id: hobby, text: hobby}});
+  
+  // state variable to keep track of updating user info
+  const [currentUserProfile, setCurrentUserProfile] = useState(userProfile);
+
   // place holder function for submitting a profile edit request 
-  var submitProfileChanges = () => {};
+  const submitProfileChanges = (event) => {
+    // TODO: make the PUT request
+    event.preventDefault();
+    console.log("submitting profile", currentUserProfile);
+  };
+  const handleChange = (key) => { 
+    return (event) => {
+      setCurrentUserProfile({...currentUserProfile, [key]: event.target.value});
+    }
+  };
+
+  // kinda a hack for now
+  const areaOptions = Object.keys(Areas).filter(key => key.length != 1).map(area => {
+    return <option value={area}>{area}</option>
+  });
+
+  // React tags functions 
+  const KeyCodes = {
+    comma: 188,
+    enter: 13
+  };
+  
+  const delimiters = [KeyCodes.comma, KeyCodes.enter];
+
+  const generateReactTags = (profileTags) => {
+    return profileTags.map(trait => { return {id: String(trait), text: String(trait)}});
+  }
+
+  const handleTagDelete = (key) => {
+    return (i) => {
+      setCurrentUserProfile({...currentUserProfile, [key]: currentUserProfile[key].filter((tag, index) => index !== i)});
+    }
+  }
+
+  const handlePersonalityTagAddition =  (tag) => {
+      if(Object.keys(PersonalityTraits).includes(tag.id)) {
+        setCurrentUserProfile({...currentUserProfile, personality: [...currentUserProfile.personality, tag.id]});
+      }
+  }
+
+  const handleHobbyTagAddition = (tag) => {
+    if(Object.keys(Hobbies).includes(tag.id)) {
+      setCurrentUserProfile({...currentUserProfile, hobbies: [...currentUserProfile.hobbies, tag.id]});
+    }
+}
+
   return (
     <Modal 
       isOpen={isPreferencePopUpOpen}
@@ -142,23 +188,37 @@ const ProfilePreferencesPanel: React.FC = (props) => {
       <h1>User Preferences</h1>
       <h2>User Info</h2>
       <form onSubmit={submitProfileChanges}>
-        <div><label>First name: <input type="text" value={userProfile.firstName}/></label></div>
-        <div><label>Last name: <input type="text" value={userProfile.lastName}/></label></div>
-        <div><label>Bio: <textarea type="text" value={userProfile.bio}/></label></div>
+        <div><label>First name: <input type="text" value={currentUserProfile.firstName} onChange={handleChange("firstName")}/></label></div>
+        <div><label>Last name: <input type="text" value={currentUserProfile.lastName} onChange={handleChange("lastName")}/></label></div>
+        <div><label>Email: <input type="text" value={currentUserProfile.email} onChange={handleChange("email")}/></label></div>
+        <div><label>Area: 
+          <select value={currentUserProfile.area} onChange={handleChange("area")}>{areaOptions}</select>
+        </label></div>
+        <div><label>Bio: <textarea type="text" value={currentUserProfile.bio} onChange={handleChange("bio")}/></label></div>
+        <div><label>Additional Info: <textarea type="text" value={currentUserProfile.additionalInfo} onChange={handleChange("additionalInfo")}/></label></div>
         <h2>User Tags</h2>
         <div>
           Personality Tags:
           <ReactTags 
-            tags={personalityTags}
+            tags={generateReactTags(currentUserProfile.personality)}
+            delimiters={delimiters}
+            suggestions={generateReactTags(Object.keys(PersonalityTraits).filter(key => key.length != 1))}
+            handleDelete={handleTagDelete("personality")}
+            handleAddition={handlePersonalityTagAddition}
+            autocomplete
           />
         </div>
         <div>
           Hobby Tags:
           <ReactTags 
-            tags={hobbyTags}
+            tags={generateReactTags(currentUserProfile.hobbies)}
+            suggestions={generateReactTags(Object.keys(Hobbies).filter(key => key.length != 1))}
+            handleDelete={handleTagDelete("hobbies")}
+            handleAddition={handleHobbyTagAddition}
+            autocomplete
           />
         </div>
-        <input type="submit" value="Save" />
+        <button type="submit">Save</button>
       </form>
       <h2>Mini Profile</h2>
       <h2>Full Profile</h2>
@@ -231,7 +291,7 @@ const ViewedProfilePanel: React.FC = () => {
 // page
 const Search: React.FC = () => {
   const [isPreferencePopUpOpen, setIsPreferencePopUpOpen] = useState(false);
-  /* React.useEffect load the user and list here */
+  // TODO: get request to load user info and enums
   const togglePreferencePopUp = () => {
     console.log("clicking button; isPreferencePopUpOpen:", isPreferencePopUpOpen);
     setIsPreferencePopUpOpen(!isPreferencePopUpOpen);
