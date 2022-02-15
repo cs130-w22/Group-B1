@@ -22,6 +22,7 @@ export class RecommendationService {
     "firstName",
     "lastName",
     "email",
+    "list",
   ];
 
   /**
