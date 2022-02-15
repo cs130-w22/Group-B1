@@ -14,6 +14,8 @@ import { AuthorizationController } from "./src/controllers/AuthorizationControll
 import { AuthorizationMiddleware } from "./src/middleware/AuthorizationMiddleware";
 import { RecommendationService } from "./src/services/RecommendationService";
 import { RecommendationController } from "./src/controllers/RecommendationController";
+import { ListService } from "./src/services/ListService";
+import { ListController } from "./src/controllers/ListController";
 
 const container = new Container();
 container.bind<RegistrableController>(TYPES.Controller).to(RoommateController);
@@ -23,6 +25,7 @@ container
 container
   .bind<RegistrableController>(TYPES.Controller)
   .to(AuthorizationController);
+container.bind<RegistrableController>(TYPES.Controller).to(ListController);
 
 container.bind<RoommateService>(TYPES.RoommateService).to(RoommateService);
 container
@@ -44,5 +47,7 @@ container
 container
   .bind<RecommendationService>(TYPES.RecommendationService)
   .to(RecommendationService);
+
+container.bind<ListService>(TYPES.ListService).to(ListService);
 
 export default container;

@@ -5,6 +5,7 @@ const TYPES = {
   Controller: Symbol("Controller"),
   RecommendationService: Symbol("RecommendationService"),
   AuthorizationMiddleware: Symbol("AuthorizationMiddleware"),
+  ListService: Symbol("ListService"),
 };
 
 export default TYPES;
