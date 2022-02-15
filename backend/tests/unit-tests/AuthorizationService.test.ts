@@ -64,6 +64,18 @@ class RoommateRepositoryMock implements RoommateRepository {
   ): Promise<Roommate[]> {
     throw new Error("Function should not be called for this unit test");
   }
+  async addToRoommateList(
+    username: string,
+    usernameToAdd: string
+  ): Promise<string[]> {
+    throw new Error("Function should not be called for this unit test");
+  }
+  async deleteFromRoommateList(
+    username: string,
+    usernameToDelete: string
+  ): Promise<string[]> {
+    throw new Error("Function should not be called for this unit test");
+  }
 }
 
 describe("Authorization Service", () => {
