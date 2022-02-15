@@ -17,6 +17,7 @@ import { json } from "body-parser";
 import { RoommateModel } from "../../src/repository/Schemas";
 import { connect, disconnect } from "mongoose";
 import * as dotenv from "dotenv";
+import exp from "constants";
 
 const testRoommate1: Roommate = {
   username: "username",
@@ -158,6 +159,61 @@ describe("Roommates API", function () {
         { username: testRoommate2.username, profile: testRoommate2.profile },
       ])
     );
+
+    const getRoommateList = await request(app)
+      .get("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader);
+    expect(getRoommateList.body).toEqual([]);
+
+    const addToRoommateList = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: testRoommate2.username });
+    expect(addToRoommateList.body).toEqual([testRoommate2.username]);
+
+    const addToRoommateListDuplicate = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: testRoommate2.username });
+    expect(addToRoommateListDuplicate.body).toEqual([testRoommate2.username]);
+
+    const getRoommateList2 = await request(app)
+      .get("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .set("Authorization", authorizationHeader);
+    expect(getRoommateList2.body).toEqual([testRoommate2.username]);
+
+    const deleteFromRoommateList = await request(app)
+      .delete("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToDelete: testRoommate2.username });
+    expect(deleteFromRoommateList.body).toEqual([]);
+
+    const deleteFromRoommateListDuplicate = await request(app)
+      .delete("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToDelete: testRoommate2.username });
+    expect(deleteFromRoommateListDuplicate.body).toEqual([]);
+
+    const failedAddToRoommateList = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: "UserNotExist" });
+    expect(failedAddToRoommateList.status).toEqual(500);
+
+    const failedDeleteFromRoommateList = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: "UserNotExist" });
+    expect(failedDeleteFromRoommateList.status).toEqual(500);
   });
 
   it("Checks for taken usernames", async () => {
