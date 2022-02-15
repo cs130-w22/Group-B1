@@ -18,7 +18,7 @@ To start the server, run
 npm run start
 ```
 
-Go to http://localhost:3000/. You should see a "Hello World!" message popping up. To stop the app, type Ctrl+C in the terminal.
+Go to http://localhost:5000/. You should see a "Hello World!" message popping up. To stop the app, type Ctrl+C in the terminal.
 
 ## Linting and Formatting
 
