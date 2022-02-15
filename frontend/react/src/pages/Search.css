@@ -7,6 +7,13 @@
   width: 30%;
   height: 80px;
 }
+
+.user-preference-panel {
+  /* CSS for user preference panel, center in the page and make it smaller */ 
+  /* Might need some help here */
+  left: 20px;
+  top: 25%;
+}
 .profilePicture {
         background-color: #dddddd;
 
