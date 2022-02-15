@@ -22,7 +22,7 @@ export class RoommateController implements RegistrableController {
       .get(this.authorizationMiddleware.verifyToken, this.getRoommates)
       .post(
         this.authorizationMiddleware.verifyPasswordExists,
-        this.createRoomate
+        this.createRoommate
       );
     app
       .route("/roommate/:username")
@@ -71,7 +71,7 @@ export class RoommateController implements RegistrableController {
     }
   };
 
-  private createRoomate = async (req: Request, res: Response) => {
+  private createRoommate = async (req: Request, res: Response) => {
     try {
       const roommate: Roommate = req.body as Roommate;
       const roommateCreated = await this.roommateService.createRoommate(
