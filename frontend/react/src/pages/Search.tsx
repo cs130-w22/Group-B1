@@ -98,6 +98,17 @@ var mockUserProfile:RoommateProfile = {
   additionalInfo: "I'm looking for a roommate to help me fight crime!"
 }
 
+interface UserProfilePanelProps {
+  profile: RoommateProfile,
+  onSettingsClick: () => void,
+}
+
+interface ProfilePreferencesPanelProps {
+  profile: RoommateProfile,
+  isPreferencePopUpOpen: boolean,
+  onCloseClick: () => void
+}
+
 // fetch data
 function getProfiles() {
   return profiles;
@@ -110,27 +121,22 @@ const useProfile = (newId) => {
   return [id, setId];
 }
 
-const UserProfilePanel: React.FC = (props) => {
-  var userProfile:RoommateProfile = props.profile;
-  var openUserPreferencesPanel = props.onSettingsClick;
-
+const UserProfilePanel: React.FC<UserProfilePanelProps> = (props: UserProfilePanelProps) => {
+  const {profile, onSettingsClick} = props;
   return (
     <div className="user-profile-panel">
       <div className='profilePicture'></div>
-      <p className='profileName'>{userProfile.firstName} {userProfile.lastName}</p>
+      <p className='profileName'>{profile.firstName} {profile.lastName}</p>
 
-      <div className='settingsButton' onClick={openUserPreferencesPanel}></div>
+      <div className='settingsButton' onClick={onSettingsClick}></div>
     </div>
   )
 }
 
-const ProfilePreferencesPanel: React.FC = (props) => {
-  var userProfile:RoommateProfile = props.profile;
-  var isPreferencePopUpOpen = props.isPreferencePopUpOpen;
-  var closeModal = props.onCloseClick;
-  
+const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (props: ProfilePreferencesPanelProps) => {
+  const {profile, isPreferencePopUpOpen, onCloseClick} = props;
   // state variable to keep track of updating user info
-  const [currentUserProfile, setCurrentUserProfile] = useState(userProfile);
+  const [currentUserProfile, setCurrentUserProfile] = useState(profile);
 
   // place holder function for submitting a profile edit request 
   const submitProfileChanges = (event) => {
@@ -182,7 +188,7 @@ const ProfilePreferencesPanel: React.FC = (props) => {
   return (
     <Modal 
       isOpen={isPreferencePopUpOpen}
-      onRequestClose={closeModal}
+      onRequestClose={onCloseClick}
       contentLabel="User Preferences"
     >
       <h1>User Preferences</h1>
@@ -194,8 +200,8 @@ const ProfilePreferencesPanel: React.FC = (props) => {
         <div><label>Area: 
           <select value={currentUserProfile.area} onChange={handleChange("area")}>{areaOptions}</select>
         </label></div>
-        <div><label>Bio: <textarea type="text" value={currentUserProfile.bio} onChange={handleChange("bio")}/></label></div>
-        <div><label>Additional Info: <textarea type="text" value={currentUserProfile.additionalInfo} onChange={handleChange("additionalInfo")}/></label></div>
+        <div><label>Bio: <textarea  value={currentUserProfile.bio} onChange={handleChange("bio")}/></label></div>
+        <div><label>Additional Info: <textarea value={currentUserProfile.additionalInfo} onChange={handleChange("additionalInfo")}/></label></div>
         <h2>User Tags</h2>
         <div>
           Personality Tags:
