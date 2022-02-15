@@ -151,6 +151,39 @@ window['connectDev'] = {
       password: window['connectDev'].user.password
     }));
   },
+  
+  // autoLogin: function(): void {
+  //   console.log('registering debug user...');
+  //   var rootUrl = window['connectDev'].rootUrl;
+  //   var xmlHttp = new XMLHttpRequest();
+  //   xmlHttp.onreadystatechange = function() { 
+  //     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+  //       console.log('registration success');
+  //       console.log(xmlHttp.responseText);
+
+  //       console.log('logging in debug user...');
+  //       var rootUrl = window['connectDev'].rootUrl;
+  //       var xmlHttp = new XMLHttpRequest();
+  //       xmlHttp.onreadystatechange = function() { 
+  //         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+  //           var response = JSON.parse(xmlHttp.responseText);
+  //           window['connectDev'].authToken = response.accessToken;
+  //           console.log('login success');
+  //           console.log(xmlHttp.responseText);
+  //         }
+  //       }
+  //       xmlHttp.open("POST", rootUrl+'/roommate/login', true); // true for async
+  //       xmlHttp.setRequestHeader('Content-Type', 'application/json');
+  //       xmlHttp.send(JSON.stringify({
+  //         username: window['connectDev'].user.username,
+  //         password: window['connectDev'].user.password
+  //       }));
+  //     }
+  //   }
+  //   xmlHttp.open("POST", rootUrl+'/roommate/', true); // true for async
+  //   xmlHttp.setRequestHeader('Content-Type', 'application/json');
+  //   xmlHttp.send(JSON.stringify( window['connectDev'].user ));
+  // },
 
   roommates: roommates,
 
