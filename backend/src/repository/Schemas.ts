@@ -15,6 +15,7 @@ const roommateSchema = new Schema<Roommate>(
       personality: { type: [String], required: true },
       additionalInfo: { type: String, required: true },
     },
+    list: { type: [String] },
   },
   {
     toObject: {

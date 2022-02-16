@@ -1,6 +1,5 @@
 import "reflect-metadata";
 
-import { AuthorizationService } from "../../src/services/AuthorizationService";
 import { RoommateRepository } from "../../src/repository/RoommateRepository";
 
 import { Area } from "../../src/roommate/area";
@@ -12,14 +11,32 @@ import TYPES from "../../types";
 
 import container from "../../inversify.config";
 import { injectable } from "inversify";
+import { ListService } from "../../src/services/ListService";
 
-const testRoommate: Roommate = {
+const testRoommate1: Roommate = {
   username: "Tom",
   password: "TomPassword",
+  list: [],
   profile: {
     firstName: "Tom",
     lastName: "Richard",
     email: "tom@gmail.com",
+    area: "Los Angeles" as Area,
+    bio: "NYU grad",
+    hobbies: [],
+    personality: [],
+    additionalInfo: "Looking for 1 roommate",
+  },
+};
+
+const testRoommate2: Roommate = {
+  username: "Sam",
+  password: "SamPassword",
+  list: [],
+  profile: {
+    firstName: "Sam",
+    lastName: "Richard",
+    email: "sam@gmail.com",
     area: "Los Angeles" as Area,
     bio: "NYU grad",
     hobbies: [],
@@ -35,8 +52,10 @@ class RoommateRepositoryMock implements RoommateRepository {
   }
 
   async findOne(username: string): Promise<Roommate | null> {
-    if (username == testRoommate.username) {
-      return testRoommate;
+    if (username == testRoommate1.username) {
+      return testRoommate1;
+    } else if (username == testRoommate2.username) {
+      return testRoommate2;
     } else {
       return null;
     }
@@ -47,16 +66,16 @@ class RoommateRepositoryMock implements RoommateRepository {
   }
 
   async getAll(): Promise<Roommate[]> {
-    return [testRoommate];
+    throw new Error("Function should not be called for this unit test");
   }
   async update(
     username: string,
     roommateProfile: RoommateProfile
   ): Promise<boolean> {
-    return username == testRoommate.username;
+    throw new Error("Function should not be called for this unit test");
   }
   async delete(username: string): Promise<boolean> {
-    return username == testRoommate.username;
+    throw new Error("Function should not be called for this unit test");
   }
   async findOverlap(
     profileFields: Partial<RoommateProfile>,
@@ -68,18 +87,18 @@ class RoommateRepositoryMock implements RoommateRepository {
     username: string,
     usernameToAdd: string
   ): Promise<string[]> {
-    throw new Error("Function should not be called for this unit test");
+    return [usernameToAdd];
   }
   async deleteFromRoommateList(
     username: string,
     usernameToDelete: string
   ): Promise<string[]> {
-    throw new Error("Function should not be called for this unit test");
+    return [];
   }
 }
 
-describe("Authorization Service", () => {
-  let authorizationService: AuthorizationService;
+describe("List Service", () => {
+  let listService: ListService;
 
   beforeAll(async () => {
     container.snapshot();
@@ -91,55 +110,37 @@ describe("Authorization Service", () => {
       .bind<RoommateRepository>(TYPES.RoommateRepository)
       .to(RoommateRepositoryMock);
 
-    authorizationService = container.get<AuthorizationService>(
-      TYPES.AuthorizationService
-    );
+    listService = container.get<ListService>(TYPES.ListService);
   });
 
   afterAll(async () => {
     container.restore();
   });
 
-  it("Checks for valid username, password, and access token", async () => {
-    const plainTextPassword = testRoommate.password;
-    testRoommate.password = authorizationService.encryptPassword(
-      testRoommate.password
-    );
+  it("Checks adding and deleting valid usernames and invalid usernames", async () => {
     expect(
-      await authorizationService.validUsernamePassword(
-        testRoommate.username,
-        plainTextPassword
+      await listService.addToRoommateList(
+        testRoommate1.username,
+        testRoommate2.username
       )
-    ).toEqual(true);
+    ).toEqual([testRoommate2.username]);
     expect(
-      await authorizationService.validUsernamePassword(
-        testRoommate.username,
-        "wrongPassword"
+      await listService.deleteFromRoommateList(
+        testRoommate1.username,
+        testRoommate2.username
       )
-    ).toEqual(false);
-    expect(
-      await authorizationService.validUsernamePassword(
-        "wrongUserName",
-        plainTextPassword
-      )
-    ).toEqual(false);
-
-    const accessToken = await authorizationService.login(
-      testRoommate.username,
-      plainTextPassword
-    );
-    expect(typeof accessToken).toBe("string");
-    expect(
-      await authorizationService.login("wrongUsername", plainTextPassword)
-    ).toEqual(null);
-    expect(
-      await authorizationService.login(testRoommate.username, "wrongPassword")
-    ).toEqual(null);
-
-    const validAuthorization = "Bearer " + accessToken;
-    expect(authorizationService.validToken(validAuthorization)).toEqual(true);
-    expect(authorizationService.validToken("wrongAuthorization")).toEqual(
-      false
-    );
+    ).toEqual([]);
+    expect(async () => {
+      await listService.addToRoommateList(
+        testRoommate1.username,
+        "usernameNotInDB"
+      );
+    }).rejects.toThrowError();
+    expect(async () => {
+      await listService.deleteFromRoommateList(
+        testRoommate1.username,
+        "usernameNotInDB"
+      );
+    }).rejects.toThrowError();
   });
 });
