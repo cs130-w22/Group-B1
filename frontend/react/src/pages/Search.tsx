@@ -199,6 +199,19 @@ window['connectDev'] = {
     xmlHttp.send(null);
   }
 };
+var viewedProfile:RoommateProfile = profiles[0];
+var viewedId:number = 0;
+
+var mockUserProfile:RoommateProfile = {
+  firstName: "Peter",
+  lastName: "Parker",
+  email: "notspiderman@marvel.com",
+  area: 'New York',
+  bio: "Hi I'm Peter Parker, your friendly neighborhood Spiderman",
+  hobbies: ["reading", "running"],
+  personality: ["introvert"],
+  additionalInfo: "I'm looking for a roommate to help me fight crime!"
+}
 
 interface UserProfilePanelProps {
   profile: RoommateProfile,
@@ -311,7 +324,42 @@ const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (props: 
       setCurrentUserProfile({...currentUserProfile, [key]: event.target.value});
     }
   };
+
+  // kinda a hack for now
+  const areaOptions = Object.keys(Areas).filter(key => key.length != 1).map(area => {
+    return <option value={area}>{area}</option>
+  });
+
+  // React tags functions 
+  const KeyCodes = {
+    comma: 188,
+    enter: 13
+  };
   
+  const delimiters = [KeyCodes.comma, KeyCodes.enter];
+
+  const generateReactTags = (profileTags) => {
+    return profileTags.map(trait => { return {id: String(trait), text: String(trait)}});
+  }
+
+  const handleTagDelete = (key) => {
+    return (i) => {
+      setCurrentUserProfile({...currentUserProfile, [key]: currentUserProfile[key].filter((tag, index) => index !== i)});
+    }
+  }
+
+  const handlePersonalityTagAddition =  (tag) => {
+      if(Object.keys(PersonalityTraits).includes(tag.id)) {
+        setCurrentUserProfile({...currentUserProfile, personality: [...currentUserProfile.personality, tag.id]});
+      }
+  }
+
+  const handleHobbyTagAddition = (tag) => {
+    if(Object.keys(Hobbies).includes(tag.id)) {
+      setCurrentUserProfile({...currentUserProfile, hobbies: [...currentUserProfile.hobbies, tag.id]});
+    }
+  }
+
   return (
     <Modal 
       isOpen={isPreferencePopUpOpen}
@@ -422,32 +470,22 @@ const ViewedProfilePanel: React.FC = () => {
 
 
 // page
-// const Search: React.FC = () => {
-//   const [isPreferencePopUpOpen, setIsPreferencePopUpOpen] = useState(false);
-//   // TODO: get request to load user info and enums
-//   const togglePreferencePopUp = () => {
-//     console.log("clicking button; isPreferencePopUpOpen:", isPreferencePopUpOpen);
-//     setIsPreferencePopUpOpen(!isPreferencePopUpOpen);
-//   }
-
-//   return (
-//     <div>
-//       <UserProfilePanel profile={mockUserProfile} onSettingsClick={togglePreferencePopUp}/>
-//       <RoommateSelectionPanel/>
-//       <ViewedProfilePanel/>
-//       <ProfilePreferencesPanel profile={mockUserProfile} isPreferencePopUpOpen={isPreferencePopUpOpen} onCloseClick={togglePreferencePopUp}/>
-//     </div>
-//   )
-// }
 const Search: React.FC = () => {
+  const [isPreferencePopUpOpen, setIsPreferencePopUpOpen] = useState(false);
+  // TODO: get request to load user info and enums
+  const togglePreferencePopUp = () => {
+    console.log("clicking button; isPreferencePopUpOpen:", isPreferencePopUpOpen);
+    setIsPreferencePopUpOpen(!isPreferencePopUpOpen);
+  }
+
   return (
     <div>
-      <UserProfilePanel/>
+      <UserProfilePanel profile={mockUserProfile} onSettingsClick={togglePreferencePopUp}/>
       <RoommateSelectionPanel/>
       <ViewedProfilePanel/>
+      <ProfilePreferencesPanel profile={mockUserProfile} isPreferencePopUpOpen={isPreferencePopUpOpen} onCloseClick={togglePreferencePopUp}/>
     </div>
   )
 }
-
 
 export default Search;
