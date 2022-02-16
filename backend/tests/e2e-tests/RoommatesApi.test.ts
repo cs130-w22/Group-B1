@@ -160,6 +160,73 @@ describe("Roommates API", function () {
       ])
     );
 
+    const getRoommateList = await request(app)
+      .get("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader);
+    expect(getRoommateList.body).toEqual([]);
+
+    const addToRoommateList = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: testRoommate2.username });
+    expect(addToRoommateList.body).toEqual([testRoommate2.username]);
+
+    const addToRoommateListDuplicate = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: testRoommate2.username });
+    expect(addToRoommateListDuplicate.body).toEqual([testRoommate2.username]);
+
+    const getRoommateList2 = await request(app)
+      .get("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader);
+    expect(getRoommateList2.body).toEqual([testRoommate2.username]);
+
+    const deleteFromRoommateList = await request(app)
+      .delete("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToDelete: testRoommate2.username });
+    expect(deleteFromRoommateList.body).toEqual([]);
+
+    const deleteFromRoommateListDuplicate = await request(app)
+      .delete("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToDelete: testRoommate2.username });
+    expect(deleteFromRoommateListDuplicate.body).toEqual([]);
+
+    const failedAddToRoommateList = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: "UserNotExist" });
+    expect(failedAddToRoommateList.status).toEqual(500);
+
+    const failedDeleteFromRoommateList = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: "UserNotExist" });
+    expect(failedDeleteFromRoommateList.status).toEqual(500);
+
+    const failedGetRoommateList = await request(app)
+      .get("/roommate/list/differentUsername")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader);
+    expect(failedGetRoommateList.status).toEqual(401);
+
+    const failedAddToRoommateList2 = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: testRoommate1.username });
+    expect(failedAddToRoommateList2.status).toEqual(400);
+
     const getAreasResponse = await request(app)
       .get("/roommate/types/areas")
       .set("Accept", "application/json");
@@ -179,6 +246,42 @@ describe("Roommates API", function () {
       .set("Accept", "application/json")
       .send(testRoommate1);
     expect(failedCreateRoommateResponse.status).toEqual(400);
+  });
+
+  it("Checks that token matches username", async () => {
+    const createRoommateResponse = await request(app)
+      .post("/roommate/")
+      .set("Accept", "application/json")
+      .send(testRoommate1);
+    expect(createRoommateResponse.status).toEqual(200);
+
+    const createSecondRoommateResponse = await request(app)
+      .post("/roommate/")
+      .set("Accept", "application/json")
+      .send(testRoommate2);
+    expect(createSecondRoommateResponse.status).toEqual(200);
+
+    const loginRoommateResponse = await request(app)
+      .post("/roommate/login")
+      .set("Accept", "application/json")
+      .send({
+        username: testRoommate1.username,
+        password: testRoommate1.password,
+      });
+    expect(loginRoommateResponse.status).toEqual(200);
+    const accessToken = loginRoommateResponse.body.accessToken;
+
+    const updatedTestRoommate = testRoommate1;
+    updatedTestRoommate.profile.bio = "Updated bio";
+
+    const authorizationHeader = "Bearer " + accessToken;
+
+    const unauthedUpdateRoommateResponse = await request(app)
+      .put("/roommate/username2")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send(updatedTestRoommate.profile);
+    expect(unauthedUpdateRoommateResponse.status).toEqual(401);
   });
 
   it("Checks for valid tokens", async () => {

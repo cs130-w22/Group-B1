@@ -12,6 +12,7 @@ import * as dotenv from "dotenv";
 const roommate1: Roommate = {
   username: "Bob",
   password: "BobPassword",
+  list: [],
   profile: {
     firstName: "Bob",
     lastName: "Smith",
@@ -27,6 +28,7 @@ const roommate1: Roommate = {
 const roommate1Updated: Roommate = {
   username: "Bob",
   password: "BobPassword",
+  list: [],
   profile: {
     firstName: "Bobby",
     lastName: "Smith",
@@ -42,6 +44,7 @@ const roommate1Updated: Roommate = {
 const roommate2: Roommate = {
   username: "Tom",
   password: "TomPassword",
+  list: [],
   profile: {
     firstName: "Tom",
     lastName: "Richard",
@@ -58,6 +61,7 @@ const roommate2: Roommate = {
 const roommate3: Roommate = {
   username: "Jessica",
   password: "JessicaPassword",
+  list: [],
   profile: {
     firstName: "Jessica",
     lastName: "Richard",
@@ -139,5 +143,52 @@ describe("Roommate Repository", () => {
     expect(await roommateRepository.findOne(roommate2.username)).toEqual(null);
 
     expect((await roommateRepository.getAll()).length).toEqual(2);
+
+    expect(
+      await roommateRepository.addToRoommateList(
+        roommate1.username,
+        roommate2.username
+      )
+    ).toEqual([roommate2.username]);
+    // no duplicates in the roommate list when the same user is added twice
+    expect(
+      await roommateRepository.addToRoommateList(
+        roommate1.username,
+        roommate2.username
+      )
+    ).toEqual([roommate2.username]);
+    expect(
+      await roommateRepository.addToRoommateList(
+        roommate1.username,
+        roommate3.username
+      )
+    ).toEqual([roommate2.username, roommate3.username]);
+
+    expect(
+      await roommateRepository.deleteFromRoommateList(
+        roommate1.username,
+        roommate3.username
+      )
+    ).toEqual([roommate2.username]);
+    // deleting a user not in roommate list should not change the roommate list
+    expect(
+      await roommateRepository.deleteFromRoommateList(
+        roommate1.username,
+        roommate3.username
+      )
+    ).toEqual([roommate2.username]);
+    expect(
+      await roommateRepository.deleteFromRoommateList(
+        roommate1.username,
+        roommate2.username
+      )
+    ).toEqual([]);
+    // deleting from empty roommate list
+    expect(
+      await roommateRepository.deleteFromRoommateList(
+        roommate1.username,
+        roommate2.username
+      )
+    ).toEqual([]);
   });
 });

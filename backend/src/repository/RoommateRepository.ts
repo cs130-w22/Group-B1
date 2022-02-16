@@ -16,6 +16,11 @@ export interface RoommateRepository {
   getAll(): Promise<Roommate[]>;
   update(username: string, roommateProfile: RoommateProfile): Promise<boolean>;
   delete(username: string): Promise<boolean>;
+  addToRoommateList(username: string, usernameToAdd: string): Promise<string[]>;
+  deleteFromRoommateList(
+    username: string,
+    usernameToDelete: string
+  ): Promise<string[]>;
 }
 
 @injectable()
@@ -32,6 +37,7 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
     if (existingRoommate) {
       return false;
     }
+    roommate.list = []; // users should have empty roommate list when being created
     const roommateDoc = new RoommateModel(roommate);
     await roommateDoc.save();
     return true;
@@ -129,5 +135,51 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
    */
   async delete(username: string): Promise<boolean> {
     return (await RoommateModel.deleteOne({ username })).deletedCount == 1;
+  }
+
+  /**
+   * Add a user to another user's roommate list
+   * @param username
+   * @param usernameToAdd
+   * @returns string[] of the updated list
+   */
+  async addToRoommateList(
+    username: string,
+    usernameToAdd: string
+  ): Promise<string[]> {
+    const conditions = {
+      username: username,
+      "list.username": { $ne: usernameToAdd }, // check if the added user is already in the list
+    };
+
+    const update = {
+      $addToSet: { list: usernameToAdd },
+    };
+
+    const updatedRoommateDoc = await RoommateModel.findOneAndUpdate(
+      conditions,
+      update,
+      { new: true }
+    );
+    return updatedRoommateDoc.list;
+  }
+
+  /**
+   * Delete a user from another user's roommate list
+   * @param username
+   * @param usernameToDelete
+   * @returns string[] of the updated list
+   */
+  async deleteFromRoommateList(
+    username: string,
+    usernameToDelete: string
+  ): Promise<string[]> {
+    // if usernameToDelete doesn't exist in list, the list will stay the same
+    const updatedRoommateDoc = await RoommateModel.findOneAndUpdate(
+      { username: username },
+      { $pull: { list: usernameToDelete } },
+      { new: true }
+    );
+    return updatedRoommateDoc.list;
   }
 }
