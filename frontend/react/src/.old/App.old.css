@@ -2,6 +2,41 @@
   text-align: center;
 }
 
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /*******************************************/
 
 .user-profile-panel {
@@ -53,7 +88,45 @@
 
 /********************************************/
 
+.profilePicture {
+        background-color: #ffffff;
 
+        display:  inline-block;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+
+        border-radius: 50%;
+      }
+      .profileName {
+        display:  inline-block;
+        position:  absolute;
+        /*top: 50%;*/
+        left: 80px;
+        width: calc(100% - 160px);
+        /*transform:  translate(0%, -50%);*/
+
+        font: 24px Calibri;
+      }
+      .settingsButton {
+        background: url('source/edit.png');
+        background-color: #ff000022;
+        background-position: center;
+        background-size: 60%;
+        background-repeat: no-repeat;
+
+        display:  inline-block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+
+        border: 2px solid #000000;
+        border-radius: 50%;
+      }
 
 .test-class {
   background-color: #dddddd;
@@ -71,7 +144,7 @@
   scrollbar-width: none;  /* Hide scrollbar for Firefox */
 }
 
-/*.miniProfile {
+.miniProfile {
       background-color: #ffffff;
 
       display: block;
@@ -122,4 +195,4 @@
         position: absolute;
         top: 15px;
         left: 65px;
-      }*/
+      }

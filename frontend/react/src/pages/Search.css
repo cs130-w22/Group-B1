@@ -1,0 +1,274 @@
+.user-profile-panel {
+  background-color: #C952D0;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 30%;
+  height: 80px;
+}
+
+.user-preference-panel {
+  /* CSS for user preference panel, center in the page and make it smaller */ 
+  /* Might need some help here */
+  left: 20px;
+  top: 25%;
+}
+.profilePicture {
+        background-color: #dddddd;
+
+        display:  inline-block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 60px;
+        height: 60px;
+
+        border-radius: 50%;
+      }
+      .profileName {
+        display:  inline-block;
+        position:  absolute;
+        /*top: 50%;*/
+        left: 80px;
+        width: calc(100% - 160px);
+        /*transform:  translate(0%, -50%);*/
+
+        font: 24px Calibri;
+        /*font-weight: bold;*/
+      }
+      .settingsButton {
+        background: url('../resources/edit.png');
+        background-color: #F2CFF5;
+        background-position: center;
+        background-size: 60%;
+        background-repeat: no-repeat;
+
+        display:  inline-block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+
+        border: 2px solid #000000;
+        border-radius: 50%;
+      }
+
+/**************************/
+
+.roommate-selection-panel {
+  background-color: #F2CFF5;
+
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  width: 30%;
+  height: calc(100% - 80px);
+
+  overflow: hidden;
+}
+.roommate-list-panel {
+  background-color: #F2CFF5;
+
+  box-sizing: border-box;
+  position: absolute;
+  padding: 15px;
+  top: 60px;
+  width: 100%;
+  height: calc(100% - 60px);
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+.recommendation-text {
+  /*display: inline-block;*/
+  /*position: absolute;*/
+  font-size: 30px;
+  transform:  translateY(-25%);
+  font-weight: bold;
+  text-decoration: underline;
+}
+.miniViewFade {
+  /*background: linear-gradient(180deg, rgba(64,49,45,1) 0%, rgba(64,49,45,0) 100%);*/
+  background: linear-gradient(180deg, #F2CFF5ff 0%, #F2CFF500 100%);
+
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  height: 15px;
+  z-index: 2;
+}
+.miniProfile {
+  background-color: #ffffff;
+
+  display: block;
+  position: relative;
+  height: 60px;
+  margin-bottom: 10px;
+
+  border: 2px solid #000000;
+  border-radius: 12px;
+}
+.miniProfilePicture {
+  background-color: #dddddd;
+
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+}
+.miniProfilePreference {
+  background-color: #bbbbbb;
+
+  display: inline-block;
+  position: absolute;
+  top: 75%;
+  left: 45px;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+}
+.miniProfileName {
+  display: inline-block;
+  position: absolute;
+  top: -15px;
+  left: 65px;
+
+  font-weight: bold;
+  font-size: 20px;
+}
+.miniProfileText {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  left: 65px;
+}
+
+.viewed-profile-panel {
+  background-color: #ffffff;
+
+  position: absolute;
+  top: 0px;
+  left:  30%;
+  width: 70%;
+  height: 100%;
+
+  overflow: scroll;
+  overflow-x: hidden;
+}
+/*.fullProfilePicture {
+  background-color: #dddddd;
+
+  display: inline-block;
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%,0%);
+
+  border-radius: 50%;
+}
+.fullProfilePreference {
+  background-color: #bbbbbb;
+
+  display: inline-block;
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  width: 45px;
+  height: 45px;
+  transform: translate(calc(-50% + 50px), 0%);
+
+  border-radius: 50%;
+}*/
+.fullProfilePicture {
+  background-color: #dddddd;
+
+  display: inline-block;
+  position: absolute;
+  top: 80px;
+  left: 20%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%,0%);
+
+  border-radius: 50%;
+}
+.fullProfilePreference {
+  background-color: #bbbbbb;
+
+  display: inline-block;
+  position: absolute;
+  top: 150px;
+  left: 20%;
+  width: 45px;
+  height: 45px;
+  transform: translate(calc(-50% + 50px), 0%);
+
+  border-radius: 50%;
+}
+/*.fullProfileName {
+  display: inline-block;
+  position: absolute;
+  top: 210px;
+  left: 50%;
+  transform: translate(-50%,0%);
+
+  font-weight: bold;
+  font-size: 20px;
+}
+.fullProfileText {
+  display: inline-block;
+  position: absolute;
+  top: 240px;
+  left: 50%;
+  transform: translate(-50%,0%);
+}*/
+.fullProfileName {
+  display: inline-block;
+  position: absolute;
+  top: 60px;
+  left: 30%;
+
+  font-weight: bold;
+  font-size: 40px;
+  text-align: left;
+}
+.fullProfileText {
+  display: inline-block;
+  position: absolute;
+  top: 150px;
+  left: 30%;
+  text-align: left;
+}
+.email {
+  display: inline-block;
+  position: absolute;
+  top: 225px;
+  left: 15%;
+  text-align: left;
+}
+.fullProfileBio {
+  background-color: #F2CFF5;
+
+  display: inline-block;
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  width: 70%;
+  height: 700px;
+  transform: translate(-50%,0%);
+
+  border-radius: 24px;
+}
