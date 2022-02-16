@@ -50,6 +50,10 @@ interface RoommateProfile {
   personality: PersonalityTrait[];
   additionalInfo: string;
 }
+interface Roommate {
+  username: string;
+  profile: RoommateProfile;
+}
 
 // stub data
 function randInt(min:number, max:number): number { return Math.floor(Math.random() * (max - min + 1)) + min; }
@@ -73,10 +77,10 @@ for (let i = 0; i < 30; i++) {
     email: 'example@email.com',
     //area: randomEnum(Areas),
     area: areas[randInt(0,areas.length-1)],
-    bio: '[about me]',
+    bio: '[about me] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     hobbies: [],
     personality: [],
-    additionalInfo: '[additional info]'
+    additionalInfo: '[additional info] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
   };
   profile.email = profile.firstName + ' ' + profile.lastName + '@' + (Math.random()<0.5?'gmail':'yahoo') + '.com';
   for (let i = 0, n = randInt(2,5); i < n; i++) {
@@ -84,6 +88,117 @@ for (let i = 0; i < 30; i++) {
   }
   profiles.push(profile);
 }
+var roommates:Roommate[] = [];
+for (let profile of profiles) {
+  let roommate:Roommate = {
+    username: profile.firstName + Math.round(Math.random()*1000),
+    profile: profile
+  };
+  roommates.push(roommate);
+}
+var viewedProfile:RoommateProfile = profiles[0];
+var viewedId:number = 0;
+
+window['connectDev'] = {
+  rootUrl: 'http://localhost:5000',
+
+  user: {
+    username: 'testuser',
+    password: 'testpass',
+    profile: {
+      firstName: 'Katniss',
+      lastName: 'Everdeen',
+      email: 'survivor@gmail.com',
+      area: 'Los Angeles',
+      bio: '[test bio]',
+      hobbies: [],
+      personality: [],
+      additionalInfo: '[test info]'
+    }
+  },
+  authToken: '',
+
+  registerStub: function(): void {
+    console.log('registering debug user...');
+    var rootUrl = window['connectDev'].rootUrl;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        console.log('registration success');
+        console.log(xmlHttp.responseText);
+      }
+    }
+    xmlHttp.open("POST", rootUrl+'/roommate/', true); // true for async
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send(JSON.stringify( window['connectDev'].user ));
+  },
+  loginStub: function(): void {
+    console.log('logging in debug user...');
+    var rootUrl = window['connectDev'].rootUrl;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        var response = JSON.parse(xmlHttp.responseText);
+        window['connectDev'].authToken = response.accessToken;
+        console.log('login success');
+        console.log(xmlHttp.responseText);
+      }
+    }
+    xmlHttp.open("POST", rootUrl+'/roommate/login', true); // true for async
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send(JSON.stringify({
+      username: window['connectDev'].user.username,
+      password: window['connectDev'].user.password
+    }));
+  },
+  
+  // autoLogin: function(): void {
+  //   console.log('registering debug user...');
+  //   var rootUrl = window['connectDev'].rootUrl;
+  //   var xmlHttp = new XMLHttpRequest();
+  //   xmlHttp.onreadystatechange = function() { 
+  //     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+  //       console.log('registration success');
+  //       console.log(xmlHttp.responseText);
+
+  //       console.log('logging in debug user...');
+  //       var rootUrl = window['connectDev'].rootUrl;
+  //       var xmlHttp = new XMLHttpRequest();
+  //       xmlHttp.onreadystatechange = function() { 
+  //         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+  //           var response = JSON.parse(xmlHttp.responseText);
+  //           window['connectDev'].authToken = response.accessToken;
+  //           console.log('login success');
+  //           console.log(xmlHttp.responseText);
+  //         }
+  //       }
+  //       xmlHttp.open("POST", rootUrl+'/roommate/login', true); // true for async
+  //       xmlHttp.setRequestHeader('Content-Type', 'application/json');
+  //       xmlHttp.send(JSON.stringify({
+  //         username: window['connectDev'].user.username,
+  //         password: window['connectDev'].user.password
+  //       }));
+  //     }
+  //   }
+  //   xmlHttp.open("POST", rootUrl+'/roommate/', true); // true for async
+  //   xmlHttp.setRequestHeader('Content-Type', 'application/json');
+  //   xmlHttp.send(JSON.stringify( window['connectDev'].user ));
+  // },
+
+  roommates: roommates,
+
+  testGet: function(): void {
+    console.log('attempting get...');
+    var rootUrl = window['connectDev'].rootUrl;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        console.log(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", rootUrl, true); // true for async
+    xmlHttp.send(null);
+  }
+};
 var viewedProfile:RoommateProfile = profiles[0];
 var viewedId:number = 0;
 
@@ -110,8 +225,68 @@ interface ProfilePreferencesPanelProps {
 }
 
 // fetch data
+var authToken = ''; // eventually stored in cookie
+var rootUrl = 'http://localhost:5000';
 function getProfiles() {
   return profiles;
+}
+function getAllRoommates(callback:(string)=>void): void {
+  console.log('looking up roommates...');
+
+  // callback(roommates);
+  // return;
+
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() { 
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      console.log(xmlHttp.responseText);
+      callback(xmlHttp.responseText);
+    }
+  }
+  xmlHttp.open("GET", rootUrl+'/roommate/', true); // true for async
+  xmlHttp.setRequestHeader('authorization', 'Bearer '+window['connectDev'].authToken);
+  xmlHttp.send(null);
+}
+window['connectDev'].getAllRoommates = getAllRoommates;
+function getRoommate(username:string, callback:(string)=>void): void {
+  console.log('looking up profile for '+username+'...');
+
+  // for (let roommate of roommates) {
+  //   if (username == roommate.username) {
+  //     callback(roommate);
+  //     return;
+  //   }
+  // }
+  // return;
+
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() { 
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+      callback(xmlHttp.responseText);
+  }
+  xmlHttp.open("GET", rootUrl+'/roommate/'+username, true); // true for async
+  xmlHttp.setRequestHeader('authorization', 'Bearer '+window['connectDev'].authToken);
+  xmlHttp.send(null);
+}
+function getFilteredRoommates(filter, callback:(string)=>void): void {
+  console.log('looking up roommates that match filter...');
+
+  let filterStr = '';
+  for (let property of filter) {
+    filterStr += (filterStr==''?'?':'&') + property + '=' + filter[property];
+  }
+
+  // callback(roommates);
+  // return;
+
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() { 
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+      callback(xmlHttp.responseText);
+  }
+  xmlHttp.open("GET", rootUrl+'/roommate/'+filterStr, true); // true for async
+  xmlHttp.setRequestHeader('authorization', 'Bearer '+window['connectDev'].authToken);
+  xmlHttp.send(null);
 }
 
 // components
@@ -183,7 +358,7 @@ const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (props: 
     if(Object.keys(Hobbies).includes(tag.id)) {
       setCurrentUserProfile({...currentUserProfile, hobbies: [...currentUserProfile.hobbies, tag.id]});
     }
-}
+  }
 
   return (
     <Modal 
