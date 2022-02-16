@@ -37,6 +37,7 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
     if (existingRoommate) {
       return false;
     }
+    roommate.list = []; // users should have empty roommate list when being created
     const roommateDoc = new RoommateModel(roommate);
     await roommateDoc.save();
     return true;

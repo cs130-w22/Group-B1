@@ -451,7 +451,7 @@ GET /roommate/list/:username
 Example Request:
 
 ```
-curl --location --request GET 'localhost:3000/roommate/list/Tom'
+curl --location --request GET 'localhost:5000/roommate/list/Tom'
 ```
 
 Example Response:
@@ -460,16 +460,20 @@ Example Response:
 ["username1", "username2"]
 ```
 
+Notice that the _username_ in the path should match the access token. Same for the following POST and DELETE requests.
+
 ### Add a user to the roommate list
 
 ```
 POST /roommate/list/:username
 ```
 
+This request body should contain a "usernameToAdd" field to indicate which username to add to the roommate list.
+
 Example Request:
 
 ```
-curl --location --request POST 'localhost:3000/roommate/list/Tom' \
+curl --location --request POST 'localhost:5000/roommate/list/Tom' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRvbSIsInNhbHQiOiJud0xxYm93VktYcENKL0FhUkhwTUFBPT0iLCJpYXQiOjE2NDQ4Nzc0NDcsImV4cCI6MTY0NDg3OTI0N30.-lg6y9Q2t9Kivf73IShwILpJcU6YCkRi6IwuwSXO5Y0' \
 --header 'Content-Type: application/json' \
 --data-raw '{ "usernameToAdd": "username3" }'
@@ -482,6 +486,7 @@ Example Response:
 ```
 
 Notice that this request adds username3 to Tom's roommate list. The endpoint returns updated roommate list.
+Users are not allowed to add themselves to the roommate list.
 
 ### Remove a user from the roommate list
 
@@ -489,10 +494,12 @@ Notice that this request adds username3 to Tom's roommate list. The endpoint ret
 DELETE /roommate/list/:username
 ```
 
+This request body should contain a "usernameToDelete" field to indicate which username to delete from the roommate list.
+
 Example Request:
 
 ```
-curl --location --request DELETE 'localhost:3000/roommate/list/Tom' \
+curl --location --request DELETE 'localhost:5000/roommate/list/Tom' \
 --header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRvbSIsInNhbHQiOiJud0xxYm93VktYcENKL0FhUkhwTUFBPT0iLCJpYXQiOjE2NDQ4Nzc0NDcsImV4cCI6MTY0NDg3OTI0N30.-lg6y9Q2t9Kivf73IShwILpJcU6YCkRi6IwuwSXO5Y0' \
 --header 'Content-Type: application/json' \
 --data-raw '{ "usernameToDelete": "username3" }'

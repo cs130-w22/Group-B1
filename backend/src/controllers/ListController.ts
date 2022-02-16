@@ -20,10 +20,10 @@ export class ListController implements RegistrableController {
   public register(app: Application): void {
     app
       .route("/roommate/list/:username")
-      .get(this.authorizationMiddleware.verifyToken, this.getRoommateList)
-      .post(this.authorizationMiddleware.verifyToken, this.addToRoommateList)
+      .get(this.authorizationMiddleware.verifyTokenMatchesParam, this.getRoommateList)
+      .post(this.authorizationMiddleware.verifyTokenMatchesParam, this.addToRoommateList)
       .delete(
-        this.authorizationMiddleware.verifyToken,
+        this.authorizationMiddleware.verifyTokenMatchesParam,
         this.deleteFromRoommateList
       );
   }
@@ -35,11 +35,11 @@ export class ListController implements RegistrableController {
       if (!roommate) {
         res.status(404).json({ message: "Roommate not found." });
       } else {
-        res.status(200).json(roommate.list === undefined ? [] : roommate.list);
+        res.status(200).json(roommate.list || []);
       }
     } catch (err) {
       return res.status(500).json({
-        message: "Failed to get roommate with given username.",
+        message: "Failed to get roommate list of the user.",
       });
     }
   };
@@ -48,6 +48,9 @@ export class ListController implements RegistrableController {
     try {
       const username = req.params["username"];
       const usernameToAdd = req.body.usernameToAdd;
+      if (username === usernameToAdd) {
+        throw Error("User should not add him or herself to the roommate list.")
+      }
       const roommateListUpdated = await this.listService.addToRoommateList(
         username,
         usernameToAdd

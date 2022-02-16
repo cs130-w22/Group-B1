@@ -184,7 +184,6 @@ describe("Roommates API", function () {
       .get("/roommate/list/username")
       .set("Accept", "application/json")
       .set("Authorization", authorizationHeader)
-      .set("Authorization", authorizationHeader);
     expect(getRoommateList2.body).toEqual([testRoommate2.username]);
 
     const deleteFromRoommateList = await request(app)
@@ -214,6 +213,19 @@ describe("Roommates API", function () {
       .set("Authorization", authorizationHeader)
       .send({ usernameToAdd: "UserNotExist" });
     expect(failedDeleteFromRoommateList.status).toEqual(500);
+
+    const failedGetRoommateList = await request(app)
+      .get("/roommate/list/differentUsername")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+    expect(failedGetRoommateList.status).toEqual(401);
+
+    const failedAddToRoommateList2 = await request(app)
+      .post("/roommate/list/username")
+      .set("Accept", "application/json")
+      .set("Authorization", authorizationHeader)
+      .send({ usernameToAdd: testRoommate1.username });
+    expect(failedAddToRoommateList2.status).toEqual(500);
 
     const getAreasResponse = await request(app)
       .get("/roommate/types/areas")
