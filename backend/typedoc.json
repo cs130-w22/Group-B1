@@ -1,5 +1,0 @@
-{
-    "entryPoints": ["./src"],
-    "entryPointStrategy": "expand",
-    "out": "auto-gen-docs"
-}
