@@ -54,7 +54,6 @@ PUT  /roommate/:username
 
 GET /roommate/recommendations/:username
 
-
 GET /roommate/areas
 GET /roommate/hobbies
 GET /roommate/personalities
@@ -451,7 +450,9 @@ GET /roommate/list/:username
 Example Request:
 
 ```
-curl --location --request GET 'localhost:5000/roommate/list/Tom'
+curl --location --request GET 'localhost:5000/roommate/list/Tom' \
+--header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRvbSIsInNhbHQiOiJud0xxYm93VktYcENKL0FhUkhwTUFBPT0iLCJpYXQiOjE2NDQ4Nzc0NDcsImV4cCI6MTY0NDg3OTI0N30.-lg6y9Q2t9Kivf73IShwILpJcU6YCkRi6IwuwSXO5Y0' \
+--header 'Content-Type: application/json' \
 ```
 
 Example Response:
