@@ -143,7 +143,10 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
    * @param usernameToAdd
    * @returns string[] of the updated list
    */
-  async addToRoommateList(username: string, usernameToAdd: string) {
+  async addToRoommateList(
+    username: string,
+    usernameToAdd: string
+  ): Promise<string[]> {
     const conditions = {
       username: username,
       "list.username": { $ne: usernameToAdd }, // check if the added user is already in the list
@@ -167,7 +170,10 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
    * @param usernameToDelete
    * @returns string[] of the updated list
    */
-  async deleteFromRoommateList(username: string, usernameToDelete: string) {
+  async deleteFromRoommateList(
+    username: string,
+    usernameToDelete: string
+  ): Promise<string[]> {
     // if usernameToDelete doesn't exist in list, the list will stay the same
     const updatedRoommateDoc = await RoommateModel.findOneAndUpdate(
       { username: username },

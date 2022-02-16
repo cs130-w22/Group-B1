@@ -12,24 +12,6 @@ export class AuthorizationMiddleware {
   public verifyToken = (req: Request, res: Response, next: NextFunction) => {
     try {
       const authorization: string = req.headers.authorization;
-      const username = req.body.username || req.query.username;
-      const validToken = this.authorizationService.validToken(
-        authorization,
-        username
-      );
-      if (!validToken) {
-        res.status(401).json({ message: "Invalid token." });
-      } else {
-        next();
-      }
-    } catch (err) {
-      res.status(500).json({ message: "Failed to verify token." });
-    }
-  };
-
-  public verifyTokenMatchesParam = (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const authorization: string = req.headers.authorization;
       const username = req.params["username"];
       const validToken = this.authorizationService.validToken(
         authorization,
