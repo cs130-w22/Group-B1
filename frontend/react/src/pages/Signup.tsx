@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import './Signup.css';
 import * as Unicons from '@iconscout/react-unicons';
 
@@ -65,7 +65,58 @@ getTypes((types)=>{
   window['types'] = types;
 });
 
+// const fillAreas = () => {
+//   let results = [] as any
+//   const finish = () => {
+//     console.log(results);
+//     return results;
+//   }
+//   let temp = getTypes((types)=>{
+//     for (let area of types.areas) {
+//       results.push(<option key={area} value="{area}">{area}</option>)
+//     }
+//     finish();
+//   });
+//   console.log(temp);
+// }
+
 const Signup: React.FC = () => {
+  const [areas, setAreas] = useState(['']);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [area, setArea] = useState('Los Angeles');
+  const handleUsernameChange = (event) => { setUsername(event.target.value); };
+  const handlePasswordChange = (event) => { setPassword(event.target.value); };
+  const handleFirstnameChange = (event) => { setFirstname(event.target.value); };
+  const handleLastnameChange = (event) => { setLastname(event.target.value); };
+  const handleEmailChange = (event) => { setEmail(event.target.value); };
+  const handleAreaChange = (event) => { setArea(event.target.value); };
+  const handleSubmit = (event) => {
+    //
+  }
+  const fetchAreas = () => {
+    const rootUrl = 'http://localhost:5000';
+    // fetch areas
+    const xmlHttpAreas = new XMLHttpRequest();
+    xmlHttpAreas.onreadystatechange = function() { 
+      if (xmlHttpAreas.readyState == 4 && xmlHttpAreas.status == 200) {
+        console.log('fetched areas list');
+        console.log(xmlHttpAreas.responseText);
+        setAreas(JSON.parse(xmlHttpAreas.responseText));
+        setArea(areas[0]);
+      }
+    }
+    xmlHttpAreas.open("GET", rootUrl+'/roommate/types/areas', true); // true for async
+    xmlHttpAreas.send(null);
+    // finish fetch areas
+  }
+  useEffect(()=>{
+    fetchAreas();
+    return () => {};
+  })
   return (
     <div className="center">
       <div className="square top_left"></div>
@@ -88,9 +139,7 @@ const Signup: React.FC = () => {
                 <input type="text" placeholder=" Email"/>
                 <div className="signup-age_container">
                   <p>Age</p>
-                  <select>
-                    {fillSelect()}
-                  </select>
+                  <AreasList areas={areas} />
                 </div>
               </div>
 
@@ -102,6 +151,17 @@ const Signup: React.FC = () => {
             <img src={people2} className="signup-people2" alt="people" /> 
           </div>
     </div>
+  )
+}
+
+interface Areas {
+  areas: string[]
+}
+const AreasList: React.FC<{areas:string[]}> = ({areas}) => {
+  return (
+    <select>
+      {areas.map((area)=>{<option key={area} value="{area}">{area}</option>})}
+    </select>
   )
 }
 
