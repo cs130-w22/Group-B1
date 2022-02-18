@@ -1,9 +1,29 @@
 language: node_js
-node_js: 
-  - "12"
+node_js:
+- '12'
 services:
-  - mongodb
-script:
-  - cd backend
-  - npm install
-  - npm run test
+- mongodb
+jobs:
+  include:
+  - stage: test backend
+    before_script:
+      - cd backend
+    script:
+      - npm install
+      - npm run test
+    after_script:
+      - cd ..
+  - stage: deploy backend
+    script: skip
+    before_deploy:
+      - cd backend
+      - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.10.0
+    deploy:
+      provider: heroku
+      api_key:
+        secure: ocx7dS8kdGbOKTCSgtq8LiMu1xXb/EZUt6qsHpkYxXnQ/QWXxU1OqLiH4NVsLhwOoI0o/PKQX6IWYtNDfFj0UcbW9uhCzJM0Y4c2d37aEphubMJaZgahnugO6qhTzo5eJ5J4Ubz5RRvBxjr+Gji3KOekEF6otPI/TE9Xa3+Gf7kXot3PVLOuZBevZCA74+v8OWIG1zq+SjxuShSPEtdaG4jOT09Q5fmcKHxtRH5GBmpHBw4oCvMtwr3/O/p2+wlFWntj4dgkHmSt5fpT82hPUbi9YXOjmHcjzm64txV2fF1a0HdYCUoDYmXP9nIA6SdPY8xsV+j/P8nYJDXe1GtKuutpNildWrBN08rtKMqKghRlPIrrXnS5cVnTvEZqkjm46Gr2hQ0IsHzuUoqnxhfhlWKhcrq7zcZHms6ZmFFF5gEpqzPgb6udyRTokH/8NWKT456t9ZGWxzv21jqbF+IWQExFQlhOdG+2Mxsx1Ymzt2CtFmRVOg8wNNTkZO/cEY5p+VM5RQvI/kNFn6TcW7zJCe4SU6YGyLM+OWcn0IqaAQHVPS51m9/+f/O8N+WepAObYosmoKNpw/htFCL6EZ2LB6jUsfAvrDkOMxrVw9qVHIBjBGRj47eYDkazwoLoApXOsIw0e57zfdHcjYT3nWLO/Qh5YNTvAQ5p9ZKsM31FuVw=
+      app: zoomie-roomies
+      skip_cleanup: true
+      on:
+        repo: cs130-w22/Group-B1
+        branch: main
