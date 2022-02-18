@@ -1,5 +1,6 @@
 
 import React from 'react';
+import {useState} from 'react';
 import './Signup.css';
 import * as Unicons from '@iconscout/react-unicons';
 
@@ -13,6 +14,56 @@ const fillSelect = () => {
   }
   return arr;
 }
+
+const getTypes = (callback) => {
+  const results = {
+    areas: [],
+    hobbies: [],
+    personalities: []
+  };
+  const rootUrl = 'http://localhost:5000';
+  // fetch areas
+  const xmlHttpAreas = new XMLHttpRequest();
+  xmlHttpAreas.onreadystatechange = function() { 
+    if (xmlHttpAreas.readyState == 4 && xmlHttpAreas.status == 200) {
+      results.areas = JSON.parse(xmlHttpAreas.responseText);
+      console.log('fetched areas list');
+      console.log(xmlHttpAreas.responseText);
+      // fetch hobbies
+      const xmlHttpHobbies = new XMLHttpRequest();
+      xmlHttpHobbies.onreadystatechange = function() {
+        if (xmlHttpHobbies.readyState == 4 && xmlHttpHobbies.status == 200) {
+          results.hobbies = JSON.parse(xmlHttpHobbies.responseText);
+          console.log('fetched hobbies list');
+          console.log(xmlHttpHobbies.responseText);
+          // fetch personalities
+          const xmlHttpPersonalities = new XMLHttpRequest();
+          xmlHttpPersonalities.onreadystatechange = function() {
+            if (xmlHttpPersonalities.readyState == 4 && xmlHttpPersonalities.status == 200) {
+              results.personalities = JSON.parse(xmlHttpPersonalities.responseText);
+              console.log('fetched personalities list');
+              console.log(xmlHttpPersonalities.responseText);
+              // final return
+              callback(results);
+            }
+          }
+          xmlHttpPersonalities.open("GET", rootUrl+'/roommate/types/personalities', true); // true for async
+          xmlHttpPersonalities.send(null);
+          // finish fetch personalities
+        }
+      }
+      xmlHttpHobbies.open("GET", rootUrl+'/roommate/types/hobbies', true); // true for async
+      xmlHttpHobbies.send(null);
+      // finish fetch hobbies
+    }
+  }
+  xmlHttpAreas.open("GET", rootUrl+'/roommate/types/areas', true); // true for async
+  xmlHttpAreas.send(null);
+  // finish fetch areas
+}
+getTypes((types)=>{
+  window['types'] = types;
+});
 
 const Signup: React.FC = () => {
   return (

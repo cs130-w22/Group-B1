@@ -10,15 +10,15 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const handleUsernameChange = (event) => {
-    window['connectDev'].user.username = event.target.value;
+    window['connectDev'].user.username = event.target.value; // track data for debug
     setUsername(event.target.value);
   };
   const handlePasswordChange = (event) => {
-    window['connectDev'].user.password = event.target.value;
+    window['connectDev'].user.password = event.target.value; // track data for debug
     setPassword(event.target.value);
   };
   const handleSubmit = (event) => {
-    var rootUrl = window['connectDev'].rootUrl;
+    var rootUrl = 'http://localhost:5000';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
