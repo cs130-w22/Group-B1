@@ -5,6 +5,30 @@ import * as Unicons from '@iconscout/react-unicons';
 
 var people1 = require('../resources/people1.png')
 
+function tryLogin(): void {
+  let un = document.getElementById('username').value || 'testuser';
+  let pw = document.getElementById('password').value || 'testpass';
+  window['connectDev'].user.username = un;
+  window['connectDev'].user.password = pw;
+
+  var rootUrl = window['connectDev'].rootUrl;
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() { 
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      var response = JSON.parse(xmlHttp.responseText);
+      window['connectDev'].authToken = response.accessToken;
+      console.log('login success');
+      console.log(xmlHttp.responseText);
+    }
+  }
+  xmlHttp.open("POST", rootUrl+'/roommate/login', true); // true for async
+  xmlHttp.setRequestHeader('Content-Type', 'application/json');
+  xmlHttp.send(JSON.stringify({
+    username: window['connectDev'].user.username,
+    password: window['connectDev'].user.password
+  }));
+}
+
 const Login: React.FC = () => {
   return (
     <div className="login-center">
@@ -16,9 +40,9 @@ const Login: React.FC = () => {
           <p className="login-instructions">Sign in to find your new roommates</p>
           <hr></hr>
 
-          <input type="text" placeholder=" Username"/>
-          <input type="password" placeholder=" Password" />
-          <div className="login-login_button">
+          <input id="username" type="text" placeholder=" Username"/>
+          <input id="password" type="password" placeholder=" Password" />
+          <div className="login-login_button" onClick={tryLogin}>
             <p>Login</p>
           </div>
           
