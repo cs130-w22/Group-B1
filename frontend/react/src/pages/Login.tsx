@@ -2,9 +2,8 @@
 import React from 'react';
 import {useState} from 'react';
 import './Login.css';
-import * as Unicons from '@iconscout/react-unicons';
 
-var people1 = require('../resources/people1.png')
+const people1 = require('../resources/people1.png')
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -18,11 +17,11 @@ const Login: React.FC = () => {
     setPassword(event.target.value);
   };
   const handleSubmit = (event) => {
-    var rootUrl = window['connectDev'].rootUrl;
-    var xmlHttp = new XMLHttpRequest();
+    const rootUrl = window['connectDev'].rootUrl;
+    const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-        var response = JSON.parse(xmlHttp.responseText);
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        const response = JSON.parse(xmlHttp.responseText);
         window['connectDev'].authToken = response.accessToken;
         console.log('login success');
         console.log(xmlHttp.responseText);
@@ -34,8 +33,8 @@ const Login: React.FC = () => {
     xmlHttp.open("POST", rootUrl+'/roommate/login', true); // true for async
     xmlHttp.setRequestHeader('Content-Type', 'application/json');
     xmlHttp.send(JSON.stringify({
-      username: username,
-      password: password
+      username,
+      password,
     }));
   }
   return (
