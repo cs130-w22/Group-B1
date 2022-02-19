@@ -34,8 +34,8 @@
 
   overflow-x: hidden;
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
 .viewed-profile-panel {
@@ -43,7 +43,7 @@
 
   position: absolute;
   top: 0px;
-  left:  30%;
+  left: 30%;
   width: 70%;
   height: 100%;
 
@@ -52,8 +52,6 @@
 }
 
 /********************************************/
-
-
 
 .test-class {
   background-color: #dddddd;
@@ -67,8 +65,8 @@
 
   overflow-x: hidden;
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
 /*.miniProfile {

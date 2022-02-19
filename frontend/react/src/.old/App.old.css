@@ -69,8 +69,8 @@
 
   overflow-x: hidden;
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
 .viewed-profile-panel {
@@ -78,7 +78,7 @@
 
   position: absolute;
   top: 0px;
-  left:  30%;
+  left: 30%;
   width: 70%;
   height: 100%;
 
@@ -89,44 +89,44 @@
 /********************************************/
 
 .profilePicture {
-        background-color: #ffffff;
+  background-color: #ffffff;
 
-        display:  inline-block;
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        width: 40px;
-        height: 40px;
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
 
-        border-radius: 50%;
-      }
-      .profileName {
-        display:  inline-block;
-        position:  absolute;
-        /*top: 50%;*/
-        left: 80px;
-        width: calc(100% - 160px);
-        /*transform:  translate(0%, -50%);*/
+  border-radius: 50%;
+}
+.profileName {
+  display: inline-block;
+  position: absolute;
+  /*top: 50%;*/
+  left: 80px;
+  width: calc(100% - 160px);
+  /*transform:  translate(0%, -50%);*/
 
-        font: 24px Calibri;
-      }
-      .settingsButton {
-        background: url('source/edit.png');
-        background-color: #ff000022;
-        background-position: center;
-        background-size: 60%;
-        background-repeat: no-repeat;
+  font: 24px Calibri;
+}
+.settingsButton {
+  background: url("source/edit.png");
+  background-color: #ff000022;
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
 
-        display:  inline-block;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
 
-        border: 2px solid #000000;
-        border-radius: 50%;
-      }
+  border: 2px solid #000000;
+  border-radius: 50%;
+}
 
 .test-class {
   background-color: #dddddd;
@@ -140,59 +140,59 @@
 
   overflow-x: hidden;
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
 .miniProfile {
-      background-color: #ffffff;
+  background-color: #ffffff;
 
-      display: block;
-      position: relative;
-      height: 60px;
-      margin-bottom: 10px;
+  display: block;
+  position: relative;
+  height: 60px;
+  margin-bottom: 10px;
 
-      border: 2px solid #000000;
-      border-radius: 12px;
-    }
-      .miniProfilePicture {
-        background-color: #dddddd;
+  border: 2px solid #000000;
+  border-radius: 12px;
+}
+.miniProfilePicture {
+  background-color: #dddddd;
 
-        display: inline-block;
-        position: absolute;
-        top: 50%;
-        left: 30px;
-        width: 50px;
-        height: 50px;
-        transform: translate(-50%, -50%);
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
 
-        border-radius: 50%;
-      }
-      .miniProfilePreference {
-        background-color: #bbbbbb;
+  border-radius: 50%;
+}
+.miniProfilePreference {
+  background-color: #bbbbbb;
 
-        display: inline-block;
-        position: absolute;
-        top: 75%;
-        left: 45px;
-        width: 20px;
-        height: 20px;
-        transform: translate(-50%, -50%);
+  display: inline-block;
+  position: absolute;
+  top: 75%;
+  left: 45px;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
 
-        border-radius: 50%;
-      }
-      .miniProfileName {
-        display: inline-block;
-        position: absolute;
-        top: -15px;
-        left: 65px;
+  border-radius: 50%;
+}
+.miniProfileName {
+  display: inline-block;
+  position: absolute;
+  top: -15px;
+  left: 65px;
 
-        font-weight: bold;
-        font-size: 20px;
-      }
-      .miniProfileText {
-        display: inline-block;
-        position: absolute;
-        top: 15px;
-        left: 65px;
-      }
+  font-weight: bold;
+  font-size: 20px;
+}
+.miniProfileText {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  left: 65px;
+}

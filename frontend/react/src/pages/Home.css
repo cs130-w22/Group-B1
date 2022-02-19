@@ -1,4 +1,3 @@
-
 :root {
   --gray-white: rgb(226, 227, 227);
   --white: rgb(247, 247, 247);
@@ -15,7 +14,7 @@ body {
 hr {
   height: 0px;
   width: 85%;
-  border-bottom: 2px;   /* for some reason, this removes the weird notch on the bottom left */
+  border-bottom: 2px; /* for some reason, this removes the weird notch on the bottom left */
 }
 
 .home-outer {
@@ -72,7 +71,7 @@ hr {
 .home-text_wrapper {
   position: absolute;
   left: 0;
-  margin-left: 9vw;  
+  margin-left: 9vw;
 }
 
 .home-text_wrapper h3 {
@@ -126,10 +125,12 @@ hr {
 
   border-radius: 17.5px;
   background-color: var(--gray-white);
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 
-.home-home, .home-signin {
+.home-home,
+.home-signin {
   width: 45%;
   max-height: 45%;
 
@@ -137,7 +138,8 @@ hr {
   padding: 0;
 }
 
-.home-login, .home-signup {
+.home-login,
+.home-signup {
   padding: 5px;
   margin-left: 20px;
   margin-right: 20px;
@@ -159,13 +161,15 @@ hr {
   transition: 0.5s;
 }
 
-.home-login:hover, .home-signup:hover {
+.home-login:hover,
+.home-signup:hover {
   opacity: 0.75;
   filter: brightness(1.15);
 }
 
 /* Animate an underline when hovering over machine */
-.home-login::before, .home-signup::before {
+.home-login::before,
+.home-signup::before {
   content: "";
   position: absolute;
   width: 75%;
@@ -184,17 +188,20 @@ hr {
   transition: all 0.3s ease-in-out 0s;
 }
 
-.home-login:hover::before, .home-signup:hover::before {
+.home-login:hover::before,
+.home-signup:hover::before {
   visibility: visible;
   transform: scaleX(1);
 }
 
-.home-login a, .home-signup a {
+.home-login a,
+.home-signup a {
   color: white;
   text-decoration: none;
 }
 
-.home-login p, .home-signup p {
+.home-login p,
+.home-signup p {
   margin-top: -10px;
   margin-bottom: 10px;
   margin-left: 0px;
@@ -208,7 +215,9 @@ hr {
   width: 100%;
 }
 
-.home-settings, .home-search, .home-contact {
+.home-settings,
+.home-search,
+.home-contact {
   color: var(--purple);
 
   padding-top: 25px;
@@ -233,14 +242,15 @@ hr {
   margin-right: 3vw;
 
   border-radius: 17.5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   background-color: var(--white);
 }
 
 .home-col h3 {
   padding-bottom: 0;
   margin-bottom: 5px;
- 
+
   font-size: calc(7.5px + 2vmin);
   letter-spacing: 1px;
 }
@@ -256,56 +266,56 @@ hr {
 }
 
 .home-quote_wrapper {
-	display: flex;
-	align-items: center;
-	text-align: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .home-quote_wrapper img {
-	/* this may not be responsive */
-	height: 50%;
-	max-width: 50%;
+  /* this may not be responsive */
+  height: 50%;
+  max-width: 50%;
 
-	margin: 0;
-	padding: 10px;
+  margin: 0;
+  padding: 10px;
 }
 
 .home-quote {
-	margin: 0;
-	margin-left: -30px;
+  margin: 0;
+  margin-left: -30px;
 
-	padding: 0;
-	text-align: left;
+  padding: 0;
+  text-align: left;
 }
 
 .home-quoter {
-	margin: 0;
-	margin-top: -10px;
+  margin: 0;
+  margin-top: -10px;
 
-	padding: 0;
-	text-align: left;
+  padding: 0;
+  text-align: left;
 }
 
 footer {
-	position: absolute;
-	bottom: -500px;
-	left: 0;
+  position: absolute;
+  bottom: -500px;
+  left: 0;
 
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 
-	height: 200px;
-	width: 100%;
-	background-color: var(--pink);
+  height: 200px;
+  width: 100%;
+  background-color: var(--pink);
 }
 
 footer p {
-	text-align: center;
-	font-size: calc(10px + 1vmin);
+  text-align: center;
+  font-size: calc(10px + 1vmin);
 }
 
 .home-signup_footer a {

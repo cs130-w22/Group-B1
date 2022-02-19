@@ -12,4 +12,3 @@ export interface RoommateProfile {
   personality: PersonalityTrait[];
   additionalInfo: string;
 }
-
