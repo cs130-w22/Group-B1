@@ -9,25 +9,24 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const handleUsernameChange = (event) => {
-    window['connectDev'].user.username = event.target.value;
+    //window['connectDev'].user.username = event.target.value; // track data for debug
     setUsername(event.target.value);
   };
   const handlePasswordChange = (event) => {
-    window['connectDev'].user.password = event.target.value;
+    //window['connectDev'].user.password = event.target.value; // track data for debug
     setPassword(event.target.value);
   };
-  const handleSubmit = (event) => {
-    const rootUrl = window['connectDev'].rootUrl;
+  const handleSubmit = () => {
+    const rootUrl = 'http://localhost:5000';
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
       if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-        const response = JSON.parse(xmlHttp.responseText);
-        window['connectDev'].authToken = response.accessToken;
         console.log('login success');
         console.log(xmlHttp.responseText);
+        window['authToken'] = JSON.parse(xmlHttp.responseText).accessToken; // change this to proper token-passing later
         window.location.pathname = '/search';
-      } else {
-        console.log('login failed');
+      } else if (xmlHttp.readyState === 4) {
+        console.log(JSON.parse(xmlHttp.responseText).message);
       }
     }
     xmlHttp.open("POST", rootUrl+'/roommate/login', true); // true for async

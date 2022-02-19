@@ -140,7 +140,7 @@ input {
 	font-size: calc(8px + 1vmin);
 }
 
-.signup-age_container {
+.signup-area_container {
 	display: flex;
 	margin-top: 10px;
 	margin-bottom: 0px;
@@ -149,11 +149,11 @@ input {
 
 }
 
-.signup-age_container p {
+.signup-area_container p {
 	font-size: calc(10px + 1vmin);
 }
 
-.signup-age_container p, .signup-age_container select {
+.signup-area_container p, .signup-area_container select {
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: 10px;
