@@ -54,9 +54,9 @@ PUT  /roommate/:username
 
 GET /roommate/recommendations/:username
 
-GET /roommate/areas
-GET /roommate/hobbies
-GET /roommate/personalities
+GET /roommate/types/areas
+GET /roommate/types/hobbies
+GET /roommate/types/personalities
 
 GET /roommate/list/:username
 POST /roommate/list/:username
@@ -369,7 +369,7 @@ GET /roommate/types/areas
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:5000/roommate/areas'
+curl --location --request GET 'http://localhost:5000/roommate/types/areas'
 ```
 
 Example Response:
@@ -394,7 +394,7 @@ GET /roommate/types/hobbies
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:5000/roommate/hobbies'
+curl --location --request GET 'http://localhost:5000/roommate/types/hobbies'
 ```
 
 Example Response:
@@ -423,7 +423,7 @@ GET /roommate/types/personalities
 Example Request:
 
 ```
-curl --location --request GET 'http://localhost:5000/roommate/personalities'
+curl --location --request GET 'http://localhost:5000/roommate/types/personalities'
 ```
 
 Example Response:

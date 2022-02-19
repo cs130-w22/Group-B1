@@ -2,9 +2,8 @@
 import React from 'react';
 import {useState} from 'react';
 import './Login.css';
-import * as Unicons from '@iconscout/react-unicons';
 
-var people1 = require('../resources/people1.png')
+const people1 = require('../resources/people1.png')
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
