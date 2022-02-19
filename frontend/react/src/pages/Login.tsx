@@ -20,20 +20,20 @@ const Login: React.FC = () => {
     const rootUrl = 'http://localhost:5000';
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
         console.log('login success');
         console.log(xmlHttp.responseText);
         window['authToken'] = JSON.parse(xmlHttp.responseText).accessToken; // change this to proper token-passing later
         window.location.pathname = '/search';
-      } else if (xmlHttp.readyState == 4) {
+      } else if (xmlHttp.readyState === 4) {
         console.log(JSON.parse(xmlHttp.responseText).message);
       }
     }
     xmlHttp.open("POST", rootUrl+'/roommate/login', true); // true for async
     xmlHttp.setRequestHeader('Content-Type', 'application/json');
     xmlHttp.send(JSON.stringify({
-      username: username,
-      password: password
+      username,
+      password,
     }));
   }
   return (

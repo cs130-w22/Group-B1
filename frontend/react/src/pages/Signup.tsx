@@ -25,21 +25,21 @@ const getTypes = (callback) => {
   // fetch areas
   const xmlHttpAreas = new XMLHttpRequest();
   xmlHttpAreas.onreadystatechange = function() { 
-    if (xmlHttpAreas.readyState == 4 && xmlHttpAreas.status == 200) {
+    if (xmlHttpAreas.readyState === 4 && xmlHttpAreas.status === 200) {
       results.areas = JSON.parse(xmlHttpAreas.responseText);
       console.log('fetched areas list');
       console.log(xmlHttpAreas.responseText);
       // fetch hobbies
       const xmlHttpHobbies = new XMLHttpRequest();
       xmlHttpHobbies.onreadystatechange = function() {
-        if (xmlHttpHobbies.readyState == 4 && xmlHttpHobbies.status == 200) {
+        if (xmlHttpHobbies.readyState === 4 && xmlHttpHobbies.status === 200) {
           results.hobbies = JSON.parse(xmlHttpHobbies.responseText);
           console.log('fetched hobbies list');
           console.log(xmlHttpHobbies.responseText);
           // fetch personalities
           const xmlHttpPersonalities = new XMLHttpRequest();
           xmlHttpPersonalities.onreadystatechange = function() {
-            if (xmlHttpPersonalities.readyState == 4 && xmlHttpPersonalities.status == 200) {
+            if (xmlHttpPersonalities.readyState === 4 && xmlHttpPersonalities.status === 200) {
               results.personalities = JSON.parse(xmlHttpPersonalities.responseText);
               console.log('fetched personalities list');
               console.log(xmlHttpPersonalities.responseText);
@@ -103,11 +103,11 @@ const Signup: React.FC = () => {
     console.log(area.toString());
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
         console.log('registration success');
         console.log(xmlHttp.responseText);
         window.location.pathname = '/login';
-      } else if (xmlHttp.readyState == 4) {
+      } else if (xmlHttp.readyState === 4) {
         console.log(JSON.parse(xmlHttp.responseText).message);
       }
     }
@@ -118,12 +118,12 @@ const Signup: React.FC = () => {
   const fetchAreas = () => {
     const xmlHttpAreas = new XMLHttpRequest();
     xmlHttpAreas.onreadystatechange = function() { 
-      if (xmlHttpAreas.readyState == 4 && xmlHttpAreas.status == 200) {
+      if (xmlHttpAreas.readyState === 4 && xmlHttpAreas.status === 200) {
         console.log('fetched areas list');
         console.log(xmlHttpAreas.responseText);
         setAreas(JSON.parse(xmlHttpAreas.responseText));
         setAreaText('Where are you from?');
-      } else if (xmlHttpAreas.readyState == 4) {
+      } else if (xmlHttpAreas.readyState === 4) {
         console.log(JSON.parse(xmlHttpAreas.responseText).message);
       }
     }
@@ -156,7 +156,7 @@ const Signup: React.FC = () => {
                   <p>{areaText}</p>
                   <select onChange={handleAreaChange}>
                     {areas.map((area)=>{
-                      return (area=='Los Angeles')
+                      return (area==='Los Angeles')
                       ? <option selected key={area} value={area}>{area}</option>
                       : <option key={area} value={area}>{area}</option>
                     })}
