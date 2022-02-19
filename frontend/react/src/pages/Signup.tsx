@@ -72,8 +72,8 @@ const Signup: React.FC = () => {
   // user forms data
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
+  const [firstName, setFirstname] = useState('');
+  const [lastName, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [area, setArea] = useState('Los Angeles');
   // user form updates
@@ -87,20 +87,20 @@ const Signup: React.FC = () => {
   const rootUrl = 'http://localhost:5000';
   const handleSubmit = () => {
     const newUser = {
-      username: username,
-      password: password,
+      username,
+      password,
       profile: {
-        firstName: firstname,
-        lastName: lastname,
-        email: email,
-        area: area.toString(),
+        firstName,
+        lastName,
+        email,
+        area,
         bio: '[Tell everyone about yourself!]',
         hobbies: [],
         personality: [],
         additionalInfo: '[Anything else you think people should know about you?]'
       }
     };
-    console.log(area.toString());
+    console.log(area);
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
       if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
@@ -144,7 +144,7 @@ const Signup: React.FC = () => {
               <div className="signup-info_container">
                 <p className="signup-title">Login Info</p>
                 <input type="text" placeholder=" Username" onChange={handleUsernameChange}/>
-                <input type="text" placeholder=" Password" onChange={handlePasswordChange}/>
+                <input type="password" placeholder=" Password" onChange={handlePasswordChange}/>
               </div>
 
               <div className="signup-info_container">
