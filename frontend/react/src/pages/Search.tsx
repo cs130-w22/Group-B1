@@ -21,8 +21,6 @@ interface Roommate {
   profile: RoommateProfile;
 }
 
-var viewedId:number = 0;
-
 window['connectDev'] = {
   rootUrl: 'http://localhost:5000',
 
@@ -41,82 +39,7 @@ window['connectDev'] = {
     }
   },
   accessToken: '',
-
-  registerStub: function(): void {
-    console.log('registering debug user...');
-    var rootUrl = window['connectDev'].rootUrl;
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() { 
-      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-        console.log('registration success');
-        console.log(xmlHttp.responseText);
-      }
-    }
-    xmlHttp.open("POST", rootUrl+'/roommate/', true); // true for async
-    xmlHttp.setRequestHeader('Content-Type', 'application/json');
-    xmlHttp.send(JSON.stringify( window['connectDev'].user ));
-  },
-  
-  // autoLogin: function(): void {
-  //   console.log('registering debug user...');
-  //   var rootUrl = window['connectDev'].rootUrl;
-  //   var xmlHttp = new XMLHttpRequest();
-  //   xmlHttp.onreadystatechange = function() { 
-  //     if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-  //       console.log('registration success');
-  //       console.log(xmlHttp.responseText);
-
-  //       console.log('logging in debug user...');
-  //       var rootUrl = window['connectDev'].rootUrl;
-  //       var xmlHttp = new XMLHttpRequest();
-  //       xmlHttp.onreadystatechange = function() { 
-  //         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-  //           var response = JSON.parse(xmlHttp.responseText);
-  //           window['connectDev'].authToken = response.accessToken;
-  //           console.log('login success');
-  //           console.log(xmlHttp.responseText);
-  //         }
-  //       }
-  //       xmlHttp.open("POST", rootUrl+'/roommate/login', true); // true for async
-  //       xmlHttp.setRequestHeader('Content-Type', 'application/json');
-  //       xmlHttp.send(JSON.stringify({
-  //         username: window['connectDev'].user.username,
-  //         password: window['connectDev'].user.password
-  //       }));
-  //     }
-  //   }
-  //   xmlHttp.open("POST", rootUrl+'/roommate/', true); // true for async
-  //   xmlHttp.setRequestHeader('Content-Type', 'application/json');
-  //   xmlHttp.send(JSON.stringify( window['connectDev'].user ));
-  // },
-
-  testGet: function(): void {
-    console.log('attempting get...');
-    var rootUrl = window['connectDev'].rootUrl;
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() { 
-      if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
-        console.log(xmlHttp.responseText);
-    }
-    xmlHttp.open("GET", rootUrl, true); // true for async
-    xmlHttp.send(null);
-  }
 };
-
-var viewedId:number = 0;
-
-var mockUserProfile:RoommateProfile = {
-  firstName: "Peter",
-  lastName: "Parker",
-  email: "notspiderman@marvel.com",
-  area: 'New York',
-  bio: "Hi I'm Peter Parker, your friendly neighborhood Spiderman",
-  hobbies: ["reading", "running"],
-  personality: ["introvert"],
-  additionalInfo: "I'm looking for a roommate to help me fight crime!"
-}
-
-
 interface UserProfilePanelProps {
   onSettingsClick: () => void,
 }
@@ -134,51 +57,8 @@ interface ProfilePreferencesPanelProps {
   onCloseClick: () => void
 }
 
-// fetch data
-var authToken = ''; // eventually stored in cookie
-var rootUrl = 'http://localhost:5000';
+const rootUrl = 'http://localhost:5000';
 
-
-
-
-function getAllRoommates(callback:(string)=>void): void {
-  console.log('looking up roommates...');
-
-  // callback(roommates);
-  // return;
-
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function() { 
-    if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-      console.log(xmlHttp.responseText);
-      callback(xmlHttp.responseText);
-    }
-  }
-  xmlHttp.open("GET", rootUrl+'/roommate/', true); // true for async
-  xmlHttp.setRequestHeader('authorization', 'Bearer '+window['connectDev'].accessToken);
-  xmlHttp.send(null);
-}
-window['connectDev'].getAllRoommates = getAllRoommates;
-function getRoommate(username:string, callback:(string)=>void): void {
-  console.log('looking up profile for '+username+'...');
-
-  // for (let roommate of roommates) {
-  //   if (username === roommate.username) {
-  //     callback(roommate);
-  //     return;
-  //   }
-  // }
-  // return;
-
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function() { 
-    if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
-      callback(xmlHttp.responseText);
-  }
-  xmlHttp.open("GET", rootUrl+'/roommate/'+username, true); // true for async
-  xmlHttp.setRequestHeader('authorization', 'Bearer '+window['connectDev'].accessToken);
-  xmlHttp.send(null);
-}
 function getFilteredRoommates(filter, callback:(string)=>void): void {
   console.log('looking up roommates that match filter...');
 
@@ -199,13 +79,6 @@ function getFilteredRoommates(filter, callback:(string)=>void): void {
   xmlHttp.setRequestHeader('authorization', 'Bearer '+window['connectDev'].accessToken);
   xmlHttp.send(null);
 }
-
-// components
-// const useProfile = (newId) => {
-//   const [id, setId] = useState(0);
-//   setId(newId);
-//   return [id, setId];
-// }
 
 const fetchProfile = async (): Promise<Response> => {
   const rootUrl = 'http://localhost:5000';
@@ -493,7 +366,6 @@ const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (props: ViewedProf
     const response = await fetchAllProfiles();
     if (response.ok) {
       console.log("got all profiles");
-      
       setProfiles(await response.json());
     }
   };
@@ -509,13 +381,13 @@ const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (props: ViewedProf
     <div className='viewed-profile-panel'>
       <div className="fullProfilePicture"/>
       <div className="fullProfilePreference"/>
-      <p className="fullProfileName">{profiles[id].profile.firstName} {profiles[id].profile.lastName}</p>
-      <p className="fullProfileText">{profiles[id].profile.personality.join(', ')}</p>
-      <p className="email">{profiles[id].profile.email}</p>
+      <p className="fullProfileName">{profiles[id]?.profile.firstName} {profiles[id]?.profile.lastName}</p>
+      <p className="fullProfileText">{profiles[id]?.profile.personality.join(', ')}</p>
+      <p className="email">{profiles[id]?.profile.email}</p>
       <div className="fullProfileBio">
-        <p>I am from <b>{profiles[id].profile.area}</b>!</p>
-        <p>{profiles[id].profile.bio}</p>
-        <p>{profiles[id].profile.additionalInfo}</p>
+        <p>I am from <b>{profiles[id]?.profile.area}</b>!</p>
+        <p>{profiles[id]?.profile.bio}</p>
+        <p>{profiles[id]?.profile.additionalInfo}</p>
       </div>
     </div>
     :
@@ -524,20 +396,6 @@ const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (props: ViewedProf
     </div>
   )
 }
-
-
-// <div className="fullProfilePicture" onClick={update}/>
-
-
-// contentStr += '<div id="fullProfilePicture"></div>';
-// contentStr += '<div id="fullProfilePreference"></div>';
-// contentStr += '<p id="fullProfileName">' + profiles[profileIndex].firstname + ' '  + profiles[profileIndex].lastname + '</p>';
-// contentStr += '<p id="fullProfileText">' + profiles[profileIndex].personality + '</p>';
-// contentStr += '<div id="personalityPreferences">[personality: self-desc + roommate prefs]</div>';
-// contentStr += '<div id="housingPreferences">[housing: prefs + current residence if applicable]</div>';
-// contentStr += '<p id="email">example@email.com</p>';
-
-
 
 // page
 const Search: React.FC = () => {
