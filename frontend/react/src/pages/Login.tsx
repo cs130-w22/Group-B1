@@ -23,7 +23,9 @@ const Login: React.FC = () => {
       if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
         console.log('login success');
         console.log(xmlHttp.responseText);
-        window['authToken'] = JSON.parse(xmlHttp.responseText).accessToken; // change this to proper token-passing later
+        window.sessionStorage.setItem("username", username);
+        const accessToken = JSON.parse(xmlHttp.responseText).accessToken; // change this to proper token-passing later
+        window.sessionStorage.setItem("accessToken", accessToken);
         window.location.pathname = '/search';
       } else if (xmlHttp.readyState === 4) {
         console.log(JSON.parse(xmlHttp.responseText).message);
