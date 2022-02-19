@@ -61,24 +61,9 @@ const getTypes = (callback) => {
   xmlHttpAreas.send(null);
   // finish fetch areas
 }
-getTypes((types)=>{
-  window['types'] = types;
-});
-
-// const fillAreas = () => {
-//   let results = [] as any
-//   const finish = () => {
-//     console.log(results);
-//     return results;
-//   }
-//   let temp = getTypes((types)=>{
-//     for (let area of types.areas) {
-//       results.push(<option key={area} value="{area}">{area}</option>)
-//     }
-//     finish();
-//   });
-//   console.log(temp);
-// }
+// getTypes((types)=>{
+//   window['types'] = types;
+// });
 
 const Signup: React.FC = () => {
   const [areas, setAreas] = useState(['']);
@@ -99,24 +84,22 @@ const Signup: React.FC = () => {
   }
   const fetchAreas = () => {
     const rootUrl = 'http://localhost:5000';
-    // fetch areas
     const xmlHttpAreas = new XMLHttpRequest();
     xmlHttpAreas.onreadystatechange = function() { 
       if (xmlHttpAreas.readyState == 4 && xmlHttpAreas.status == 200) {
         console.log('fetched areas list');
         console.log(xmlHttpAreas.responseText);
         setAreas(JSON.parse(xmlHttpAreas.responseText));
+        console.log(areas);
         setArea(areas[0]);
       }
     }
     xmlHttpAreas.open("GET", rootUrl+'/roommate/types/areas', true); // true for async
     xmlHttpAreas.send(null);
-    // finish fetch areas
   }
   useEffect(()=>{
     fetchAreas();
-    return () => {};
-  })
+  }, []);
   return (
     <div className="center">
       <div className="square top_left"></div>
@@ -138,8 +121,10 @@ const Signup: React.FC = () => {
                 <input type="text" placeholder=" Last Name"/>
                 <input type="text" placeholder=" Email"/>
                 <div className="signup-age_container">
-                  <p>Age</p>
-                  <AreasList areas={areas} />
+                  <p>Where are you from?</p>
+                  <select>
+                    {areas.map((area)=>{return <option key={area} value="{area}">{area}</option>})}
+                  </select>
                 </div>
               </div>
 
@@ -151,17 +136,6 @@ const Signup: React.FC = () => {
             <img src={people2} className="signup-people2" alt="people" /> 
           </div>
     </div>
-  )
-}
-
-interface Areas {
-  areas: string[]
-}
-const AreasList: React.FC<{areas:string[]}> = ({areas}) => {
-  return (
-    <select>
-      {areas.map((area)=>{<option key={area} value="{area}">{area}</option>})}
-    </select>
   )
 }
 
