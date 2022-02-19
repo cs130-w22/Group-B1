@@ -66,40 +66,72 @@ const getTypes = (callback) => {
 // });
 
 const Signup: React.FC = () => {
+  // client data
   const [areas, setAreas] = useState(['']);
+  const [areaText, setAreaText] = useState('Loading regions...');
+  // user forms data
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [area, setArea] = useState('Los Angeles');
+  // user form updates
   const handleUsernameChange = (event) => { setUsername(event.target.value); };
   const handlePasswordChange = (event) => { setPassword(event.target.value); };
   const handleFirstnameChange = (event) => { setFirstname(event.target.value); };
   const handleLastnameChange = (event) => { setLastname(event.target.value); };
   const handleEmailChange = (event) => { setEmail(event.target.value); };
   const handleAreaChange = (event) => { setArea(event.target.value); };
-  const handleSubmit = (event) => {
-    //
+  // server interaction
+  const rootUrl = 'http://localhost:5000';
+  const handleSubmit = () => {
+    const newUser = {
+      username: username,
+      password: password,
+      profile: {
+        firstName: firstname,
+        lastName: lastname,
+        email: email,
+        area: area.toString(),
+        bio: '[Tell everyone about yourself!]',
+        hobbies: [],
+        personality: [],
+        additionalInfo: '[Anything else you think people should know about you?]'
+      }
+    };
+    console.log(area.toString());
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        console.log('registration success');
+        console.log(xmlHttp.responseText);
+        window.location.pathname = '/login';
+      } else if (xmlHttp.readyState == 4) {
+        console.log(JSON.parse(xmlHttp.responseText).message);
+      }
+    }
+    xmlHttp.open('POST', rootUrl+'/roommate/', true); // true for async
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send(JSON.stringify( newUser ));
   }
   const fetchAreas = () => {
-    const rootUrl = 'http://localhost:5000';
     const xmlHttpAreas = new XMLHttpRequest();
     xmlHttpAreas.onreadystatechange = function() { 
       if (xmlHttpAreas.readyState == 4 && xmlHttpAreas.status == 200) {
         console.log('fetched areas list');
         console.log(xmlHttpAreas.responseText);
         setAreas(JSON.parse(xmlHttpAreas.responseText));
-        console.log(areas);
-        setArea(areas[0]);
+        setAreaText('Where are you from?');
+      } else if (xmlHttpAreas.readyState == 4) {
+        console.log(JSON.parse(xmlHttpAreas.responseText).message);
       }
     }
-    xmlHttpAreas.open("GET", rootUrl+'/roommate/types/areas', true); // true for async
+    xmlHttpAreas.open('GET', rootUrl+'/roommate/types/areas', true); // true for async
     xmlHttpAreas.send(null);
   }
-  useEffect(()=>{
-    fetchAreas();
-  }, []);
+  useEffect(()=>{ fetchAreas(); }, []); // runs once on init
+  // component
   return (
     <div className="center">
       <div className="square top_left"></div>
@@ -111,24 +143,28 @@ const Signup: React.FC = () => {
 
               <div className="signup-info_container">
                 <p className="signup-title">Login Info</p>
-                <input type="text" placeholder=" Username"/>
-                <input type="text" placeholder=" Password"/>
+                <input type="text" placeholder=" Username" onChange={handleUsernameChange}/>
+                <input type="text" placeholder=" Password" onChange={handlePasswordChange}/>
               </div>
 
               <div className="signup-info_container">
                 <p className="signup-title">Tell us about yourself</p>
-                <input type="text" placeholder=" First Name"/>
-                <input type="text" placeholder=" Last Name"/>
-                <input type="text" placeholder=" Email"/>
-                <div className="signup-age_container">
-                  <p>Where are you from?</p>
-                  <select>
-                    {areas.map((area)=>{return <option key={area} value="{area}">{area}</option>})}
+                <input type="text" placeholder=" First Name" onChange={handleFirstnameChange}/>
+                <input type="text" placeholder=" Last Name" onChange={handleLastnameChange}/>
+                <input type="text" placeholder=" Email" onChange={handleEmailChange}/>
+                <div className="signup-area_container">
+                  <p>{areaText}</p>
+                  <select onChange={handleAreaChange}>
+                    {areas.map((area)=>{
+                      return (area=='Los Angeles')
+                      ? <option selected key={area} value={area}>{area}</option>
+                      : <option key={area} value={area}>{area}</option>
+                    })}
                   </select>
                 </div>
               </div>
 
-              <div className="signup-sign_up_button">
+              <div className="signup-sign_up_button" onClick={handleSubmit}>
                 <p>Sign Up</p>
               </div>
 
