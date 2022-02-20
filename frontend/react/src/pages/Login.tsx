@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { BACKEND_URL } from "../util/Constants";
 import "./Login.css";
 
 const people1 = require("../resources/people1.png");
@@ -15,29 +16,24 @@ const Login: React.FC = () => {
     //window['connectDev'].user.password = event.target.value; // track data for debug
     setPassword(event.target.value);
   };
-  const handleSubmit = () => {
-    const rootUrl = "http://localhost:5000";
-    const xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-        console.log("login success");
-        console.log(xmlHttp.responseText);
-        window.sessionStorage.setItem("username", username);
-        const accessToken = JSON.parse(xmlHttp.responseText).accessToken; // change this to proper token-passing later
-        window.sessionStorage.setItem("accessToken", accessToken);
-        window.location.pathname = "/search";
-      } else if (xmlHttp.readyState === 4) {
-        console.log(JSON.parse(xmlHttp.responseText).message);
-      }
-    };
-    xmlHttp.open("POST", rootUrl + "/roommate/login", true); // true for async
-    xmlHttp.setRequestHeader("Content-Type", "application/json");
-    xmlHttp.send(
-      JSON.stringify({
-        username,
-        password,
-      })
-    );
+  const handleSubmit = async () => {
+    const url = BACKEND_URL + "/roommate/login";
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    if (response.ok) {
+      const accessToken = (await response.json()).accessToken;
+      window.sessionStorage.setItem("accessToken", accessToken);
+      window.sessionStorage.setItem("username", username);
+      window.location.pathname = "/search";
+    } else {
+      const errorMessage = (await response.json()).message;
+      alert(errorMessage);
+    }
   };
   return (
     <div className="login-center">

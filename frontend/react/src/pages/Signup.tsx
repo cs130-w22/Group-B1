@@ -1,81 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { BACKEND_URL } from "../util/Constants";
 import "./Signup.css";
-import * as Unicons from "@iconscout/react-unicons";
 
-var homePageIcon = require("../resources/banner.png");
-var people2 = require("../resources/people2.png");
-
-const fillSelect = () => {
-  var arr = [] as any;
-  for (let i = 18; i < 100; i++) {
-    arr.push(
-      <option key={i} value="{i}">
-        {i}
-      </option>
-    );
-  }
-  return arr;
-};
-
-const getTypes = (callback) => {
-  const results = {
-    areas: [],
-    hobbies: [],
-    personalities: [],
-  };
-  const rootUrl = "http://localhost:5000";
-  // fetch areas
-  const xmlHttpAreas = new XMLHttpRequest();
-  xmlHttpAreas.onreadystatechange = function () {
-    if (xmlHttpAreas.readyState === 4 && xmlHttpAreas.status === 200) {
-      results.areas = JSON.parse(xmlHttpAreas.responseText);
-      console.log("fetched areas list");
-      console.log(xmlHttpAreas.responseText);
-      // fetch hobbies
-      const xmlHttpHobbies = new XMLHttpRequest();
-      xmlHttpHobbies.onreadystatechange = function () {
-        if (xmlHttpHobbies.readyState === 4 && xmlHttpHobbies.status === 200) {
-          results.hobbies = JSON.parse(xmlHttpHobbies.responseText);
-          console.log("fetched hobbies list");
-          console.log(xmlHttpHobbies.responseText);
-          // fetch personalities
-          const xmlHttpPersonalities = new XMLHttpRequest();
-          xmlHttpPersonalities.onreadystatechange = function () {
-            if (
-              xmlHttpPersonalities.readyState === 4 &&
-              xmlHttpPersonalities.status === 200
-            ) {
-              results.personalities = JSON.parse(
-                xmlHttpPersonalities.responseText
-              );
-              console.log("fetched personalities list");
-              console.log(xmlHttpPersonalities.responseText);
-              // final return
-              callback(results);
-            }
-          };
-          xmlHttpPersonalities.open(
-            "GET",
-            rootUrl + "/roommate/types/personalities",
-            true
-          ); // true for async
-          xmlHttpPersonalities.send(null);
-          // finish fetch personalities
-        }
-      };
-      xmlHttpHobbies.open("GET", rootUrl + "/roommate/types/hobbies", true); // true for async
-      xmlHttpHobbies.send(null);
-      // finish fetch hobbies
-    }
-  };
-  xmlHttpAreas.open("GET", rootUrl + "/roommate/types/areas", true); // true for async
-  xmlHttpAreas.send(null);
-  // finish fetch areas
-};
-// getTypes((types)=>{
-//   window['types'] = types;
-// });
+const people2 = require("../resources/people2.png");
 
 const Signup: React.FC = () => {
   // client data
@@ -108,7 +36,6 @@ const Signup: React.FC = () => {
     setArea(event.target.value);
   };
   // server interaction
-  const rootUrl = "http://localhost:5000";
   const handleSubmit = async () => {
     const newUser = {
       username,
@@ -142,21 +69,20 @@ const Signup: React.FC = () => {
       console.log((await response.json()).message);
     }
   };
-  const fetchAreas = () => {
-    const xmlHttpAreas = new XMLHttpRequest();
-    xmlHttpAreas.onreadystatechange = function () {
-      if (xmlHttpAreas.readyState === 4 && xmlHttpAreas.status === 200) {
-        console.log("fetched areas list");
-        console.log(xmlHttpAreas.responseText);
-        setAreas(JSON.parse(xmlHttpAreas.responseText));
-        setAreaText("Where are you from?");
-      } else if (xmlHttpAreas.readyState === 4) {
-        console.log(JSON.parse(xmlHttpAreas.responseText).message);
-      }
-    };
-    xmlHttpAreas.open("GET", rootUrl + "/roommate/types/areas", true); // true for async
-    xmlHttpAreas.send(null);
+  const fetchAreas = async () => {
+    const url = BACKEND_URL + "/roommate/types/areas";
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      setAreas(await response.json());
+      setAreaText("Where are you from?");
+    }
   };
+
   useEffect(() => {
     fetchAreas();
   }, []); // runs once on init

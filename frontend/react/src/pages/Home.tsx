@@ -1,19 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import Login from "./Login";
-import Signup from "./Signup";
 import * as Unicons from "@iconscout/react-unicons";
 
 // images
-var people = require("../resources/people.png");
-var man1 = require("../resources/man1.png");
-var woman1 = require("../resources/woman1.png");
-var woman2 = require("../resources/woman2.png");
+const people = require("../resources/people.png");
+const man1 = require("../resources/man1.png");
+const woman1 = require("../resources/woman1.png");
+const woman2 = require("../resources/woman2.png");
 
 // unicon logo sizes
-var col_icon_size = 47.5;
-var login_icon_size = 60;
+const col_icon_size = 47.5;
+const login_icon_size = 60;
 
 const Home: React.FC = () => {
   return (
