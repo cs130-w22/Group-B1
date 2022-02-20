@@ -12,6 +12,8 @@ import {
   fetchListUsernames,
   addUsernameToList,
   deleteUsernameFromList,
+  fetchAreas,
+  fetchProfilesWithFilters,
 } from "../../util/ApiCalls";
 
 interface RoommateSelectionPanelProps {
@@ -83,10 +85,53 @@ export const RoommateSelectionPanel: React.FC<RoommateSelectionPanelProps> = (
     }
   };
 
+  const [areas, setAreas] = useState<any>([]);
+  const getAreas = async () => {
+    const response = await fetchAreas();
+    if (response.ok) {
+      const officialAreas = await response.json();
+      setAreas(["Any", ...officialAreas]);
+    }
+  };
+  const areaOptions = areas
+    .filter((key) => key.length !== 1)
+    .map((area) => {
+      return <option value={area}>{area}</option>;
+    });
+
+  const searchFilters: {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    area?: string;
+  } = {};
+
+  const handleFilterChange = (key) => {
+    return (event) => {
+      searchFilters[key] = event.target.value;
+    };
+  };
+
+  const performSearch = async () => {
+    Object.keys(searchFilters).forEach(
+      (k) => searchFilters[k] === "" && delete searchFilters[k]
+    );
+    if (searchFilters["area"] === "Any") {
+      delete searchFilters["area"];
+    }
+    const response = await fetchProfilesWithFilters(searchFilters);
+    if (response.ok) {
+      setRoommates(await response.json());
+    } else {
+      alert((await response.json()).message);
+    }
+  };
+
   useEffect(() => {
     getAllProfiles();
     getRecommendedProfiles();
     getListProfiles();
+    getAreas();
   }, []);
 
   return (
@@ -117,6 +162,33 @@ export const RoommateSelectionPanel: React.FC<RoommateSelectionPanelProps> = (
           />
         </TabPanel>
         <TabPanel>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            onChange={handleFilterChange("firstName")}
+          />
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            onChange={handleFilterChange("lastName")}
+          />
+          <br />
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            onChange={handleFilterChange("email")}
+          />
+          <label>
+            Area:
+            <select onChange={handleFilterChange("area")}>{areaOptions}</select>
+          </label>
+          <button type="submit" onClick={performSearch}>
+            Search
+          </button>
           <RoommateProfileSnippetPanel
             roommates={roommates}
             setRoommate={props.setRoommate}

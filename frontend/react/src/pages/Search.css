@@ -74,9 +74,9 @@
   box-sizing: border-box;
   position: absolute;
   padding: 15px;
-  top: 60px;
+  top: 130px;
   width: 100%;
-  height: calc(100% - 60px);
+  height: calc(100% - 130px);
 
   overflow-x: hidden;
   overflow-y: scroll;
@@ -96,7 +96,7 @@
   background: linear-gradient(180deg, #f2cff5ff 0%, #f2cff500 100%);
 
   position: absolute;
-  top: 60px;
+  top: 130px;
   width: 100%;
   height: 15px;
   z-index: 2;

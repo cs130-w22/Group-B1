@@ -33,6 +33,14 @@ export const fetchAllProfiles = async (): Promise<Response> => {
   return await authedGetRequest(url);
 };
 
+export const fetchProfilesWithFilters = async (
+  filter: any
+): Promise<Response> => {
+  const queryString = new URLSearchParams(filter).toString();
+  const url = BACKEND_URL + "/roommate/?" + queryString;
+  return await authedGetRequest(url);
+};
+
 export const fetchRoommateProfile = async (
   roommateUsername?: string
 ): Promise<Response> => {

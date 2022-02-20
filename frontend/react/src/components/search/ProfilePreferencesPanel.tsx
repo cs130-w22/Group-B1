@@ -5,6 +5,7 @@ import { WithContext as ReactTags } from "react-tag-input";
 
 import { RoommateProfile } from "../../util/Roommate";
 import { BACKEND_URL } from "../../util/Constants";
+import { fetchAreas } from "../../util/ApiCalls";
 
 interface ProfilePreferencesPanelProps {
   isPreferencePopUpOpen: boolean;
@@ -36,13 +37,7 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
   const [areas, setAreas] = useState<any>([]);
 
   const getAreas = async () => {
-    const url = BACKEND_URL + "/roommate/types/areas";
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetchAreas();
     if (response.ok) {
       setAreas(await response.json());
     }

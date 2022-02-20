@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { BACKEND_URL } from "../util/Constants";
 import "./Login.css";
 import { loginRoommate } from "../util/ApiCalls";
 
