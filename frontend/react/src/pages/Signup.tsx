@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { BACKEND_URL } from "../util/Constants";
+import { createRoommate, fetchAreas } from "../util/ApiCalls";
+
 import "./Signup.css";
 
 const people2 = require("../resources/people2.png");
@@ -52,31 +53,17 @@ const Signup: React.FC = () => {
           "[Anything else you think people should know about you?]",
       },
     };
-    const rootUrl = "http://localhost:5000";
-    const url = rootUrl + "/roommate/";
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    });
+    const response = await createRoommate(newUser);
     if (response.ok) {
       console.log("registration success");
       window.location.pathname = "/login";
     } else {
-      console.log(JSON.stringify(newUser));
-      console.log((await response.json()).message);
+      alert((await response.json()).message);
     }
   };
-  const fetchAreas = async () => {
-    const url = BACKEND_URL + "/roommate/types/areas";
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+
+  const getAreas = async () => {
+    const response = await fetchAreas();
     if (response.ok) {
       setAreas(await response.json());
       setAreaText("Where are you from?");
@@ -84,7 +71,7 @@ const Signup: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchAreas();
+    getAreas();
   }, []); // runs once on init
   // component
   return (

@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { BACKEND_URL } from "../util/Constants";
 import "./Login.css";
+import { loginRoommate } from "../util/ApiCalls";
 
 const people1 = require("../resources/people1.png");
 
@@ -17,14 +18,7 @@ const Login: React.FC = () => {
     setPassword(event.target.value);
   };
   const handleSubmit = async () => {
-    const url = BACKEND_URL + "/roommate/login";
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    const response = await loginRoommate(username, password);
     if (response.ok) {
       const accessToken = (await response.json()).accessToken;
       window.sessionStorage.setItem("accessToken", accessToken);
