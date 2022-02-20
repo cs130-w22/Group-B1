@@ -53,7 +53,7 @@ export class AuthorizationMiddleware {
       req.method === "PUT" ||
       req.method === "DELETE" ||
       req.url.startsWith("/roommate/list") ||
-      req.url.startsWith("/roommate/recommendations/")
+      req.url.startsWith("/roommate/recommendations")
     );
   }
 }
