@@ -54,6 +54,40 @@ export const fetchListUsernames = async (): Promise<Response> => {
   return await authedGetRequest(url);
 };
 
+export const addUsernameToList = async (
+  usernameToAdd: string
+): Promise<Response> => {
+  const username = window.sessionStorage.getItem("username") || "";
+  const accessToken = window.sessionStorage.getItem("accessToken");
+  const url = BACKEND_URL + "/roommate/list/" + username;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken,
+    },
+    body: JSON.stringify({ usernameToAdd }),
+  });
+  return response;
+};
+
+export const deleteUsernameFromList = async (
+  usernameToDelete: string
+): Promise<Response> => {
+  const username = window.sessionStorage.getItem("username") || "";
+  const accessToken = window.sessionStorage.getItem("accessToken");
+  const url = BACKEND_URL + "/roommate/list/" + username;
+  const response = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken,
+    },
+    body: JSON.stringify({ usernameToDelete }),
+  });
+  return response;
+};
+
 export const fetchAreas = async (): Promise<Response> => {
   const url = BACKEND_URL + "/roommate/types/areas";
   return await unauthedGetRequest(url);

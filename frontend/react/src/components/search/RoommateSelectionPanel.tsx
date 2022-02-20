@@ -10,6 +10,8 @@ import {
   fetchRecommendedProfiles,
   fetchRoommateProfile,
   fetchListUsernames,
+  addUsernameToList,
+  deleteUsernameFromList,
 } from "../../util/ApiCalls";
 
 interface RoommateSelectionPanelProps {
@@ -61,6 +63,26 @@ export const RoommateSelectionPanel: React.FC<RoommateSelectionPanelProps> = (
     }
   };
 
+  const onClickAddToList = async (usernameToAdd: string) => {
+    const addUsernameToListResponse = await addUsernameToList(usernameToAdd);
+    if (addUsernameToListResponse.ok) {
+      getListProfiles();
+    } else {
+      alert((await addUsernameToListResponse.json()).message);
+    }
+  };
+
+  const onClickDeleteFromList = async (usernameToDelete: string) => {
+    const deleteUsernameFromListResponse = await deleteUsernameFromList(
+      usernameToDelete
+    );
+    if (deleteUsernameFromListResponse.ok) {
+      getListProfiles();
+    } else {
+      alert((await deleteUsernameFromListResponse.json()).message);
+    }
+  };
+
   useEffect(() => {
     getAllProfiles();
     getRecommendedProfiles();
@@ -80,18 +102,27 @@ export const RoommateSelectionPanel: React.FC<RoommateSelectionPanelProps> = (
           <RoommateProfileSnippetPanel
             roommates={recommendedRoommates}
             setRoommate={props.setRoommate}
+            isListPanel={false}
+            onClickAddToList={onClickAddToList}
+            onClickDeleteFromList={onClickDeleteFromList}
           />
         </TabPanel>
         <TabPanel>
           <RoommateProfileSnippetPanel
             roommates={listRoommates}
             setRoommate={props.setRoommate}
+            isListPanel={true}
+            onClickAddToList={onClickAddToList}
+            onClickDeleteFromList={onClickDeleteFromList}
           />
         </TabPanel>
         <TabPanel>
           <RoommateProfileSnippetPanel
             roommates={roommates}
             setRoommate={props.setRoommate}
+            isListPanel={false}
+            onClickAddToList={onClickAddToList}
+            onClickDeleteFromList={onClickDeleteFromList}
           />
         </TabPanel>
       </Tabs>
