@@ -38,6 +38,11 @@ const Signup: React.FC = () => {
   };
   // server interaction
   const handleSubmit = async () => {
+    if ([username, password, firstName, lastName, email].includes("")) {
+      alert("All fields must be provided");
+      return;
+    }
+
     const newUser = {
       username,
       password,
