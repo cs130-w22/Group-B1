@@ -39,8 +39,6 @@ const Search: React.FC = () => {
       <ProfilePreferencesPanel
         isPreferencePopUpOpen={isPreferencePopUpOpen}
         onCloseClick={togglePreferencePopUp}
-        profile={userRoommateProfile}
-        setProfile={setUserRoommateProfile}
       />
     </div>
   );

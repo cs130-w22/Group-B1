@@ -30,6 +30,7 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
               Area: <b>{roommate?.profile.area}</b>
             </p>
             <p>Bio: {roommate?.profile.bio}</p>
+            <p>Hobbies: {roommate?.profile.hobbies.join(", ")}</p>
             <p>Additional Info: {roommate?.profile.additionalInfo}</p>
           </div>
         </div>

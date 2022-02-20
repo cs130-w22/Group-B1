@@ -1,23 +1,31 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { WithContext as ReactTags } from "react-tag-input";
+import ReactTags from "react-tag-autocomplete";
 
-import { RoommateProfile } from "../../util/Roommate";
 import { BACKEND_URL } from "../../util/Constants";
-import { fetchAreas } from "../../util/ApiCalls";
+import { fetchAreas, fetchRoommateProfile } from "../../util/ApiCalls";
+
+import "./ProfilePreferencesPanel.css";
 
 interface ProfilePreferencesPanelProps {
   isPreferencePopUpOpen: boolean;
   onCloseClick: () => void;
-  profile: RoommateProfile;
-  setProfile: React.Dispatch<any>;
 }
 
 export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
   props: ProfilePreferencesPanelProps
 ) => {
-  const { isPreferencePopUpOpen, onCloseClick, profile, setProfile } = props;
+  const { isPreferencePopUpOpen, onCloseClick } = props;
+
+  const [profile, setProfile] = useState<any>(null);
+
+  const getUserRoommateProfile = async () => {
+    const response = await fetchRoommateProfile();
+    if (response.ok) {
+      setProfile(await response.json());
+    }
+  };
 
   const [hobbies, setHobbies] = useState<any>([]);
 
@@ -59,6 +67,7 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
   };
 
   useEffect(() => {
+    getUserRoommateProfile();
     getHobbies();
     getAreas();
     getPersonalities();
@@ -98,18 +107,10 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
       return <option value={area}>{area}</option>;
     });
 
-  // React tags functions
-  const KeyCodes = {
-    comma: 188,
-    enter: 13,
-  };
-
-  const delimiters = [KeyCodes.comma, KeyCodes.enter];
-
   const generateReactTags = (profileTags) => {
     if (profileTags) {
       return profileTags.map((trait) => {
-        return { id: String(trait), text: String(trait) };
+        return { id: String(trait), name: String(trait) };
       });
     }
     return [];
@@ -201,36 +202,32 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
             />
           </label>
         </div>
-        <h2>User Tags</h2>
+        <h2>Personality Tags</h2>
         <div>
-          Personality Tags:
           <ReactTags
             tags={generateReactTags(profile?.personality)}
-            delimiters={delimiters}
             suggestions={generateReactTags(
               personalities.filter((key) => key.length !== 1)
             )}
-            handleDelete={handleTagDelete("personality")}
-            handleAddition={handlePersonalityTagAddition}
-            autocomplete
+            onDelete={handleTagDelete("personality")}
+            onAddition={handlePersonalityTagAddition}
+            placeholderText="Personality"
           />
         </div>
+        <h2>Hobby Tags</h2>
         <div>
-          Hobby Tags:
           <ReactTags
             tags={generateReactTags(profile?.hobbies)}
             suggestions={generateReactTags(
               hobbies.filter((key) => key.length !== 1)
             )}
-            handleDelete={handleTagDelete("hobbies")}
-            handleAddition={handleHobbyTagAddition}
-            autocomplete
+            onDelete={handleTagDelete("hobbies")}
+            onAddition={handleHobbyTagAddition}
+            placeholderText="Hobby"
           />
         </div>
         <button type="submit">Save</button>
       </form>
-      <h2>Mini Profile</h2>
-      <h2>Full Profile</h2>
     </Modal>
   );
 };
