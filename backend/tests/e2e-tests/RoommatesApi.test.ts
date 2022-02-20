@@ -147,7 +147,9 @@ describe("Roommates API", function () {
       .set("Authorization", authorizationHeader);
     expect(getRoommatesByFilterResponse.status).toEqual(200);
     expect(getRoommatesByFilterResponse.body).toEqual(
-      expect.arrayContaining([testRoommate2.profile])
+      expect.arrayContaining([
+        { username: testRoommate2.username, profile: testRoommate2.profile },
+      ])
     );
 
     const getRecommendationsResponse = await request(app)
