@@ -38,7 +38,9 @@ export class RoommateController implements RegistrableController {
         const filteredPartialProfile = _.omitBy(partialProfile, _.isUndefined);
         const roommateProfiles = (
           await this.roommateService.findRoommatesWhere(filteredPartialProfile)
-        ).map((roommate) => roommate.profile);
+        ).map((roommate) => {
+          return { username: roommate.username, profile: roommate.profile };
+        });
         res.status(200).json(roommateProfiles);
       } else {
         const roommateProfiles = (
