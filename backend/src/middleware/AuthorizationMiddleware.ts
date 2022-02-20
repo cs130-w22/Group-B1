@@ -12,10 +12,9 @@ export class AuthorizationMiddleware {
   public verifyToken = (req: Request, res: Response, next: NextFunction) => {
     try {
       const authorization: string = req.headers.authorization;
-      const username =
-        req.method === "POST" || req.method === "PUT" || req.method === "DELETE"
-          ? req.params["username"]
-          : undefined;
+      const username = this.requireUsernameParamToMatchToken(req)
+        ? req.params["username"]
+        : undefined;
       const validToken = this.authorizationService.validToken(
         authorization,
         username
@@ -47,4 +46,14 @@ export class AuthorizationMiddleware {
       res.status(500).json({ message: "Failed to encrypt password." });
     }
   };
+
+  private requireUsernameParamToMatchToken(req: Request): boolean {
+    return (
+      req.method === "POST" ||
+      req.method === "PUT" ||
+      req.method === "DELETE" ||
+      req.url.startsWith("/roommate/list") ||
+      req.url.startsWith("/roommate/recommendations")
+    );
+  }
 }
