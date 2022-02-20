@@ -218,7 +218,7 @@ describe("Roommates API", function () {
       .get("/roommate/list/differentUsername")
       .set("Accept", "application/json")
       .set("Authorization", authorizationHeader);
-    expect(failedGetRoommateList.status).toEqual(401);
+    expect(failedGetRoommateList.status).toEqual(404);
 
     const failedAddToRoommateList2 = await request(app)
       .post("/roommate/list/username")
