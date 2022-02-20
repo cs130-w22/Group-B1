@@ -41,8 +41,6 @@ export class RoommateController implements RegistrableController {
         ).map((roommate) => {
           return { username: roommate.username, profile: roommate.profile };
         });
-        console.log("getRoommates");
-        console.log(roommateProfiles);
         res.status(200).json(roommateProfiles);
       } else {
         const roommateProfiles = (
