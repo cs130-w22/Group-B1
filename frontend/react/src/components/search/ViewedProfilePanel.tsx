@@ -1,5 +1,6 @@
 import React from "react";
 import { Roommate } from "../../util/Roommate";
+import ReactJson from "react-json-view";
 
 interface ViewedProfilePanelProps {
   roommate: Roommate | null;
@@ -20,18 +21,8 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
           <p className="fullProfileName">
             {roommate?.profile.firstName} {roommate?.profile.lastName}
           </p>
-          <p className="fullProfileText">
-            {roommate?.profile.personality.join(", ")}
-          </p>
-          <p className="email">{roommate?.profile.email}</p>
           <div className="fullProfileBio">
-            <p>Username: {roommate?.username} </p>
-            <p>
-              Area: <b>{roommate?.profile.area}</b>
-            </p>
-            <p>Bio: {roommate?.profile.bio}</p>
-            <p>Hobbies: {roommate?.profile.hobbies.join(", ")}</p>
-            <p>Additional Info: {roommate?.profile.additionalInfo}</p>
+            <ReactJson src={roommate} name={null} />
           </div>
         </div>
       ) : (

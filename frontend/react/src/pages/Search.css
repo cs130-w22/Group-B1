@@ -260,8 +260,6 @@
   text-align: left;
 }
 .fullProfileBio {
-  background-color: #f2cff5;
-
   display: inline-block;
   position: absolute;
   top: 300px;
@@ -269,6 +267,8 @@
   width: 70%;
   height: 700px;
   transform: translate(-50%, 0%);
+  text-align: left;
+  font-size: 20px;
 
   border-radius: 24px;
 }
