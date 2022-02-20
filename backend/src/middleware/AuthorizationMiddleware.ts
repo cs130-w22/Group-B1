@@ -12,7 +12,7 @@ export class AuthorizationMiddleware {
   public verifyToken = (req: Request, res: Response, next: NextFunction) => {
     try {
       const authorization: string = req.headers.authorization;
-      const username = req.params["username"];
+      const username = req.method === "POST" ? req.params["username"] : undefined;
       const validToken = this.authorizationService.validToken(
         authorization,
         username
