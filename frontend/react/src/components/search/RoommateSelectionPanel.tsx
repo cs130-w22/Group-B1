@@ -8,6 +8,8 @@ import { RoommateProfileSnippetPanel } from "./RoommateProfileSnippetPanel";
 import {
   fetchAllProfiles,
   fetchRecommendedProfiles,
+  fetchRoommateProfile,
+  fetchListUsernames,
 } from "../../util/ApiCalls";
 
 interface RoommateSelectionPanelProps {
@@ -19,6 +21,7 @@ export const RoommateSelectionPanel: React.FC<RoommateSelectionPanelProps> = (
 ) => {
   const [roommates, setRoommates] = useState<any>([]);
   const [recommendedRoommates, setRecommendedRoommates] = useState<any>([]);
+  const [listRoommates, setListRoommate] = useState<any>([]);
 
   // API returns { username, profile }
   const getAllProfiles = async () => {
@@ -35,9 +38,33 @@ export const RoommateSelectionPanel: React.FC<RoommateSelectionPanelProps> = (
     }
   };
 
+  const getListProfiles = async () => {
+    const listUsernamesResponse = await fetchListUsernames();
+    if (listUsernamesResponse.ok) {
+      const listUsernames = await listUsernamesResponse.json();
+      const responses = await Promise.all(
+        listUsernames.map((username) => fetchRoommateProfile(username))
+      );
+      if (responses.find((response) => !response.ok)) {
+        alert("Error retrieving roommate list profiles");
+      } else {
+        const roommateProfiles = await Promise.all(
+          responses.map((response) => response.json())
+        );
+        const roommates = roommateProfiles.map((profile, index) => {
+          return { username: listUsernames[index], profile };
+        });
+        setListRoommate(roommates);
+      }
+    } else {
+      alert((await listUsernamesResponse.json()).message);
+    }
+  };
+
   useEffect(() => {
     getAllProfiles();
     getRecommendedProfiles();
+    getListProfiles();
   }, []);
 
   return (
@@ -45,12 +72,19 @@ export const RoommateSelectionPanel: React.FC<RoommateSelectionPanelProps> = (
       <Tabs>
         <TabList>
           <Tab>Recommendations</Tab>
+          <Tab>List</Tab>
           <Tab>All Roommates</Tab>
         </TabList>
 
         <TabPanel>
           <RoommateProfileSnippetPanel
             roommates={recommendedRoommates}
+            setRoommate={props.setRoommate}
+          />
+        </TabPanel>
+        <TabPanel>
+          <RoommateProfileSnippetPanel
+            roommates={listRoommates}
             setRoommate={props.setRoommate}
           />
         </TabPanel>

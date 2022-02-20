@@ -33,8 +33,11 @@ export const fetchAllProfiles = async (): Promise<Response> => {
   return await authedGetRequest(url);
 };
 
-export const fetchRoommateProfile = async (): Promise<Response> => {
-  const username = window.sessionStorage.getItem("username");
+export const fetchRoommateProfile = async (
+  roommateUsername?: string
+): Promise<Response> => {
+  const username =
+    roommateUsername || window.sessionStorage.getItem("username");
   const url = BACKEND_URL + "/roommate/" + username;
   return await authedGetRequest(url);
 };
@@ -43,6 +46,22 @@ export const fetchRecommendedProfiles = async (): Promise<Response> => {
   const username = window.sessionStorage.getItem("username") || "";
   const url = BACKEND_URL + "/roommate/recommendations/" + username;
   return await authedGetRequest(url);
+};
+
+export const fetchListUsernames = async (): Promise<Response> => {
+  const username = window.sessionStorage.getItem("username") || "";
+  const url = BACKEND_URL + "/roommate/list/" + username;
+  return await authedGetRequest(url);
+};
+
+export const fetchAreas = async (): Promise<Response> => {
+  const url = BACKEND_URL + "/roommate/types/areas";
+  return await unauthedGetRequest(url);
+};
+
+export const fetchHobbies = async (): Promise<Response> => {
+  const url = BACKEND_URL + "/roommate/types/areas";
+  return await unauthedGetRequest(url);
 };
 
 const unauthedGetRequest = async (url: string): Promise<Response> => {
@@ -65,14 +84,4 @@ const authedGetRequest = async (url: string): Promise<Response> => {
     },
   });
   return response;
-};
-
-export const fetchAreas = async (): Promise<Response> => {
-  const url = BACKEND_URL + "/roommate/types/areas";
-  return await unauthedGetRequest(url);
-};
-
-export const fetchHobbies = async (): Promise<Response> => {
-  const url = BACKEND_URL + "/roommate/types/areas";
-  return await unauthedGetRequest(url);
 };

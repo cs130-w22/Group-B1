@@ -16,6 +16,7 @@ export const RoommateProfileSnippetPanel: React.FC<
         {props.roommates ? (
           props.roommates.map((roommate) => (
             <div
+              key={roommate?.username}
               className="miniProfile"
               onClick={() => {
                 props.setRoommate(roommate);
@@ -24,10 +25,10 @@ export const RoommateProfileSnippetPanel: React.FC<
               <div className="miniProfilePicture"></div>
               <div className="miniProfilePreference"></div>
               <p className="miniProfileName">
-                {roommate.profile.firstName} {roommate.profile.lastName}
+                {roommate?.profile.firstName} {roommate?.profile.lastName}
               </p>
               <p className="miniProfileText">
-                {roommate.profile.personality.join(", ")}
+                {roommate?.profile.personality.join(", ")}
               </p>
             </div>
           ))

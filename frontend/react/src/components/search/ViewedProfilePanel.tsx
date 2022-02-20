@@ -25,6 +25,7 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
           </p>
           <p className="email">{roommate?.profile.email}</p>
           <div className="fullProfileBio">
+            <p>Username: {roommate?.username} </p>
             <p>
               Area: <b>{roommate?.profile.area}</b>
             </p>
