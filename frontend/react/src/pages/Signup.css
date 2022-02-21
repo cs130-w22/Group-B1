@@ -20,6 +20,11 @@ input {
   border-radius: 7.5px;
 }
 
+a:hover {
+  color: white !important;
+  opacity: 0.75;
+}
+
 .center {
   position: relative;
   min-height: 100vh;
@@ -29,6 +34,7 @@ input {
   justify-content: center;
 
   color: black;
+  padding: 5%;
   font-size: calc(10px + 2vmin);
 }
 
@@ -61,8 +67,8 @@ input {
 }
 
 .signup-signup_banner {
-  height: 120vh;
-  width: 75%;
+	height: 105vh;
+	width: 75%;
 
   display: flex;
   align-items: center;
@@ -96,8 +102,7 @@ input {
 }
 
 .signup-instructions {
-  padding: 7.5px;
-  margin-top: 0;
+	padding: 7.5px;
   margin-bottom: 0;
 }
 
@@ -159,6 +164,10 @@ input {
   margin-bottom: 0px;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.area {
+  font-size: calc(8px + 1.5vmin);
 }
 
 .signup-sign_up_button {

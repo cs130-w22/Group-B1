@@ -220,7 +220,7 @@ hr {
 .home-contact {
   color: var(--purple);
 
-  padding-top: 25px;
+  margin-top: 25px;
   padding-bottom: 10px;
   padding-left: 0px;
   padding-right: 0px;
@@ -324,7 +324,7 @@ footer p {
 }
 
 .home-signup_footer {
-  padding: 5px;
+  padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
 
