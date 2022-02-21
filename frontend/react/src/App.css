@@ -3,57 +3,20 @@
 }
 
 /*******************************************/
-
-.user-profile-panel {
-  background-color: #a81c0a;
-
-  position: absolute;
-  width: 30%;
-  height: 80px;
-}
-
-.roommate-selection-panel {
-  background-color: #888888;
-
-  position: absolute;
-  top: 80px;
-  width: 30%;
-  height: calc(100% - 80px);
-
-  overflow: hidden;
-}
-.roommate-list-panel {
-  background-color: #dddddd;
-
-  box-sizing: border-box;
-  position: absolute;
-  padding: 15px;
-  top: 60px;
-  width: 100%;
-  height: calc(100% - 60px);
-
-  overflow-x: hidden;
-  overflow-y: scroll;
-  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;  /* Hide scrollbar for Firefox */
-}
-
-.viewed-profile-panel {
+/* .viewed-profile-panel {
   background-color: #eeeeee;
 
   position: absolute;
   top: 0px;
-  left:  30%;
+  left: 30%;
   width: 70%;
   height: 100%;
 
   overflow: scroll;
   overflow-x: hidden;
-}
+} */
 
 /********************************************/
-
-
 
 .test-class {
   background-color: #dddddd;
@@ -67,8 +30,8 @@
 
   overflow-x: hidden;
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
 /*.miniProfile {

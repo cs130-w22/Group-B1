@@ -1,13 +1,16 @@
+import React from "react";
+import { useState } from "react";
+import "./Login.css";
+import { loginRoommate } from "../util/ApiCalls";
 
-import React from 'react';
-import {useState} from 'react';
-import './Login.css';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
-const people1 = require('../resources/people1.png')
+const people1 = require("../resources/people1.png");
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const handleUsernameChange = (event) => {
     //window['connectDev'].user.username = event.target.value; // track data for debug
     setUsername(event.target.value);
@@ -16,46 +19,55 @@ const Login: React.FC = () => {
     //window['connectDev'].user.password = event.target.value; // track data for debug
     setPassword(event.target.value);
   };
-  const handleSubmit = () => {
-    const rootUrl = 'http://localhost:5000';
-    const xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() { 
-      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-        console.log('login success');
-        console.log(xmlHttp.responseText);
-        window['authToken'] = JSON.parse(xmlHttp.responseText).accessToken; // change this to proper token-passing later
-        window.location.pathname = '/search';
-      } else if (xmlHttp.readyState === 4) {
-        console.log(JSON.parse(xmlHttp.responseText).message);
-      }
+  const handleSubmit = async () => {
+    const response = await loginRoommate(username, password);
+    if (response.ok) {
+      const accessToken = (await response.json()).accessToken;
+      window.sessionStorage.setItem("accessToken", accessToken);
+      window.sessionStorage.setItem("username", username);
+      console.log("Successfully logged in");
+      window.location.pathname = "/search";
+    } else {
+      const errorMessage = (await response.json()).message;
+      alert(errorMessage);
     }
-    xmlHttp.open("POST", rootUrl+'/roommate/login', true); // true for async
-    xmlHttp.setRequestHeader('Content-Type', 'application/json');
-    xmlHttp.send(JSON.stringify({
-      username,
-      password,
-    }));
-  }
+  };
   return (
     <div className="login-center">
       <div className="login-square top_left"></div>
       <div className="login-square bottom_right"></div>
       <div className="login-login_banner">
-        <img src={people1} className="login-people" alt="people" /> 
+        <img src={people1} className="login-people" alt="people" />
         <div className="login-login_region">
-          <p className="login-instructions">Sign in to find your new roommates</p>
+          <p className="login-instructions">
+            Sign in to find your new roommates
+          </p>
           <hr></hr>
-
-          <input id="username" type="text" placeholder=" Username" onChange={handleUsernameChange} />
-          <input id="password" type="password" placeholder=" Password" onChange={handlePasswordChange} />
-          <div className="login-login_button" onClick={handleSubmit}>
-            <p>Login</p>
-          </div>
-          
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                id="username"
+                type="text"
+                placeholder="Username"
+                onChange={handleUsernameChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                id="password"
+                type="password"
+                placeholder="Password"
+                onChange={handlePasswordChange}
+              />
+            </Form.Group>
+            <Button onClick={handleSubmit}>Login</Button>
+          </Form>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;
