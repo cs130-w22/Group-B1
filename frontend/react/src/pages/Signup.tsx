@@ -138,7 +138,7 @@ const Signup: React.FC = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Area</Form.Label>
+                <Form.Label>{areaText}</Form.Label>
                 <Form.Select onChange={handleAreaChange}>
                   {areas.map((area) => {
                     return area === "Los Angeles" ? (
