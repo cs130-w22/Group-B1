@@ -1,5 +1,7 @@
 import React from "react";
 import { RoommateProfile } from "../../util/Roommate";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 interface UserProfilePanelProps {
   onSettingsClick: () => void;
@@ -12,13 +14,16 @@ export const UserProfilePanel: React.FC<UserProfilePanelProps> = (
   const { onSettingsClick, profile } = props;
 
   return (
-    <div className="user-profile-panel">
+    <Card>
       <div className="profilePicture"></div>
-      <p className="profileName">
+      <Card.Title>
         {profile?.firstName} {profile?.lastName}
-      </p>
-
-      <div className="settingsButton" onClick={onSettingsClick}></div>
-    </div>
+      </Card.Title>
+      <Card.Body>
+        <Button className="settingsButton" onClick={onSettingsClick}>
+          Edit Profile
+        </Button>
+      </Card.Body>
+    </Card>
   );
 };

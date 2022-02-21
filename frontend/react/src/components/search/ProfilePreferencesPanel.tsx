@@ -6,6 +6,12 @@ import ReactTags from "react-tag-autocomplete";
 import { BACKEND_URL } from "../../util/Constants";
 import { fetchAreas, fetchRoommateProfile } from "../../util/ApiCalls";
 
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./ProfilePreferencesPanel.css";
 
 interface ProfilePreferencesPanelProps {
@@ -141,93 +147,88 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
   };
 
   return (
-    <Modal
-      isOpen={isPreferencePopUpOpen}
-      onRequestClose={onCloseClick}
-      contentLabel="User Preferences"
-    >
-      <h1>User Preferences</h1>
-      <h2>User Info</h2>
-      <form onSubmit={submitProfileChanges}>
-        <div>
-          <label>
-            First name:{" "}
-            <input
+    <Card>
+      <Modal
+        isOpen={isPreferencePopUpOpen}
+        onRequestClose={onCloseClick}
+        contentLabel="User Preferences"
+      >
+        <h1>User Preferences</h1>
+        <Form onSubmit={submitProfileChanges}>
+          <Form.Group className="mb-3">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
               type="text"
               value={profile?.firstName}
               onChange={handleChange("firstName")}
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            Last name:{" "}
-            <input
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
               type="text"
               value={profile?.lastName}
               onChange={handleChange("lastName")}
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            Email:{" "}
-            <input
-              type="text"
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
               value={profile?.email}
               onChange={handleChange("email")}
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            Area:
-            <select value={profile?.area} onChange={handleChange("area")}>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Area</Form.Label>
+            <Form.Select value={profile?.area} onChange={handleChange("area")}>
               {areaOptions}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Bio:{" "}
-            <textarea value={profile?.bio} onChange={handleChange("bio")} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Additional Info:{" "}
-            <textarea
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Bio</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              value={profile?.bio}
+              onChange={handleChange("bio")}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Additional Info</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
               value={profile?.additionalInfo}
               onChange={handleChange("additionalInfo")}
             />
-          </label>
-        </div>
-        <h2>Personality Tags</h2>
-        <div>
-          <ReactTags
-            tags={generateReactTags(profile?.personality)}
-            suggestions={generateReactTags(
-              personalities.filter((key) => key.length !== 1)
-            )}
-            onDelete={handleTagDelete("personality")}
-            onAddition={handlePersonalityTagAddition}
-            placeholderText="Personality"
-          />
-        </div>
-        <h2>Hobby Tags</h2>
-        <div>
-          <ReactTags
-            tags={generateReactTags(profile?.hobbies)}
-            suggestions={generateReactTags(
-              hobbies.filter((key) => key.length !== 1)
-            )}
-            onDelete={handleTagDelete("hobbies")}
-            onAddition={handleHobbyTagAddition}
-            placeholderText="Hobby"
-          />
-        </div>
-        <button type="submit">Save</button>
-      </form>
-    </Modal>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Personality Tags</Form.Label>
+            <ReactTags
+              tags={generateReactTags(profile?.personality)}
+              suggestions={generateReactTags(
+                personalities.filter((key) => key.length !== 1)
+              )}
+              onDelete={handleTagDelete("personality")}
+              onAddition={handlePersonalityTagAddition}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Hobby Tags</Form.Label>
+            <ReactTags
+              tags={generateReactTags(profile?.hobbies)}
+              suggestions={generateReactTags(
+                hobbies.filter((key) => key.length !== 1)
+              )}
+              onDelete={handleTagDelete("hobbies")}
+              onAddition={handleHobbyTagAddition}
+              placeholderText="Hobby"
+            />
+          </Form.Group>
+          <Button type="submit">Save</Button>
+        </Form>
+      </Modal>
+    </Card>
   );
 };

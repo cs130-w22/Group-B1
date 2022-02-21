@@ -2,6 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { createRoommate, fetchAreas } from "../util/ApiCalls";
 
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
 import "./Signup.css";
 
 const people2 = require("../resources/people2.png");
@@ -91,56 +94,67 @@ const Signup: React.FC = () => {
           <hr></hr>
 
           <div className="signup-info_container">
-            <p className="signup-title">Login Info</p>
-            <input
-              type="text"
-              placeholder=" Username"
-              onChange={handleUsernameChange}
-            />
-            <input
-              type="password"
-              placeholder=" Password"
-              onChange={handlePasswordChange}
-            />
-          </div>
-
-          <div className="signup-info_container">
-            <p className="signup-title">Tell us about yourself</p>
-            <input
-              type="text"
-              placeholder=" First Name"
-              onChange={handleFirstnameChange}
-            />
-            <input
-              type="text"
-              placeholder=" Last Name"
-              onChange={handleLastnameChange}
-            />
-            <input
-              type="text"
-              placeholder=" Email"
-              onChange={handleEmailChange}
-            />
-            <div className="signup-area_container">
-              <p>{areaText}</p>
-              <select onChange={handleAreaChange}>
-                {areas.map((area) => {
-                  return area === "Los Angeles" ? (
-                    <option selected key={area} value={area}>
-                      {area}
-                    </option>
-                  ) : (
-                    <option key={area} value={area}>
-                      {area}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-
-          <div className="signup-sign_up_button" onClick={handleSubmit}>
-            <p>Sign Up</p>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3">
+                <p className="signup-title">Tell us about yourself</p>
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder=" Username"
+                  onChange={handleUsernameChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder=" Password"
+                  onChange={handlePasswordChange}
+                />
+              </Form.Group>
+              <p className="signup-title">Tell us about yourself</p>
+              <Form.Group className="mb-3">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="First Name"
+                  onChange={handleFirstnameChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="First Name"
+                  onChange={handleLastnameChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Email"
+                  onChange={handleEmailChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Area</Form.Label>
+                <Form.Select onChange={handleAreaChange}>
+                  {areas.map((area) => {
+                    return area === "Los Angeles" ? (
+                      <option selected key={area} value={area}>
+                        {area}
+                      </option>
+                    ) : (
+                      <option key={area} value={area}>
+                        {area}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </Form.Group>
+              <Button type="submit">Sign up</Button>
+            </Form>
           </div>
         </div>
         <img src={people2} className="signup-people2" alt="people" />

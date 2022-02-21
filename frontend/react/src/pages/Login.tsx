@@ -3,6 +3,9 @@ import { useState } from "react";
 import "./Login.css";
 import { loginRoommate } from "../util/ApiCalls";
 
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
 const people1 = require("../resources/people1.png");
 
 const Login: React.FC = () => {
@@ -39,22 +42,27 @@ const Login: React.FC = () => {
             Sign in to find your new roommates
           </p>
           <hr></hr>
-
-          <input
-            id="username"
-            type="text"
-            placeholder=" Username"
-            onChange={handleUsernameChange}
-          />
-          <input
-            id="password"
-            type="password"
-            placeholder=" Password"
-            onChange={handlePasswordChange}
-          />
-          <div className="login-login_button" onClick={handleSubmit}>
-            <p>Login</p>
-          </div>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                id="username"
+                type="text"
+                placeholder=" Username"
+                onChange={handleUsernameChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                id="password"
+                type="password"
+                placeholder="Password"
+                onChange={handlePasswordChange}
+              />
+            </Form.Group>
+            <Button type="submit">Login</Button>
+          </Form>
         </div>
       </div>
     </div>
