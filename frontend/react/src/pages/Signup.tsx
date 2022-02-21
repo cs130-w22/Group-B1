@@ -94,9 +94,9 @@ const Signup: React.FC = () => {
           <hr></hr>
 
           <div className="signup-info_container">
-            <Form onSubmit={handleSubmit}>
+            <Form>
               <Form.Group className="mb-3">
-                <p className="signup-title">Tell us about yourself</p>
+                <p className="signup-title">Login Info</p>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
@@ -153,7 +153,7 @@ const Signup: React.FC = () => {
                   })}
                 </Form.Select>
               </Form.Group>
-              <Button type="submit">Sign up</Button>
+              <Button onClick={handleSubmit}>Sign up</Button>
             </Form>
           </div>
         </div>

@@ -25,6 +25,7 @@ const Login: React.FC = () => {
       const accessToken = (await response.json()).accessToken;
       window.sessionStorage.setItem("accessToken", accessToken);
       window.sessionStorage.setItem("username", username);
+      console.log("Successfully logged in");
       window.location.pathname = "/search";
     } else {
       const errorMessage = (await response.json()).message;
@@ -42,7 +43,7 @@ const Login: React.FC = () => {
             Sign in to find your new roommates
           </p>
           <hr></hr>
-          <Form onSubmit={handleSubmit}>
+          <Form>
             <Form.Group className="mb-3">
               <Form.Label>Username</Form.Label>
               <Form.Control
@@ -61,7 +62,7 @@ const Login: React.FC = () => {
                 onChange={handlePasswordChange}
               />
             </Form.Group>
-            <Button type="submit">Login</Button>
+            <Button onClick={handleSubmit}>Login</Button>
           </Form>
         </div>
       </div>
