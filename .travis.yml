@@ -50,4 +50,4 @@ jobs:
       skip_cleanup: true
       on:
         repo: cs130-w22/Group-B1
-        branch: andrew-frontend-completion
+        branch: main
