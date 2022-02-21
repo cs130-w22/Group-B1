@@ -48,7 +48,7 @@ const Login: React.FC = () => {
               <Form.Control
                 id="username"
                 type="text"
-                placeholder=" Username"
+                placeholder="Username"
                 onChange={handleUsernameChange}
               />
             </Form.Group>

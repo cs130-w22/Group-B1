@@ -100,7 +100,7 @@ const Signup: React.FC = () => {
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder=" Username"
+                  placeholder="Username"
                   onChange={handleUsernameChange}
                 />
               </Form.Group>
@@ -108,7 +108,7 @@ const Signup: React.FC = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder=" Password"
+                  placeholder="Password"
                   onChange={handlePasswordChange}
                 />
               </Form.Group>
@@ -125,14 +125,14 @@ const Signup: React.FC = () => {
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="First Name"
+                  placeholder="Last Name"
                   onChange={handleLastnameChange}
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>First Name</Form.Label>
+                <Form.Label>Email</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="email"
                   placeholder="Email"
                   onChange={handleEmailChange}
                 />
