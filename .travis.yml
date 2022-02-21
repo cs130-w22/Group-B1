@@ -41,6 +41,7 @@ jobs:
     script: skip
     before_deploy:
       - cd frontend/react
+      - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.10.0
     deploy:
       provider: heroku
       api_key:
