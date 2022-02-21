@@ -33,6 +33,7 @@ jobs:
     before_script:
       - cd frontend/react
     script:
+      - npm install
       - npm run build
     after_script:
       - cd ../..
