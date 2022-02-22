@@ -1,5 +1,5 @@
 # Building and Deploying Zoomie Roomies
-The builds and deployments are handled automatically by TravisCI. Builds are triggered whenever a pull request is made or a commit is made to the main branch. Deployments are made to Heroku whenever commits are made to the main branch. The frontend app is deployed at https://use-zoomie-roomies.herokuapp.com/ and the backend is deployed at https://zoomie-roomies.herokuapp.com/.
+The builds and deployments are handled automatically by TravisCI. Builds are triggered whenever a pull request is made or a commit is made to the main branch. Deployments are triggered and made to Heroku whenever commits are made to the main branch. The frontend app is deployed at https://use-zoomie-roomies.herokuapp.com/ and the backend is deployed at https://zoomie-roomies.herokuapp.com/.
 
 For instructions on how to build the frontend and backend apps locally, refer to the README's in the frontend/react and backend folders.
 
