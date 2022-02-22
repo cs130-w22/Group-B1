@@ -19,6 +19,9 @@ interface ProfilePreferencesPanelProps {
   onCloseClick: () => void;
 }
 
+/**
+ * Component for editing user's roommate profile
+ */
 export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
   props: ProfilePreferencesPanelProps
 ) => {
