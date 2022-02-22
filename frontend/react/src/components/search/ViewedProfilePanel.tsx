@@ -7,6 +7,9 @@ interface ViewedProfilePanelProps {
   roommate: Roommate | null;
 }
 
+/**
+ * Component for showing details of an individual roommate profile
+ */
 export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
   props: ViewedProfilePanelProps
 ) => {
