@@ -23,6 +23,9 @@ export interface RoommateRepository {
   ): Promise<string[]>;
 }
 
+/**
+ * RoommateRepositoryImplMongo is responsible for performing CRUD operations on a MongoDB database for roommates. 
+ */
 @injectable()
 export class RoommateRepositoryImplMongo implements RoommateRepository {
   /**

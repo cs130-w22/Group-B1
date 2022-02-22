@@ -6,6 +6,9 @@ import { RoommateProfile } from "../roommate/roommateProfile";
 import voca from "voca";
 import _ from "lodash";
 
+/**
+ * RecommendationService handles the logic of finding recommended roommates based on a given roommate
+ */
 @injectable()
 export class RecommendationService {
   @inject(TYPES.RoommateRepository)

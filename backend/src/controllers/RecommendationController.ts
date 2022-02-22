@@ -6,6 +6,9 @@ import { RoommateService } from "../services/RoommateService";
 import { AuthorizationMiddleware } from "../middleware/AuthorizationMiddleware";
 import { RegistrableController } from "./RegistrableController";
 
+/**
+ * RecommendationController manages an endpoint that recommends roommates for a given user.
+ */
 @injectable()
 export class RecommendationController implements RegistrableController {
   @inject(TYPES.RecommendationService)

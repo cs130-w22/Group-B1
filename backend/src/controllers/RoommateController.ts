@@ -8,6 +8,9 @@ import { RegistrableController } from "./RegistrableController";
 import { RoommateProfile } from "../roommate/roommateProfile";
 import _ from "lodash";
 
+/**
+ * RoommateController manages an endpoint that is used to get, create, or update roommates.
+ */
 @injectable()
 export class RoommateController implements RegistrableController {
   @inject(TYPES.RoommateService)

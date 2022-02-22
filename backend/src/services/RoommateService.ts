@@ -5,6 +5,9 @@ import { Roommate } from "../roommate/roommate";
 import { RoommateProfile } from "../roommate/roommateProfile";
 import "reflect-metadata";
 
+/**
+ * RoommateService handles the logic of getting, creating, and updating roommates.
+ */
 @injectable()
 export class RoommateService {
   @inject(TYPES.RoommateRepository)

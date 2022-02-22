@@ -6,6 +6,9 @@ import { AuthorizationMiddleware } from "../middleware/AuthorizationMiddleware";
 import { RegistrableController } from "./RegistrableController";
 import { ListService } from "../services/ListService";
 
+/**
+ * ListController manages an endpoint to get or modify a roommate list.
+ */
 @injectable()
 export class ListController implements RegistrableController {
   @inject(TYPES.RoommateService)
@@ -17,6 +20,10 @@ export class ListController implements RegistrableController {
   @inject(TYPES.AuthorizationMiddleware)
   private authorizationMiddleware: AuthorizationMiddleware;
 
+  /**
+   * Registers the endpoints for roommate list.
+   * @param app The app to register the endpoints on
+   */
   public register(app: Application): void {
     app
       .route("/roommate/list/:username")
@@ -28,6 +35,11 @@ export class ListController implements RegistrableController {
       );
   }
 
+  /**
+   * Gets a roommate list given a request containing a username
+   * @param req The HTTP request. It should have a username as a paramater.
+   * @param res The HTTP response. If no errors, will return the roommate list.
+   */
   private getRoommateList = async (req: Request, res: Response) => {
     try {
       const username = req.params["username"];
@@ -44,6 +56,12 @@ export class ListController implements RegistrableController {
     }
   };
 
+  /**
+   * 
+   * @param req 
+   * @param res 
+   * @returns 
+   */
   private addToRoommateList = async (req: Request, res: Response) => {
     try {
       const username = req.params["username"];

@@ -5,6 +5,9 @@ import { Areas } from "../roommate/area";
 import { PersonalityTraits } from "../roommate/personalityTrait";
 import { Hobbies } from "../roommate/hobby";
 
+/**
+ * RoommateInterfaceController manages an endpoint that gets the different possible values for areas, hobbies, and personalities.
+ */
 @injectable()
 export class RoommateInterfaceController implements RegistrableController {
   public register(app: Application): void {

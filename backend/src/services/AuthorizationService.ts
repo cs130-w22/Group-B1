@@ -5,6 +5,10 @@ import { Roommate } from "../roommate/roommate";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 
+/**
+ * AuthorizationService handles the logic of logging in users, checking if a token is valid, 
+ * and encrypting passwords.
+ */
 @injectable()
 export class AuthorizationService {
   @inject(TYPES.RoommateRepository)

@@ -3,6 +3,9 @@ import TYPES from "../../types";
 import { RoommateRepository } from "../repository/RoommateRepository";
 import "reflect-metadata";
 
+/**
+ * ListService handles the logic of adding or removing a user from another user's roommate list.
+ */
 @injectable()
 export class ListService {
   @inject(TYPES.RoommateRepository)

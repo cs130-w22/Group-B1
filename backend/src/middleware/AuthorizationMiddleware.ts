@@ -4,6 +4,9 @@ import TYPES from "../../types";
 import { AuthorizationService } from "../services/AuthorizationService";
 import "reflect-metadata";
 
+/**
+ * AuthorizationMiddleware is used to check if a token is valid, and to verify and encrypt new passwords.
+ */
 @injectable()
 export class AuthorizationMiddleware {
   @inject(TYPES.AuthorizationService)
