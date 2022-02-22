@@ -1,4 +1,4 @@
-# Getting started
+# Getting Started
 
 First run `npm install` to install all the packages.
 
