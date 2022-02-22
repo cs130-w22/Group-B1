@@ -1,3 +1,48 @@
+
+.modal_wrapper {
+  position: absolute;
+  inset: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 15px;
+  outline: none;
+  padding: 100px;
+}
+
+.profile-preferences-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+  transition: 0.5s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  /*color: var(--purple);*/
+}
+
+.profile-preferences-close:hover {
+  opacity: 0.5;
+}
+
+.submit_button {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  border-radius: 10px;
+}
+
 .react-tags {
   position: relative;
   padding: 6px 0 0 6px;
