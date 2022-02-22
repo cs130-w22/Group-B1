@@ -11,10 +11,10 @@ import { RegistrableController } from "./RegistrableController";
 export class AuthorizationController implements RegistrableController {
   @inject(TYPES.AuthorizationService)
   private authorizationService: AuthorizationService;
-  
+
   /**
    * Registers the roommate login endpoint.
-   * @param app The app to register the endpoint on
+   * @param app The app to register the endpoint on.
    */
   public register(app: Application): void {
     app.route("/roommate/login").post(async (req: Request, res: Response) => {

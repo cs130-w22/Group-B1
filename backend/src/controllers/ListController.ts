@@ -22,7 +22,7 @@ export class ListController implements RegistrableController {
 
   /**
    * Registers the endpoints for roommate list.
-   * @param app The app to register the endpoints on
+   * @param app The app to register the endpoints on.
    */
   public register(app: Application): void {
     app
@@ -36,8 +36,8 @@ export class ListController implements RegistrableController {
   }
 
   /**
-   * Gets a roommate list given a request containing a username
-   * @param req The HTTP request. It should have a username as a paramater.
+   * Gets a roommate list given a request containing a username.
+   * @param req The HTTP request. It should have a username as a path parameter.
    * @param res The HTTP response. If no errors, will return the roommate list.
    */
   private getRoommateList = async (req: Request, res: Response) => {
@@ -57,10 +57,10 @@ export class ListController implements RegistrableController {
   };
 
   /**
-   * 
-   * @param req 
-   * @param res 
-   * @returns 
+   * Adds a roommate to someone's rommate list given a request.
+   * @param req The HTTP request. It should have a username as a path parameter, and the username to add in the body.
+   * @param res The HTTP response. If no errors, it will send back the updated roommate list.
+   * @returns
    */
   private addToRoommateList = async (req: Request, res: Response) => {
     try {
@@ -84,6 +84,12 @@ export class ListController implements RegistrableController {
     }
   };
 
+  /**
+   * Deletes a roommate from someone's roommate list given a request.
+   * @param req The HTTP request. It should have a username as a path parameter, and the username to delete in the body.
+   * @param res The HTTP response. If no errors, it will send back the updated roommate list.
+   * @returns
+   */
   private deleteFromRoommateList = async (req: Request, res: Response) => {
     try {
       const username = req.params["username"];

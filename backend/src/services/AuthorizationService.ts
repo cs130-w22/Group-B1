@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 
 /**
- * AuthorizationService handles the logic of logging in users, checking if a token is valid, 
+ * AuthorizationService handles the logic of logging in users, checking if a token is valid,
  * and encrypting passwords.
  */
 @injectable()
