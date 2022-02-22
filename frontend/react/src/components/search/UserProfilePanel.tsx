@@ -8,6 +8,9 @@ interface UserProfilePanelProps {
   profile: RoommateProfile;
 }
 
+/**
+ * Component that shows user's name and a button that opens {@link ProfilePreferencesPanel}
+ */
 export const UserProfilePanel: React.FC<UserProfilePanelProps> = (
   props: UserProfilePanelProps
 ) => {

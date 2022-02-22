@@ -18,6 +18,10 @@ import {
   fetchProfilesWithFilters,
 } from "../../util/ApiCalls";
 
+/**
+ * Component that includes 3 tabs for viewing all roommates, roommate list, and recommendations.
+ * Each tab has a {@link RoommateProfileSnippetPanel}
+ */
 export const RoommateSelectionPanel: React.FC = () => {
   const [roommates, setRoommates] = useState<any>([]);
   const [recommendedRoommates, setRecommendedRoommates] = useState<any>([]);
