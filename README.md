@@ -1,6 +1,11 @@
+# Building and Deploying Zoomie Roomies
+The builds and deployments are handled automatically by TravisCI. Builds are triggered whenever a pull request is made or a commit is made to the main branch. Deployments are made to Heroku whenever commits are made to the main branch. The frontend app is deployed at https://use-zoomie-roomies.herokuapp.com/ and the backend is deployed at https://zoomie-roomies.herokuapp.com/.
+
+For instructions on how to build the frontend and backend apps locally, refer to the README's in the frontend/react and backend folders.
+
 # Repository Template
 
-[![Build Status](https://travis-ci.org/cs130-w21/template.svg?branch=master)](https://travis-ci.org/cs130-w21/template)
+[![Build Status](https://app.travis-ci.com/cs130-w22/Group-B1.svg?branch=main)](https://app.travis-ci.com/github/cs130-w22/Group-B1)
 [![Release](https://img.shields.io/github/v/release/cs130-w21/template?label=release)](https://github.com/cs130-w21/template/releases/latest)
 
 This repo serves as a template for repositories in this organization. The following information describes how the native features/workflows of Github can be customized to work in a scrum development process.
