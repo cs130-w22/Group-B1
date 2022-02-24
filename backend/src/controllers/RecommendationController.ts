@@ -6,6 +6,9 @@ import { RoommateService } from "../services/RoommateService";
 import { AuthorizationMiddleware } from "../middleware/AuthorizationMiddleware";
 import { RegistrableController } from "./RegistrableController";
 
+/**
+ * RecommendationController manages an endpoint that recommends roommates for a given user.
+ */
 @injectable()
 export class RecommendationController implements RegistrableController {
   @inject(TYPES.RecommendationService)
@@ -17,12 +20,21 @@ export class RecommendationController implements RegistrableController {
   @inject(TYPES.AuthorizationMiddleware)
   private authorizationMiddleware: AuthorizationMiddleware;
 
+  /**
+   * Registers the recommendations endpoint.
+   * @param app The app to register the endpoint on.
+   */
   public register(app: Application): void {
     app
       .route("/roommate/recommendations/:username")
       .get(this.authorizationMiddleware.verifyToken, this.getRecommendations);
   }
 
+  /**
+   * Gets recommendations given a request containing a username.
+   * @param req The HTTP request. It should have a username as a parameter.
+   * @param res The HTTP response. If no errors, will return a list of recommended roommate profiles and corresponding usernames.
+   */
   private getRecommendations = async (req: Request, res: Response) => {
     try {
       const username = req.params["username"];

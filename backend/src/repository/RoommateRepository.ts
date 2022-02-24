@@ -23,12 +23,15 @@ export interface RoommateRepository {
   ): Promise<string[]>;
 }
 
+/**
+ * RoommateRepositoryImplMongo is responsible for performing CRUD operations on a MongoDB database for roommates.
+ */
 @injectable()
 export class RoommateRepositoryImplMongo implements RoommateRepository {
   /**
    * Create a Roommate
-   * @param roommate Roommate as represented in roommate folder
-   * @returns False if already exists, true if entered successfully
+   * @param roommate The roommate object to create.
+   * @returns False if the roommate already exists, true if the roommate was created successfully.
    */
   async create(roommate: Roommate): Promise<boolean> {
     const existingRoommate = await RoommateModel.findOne({
@@ -44,9 +47,9 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Finds a roommate given a username
-   * @param username
-   * @returns Null if does not exist, otherwise Roommate
+   * Finds a roommate given a username.
+   * @param username The username of the corresponding roommate to find.
+   * @returns Null if the roommate with the username does not exist, otherwise the found roommate.
    */
   async findOne(username: string): Promise<Roommate | null> {
     const roommate = await RoommateModel.findOne({ username: username });
@@ -54,9 +57,9 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Finds a roommate whose profile matches profile fields
-   * @param profile a partial RoommateProfile
-   * @returns an array of roommates who match search criteria
+   * Finds a roommate whose profile matches profile fields.
+   * @param profile A partial RoommateProfile, which must all match the roommate to find.
+   * @returns An array of roommates who match search criteria.
    */
   async findWhere(profile: Partial<RoommateProfile>): Promise<Roommate[]> {
     const filter = _.mapKeys(profile, (value, key) => "profile." + key);
@@ -65,16 +68,16 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Get roommates that match any of the similar attributes
-   * @param profileFields to match
-   * @param keysToIgnore a list of keys that will not be used to match
-   * @returns Array of matching roommates
+   * Get roommates that match any of the attributes given
+   * @param profileFields A partial roommate profile to match.
+   * @param keysToIgnore A list of keys that will not be used to match.
+   * @returns The matching roommates.
    */
   async findOverlap(
     profileFields: Partial<RoommateProfile>,
     keysToIgnore: string[] = []
   ): Promise<Roommate[]> {
-    //Convert object to list of {profile.key : value}, flattening the lists as well, to make the query arg
+    // Convert object to list of {profile.key : value}, flattening the lists as well, to make the query arg
     const fields = Object.entries(profileFields).flatMap(function ([
       key,
       value,
@@ -101,8 +104,8 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Get all of the roommates
-   * @returns List of all roommates
+   * Get all of the roommates.
+   * @returns All of the roommates that exist.
    */
   async getAll(): Promise<Roommate[]> {
     const roommateDocs = await RoommateModel.find();
@@ -110,10 +113,10 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Updates a roommate's profile with a given username
-   * @param username
-   * @param roommate
-   * @returns False if the roommate did not exist, true if update succeedd
+   * Updates a roommate's profile given the roommate's username.
+   * @param username The username for the roommate profile to update.
+   * @param roommateProfile The user's new roommate profile.
+   * @returns False if the roommate did not exist, true if update succeeded
    */
   async update(
     username: string,
@@ -129,19 +132,19 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Deletes a roommate given a username
-   * @param username
-   * @returns True if the roommate was deleted, false otherwise
+   * Deletes a roommate given the roommate's username.
+   * @param username The username of the roommate to be deleted.
+   * @returns True if the roommate was deleted, false otherwise.
    */
   async delete(username: string): Promise<boolean> {
     return (await RoommateModel.deleteOne({ username })).deletedCount == 1;
   }
 
   /**
-   * Add a user to another user's roommate list
-   * @param username
-   * @param usernameToAdd
-   * @returns string[] of the updated list
+   * Add a user to another user's roommate list.
+   * @param username The username of the user's roommate list to update.
+   * @param usernameToAdd The username to add to the list.
+   * @returns The updated roommate list of the user.
    */
   async addToRoommateList(
     username: string,
@@ -165,10 +168,10 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Delete a user from another user's roommate list
-   * @param username
-   * @param usernameToDelete
-   * @returns string[] of the updated list
+   * Delete a user from another user's roommate list.
+   * @param username The username of the user's roommate list to update.
+   * @param usernameToDelete The username to delete from the list.
+   * @returns The updated roommate list of the user.
    */
   async deleteFromRoommateList(
     username: string,

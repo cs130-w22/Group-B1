@@ -6,6 +6,9 @@ import { RoommateProfile } from "../roommate/roommateProfile";
 import voca from "voca";
 import _ from "lodash";
 
+/**
+ * RecommendationService handles the logic of finding recommended roommates based on a given roommate
+ */
 @injectable()
 export class RecommendationService {
   @inject(TYPES.RoommateRepository)
@@ -51,6 +54,13 @@ export class RecommendationService {
       .value();
   }
 
+  /**
+   * Returns a score of how compatible two roommate profiles are. The higher the score,
+   * the more compatible two roommates are evaluated to be.
+   * @param profile1 The first roommate profile
+   * @param profile2 The second roommate profile.
+   * @returns The two profiles' compatibility score.
+   */
   private getCompatibilityScore(
     profile1: RoommateProfile,
     profile2: RoommateProfile

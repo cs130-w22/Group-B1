@@ -8,6 +8,9 @@ import { RegistrableController } from "./RegistrableController";
 import { RoommateProfile } from "../roommate/roommateProfile";
 import _ from "lodash";
 
+/**
+ * RoommateController manages an endpoint that is used to get, create, or update roommates.
+ */
 @injectable()
 export class RoommateController implements RegistrableController {
   @inject(TYPES.RoommateService)
@@ -16,6 +19,10 @@ export class RoommateController implements RegistrableController {
   @inject(TYPES.AuthorizationMiddleware)
   private authorizationMiddleware: AuthorizationMiddleware;
 
+  /**
+   * Registers all endpoints for getting, creating, and updating roommates.
+   * @param app The app to register the endpoints on.
+   */
   public register(app: Application): void {
     app
       .route("/roommate")
@@ -30,6 +37,11 @@ export class RoommateController implements RegistrableController {
       .put(this.authorizationMiddleware.verifyToken, this.updateRoommate);
   }
 
+  /**
+   * Gets all roommates or matching roommates based on query parameters.
+   * @param req The HTTP request. It can have roommate profile fields to filter by as query parameters.
+   * @param res The HTTP response. If no errors, it will send back all matching roommates.
+   */
   private getRoommates = async (req: Request, res: Response) => {
     try {
       const { firstName, lastName, email, area } = req.query;
@@ -57,6 +69,11 @@ export class RoommateController implements RegistrableController {
     }
   };
 
+  /**
+   * Gets a roommate profile given a username.
+   * @param req The HTTP request. The roommate profile is given as a path parameter
+   * @param res The HTTP response. If no errors, it will send back the corresponding roommate profile
+   */
   private getRoommateByUsername = async (req: Request, res: Response) => {
     try {
       const username = req.params["username"];
@@ -73,6 +90,11 @@ export class RoommateController implements RegistrableController {
     }
   };
 
+  /**
+   * Creates a roommate given a roommate object.
+   * @param req The HTTP request. The request body should be a roommate object.
+   * @param res The HTTP response. If no errors, it will send back the roommate profile.
+   */
   private createRoommate = async (req: Request, res: Response) => {
     try {
       const roommate: Roommate = req.body as Roommate;
@@ -93,6 +115,12 @@ export class RoommateController implements RegistrableController {
     }
   };
 
+  /**
+   * Updates a roommate given a username and roommate profile object
+   * @param req The HTTP request. The request path parameter should the username of the roommate
+   * to update. The body should be the new roommate profile.
+   * @param res The HTTP response. If no errors, it will send back the new roommateProfile
+   */
   private updateRoommate = async (req: Request, res: Response) => {
     try {
       const username = req.params["username"];
