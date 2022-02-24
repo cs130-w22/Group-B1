@@ -17,7 +17,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./ProfilePreferencesPanel.css";
 
-const close_icon_size = 37.5;
+const close_icon_size = 30;
 
 interface ProfilePreferencesPanelProps {
   isPreferencePopUpOpen: boolean;
@@ -164,12 +164,12 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
         <h1 className="title">User Preferences</h1>
         <div className="header">
           {/*close button*/}
-          <button onClick={onCloseClick} className="profile-preferences-close">
+          <button onClick={onCloseClick} className="profile-preferences-close" title="Close">
             <Unicons.UilMultiply size={close_icon_size} />
           </button>
 
-                    {/*save button*/}
-          <Button type="submit" className="submit_button">
+          {/*save button*/}
+          <Button type="submit" className="submit_button" title="Save">
             <Unicons.UilSave size={close_icon_size} />
           </Button>
         </div>
