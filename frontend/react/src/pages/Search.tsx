@@ -13,6 +13,9 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./Search.css";
 
+/**
+ * Search page includes {@link UserProfilePanel}, {@link ProfilePreferencesPanel}, and {@link RoommateSelectionPanel}
+ */
 const Search: React.FC = () => {
   const [isPreferencePopUpOpen, setIsPreferencePopUpOpen] = useState(false);
   const togglePreferencePopUp = () => {

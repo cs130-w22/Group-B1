@@ -13,6 +13,9 @@ const woman2 = require("../resources/woman2.png");
 const col_icon_size = 47.5;
 const login_icon_size = 60;
 
+/**
+ * Home page links to login and signup pages
+ */
 const Home: React.FC = () => {
   return (
     <div className="home-outer">

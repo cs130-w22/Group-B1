@@ -12,6 +12,10 @@ interface RoommateProfileSnippetProps {
   onClickDeleteFromList: (username: string) => Promise<void>;
 }
 
+/**
+ * Component for showing and hiding roommate profile information.
+ * Profile information shown as a {@link ViewedProfilePanel}
+ */
 export const RoommateProfileSnippetPanel: React.FC<
   RoommateProfileSnippetProps
 > = (props: RoommateProfileSnippetProps) => {
