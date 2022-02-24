@@ -44,7 +44,7 @@ export class RoommateService {
   /**
    * Finds a single roommate given a username.
    * @param username The username of the roommate to find.
-   * @returns False if the roommate already exists, true if entered successfully
+   * @returns Null if the roommate does not exist, Roommate if exists
    */
   public async findRoommate(username: string): Promise<Roommate | null> {
     return await this.roommateRepository.findOne(username);
@@ -54,7 +54,7 @@ export class RoommateService {
    * Updates a roommate profile.
    * @param username The username of the user to update.
    * @param roommateProfile The new roommate profile the user should have.
-   * @returns False if the roommate did not exist, true if update succeedd
+   * @returns False if the roommate did not exist, true if update succeeded
    */
   public async updateRoommate(
     username: string,

@@ -59,7 +59,7 @@ export class RecommendationService {
    * the more compatible two roommates are evaluated to be.
    * @param profile1 The first roommate profile
    * @param profile2 The second roommate profile.
-   * @returns The two profile's compatibility score.
+   * @returns The two profiles' compatibility score.
    */
   private getCompatibilityScore(
     profile1: RoommateProfile,

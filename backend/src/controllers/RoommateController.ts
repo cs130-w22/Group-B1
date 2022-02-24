@@ -117,7 +117,7 @@ export class RoommateController implements RegistrableController {
 
   /**
    * Updates a roommate given a username and roommate profile object
-   * @param req The HTTP request. The request query parameter should the username of the roommate
+   * @param req The HTTP request. The request path parameter should the username of the roommate
    * to update. The body should be the new roommate profile.
    * @param res The HTTP response. If no errors, it will send back the new roommateProfile
    */

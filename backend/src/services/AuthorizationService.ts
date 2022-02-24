@@ -46,7 +46,7 @@ export class AuthorizationService {
    * Given a username and password, returns whether the password is correct for the username.
    * @param username The username to correspond with the password.
    * @param password The password in plain text.
-   * @returns True
+   * @returns True if username and password match, False otherwise
    */
   public async validUsernamePassword(
     username: string,
@@ -97,7 +97,7 @@ export class AuthorizationService {
 
   /**
    * Encrypts a password.
-   * @param assword The password to encrypt.
+   * @param password The password to encrypt.
    * @returns The encrypted password.
    */
   public encryptPassword(password: string) {

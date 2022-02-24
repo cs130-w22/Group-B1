@@ -77,7 +77,7 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
     profileFields: Partial<RoommateProfile>,
     keysToIgnore: string[] = []
   ): Promise<Roommate[]> {
-    //Convert object to list of {profile.key : value}, flattening the lists as well, to make the query arg
+    // Convert object to list of {profile.key : value}, flattening the lists as well, to make the query arg
     const fields = Object.entries(profileFields).flatMap(function ([
       key,
       value,
@@ -116,7 +116,7 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
    * Updates a roommate's profile given the roommate's username.
    * @param username The username for the roommate profile to update.
    * @param roommateProfile The user's new roommate profile.
-   * @returns False if the roommate did not exist, true if update succeedd
+   * @returns False if the roommate did not exist, true if update succeeded
    */
   async update(
     username: string,
@@ -144,7 +144,7 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
    * Add a user to another user's roommate list.
    * @param username The username of the user's roommate list to update.
    * @param usernameToAdd The username to add to the list.
-   * @returns of The updated roommate list of the user.
+   * @returns The updated roommate list of the user.
    */
   async addToRoommateList(
     username: string,

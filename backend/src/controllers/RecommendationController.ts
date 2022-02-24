@@ -31,7 +31,7 @@ export class RecommendationController implements RegistrableController {
   }
 
   /**
-   * Gets recommendations given a request request containing a username.
+   * Gets recommendations given a request containing a username.
    * @param req The HTTP request. It should have a username as a parameter.
    * @param res The HTTP response. If no errors, will return a list of recommended roommate profiles and corresponding usernames.
    */

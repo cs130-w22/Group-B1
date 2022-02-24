@@ -57,7 +57,7 @@ export class ListController implements RegistrableController {
   };
 
   /**
-   * Adds a roommate to someone's rommate list given a request.
+   * Adds a roommate to someone's roommate list given a request.
    * @param req The HTTP request. It should have a username as a path parameter, and the username to add in the body.
    * @param res The HTTP response. If no errors, it will send back the updated roommate list.
    * @returns
