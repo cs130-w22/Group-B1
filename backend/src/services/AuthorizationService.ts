@@ -46,7 +46,7 @@ export class AuthorizationService {
    * Given a username and password, returns whether the password is correct for the username.
    * @param username The username to correspond with the password.
    * @param password The password in plain text.
-   * @returns True 
+   * @returns True
    */
   public async validUsernamePassword(
     username: string,

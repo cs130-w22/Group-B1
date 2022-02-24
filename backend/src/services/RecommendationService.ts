@@ -55,7 +55,7 @@ export class RecommendationService {
   }
 
   /**
-   * Returns a score of how compatible two roommate profiles are. The higher the score, 
+   * Returns a score of how compatible two roommate profiles are. The higher the score,
    * the more compatible two roommates are evaluated to be.
    * @param profile1 The first roommate profile
    * @param profile2 The second roommate profile.

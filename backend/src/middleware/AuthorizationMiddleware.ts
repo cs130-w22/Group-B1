@@ -14,7 +14,7 @@ export class AuthorizationMiddleware {
 
   /**
    * Verifies whether a given authorization token is valid.
-   * @param req The HTTP request. Expected to conatain authorization as a header parameter.
+   * @param req The HTTP request. Expected to contain authorization as a header parameter.
    * @param res The HTTP response. Only returned if there is an error, otherwise, moves on to next.
    * @param next The next function to be invoked if no errors.
    */

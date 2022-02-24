@@ -49,7 +49,7 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   /**
    * Finds a roommate given a username.
    * @param username The username of the corresponding roommate to find.
-   * @returns Null if the roomate with the username does not exist, otherwise the found roommate.
+   * @returns Null if the roommate with the username does not exist, otherwise the found roommate.
    */
   async findOne(username: string): Promise<Roommate | null> {
     const roommate = await RoommateModel.findOne({ username: username });
@@ -132,7 +132,7 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
   }
 
   /**
-   * Deletes a roommate given the roomate's username.
+   * Deletes a roommate given the roommate's username.
    * @param username The username of the roommate to be deleted.
    * @returns True if the roommate was deleted, false otherwise.
    */
@@ -144,7 +144,7 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
    * Add a user to another user's roommate list.
    * @param username The username of the user's roommate list to update.
    * @param usernameToAdd The username to add to the list.
-   * @returns of The updated roomate list of the user.
+   * @returns of The updated roommate list of the user.
    */
   async addToRoommateList(
     username: string,
@@ -169,9 +169,9 @@ export class RoommateRepositoryImplMongo implements RoommateRepository {
 
   /**
    * Delete a user from another user's roommate list.
-   * @param username The username of the user's roommate list to update. 
+   * @param username The username of the user's roommate list to update.
    * @param usernameToDelete The username to delete from the list.
-   * @returns The updated roomate list of the user.
+   * @returns The updated roommate list of the user.
    */
   async deleteFromRoommateList(
     username: string,
