@@ -162,9 +162,18 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
         contentLabel="User Preferences"
       >
         <h1 className="title">User Preferences</h1>
-        <button onClick={onCloseClick} className="profile-preferences-close">
-          <Unicons.UilMultiply size={close_icon_size} />
-        </button>
+        <div className="header">
+          {/*close button*/}
+          <button onClick={onCloseClick} className="profile-preferences-close">
+            <Unicons.UilMultiply size={close_icon_size} />
+          </button>
+
+                    {/*save button*/}
+          <Button type="submit" className="submit_button">
+            <Unicons.UilSave size={close_icon_size} />
+          </Button>
+        </div>
+
         <Row> 
           {/*short response fill-ins (i.e. first / last name, etc) */}
           <Col>
@@ -247,7 +256,6 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
             </Form>
           </Col>
         </Row>
-        <Button type="submit" className="submit_button">Save</Button>
       </Modal>
     </Card>
   );
