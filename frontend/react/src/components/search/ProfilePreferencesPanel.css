@@ -51,9 +51,10 @@
 }
 
 .legend {
-  position: absolute;
-  top: 0;
-  left: 0;
+  /*position: -webkit-sticky;*/
+  position: fixed;
+  top: 75px;
+  left: 125px;
 
   display: flex;
   flex-direction: column;
@@ -61,8 +62,9 @@
   text-align: center;
   justify-content: center;
 
-  height: 75%;  /*maybe change this*/
+  height: 50%;  /*maybe change this*/
   width: 5vw;
+  z-index: 99;
   background-color: var(--pink);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
