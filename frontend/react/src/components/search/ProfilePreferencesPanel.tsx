@@ -17,7 +17,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./ProfilePreferencesPanel.css";
 
-const close_icon_size = 30;
+const icon_size = 30;
 
 interface ProfilePreferencesPanelProps {
   isPreferencePopUpOpen: boolean;
@@ -159,59 +159,78 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
       <Modal className="modal_wrapper"
         isOpen={isPreferencePopUpOpen}
         onRequestClose={onCloseClick}
-        contentLabel="User Preferences"
-      >
-        <h1 className="title">User Preferences</h1>
-        <div className="header">
-          {/*close button*/}
-          <button onClick={onCloseClick} className="profile-preferences-close" title="Close">
-            <Unicons.UilMultiply size={close_icon_size} />
-          </button>
+        contentLabel="User Preferences">
 
-          {/*save button*/}
-          <Button type="submit" className="submit_button" title="Save">
-            <Unicons.UilSave size={close_icon_size} />
-          </Button>
+        <button onClick={onCloseClick} className="profile-preferences-close" title="Close">
+          <Unicons.UilMultiply size={icon_size} />
+        </button>
+
+        <div className="legend">
+          <a href="#EditProfile" title="Edit Profile">
+            <Unicons.UilUserCircle size={icon_size} className="icon"/>
+          </a>
+
+          <a href="#EditLocation" title="Edit Location">
+            <Unicons.UilMapMarker size={icon_size} className="icon" title="Edit location"/>
+          </a>
+
+          <a href="#EditHobbies" title="Edit Hobbies">
+            <Unicons.UilHeartSign size={icon_size} className="icon" title="Edit hobbies"/>
+          </a>
         </div>
 
-        <Row> 
-          {/*short response fill-ins (i.e. first / last name, etc) */}
-          <Col>
+        {/*edit profile*/}
+        <div className="section_wrapper">
+          <h3 className="title" id="EditProfile">Edit Profile</h3>
+          <div className="form_wrapper">
             <Form.Group className="mb-3">
-              <Form.Label className="form_label">First Name</Form.Label>
-              <Form.Control
-                type="text"
-                value={profile?.firstName}
-                onChange={handleChange("firstName")}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                value={profile?.lastName}
-                onChange={handleChange("lastName")}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                value={profile?.email}
-                onChange={handleChange("email")}
-              />
-            </Form.Group>
+                <Form.Label className="form_label">First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={profile?.firstName}
+                  onChange={handleChange("firstName")}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={profile?.lastName}
+                  onChange={handleChange("lastName")}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={profile?.email}
+                  onChange={handleChange("email")}
+                />
+              </Form.Group>
+            </div>
+        </div>
+
+        {/*edit location*/}
+        <div className="section_wrapper">
+          <div className="spacer" id="EditLocation"></div>
+          <h3 className="title">Edit Location</h3>          
+          <div className="form_wrapper">
             <Form.Group className="mb-3">
               <Form.Label>Area</Form.Label>
               <Form.Select value={profile?.area} onChange={handleChange("area")}>
                 {areaOptions}
               </Form.Select>
             </Form.Group>
-          </Col>
+          </div>
+        </div>
 
-          {/*long response fill-ins (i.e. bio, additional info, etc) */}
-          <Col>
-              <Form onSubmit={submitProfileChanges}>
+        {/*edit about you*/}
+        <div className="section_wrapper">
+          <div className="spacer" id="EditHobbies"></div>
+          <h3 className="title">Edit Hobbies</h3>          
+          <div className="form_wrapper">
+            
+            <Form onSubmit={submitProfileChanges}>
               <Form.Group className="mb-3">
                 <Form.Label>Bio</Form.Label>
                 <Form.Control
@@ -254,8 +273,13 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
                 />
               </Form.Group>
             </Form>
-          </Col>
-        </Row>
+          </div>
+        </div>
+
+        <Button type="submit" className="submit_button" title="Save">
+          <p>Save</p>
+        </Button>
+
       </Modal>
     </Card>
   );

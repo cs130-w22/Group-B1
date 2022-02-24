@@ -2,6 +2,7 @@
   --gray-white: rgb(226, 227, 227);
   --white: rgb(247, 247, 247);
   --pink: rgb(242, 194, 246, 0.5);
+  --pink-no-alpha: rgb(242, 194, 246);
   --purple: rgb(191, 26, 197);
   --light-black: rgb(24, 24, 24);
 }

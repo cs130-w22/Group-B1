@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-// import ReactDOM from 'react-dom';
 
 import { UserProfilePanel } from "../components/search/UserProfilePanel";
 import { RoommateSelectionPanel } from "../components/search/RoommateSelectionPanel";
