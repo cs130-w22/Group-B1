@@ -2,8 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import ReactTags from "react-tag-autocomplete";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
+// import Row from "react-bootstrap/Row";
 import * as Unicons from "@iconscout/react-unicons";
 
 import { BACKEND_URL } from "../../util/Constants";
