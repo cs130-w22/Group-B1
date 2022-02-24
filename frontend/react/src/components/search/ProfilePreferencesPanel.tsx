@@ -158,7 +158,7 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
         onRequestClose={onCloseClick}
         contentLabel="User Preferences"
       >
-        <h1>User Preferences</h1>
+        <h1 className="title">User Preferences</h1>
         <button onClick={onCloseClick} className="profile-preferences-close">
           <Unicons.UilMultiply size={close_icon_size} />
         </button>
@@ -166,7 +166,7 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
           {/*short response fill-ins (i.e. first / last name, etc) */}
           <Col>
             <Form.Group className="mb-3">
-              <Form.Label>First Name</Form.Label>
+              <Form.Label className="form_label">First Name</Form.Label>
               <Form.Control
                 type="text"
                 value={profile?.firstName}
