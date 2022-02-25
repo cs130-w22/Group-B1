@@ -272,12 +272,12 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
               </Form.Group>
             </Form>
           </div>
-        </div>
 
         <Button type="submit" className="submit_button" title="Save">
           <p>Save</p>
         </Button>
-
+          
+        </div>
       </Modal>
     </Card>
   );
