@@ -67,8 +67,8 @@ a:hover {
 }
 
 .signup-signup_banner {
-	height: 105vh;
-	width: 75%;
+  height: 105vh;
+  width: 75%;
 
   display: flex;
   align-items: center;
@@ -102,7 +102,7 @@ a:hover {
 }
 
 .signup-instructions {
-	padding: 7.5px;
+  padding: 7.5px;
   margin-bottom: 0;
 }
 

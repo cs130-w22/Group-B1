@@ -1,4 +1,3 @@
-
 .modal_wrapper {
   position: absolute;
   top: 0px;
@@ -63,7 +62,7 @@
   text-align: center;
   justify-content: center;
 
-  height: 50%;  /*maybe change this*/
+  height: 50%; /*maybe change this*/
   width: 5vw;
   z-index: 99;
   background-color: var(--pink);
@@ -81,7 +80,7 @@
 
 .section_wrapper {
   position: relative;
-  top: 400px; 
+  top: 400px;
   left: 2vw;
 
   width: 60%;
