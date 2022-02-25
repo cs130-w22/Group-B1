@@ -97,7 +97,6 @@ const Signup: React.FC = () => {
             <Form>
               <Form.Group className="mb-3">
                 <p className="signup-title">Login Info</p>
-                <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Username"
@@ -105,7 +104,6 @@ const Signup: React.FC = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Password"
@@ -114,7 +112,6 @@ const Signup: React.FC = () => {
               </Form.Group>
               <p className="signup-title">Tell us about yourself</p>
               <Form.Group className="mb-3">
-                <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="First Name"
@@ -122,7 +119,6 @@ const Signup: React.FC = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Last Name"
@@ -130,7 +126,6 @@ const Signup: React.FC = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Email"
@@ -138,7 +133,7 @@ const Signup: React.FC = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>{areaText}</Form.Label>
+                <Form.Label className="area">{areaText}</Form.Label>
                 <Form.Select onChange={handleAreaChange}>
                   {areas.map((area) => {
                     return area === "Los Angeles" ? (

@@ -2,6 +2,7 @@
   --gray-white: rgb(226, 227, 227);
   --white: rgb(247, 247, 247);
   --pink: rgb(242, 194, 246, 0.5);
+  --pink-no-alpha: rgb(242, 194, 246);
   --purple: rgb(191, 26, 197);
   --light-black: rgb(24, 24, 24);
 }
@@ -94,7 +95,7 @@ hr {
 
 .home-text_wrapper h4 {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 50px;
   margin-left: 0;
   margin-right: 0;
 
@@ -220,7 +221,7 @@ hr {
 .home-contact {
   color: var(--purple);
 
-  padding-top: 25px;
+  margin-top: 25px;
   padding-bottom: 10px;
   padding-left: 0px;
   padding-right: 0px;
@@ -323,8 +324,12 @@ footer p {
   text-decoration: none;
 }
 
+.home-signup_footer p {
+  margin: 0;
+}
+
 .home-signup_footer {
-  padding: 5px;
+  padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
 

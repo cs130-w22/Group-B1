@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import ReactTags from "react-tag-autocomplete";
+import * as Unicons from "@iconscout/react-unicons";
 
 import { BACKEND_URL } from "../../util/Constants";
 import { fetchAreas, fetchRoommateProfile } from "../../util/ApiCalls";
@@ -13,6 +14,8 @@ import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./ProfilePreferencesPanel.css";
+
+const icon_size = 30;
 
 interface ProfilePreferencesPanelProps {
   isPreferencePopUpOpen: boolean;
@@ -152,85 +155,147 @@ export const ProfilePreferencesPanel: React.FC<ProfilePreferencesPanelProps> = (
   return (
     <Card>
       <Modal
+        className="modal_wrapper"
         isOpen={isPreferencePopUpOpen}
         onRequestClose={onCloseClick}
         contentLabel="User Preferences"
       >
-        <h1>User Preferences</h1>
-        <Form onSubmit={submitProfileChanges}>
-          <Form.Group className="mb-3">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              type="text"
-              value={profile?.firstName}
-              onChange={handleChange("firstName")}
+        <button
+          onClick={onCloseClick}
+          className="profile-preferences-close"
+          title="Close"
+        >
+          <Unicons.UilMultiply size={icon_size} />
+        </button>
+
+        <div className="legend">
+          <a href="#EditProfile" title="Edit Profile">
+            <Unicons.UilUserCircle size={icon_size} className="icon" />
+          </a>
+
+          <a href="#EditLocation" title="Edit Location">
+            <Unicons.UilMapMarker
+              size={icon_size}
+              className="icon"
+              title="Edit location"
             />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              type="text"
-              value={profile?.lastName}
-              onChange={handleChange("lastName")}
+          </a>
+
+          <a href="#EditHobbies" title="Edit Hobbies">
+            <Unicons.UilHeartSign
+              size={icon_size}
+              className="icon"
+              title="Edit hobbies"
             />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              value={profile?.email}
-              onChange={handleChange("email")}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Area</Form.Label>
-            <Form.Select value={profile?.area} onChange={handleChange("area")}>
-              {areaOptions}
-            </Form.Select>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Bio</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              value={profile?.bio}
-              onChange={handleChange("bio")}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Additional Info</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              value={profile?.additionalInfo}
-              onChange={handleChange("additionalInfo")}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Personality Tags</Form.Label>
-            <ReactTags
-              tags={generateReactTags(profile?.personality)}
-              suggestions={generateReactTags(
-                personalities.filter((key) => key.length !== 1)
-              )}
-              onDelete={handleTagDelete("personality")}
-              onAddition={handlePersonalityTagAddition}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Hobby Tags</Form.Label>
-            <ReactTags
-              tags={generateReactTags(profile?.hobbies)}
-              suggestions={generateReactTags(
-                hobbies.filter((key) => key.length !== 1)
-              )}
-              onDelete={handleTagDelete("hobbies")}
-              onAddition={handleHobbyTagAddition}
-              placeholderText="Hobby"
-            />
-          </Form.Group>
-          <Button type="submit">Save</Button>
-        </Form>
+          </a>
+        </div>
+
+        {/*edit profile*/}
+        <div className="section_wrapper">
+          <h3 className="title" id="EditProfile">
+            Edit Profile
+          </h3>
+          <div className="form_wrapper">
+            <Form.Group className="mb-3">
+              <Form.Label className="form_label">First Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={profile?.firstName}
+                onChange={handleChange("firstName")}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={profile?.lastName}
+                onChange={handleChange("lastName")}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                value={profile?.email}
+                onChange={handleChange("email")}
+              />
+            </Form.Group>
+          </div>
+        </div>
+
+        {/*edit location*/}
+        <div className="section_wrapper">
+          <div className="spacer" id="EditLocation"></div>
+          <h3 className="title">Edit Location</h3>
+          <div className="form_wrapper">
+            <Form.Group className="mb-3">
+              <Form.Label>Area</Form.Label>
+              <Form.Select
+                value={profile?.area}
+                onChange={handleChange("area")}
+              >
+                {areaOptions}
+              </Form.Select>
+            </Form.Group>
+          </div>
+        </div>
+
+        {/*edit about you*/}
+        <div className="section_wrapper">
+          <div className="spacer" id="EditHobbies"></div>
+          <h3 className="title">Edit Hobbies</h3>
+          <div className="form_wrapper">
+            <Form.Group className="mb-3">
+              <Form.Label>Bio</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={profile?.bio}
+                onChange={handleChange("bio")}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Additional Info</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={profile?.additionalInfo}
+                onChange={handleChange("additionalInfo")}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Personality Tags</Form.Label>
+              <ReactTags
+                tags={generateReactTags(profile?.personality)}
+                suggestions={generateReactTags(
+                  personalities.filter((key) => key.length !== 1)
+                )}
+                onDelete={handleTagDelete("personality")}
+                onAddition={handlePersonalityTagAddition}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Hobby Tags</Form.Label>
+              <ReactTags
+                tags={generateReactTags(profile?.hobbies)}
+                suggestions={generateReactTags(
+                  hobbies.filter((key) => key.length !== 1)
+                )}
+                onDelete={handleTagDelete("hobbies")}
+                onAddition={handleHobbyTagAddition}
+                placeholderText="Hobby"
+              />
+            </Form.Group>
+          </div>
+
+          <Button
+            onClick={submitProfileChanges}
+            className="submit_button"
+            title="Save"
+          >
+            <p>Save</p>
+          </Button>
+        </div>
       </Modal>
     </Card>
   );
