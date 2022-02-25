@@ -26,7 +26,7 @@ const Home: React.FC = () => {
 
           <div className="home-text_wrapper">
             <h3>Zoomie Roomies</h3>
-            <h4>Finding roomates made fast.</h4>
+            <h4>Finding roommates made fast.</h4>
           </div>
 
           <div className="home-buttons_wrapper">
