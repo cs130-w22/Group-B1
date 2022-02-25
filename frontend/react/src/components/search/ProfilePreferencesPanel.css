@@ -107,6 +107,7 @@
 .submit_button p {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .submit_button {
