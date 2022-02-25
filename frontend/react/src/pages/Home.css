@@ -324,6 +324,10 @@ footer p {
   text-decoration: none;
 }
 
+.home-signup_footer p {
+  margin: 0;
+}
+
 .home-signup_footer {
   padding: 20px;
   margin-left: 20px;
