@@ -1,63 +1,62 @@
-
 .tab {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.75px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.75px;
 
-    display: inline-block;
-    border: 1px solid transparent;
-    border-bottom: none;
-    bottom: -1px;
-    position: relative;
-    list-style: none;
-    padding: 6px 12px;
-    cursor: pointer;
+  display: inline-block;
+  border: 1px solid transparent;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 
 .react-tabs__tab--selected {
-    background: var(--pink);
-    border: none;
-    color: var(--purple);   
+  background: var(--pink);
+  border: none;
+  color: var(--purple);
 
-    border-radius: 10px 10px 0 0;
-    transition: 0.5s ease-in-out;
+  border-radius: 10px 10px 0 0;
+  transition: 0.5s ease-in-out;
 }
 
 .roommates_tab {
-    margin-top: 75px !important;
-    /*background: green;*/
+  margin-top: 75px !important;
+  /*background: green;*/
 }
 
 .search_button {
-    color: yellow;
+  color: yellow;
 }
 
 .fill_in {
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
 
-    font-weight: 600;
-    letter-spacing: 0.75px;
-    /*background: yellow !important;*/
+  font-weight: 600;
+  letter-spacing: 0.75px;
+  /*background: yellow !important;*/
 }
 
 #search_button {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 55px;
-    padding-right: 55px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 55px;
+  padding-right: 55px;
 
-    margin-top: 20px;
-    border-radius: 12px;
+  margin-top: 20px;
+  border-radius: 12px;
 
-    font: var(--pink);
-    letter-spacing: 1.25px;
-    background-color: var(--purple);
-    border: none;
-    transition: 0.5s;
+  font: var(--pink);
+  letter-spacing: 1.25px;
+  background-color: var(--purple);
+  border: none;
+  transition: 0.5s;
 }
 
 #search_button:hover {
-    opacity: 0.75;
+  opacity: 0.75;
 }
