@@ -2,7 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import "./RoomateSelectionPanel.css"
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { RoommateProfileSnippetPanel } from "./RoommateProfileSnippetPanel";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -143,9 +145,9 @@ export const RoommateSelectionPanel: React.FC = () => {
     <div className="roommate-selection-panel">
       <Tabs>
         <TabList>
-          <Tab>Recommendations</Tab>
-          <Tab>List</Tab>
-          <Tab>All Roommates</Tab>
+          <Tab className="tab">Recommendations</Tab>
+          <Tab className="tab">List</Tab>
+          <Tab className="tab">All Roommates</Tab>
         </TabList>
 
         <TabPanel>
@@ -166,42 +168,53 @@ export const RoommateSelectionPanel: React.FC = () => {
         </TabPanel>
         <TabPanel>
           <Row>
-            <Form onSubmit={performSearch}>
-              <Form.Group className="mb-3">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  onChange={handleFilterChange("firstName")}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  onChange={handleFilterChange("lastName")}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  onChange={handleFilterChange("email")}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Area</Form.Label>
-                <Form.Select onChange={handleFilterChange("area")}>
-                  {areaOptions}
-                </Form.Select>
-              </Form.Group>
-              <Button type="submit">Search</Button>
+            <Form onSubmit={performSearch} className="roommates_tab">
+              <Row>
+                {/*first and last name*/}
+                <Col>
+                  <Form.Group className="mb-3 fill_in">
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="firstName"
+                      id="firstName"
+                      onChange={handleFilterChange("firstName")}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3 fill_in">
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="lastName"
+                      id="lastName"
+                      onChange={handleFilterChange("lastName")}
+                    />
+                  </Form.Group>
+                </Col>
+
+                {/*email and area*/}
+                <Col>
+                  <Form.Group className="mb-3 fill_in">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      onChange={handleFilterChange("email")}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3 fill_in">
+                    <Form.Label>Area</Form.Label>
+                    <Form.Select onChange={handleFilterChange("area")}>
+                      {areaOptions}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+              </Row>
             </Form>
           </Row>
+
+            <Button type="submit" id="search_button">Search</Button>
+
           <Row>
             <RoommateProfileSnippetPanel
               roommates={roommates}
