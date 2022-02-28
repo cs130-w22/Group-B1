@@ -2,10 +2,10 @@ import React from "react";
 import { Roommate } from "../../util/Roommate";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import "./ViewedProfilePanel.css"
+import "./ViewedProfilePanel.css";
 import * as Unicons from "@iconscout/react-unicons";
 
-var icon_size = 25
+var icon_size = 25;
 
 interface ViewedProfilePanelProps {
   roommate: Roommate | null;
@@ -23,11 +23,8 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
     <div className="viewed-profile-panel">
       <Card>
         <Card.Body>
-
           {/*profile name*/}
-          <Card.Title className="header_name">
-            {roommate?.username}
-          </Card.Title>
+          <Card.Title className="header_name">{roommate?.username}</Card.Title>
 
           {/*wrapper for area and email*/}
           <div className="area_email_wrapper">
@@ -39,19 +36,24 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
 
             {/*email contact*/}
             <Card.Text className="area_email_text email">
-              <Unicons.UilEnvelopeSend size={icon_size}/>
-              <a href={"https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=" + roommate?.profile.email} target="_blank">
+              <Unicons.UilEnvelopeSend size={icon_size} />
+              <a
+                href={
+                  "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=" +
+                  roommate?.profile.email
+                }
+                target="_blank"
+              >
                 {roommate?.profile.email}
               </a>
             </Card.Text>
           </div>
-
         </Card.Body>
 
         <Card.Header>{roommate?.profile.bio}</Card.Header>
         <Card.Text>
           <ListGroup>
-{/*            <ListGroup.Item>
+            {/*            <ListGroup.Item>
               Personality: {roommate?.profile.personality.join(", ")}
             </ListGroup.Item>*/}
 
