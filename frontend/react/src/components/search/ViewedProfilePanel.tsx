@@ -23,7 +23,13 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
     <div className="viewed-profile-panel">
       <Card>
         <Card.Body>
-          <Card.Title className="header_name">@{roommate?.username}</Card.Title>
+
+          {/*profile name*/}
+          <Card.Title className="header_name">
+            {roommate?.username}
+          </Card.Title>
+
+          {/*wrapper for area and email*/}
           <div className="area_email_wrapper">
             <Card.Text className="area_email_text">
               {/*area*/}
@@ -42,14 +48,13 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
 
         </Card.Body>
 
-        <Card.Header>Bio: {roommate?.profile.bio}</Card.Header>
+        <Card.Header>{roommate?.profile.bio}</Card.Header>
         <Card.Text>
           <ListGroup>
-{/*            <ListGroup.Item>Area: {roommate?.profile.area}</ListGroup.Item>
-            <ListGroup.Item>Email: {roommate?.profile.email}</ListGroup.Item>*/}
-            <ListGroup.Item>
+{/*            <ListGroup.Item>
               Personality: {roommate?.profile.personality.join(", ")}
-            </ListGroup.Item>
+            </ListGroup.Item>*/}
+
             <ListGroup.Item>
               Hobbies: {roommate?.profile.hobbies.join(", ")}
             </ListGroup.Item>
