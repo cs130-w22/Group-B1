@@ -42,7 +42,7 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
                   "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=" +
                   roommate?.profile.email
                 }
-                target="_blank"
+                target="_blank" rel="noreferrer"
               >
                 {roommate?.profile.email}
               </a>
