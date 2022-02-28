@@ -21,3 +21,12 @@
 .email {
     text-decoration: underline;
 }
+
+.email a {
+    color: rgb(101, 101, 104);  /*ios space gray*/
+    transition: 0.5s;
+}
+
+.email a:hover {
+    color: var(--purple) !important;
+}

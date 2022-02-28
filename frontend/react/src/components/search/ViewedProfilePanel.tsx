@@ -27,14 +27,16 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
           <div className="area_email_wrapper">
             <Card.Text className="area_email_text">
               {/*area*/}
-              <Unicons.UilMapMarker size={icon_size} className=""/>
+              <Unicons.UilMapMarker size={icon_size} />
               {roommate?.profile.area}
             </Card.Text>
 
             {/*email contact*/}
             <Card.Text className="area_email_text email">
-              <Unicons.UilEnvelopeSend size={icon_size} className=""/>
-              {roommate?.profile.email}
+              <Unicons.UilEnvelopeSend size={icon_size}/>
+              <a href={"https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=" + roommate?.profile.email} target="_blank">
+                {roommate?.profile.email}
+              </a>
             </Card.Text>
           </div>
 
