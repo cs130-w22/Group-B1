@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import "./RoomateSelectionPanel.css"
+import "./RoomateSelectionPanel.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { RoommateProfileSnippetPanel } from "./RoommateProfileSnippetPanel";
@@ -168,7 +168,7 @@ export const RoommateSelectionPanel: React.FC = () => {
         </TabPanel>
         <TabPanel>
           <Row>
-            <Form onSubmit={performSearch} className="roommates_tab">
+            <Form className="roommates_tab">
               <Row>
                 {/*first and last name*/}
                 <Col>
@@ -213,7 +213,9 @@ export const RoommateSelectionPanel: React.FC = () => {
             </Form>
           </Row>
 
-            <Button type="submit" id="search_button">Search</Button>
+          <Button onClick={performSearch} id="search_button">
+            Search
+          </Button>
 
           <Row>
             <RoommateProfileSnippetPanel
