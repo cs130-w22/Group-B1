@@ -63,15 +63,13 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
           </div>
         </Card.Body>
 
-        <Card.Header>{roommate?.profile.bio}</Card.Header>
-        <Card.Footer>
-          {/*additional info*/}
+        <Card.Header>
+          {roommate?.profile.bio}
           <div className="bold_wrapper">
             <Card.Text className="bold">Additional Info:</Card.Text>
             <Card.Text>{roommate?.profile.additionalInfo}</Card.Text>
           </div>
-
-        </Card.Footer>
+        </Card.Header>
       </Card>
     </div>
   );

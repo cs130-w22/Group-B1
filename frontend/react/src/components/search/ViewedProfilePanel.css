@@ -1,3 +1,4 @@
+
 .header_name {
   position: relative;
   top: 0;
@@ -26,7 +27,6 @@
 }
 
 .email a {
-  /*color: rgb(101, 101, 104);  /*ios space gray*/
   color: var(--purple);
   transition: 0.5s;
 }

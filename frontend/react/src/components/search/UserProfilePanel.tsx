@@ -2,6 +2,10 @@ import React from "react";
 import { RoommateProfile } from "../../util/Roommate";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import "./UserProfilePanel.css"
+import * as Unicons from "@iconscout/react-unicons";
+
+const ICON_SIZE = 25;
 
 interface UserProfilePanelProps {
   onSettingsClick: () => void;
@@ -18,15 +22,12 @@ export const UserProfilePanel: React.FC<UserProfilePanelProps> = (
 
   return (
     <Card>
-      <div className="profilePicture"></div>
-      <Card.Title>
+      <Card.Title id="name">
         {profile?.firstName} {profile?.lastName}
-      </Card.Title>
-      <Card.Body>
         <Button className="settingsButton" onClick={onSettingsClick}>
-          Edit Profile
+          <Unicons.UilSetting size={ICON_SIZE} />
         </Button>
-      </Card.Body>
+      </Card.Title>
     </Card>
   );
 };
