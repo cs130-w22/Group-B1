@@ -166,7 +166,7 @@ export const RoommateSelectionPanel: React.FC = () => {
             onClickDeleteFromList={onClickDeleteFromList}
           />
         </TabPanel>
-        <TabPanel>
+        <TabPanel className="tab_panel">
           <Row>
             <Form className="roommates_tab">
               <Row>

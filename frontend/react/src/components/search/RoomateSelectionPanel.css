@@ -3,10 +3,7 @@
   position: relative;
   top: -45%;
 
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
+  padding-top: 10px;
 
   height: 75px;
   width: 90%;
@@ -34,6 +31,13 @@
   cursor: pointer;
 }
 
+.react-tabs__tab-list {
+  border-bottom: none !important;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .react-tabs__tab--selected {
   background: var(--pink);
   border: none;
@@ -45,11 +49,6 @@
 
 .roommates_tab {
   margin-top: 75px !important;
-  /*background: green;*/
-}
-
-.search_button {
-  color: yellow;
 }
 
 .fill_in {
@@ -59,7 +58,6 @@
 
   font-weight: 600;
   letter-spacing: 0.75px;
-  /*background: yellow !important;*/
 }
 
 #search_button {
@@ -82,3 +80,20 @@
 #search_button:hover {
   opacity: 0.75;
 }
+
+@keyframes slide_down {
+  from {
+    bottom: -100%;
+  }
+
+  to {
+    bottom: 100%;
+  }
+}
+
+.tab_panel {
+  padding: 50px;
+
+  background-color: white;
+  animation: slide_down 5s forwards;
+} 
