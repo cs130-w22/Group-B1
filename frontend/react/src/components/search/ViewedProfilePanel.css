@@ -1,0 +1,36 @@
+.header_name {
+  position: relative;
+  top: 0;
+  left: 0;
+
+  font-size: calc(12px + 2vmin);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.area_email_wrapper {
+  color: rgb(101, 101, 104); /*ios space gray*/
+}
+
+.area_email_text {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.email {
+  text-decoration: underline;
+}
+
+.email a {
+  /*color: rgb(101, 101, 104);  /*ios space gray*/
+  color: var(--purple);
+  transition: 0.5s;
+}
+
+.email a:hover {
+  color: var(--purple) !important;
+}
