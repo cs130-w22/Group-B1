@@ -34,6 +34,7 @@ const Search: React.FC = () => {
 
   return (
     <Container>
+      <div className="search_header"></div>
       <Row>
         <Col>
           <UserProfilePanel
@@ -51,6 +52,7 @@ const Search: React.FC = () => {
           <RoommateSelectionPanel />
         </Col>
       </Row>
+      <div className="search_footer"></div>
     </Container>
   );
 };

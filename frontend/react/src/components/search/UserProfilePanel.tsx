@@ -21,7 +21,7 @@ export const UserProfilePanel: React.FC<UserProfilePanelProps> = (
   const { onSettingsClick, profile } = props;
 
   return (
-    <Card className="user_profile_card">
+    <Card id="user_profile_card">
       <Card.Title id="name">
         {profile?.firstName} {profile?.lastName}
         <Button className="settingsButton" onClick={onSettingsClick}>

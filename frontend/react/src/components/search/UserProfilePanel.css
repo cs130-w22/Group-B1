@@ -1,3 +1,10 @@
+
+#user_profile_card {
+  background-image: linear-gradient(to right, var(--pink) , var(--pink-no-alpha));
+  border-radius: 15px;
+  border: 1px solid white;  /* bad hack to get rid of border, using !important was not working */
+}
+
 #name {
   margin: 75px;
 
@@ -7,6 +14,7 @@
   text-align: center;
   justify-content: center;
 
+  color: white;
   font-size: calc(14px + 2vmin);
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -17,8 +25,8 @@
   top: 5px;
   right: 5px;
 
-  background-color: white !important;
-  color: var(--purple) !important;
+  background-color: var(--pink-no-alpha) !important;
+  color: white !important;
   border: none !important;
   border-radius: 10px !important;
 
@@ -32,5 +40,5 @@
 }
 
 .settingsButton:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }
