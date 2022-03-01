@@ -5,11 +5,11 @@ import ListGroup from "react-bootstrap/ListGroup";
 import "./ViewedProfilePanel.css";
 import * as Unicons from "@iconscout/react-unicons";
 
-var icon_size = 25;
-
 interface ViewedProfilePanelProps {
   roommate: Roommate | null;
 }
+
+const ICON_SIZE = 25;
 
 /**
  * Component for showing details of an individual roommate profile
@@ -30,19 +30,20 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
           <div className="area_email_wrapper">
             <Card.Text className="area_email_text">
               {/*area*/}
-              <Unicons.UilMapMarker size={icon_size} />
+              <Unicons.UilMapMarker size={ICON_SIZE} />
               {roommate?.profile.area}
             </Card.Text>
 
             {/*email contact*/}
             <Card.Text className="area_email_text email">
-              <Unicons.UilEnvelopeSend size={icon_size} />
+              <Unicons.UilEnvelopeSend size={ICON_SIZE} />
               <a
                 href={
                   "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=" +
                   roommate?.profile.email
                 }
-                target="_blank" rel="noreferrer"
+                target="_blank"
+                rel="noreferrer"
               >
                 {roommate?.profile.email}
               </a>
