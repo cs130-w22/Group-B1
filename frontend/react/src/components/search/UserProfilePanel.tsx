@@ -2,7 +2,7 @@ import React from "react";
 import { RoommateProfile } from "../../util/Roommate";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import "./UserProfilePanel.css"
+import "./UserProfilePanel.css";
 import * as Unicons from "@iconscout/react-unicons";
 
 const ICON_SIZE = 25;
@@ -21,7 +21,7 @@ export const UserProfilePanel: React.FC<UserProfilePanelProps> = (
   const { onSettingsClick, profile } = props;
 
   return (
-    <Card>
+    <Card className="user_profile_card">
       <Card.Title id="name">
         {profile?.firstName} {profile?.lastName}
         <Button className="settingsButton" onClick={onSettingsClick}>

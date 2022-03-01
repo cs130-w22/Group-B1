@@ -1,7 +1,6 @@
 import React from "react";
 import { Roommate } from "../../util/Roommate";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
 import "./ViewedProfilePanel.css";
 import * as Unicons from "@iconscout/react-unicons";
 
