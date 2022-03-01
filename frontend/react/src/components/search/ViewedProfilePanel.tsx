@@ -57,7 +57,6 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
             <ListGroup.Item>
               Personality: {roommate?.profile.personality.join(", ")}
             </ListGroup.Item>
-
             <ListGroup.Item>
               Hobbies: {roommate?.profile.hobbies.join(", ")}
             </ListGroup.Item>
