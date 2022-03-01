@@ -34,3 +34,16 @@
 .email a:hover {
   color: var(--purple) !important;
 }
+
+.bold_wrapper {
+  margin-top: 5px;
+  padding: 0;
+  display: flex;
+}
+
+.bold {
+  margin: 0;
+
+  font-weight: 500;
+  padding-right: 5px;
+}

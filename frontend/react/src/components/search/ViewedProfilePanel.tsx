@@ -48,22 +48,29 @@ export const ViewedProfilePanel: React.FC<ViewedProfilePanelProps> = (
                 {roommate?.profile.email}
               </a>
             </Card.Text>
+
+            {/*personalities*/}
+            <div className="bold_wrapper">
+              <Card.Text className="bold">Personality:</Card.Text>
+              <Card.Text>{roommate?.profile.personality.join(", ")}</Card.Text>
+            </div>
+
+            {/*hobbies*/}
+            <div className="bold_wrapper">
+              <Card.Text className="bold">Hobbies:</Card.Text>
+              <Card.Text>{roommate?.profile.hobbies.join(", ")} </Card.Text>
+            </div>
           </div>
         </Card.Body>
 
         <Card.Header>{roommate?.profile.bio}</Card.Header>
-        <Card.Text>
-          <ListGroup>
-            <ListGroup.Item>
-              Personality: {roommate?.profile.personality.join(", ")}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Hobbies: {roommate?.profile.hobbies.join(", ")}
-            </ListGroup.Item>
-          </ListGroup>
-        </Card.Text>
         <Card.Footer>
-          Additional Info: {roommate?.profile.additionalInfo}
+          {/*additional info*/}
+          <div className="bold_wrapper">
+            <Card.Text className="bold">Additional Info:</Card.Text>
+            <Card.Text>{roommate?.profile.additionalInfo}</Card.Text>
+          </div>
+
         </Card.Footer>
       </Card>
     </div>
