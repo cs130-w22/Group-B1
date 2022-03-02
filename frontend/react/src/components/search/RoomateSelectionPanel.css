@@ -81,19 +81,9 @@
   opacity: 0.75;
 }
 
-@keyframes slide_down {
-  from {
-    bottom: -100%;
-  }
-
-  to {
-    bottom: 100%;
-  }
-}
-
 .tab_panel {
   padding: 50px;
+  height: 0px;
 
   background-color: white;
-  animation: slide_down 5s forwards;
 } 
