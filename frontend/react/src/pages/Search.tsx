@@ -52,7 +52,6 @@ const Search: React.FC = () => {
           <RoommateSelectionPanel />
         </Col>
       </Row>
-      <div className="search_footer"></div>
     </Container>
   );
 };
