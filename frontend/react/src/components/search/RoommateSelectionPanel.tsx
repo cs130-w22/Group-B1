@@ -225,6 +225,7 @@ export const RoommateSelectionPanel: React.FC = () => {
               onClickDeleteFromList={onClickDeleteFromList}
             />
           </Row>
+          <div className="panel_footer"></div>
         </TabPanel>
       </Tabs>
     </div>

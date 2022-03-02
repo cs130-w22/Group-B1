@@ -87,3 +87,12 @@
 
   background-color: white;
 } 
+
+.panel_footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+
+  height: 150px;
+  width: 100%;
+}
