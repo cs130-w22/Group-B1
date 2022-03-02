@@ -34,6 +34,7 @@ const Search: React.FC = () => {
 
   return (
     <Container>
+      <div className="search_header"></div>
       <Row>
         <Col>
           <UserProfilePanel

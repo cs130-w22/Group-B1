@@ -26,11 +26,23 @@
 }
 
 .email a {
-  /*color: rgb(101, 101, 104);  /*ios space gray*/
   color: var(--purple);
   transition: 0.5s;
 }
 
 .email a:hover {
   color: var(--purple) !important;
+}
+
+.bold_wrapper {
+  margin-top: 5px;
+  padding: 0;
+  display: flex;
+}
+
+.bold {
+  margin: 0;
+
+  font-weight: 500;
+  padding-right: 5px;
 }
