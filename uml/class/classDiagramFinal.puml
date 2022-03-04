@@ -1,0 +1,203 @@
+@startuml
+enum Area {
+"Austin",
+  "Los Angeles",
+  "Miami",
+  "New York",
+  "San Francisco",
+  "Seattle",
+}
+
+enum Hobby {
+  "baseball",
+  "basketball",
+  "cooking",
+  "gaming",
+  "hiking",
+  "knitting",
+  "reading",
+  "running",
+  "soccer",
+  "tennis",
+}
+
+enum PersonalityTrait {
+  "introvert",
+  "extrovert",
+  "sensor",
+  "intuitive",
+  "thinker",
+  "feeler",
+  "judger",
+  "perceiver",
+}
+
+class RoommateProfile {
+  +string firstname
+  +string lastname
+  +string email
+  +Area area
+  +string bio
+  +Hobby[] hobbies
+  +PersonalityTrait[] personality
+  +string additionalInfo
+}
+
+class Roommate {
+  +string username
+  +string password
+  +RommateProfile profile
+}
+
+interface RoommateRepository {
+  + boolean create(Roommate roommate)
+  + Roommate findOne(string username)
+  + Roommate findOverlap( RoommateProfile profileFields, string[] keysToIgnore)
+  + Roommate[] getAll()
+  + boolean update(string username, RoommateProfile roommateProfile)
+  + boolean delete(string username)
+}
+
+class RoommateRepositoryImplMongo implements RoommateRepository {
+  + boolean create(Roommate roommate)
+  + Roommate findOne(string username)
+  + Roommate findOverlap( RoommateProfile profileFields, string[] keysToIgnore)
+  + Roommate[] getAll()
+  + boolean update(string username, RoommateProfile roommateProfile)
+  + boolean delete(string username)
+  - mongo.model roommateModel
+}
+
+class RoommateService {
+  - RoommateRepository roommateRepository
+  + Roommate[] getAllRoommates()
+  + boolean createRoommate(Roommate roommate)
+  + Roommate findRoommate(string username)
+  + boolean updateRoommate(string username, RoommateProfile roommateProfile)
+}
+
+class AuthorizationService {
+  - RoommateRepository roommateRepository
+  + string login(string username, string password)
+  + boolean validUsernamePassword(string username, string password)
+  + boolean validToken(string username, string password)
+  + string encryptPassword(string password)
+}
+
+class RecommendationService {
+  - RoommateRepository roommateRepository
+  - {static} string[] fieldsNotToCompare
+  - {static} HashMap<string, int> scores
+  + Roommate[] getRecommendations(Roommate roommate)
+  - int getCompatibilityScore(RoommateProfile profile1, RoommateProfile profile2)
+}
+
+class ListService {
+  - RoommateRepository roommateRepository
+  - String[] addToRoommateList(string username, string usernameToAdd)
+  - String[] deleteFromRoommateList(string username, string usernameToDelete)
+
+}
+
+interface RegistrableController {
+  + void register(Application app)
+}
+
+class AuthorizationController implements RegistrableController {
+  - AuthorizationService authorizationService
+  + void register(Application app)
+  - Response login(Request req, Response res)
+}
+
+class RecommendationController implements RegistrableController {
+  - RecommendationService recommendationService
+  - RoommateService roommateService
+  - AuthorizationMiddleware authorizationMiddleware
+  + void register(Application app)
+  - Response getRecommendations(Request req, Response res)
+}
+
+class RoommateController implements RegistrableController {
+  - RoommateService roommateService
+  - AuthorizationMiddleware authorizationMiddleware
+  + void register(Application app)
+  - Response getRoommates(Request req, Response res)
+  - Response createRoomate(Request req, Response res)
+  - Response updateRoommate(Request req, Response res)
+}
+
+class ListController implements RegistrableController {
+  - RoommateService roommateService
+  - AuthorizationMiddleware authorizationMiddleware
+  - ListService listService
+  + void register(Application app)
+  - Response getRoommateList(Request req, Response res)
+  - Response addToRoommateList(Request req, Response res)
+  - Response deleteFromRoommateList(Request req, Response res)
+}
+
+class RoommateInterfaceController implements RegistrableController {
+  + void register(Application app)
+  - Response getAreas(Request req, Response res)
+  - Response getHobbies(Request req, Response res)
+  - Response getPersonalityTraits(Request req, Response res)
+}
+
+class AuthorizationMiddleware {
+  - AuthorizationService authorizationService
+  + Response verifyToken(Request req, Response res)
+  + Response verifyPasswordExists(Request req, Response res)
+}
+
+class App {}
+
+Roommate "1" *--> "1" RoommateProfile
+
+RoommateRepositoryImplMongo --> Roommate : use schema
+RoommateRepositoryImplMongo --> RoommateProfile
+
+RoommateService "1" o--> "1" RoommateRepository
+RoommateService --> Roommate
+RoommateService --> RoommateProfile
+
+AuthorizationService "1" o--> "1" RoommateRepository
+
+RecommendationService "1" o--> "1" RoommateRepository
+
+RecommendationService --> Roommate
+RecommendationService --> RoommateProfile
+
+ListService "1" o--> "1" RoommateRepository
+
+AuthorizationController "1" o--> "1" AuthorizationService
+
+RecommendationController "1" o--> "1" RecommendationService
+RecommendationController "1" o--> "1" RoommateService
+RecommendationController "1" o--> "1" AuthorizationMiddleware
+
+RoommateController "1" o--> "1" RoommateService
+RoommateController "1" o--> "1" AuthorizationMiddleware
+
+ListController "1" o--> "1" ListService
+ListController "1" o--> "1" RoommateService
+ListController "1" o--> "1" AuthorizationMiddleware
+
+AuthorizationMiddleware "1" o-> "1" AuthorizationService
+
+RegistrableController "*" -up-> "1" App : register
+
+together {
+  enum Area
+  enum Hobby
+  enum PersonalityTrait
+}
+
+together {
+  class RecommendationController
+  class AuthorizationController
+  class RoommateController
+  class RoommateInterfaceController
+  class ListController
+}
+
+@enduml

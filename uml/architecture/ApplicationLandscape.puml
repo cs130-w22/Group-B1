@@ -1,0 +1,25 @@
+@startuml
+
+[Presentation] as FE
+
+[Business Logic] as BE
+
+[Data] as DB
+
+FE <-> BE
+BE <-> DB
+
+note bottom of FE
+React.js "frontend"
+end note
+
+note bottom of BE
+Node.js "backend"
+end note
+
+note bottom of DB
+MongoDB
+end note
+
+
+@enduml
